@@ -37,4 +37,5 @@ android {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation("io.coil-kt:coil-base:1.2.2")
 }
