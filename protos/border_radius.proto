@@ -1,0 +1,9 @@
+syntax = "proto3";
+option java_package = "com.texture_image.proto";
+
+message ImageBorderRadius {
+  float topLeft = 1;
+  float topRight = 2;
+  float bottomLeft = 3;
+  float bottomRight = 4;
+}
