@@ -10,3 +10,7 @@ export "src/image_info.pb.dart";
 export "src/image_info.pbenum.dart";
 export "src/image_info.pbjson.dart";
 export "src/image_info.pbserver.dart";
+export "src/method_call_result.pb.dart";
+export "src/method_call_result.pbenum.dart";
+export "src/method_call_result.pbjson.dart";
+export "src/method_call_result.pbserver.dart";

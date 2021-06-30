@@ -1,0 +1,22 @@
+syntax = "proto3";
+option java_package = "com.texture_image.proto";
+
+enum ImageTaskState {
+  initialized = 0;
+  loading = 1;
+  completed = 2;
+  canceled = 3;
+  failed = 4 ;
+}
+
+message ImageResult {
+  int32 code = 1;
+
+  string message = 2;
+
+  int32 textureId = 3;
+
+  ImageTaskState state = 4;
+
+  string url = 5;
+}
