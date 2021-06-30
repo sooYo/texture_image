@@ -19,12 +19,12 @@ class ImageLoader(
 ) {
     private val taskMap: LoaderTaskMap = LoaderTaskMap()
 
-    private val loaderCore: ImageLoader? by lazy(LazyThreadSafetyMode.NONE) {
+    private val loaderCore: coil.ImageLoader? by lazy(LazyThreadSafetyMode.NONE) {
         val httpClient = OkHttpClient.Builder()
                 .cache(CoilUtils.createDefaultCache(context))
                 .build()
 
-        ImageLoader.Builder(context)
+        coil.ImageLoader.Builder(context)
                 .crossfade(true)
                 .availableMemoryPercentage(0.25)
                 .bitmapConfig(Bitmap.Config.ARGB_8888)
@@ -34,7 +34,6 @@ class ImageLoader(
 
     // region Channel Handlers
     fun createTextureImage(@NonNull call: MethodCall, @NonNull result: Result) {
-
 
     }
 

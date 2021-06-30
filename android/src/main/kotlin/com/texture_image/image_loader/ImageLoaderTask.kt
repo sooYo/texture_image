@@ -3,6 +3,7 @@ package com.texture_image.image_loader
 import android.content.Context
 import android.graphics.drawable.Drawable
 import coil.request.ImageRequest
+import coil.target.Target
 import com.texture_image.constants.SurfaceTextureEntry
 import com.texture_image.constants.TaskState
 import com.texture_image.models.CachePolicy
@@ -14,7 +15,7 @@ class ImageLoaderTask(
         private val imageUrl: String,
         private val geometry: Geometry,
         private val cachePolicy: CachePolicy,
-        private val textureEntry: SurfaceTextureEntry,
+        private val textureEntry: SurfaceTextureEntry
 ) : Target {
     private var outline: TaskOutline? = null
 
@@ -37,7 +38,7 @@ class ImageLoaderTask(
                 state = TaskState.INITIALIZED,
                 cancelToken = null,
                 surface = null,
-                retryCount = 0,
+                retryCount = 0
         )
 
         return outline
