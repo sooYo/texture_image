@@ -1,7 +1,11 @@
 package com.texture_image.image_loader
 
 import android.content.Context
+import android.graphics.Paint
+import android.graphics.Rect
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.view.Surface
 import coil.request.ImageRequest
 import coil.target.Target
 import com.texture_image.constants.SurfaceTextureEntry
@@ -38,7 +42,9 @@ class ImageLoaderTask(
                 state = TaskState.INITIALIZED,
                 cancelToken = null,
                 surface = null,
-                retryCount = 0
+                retryCount = 0,
+                entry = textureEntry,
+                imageUrl = imageUrl
         )
 
         return outline
@@ -62,7 +68,24 @@ class ImageLoaderTask(
     }
 
     override fun onSuccess(result: Drawable) {
-        super.onSuccess(result)
+        if (result !is BitmapDrawable) {
+            return
+        }
+
+        val rect = Rect(0, 0, geometry.width!!, 1300)
+        val surfaceTexture = textureEntry.surfaceTexture()
+
+        surfaceTexture.setDefaultBufferSize(rect.width(), rect.height())
+        val surface = Surface(surfaceTexture)
+        val canvas = surface.lockCanvas(rect)
+
+        val paint = Paint()
+        paint.isAntiAlias = true;
+        paint.isFilterBitmap = true;
+        paint.isDither = true;
+
+        canvas.drawBitmap(result.bitmap, null, rect, paint)
+        surface.unlockCanvasAndPost(canvas)
     }
 
     override fun onStart(placeholder: Drawable?) {

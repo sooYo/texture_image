@@ -14,8 +14,8 @@ public final class ImageInfo {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface TextureImageInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:TextureImageInfo)
+  public interface ImageRequestInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageRequestInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -43,11 +43,19 @@ public final class ImageInfo {
     int getHeight();
 
     /**
+     * <pre>
+     * Image to be shown when loading failed, can be URL or local file path
+     * </pre>
+     *
      * <code>string errorPlaceholder = 4;</code>
      * @return The errorPlaceholder.
      */
     java.lang.String getErrorPlaceholder();
     /**
+     * <pre>
+     * Image to be shown when loading failed, can be URL or local file path
+     * </pre>
+     *
      * <code>string errorPlaceholder = 4;</code>
      * @return The bytes for errorPlaceholder.
      */
@@ -55,11 +63,19 @@ public final class ImageInfo {
         getErrorPlaceholderBytes();
 
     /**
+     * <pre>
+     * Can be URL or local file path
+     * </pre>
+     *
      * <code>string placeholder = 5;</code>
      * @return The placeholder.
      */
     java.lang.String getPlaceholder();
     /**
+     * <pre>
+     * Can be URL or local file path
+     * </pre>
+     *
      * <code>string placeholder = 5;</code>
      * @return The bytes for placeholder.
      */
@@ -67,43 +83,79 @@ public final class ImageInfo {
         getPlaceholderBytes();
 
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Refer to [BoxFit] in enum.proto
+     * </pre>
+     *
+     * <code>.BoxFit fit = 6;</code>
+     * @return The enum numeric value on the wire for fit.
+     */
+    int getFitValue();
+    /**
+     * <pre>
+     * Refer to [BoxFit] in enum.proto
+     * </pre>
+     *
+     * <code>.BoxFit fit = 6;</code>
+     * @return The fit.
+     */
+    com.texture_image.proto.Enum.BoxFit getFit();
+
+    /**
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      * @return Whether the borderRadius field is set.
      */
     boolean hasBorderRadius();
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      * @return The borderRadius.
      */
-    com.texture_image.proto.BorderRadius.ImageBorderRadius getBorderRadius();
+    com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius();
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      */
-    com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder();
+    com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder();
   }
   /**
-   * Protobuf type {@code TextureImageInfo}
+   * <pre>
+   * Send this info to native side when plugin wants to load an image
+   * </pre>
+   *
+   * Protobuf type {@code ImageRequestInfo}
    */
-  public static final class TextureImageInfo extends
+  public static final class ImageRequestInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:TextureImageInfo)
-      TextureImageInfoOrBuilder {
+      // @@protoc_insertion_point(message_implements:ImageRequestInfo)
+      ImageRequestInfoOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use TextureImageInfo.newBuilder() to construct.
-    private TextureImageInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use ImageRequestInfo.newBuilder() to construct.
+    private ImageRequestInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private TextureImageInfo() {
+    private ImageRequestInfo() {
       url_ = "";
       errorPlaceholder_ = "";
       placeholder_ = "";
+      fit_ = 0;
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new TextureImageInfo();
+      return new ImageRequestInfo();
     }
 
     @java.lang.Override
@@ -111,7 +163,7 @@ public final class ImageInfo {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private TextureImageInfo(
+    private ImageRequestInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -157,12 +209,18 @@ public final class ImageInfo {
               placeholder_ = s;
               break;
             }
-            case 50: {
-              com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder subBuilder = null;
+            case 48: {
+              int rawValue = input.readEnum();
+
+              fit_ = rawValue;
+              break;
+            }
+            case 58: {
+              com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder subBuilder = null;
               if (borderRadius_ != null) {
                 subBuilder = borderRadius_.toBuilder();
               }
-              borderRadius_ = input.readMessage(com.texture_image.proto.BorderRadius.ImageBorderRadius.parser(), extensionRegistry);
+              borderRadius_ = input.readMessage(com.texture_image.proto.ImageInfo.ImageBorderRadius.parser(), extensionRegistry);
               if (subBuilder != null) {
                 subBuilder.mergeFrom(borderRadius_);
                 borderRadius_ = subBuilder.buildPartial();
@@ -191,15 +249,15 @@ public final class ImageInfo {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_TextureImageInfo_descriptor;
+      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_TextureImageInfo_fieldAccessorTable
+      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.TextureImageInfo.class, com.texture_image.proto.ImageInfo.TextureImageInfo.Builder.class);
+              com.texture_image.proto.ImageInfo.ImageRequestInfo.class, com.texture_image.proto.ImageInfo.ImageRequestInfo.Builder.class);
     }
 
     public static final int URL_FIELD_NUMBER = 1;
@@ -265,6 +323,10 @@ public final class ImageInfo {
     public static final int ERRORPLACEHOLDER_FIELD_NUMBER = 4;
     private volatile java.lang.Object errorPlaceholder_;
     /**
+     * <pre>
+     * Image to be shown when loading failed, can be URL or local file path
+     * </pre>
+     *
      * <code>string errorPlaceholder = 4;</code>
      * @return The errorPlaceholder.
      */
@@ -282,6 +344,10 @@ public final class ImageInfo {
       }
     }
     /**
+     * <pre>
+     * Image to be shown when loading failed, can be URL or local file path
+     * </pre>
+     *
      * <code>string errorPlaceholder = 4;</code>
      * @return The bytes for errorPlaceholder.
      */
@@ -303,6 +369,10 @@ public final class ImageInfo {
     public static final int PLACEHOLDER_FIELD_NUMBER = 5;
     private volatile java.lang.Object placeholder_;
     /**
+     * <pre>
+     * Can be URL or local file path
+     * </pre>
+     *
      * <code>string placeholder = 5;</code>
      * @return The placeholder.
      */
@@ -320,6 +390,10 @@ public final class ImageInfo {
       }
     }
     /**
+     * <pre>
+     * Can be URL or local file path
+     * </pre>
+     *
      * <code>string placeholder = 5;</code>
      * @return The bytes for placeholder.
      */
@@ -338,10 +412,41 @@ public final class ImageInfo {
       }
     }
 
-    public static final int BORDERRADIUS_FIELD_NUMBER = 6;
-    private com.texture_image.proto.BorderRadius.ImageBorderRadius borderRadius_;
+    public static final int FIT_FIELD_NUMBER = 6;
+    private int fit_;
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Refer to [BoxFit] in enum.proto
+     * </pre>
+     *
+     * <code>.BoxFit fit = 6;</code>
+     * @return The enum numeric value on the wire for fit.
+     */
+    @java.lang.Override public int getFitValue() {
+      return fit_;
+    }
+    /**
+     * <pre>
+     * Refer to [BoxFit] in enum.proto
+     * </pre>
+     *
+     * <code>.BoxFit fit = 6;</code>
+     * @return The fit.
+     */
+    @java.lang.Override public com.texture_image.proto.Enum.BoxFit getFit() {
+      @SuppressWarnings("deprecation")
+      com.texture_image.proto.Enum.BoxFit result = com.texture_image.proto.Enum.BoxFit.valueOf(fit_);
+      return result == null ? com.texture_image.proto.Enum.BoxFit.UNRECOGNIZED : result;
+    }
+
+    public static final int BORDERRADIUS_FIELD_NUMBER = 7;
+    private com.texture_image.proto.ImageInfo.ImageBorderRadius borderRadius_;
+    /**
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      * @return Whether the borderRadius field is set.
      */
     @java.lang.Override
@@ -349,18 +454,26 @@ public final class ImageInfo {
       return borderRadius_ != null;
     }
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      * @return The borderRadius.
      */
     @java.lang.Override
-    public com.texture_image.proto.BorderRadius.ImageBorderRadius getBorderRadius() {
-      return borderRadius_ == null ? com.texture_image.proto.BorderRadius.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+    public com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius() {
+      return borderRadius_ == null ? com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
     }
     /**
-     * <code>.ImageBorderRadius borderRadius = 6;</code>
+     * <pre>
+     * Whether to make a rounded rect style or not
+     * </pre>
+     *
+     * <code>.ImageBorderRadius borderRadius = 7;</code>
      */
     @java.lang.Override
-    public com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
+    public com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
       return getBorderRadius();
     }
 
@@ -393,8 +506,11 @@ public final class ImageInfo {
       if (!getPlaceholderBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 5, placeholder_);
       }
+      if (fit_ != com.texture_image.proto.Enum.BoxFit.fill.getNumber()) {
+        output.writeEnum(6, fit_);
+      }
       if (borderRadius_ != null) {
-        output.writeMessage(6, getBorderRadius());
+        output.writeMessage(7, getBorderRadius());
       }
       unknownFields.writeTo(output);
     }
@@ -422,9 +538,13 @@ public final class ImageInfo {
       if (!getPlaceholderBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, placeholder_);
       }
+      if (fit_ != com.texture_image.proto.Enum.BoxFit.fill.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(6, fit_);
+      }
       if (borderRadius_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(6, getBorderRadius());
+          .computeMessageSize(7, getBorderRadius());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -436,10 +556,10 @@ public final class ImageInfo {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.TextureImageInfo)) {
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageRequestInfo)) {
         return super.equals(obj);
       }
-      com.texture_image.proto.ImageInfo.TextureImageInfo other = (com.texture_image.proto.ImageInfo.TextureImageInfo) obj;
+      com.texture_image.proto.ImageInfo.ImageRequestInfo other = (com.texture_image.proto.ImageInfo.ImageRequestInfo) obj;
 
       if (!getUrl()
           .equals(other.getUrl())) return false;
@@ -451,6 +571,7 @@ public final class ImageInfo {
           .equals(other.getErrorPlaceholder())) return false;
       if (!getPlaceholder()
           .equals(other.getPlaceholder())) return false;
+      if (fit_ != other.fit_) return false;
       if (hasBorderRadius() != other.hasBorderRadius()) return false;
       if (hasBorderRadius()) {
         if (!getBorderRadius()
@@ -477,6 +598,8 @@ public final class ImageInfo {
       hash = (53 * hash) + getErrorPlaceholder().hashCode();
       hash = (37 * hash) + PLACEHOLDER_FIELD_NUMBER;
       hash = (53 * hash) + getPlaceholder().hashCode();
+      hash = (37 * hash) + FIT_FIELD_NUMBER;
+      hash = (53 * hash) + fit_;
       if (hasBorderRadius()) {
         hash = (37 * hash) + BORDERRADIUS_FIELD_NUMBER;
         hash = (53 * hash) + getBorderRadius().hashCode();
@@ -486,69 +609,69 @@ public final class ImageInfo {
       return hash;
     }
 
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(byte[] data)
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseDelimitedFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -561,7 +684,7 @@ public final class ImageInfo {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.TextureImageInfo prototype) {
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageRequestInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -577,26 +700,30 @@ public final class ImageInfo {
       return builder;
     }
     /**
-     * Protobuf type {@code TextureImageInfo}
+     * <pre>
+     * Send this info to native side when plugin wants to load an image
+     * </pre>
+     *
+     * Protobuf type {@code ImageRequestInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:TextureImageInfo)
-        com.texture_image.proto.ImageInfo.TextureImageInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:ImageRequestInfo)
+        com.texture_image.proto.ImageInfo.ImageRequestInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_TextureImageInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_TextureImageInfo_fieldAccessorTable
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.TextureImageInfo.class, com.texture_image.proto.ImageInfo.TextureImageInfo.Builder.class);
+                com.texture_image.proto.ImageInfo.ImageRequestInfo.class, com.texture_image.proto.ImageInfo.ImageRequestInfo.Builder.class);
       }
 
-      // Construct using com.texture_image.proto.ImageInfo.TextureImageInfo.newBuilder()
+      // Construct using com.texture_image.proto.ImageInfo.ImageRequestInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -624,6 +751,8 @@ public final class ImageInfo {
 
         placeholder_ = "";
 
+        fit_ = 0;
+
         if (borderRadiusBuilder_ == null) {
           borderRadius_ = null;
         } else {
@@ -636,17 +765,17 @@ public final class ImageInfo {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_TextureImageInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.TextureImageInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.TextureImageInfo.getDefaultInstance();
+      public com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageRequestInfo.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.TextureImageInfo build() {
-        com.texture_image.proto.ImageInfo.TextureImageInfo result = buildPartial();
+      public com.texture_image.proto.ImageInfo.ImageRequestInfo build() {
+        com.texture_image.proto.ImageInfo.ImageRequestInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -654,13 +783,14 @@ public final class ImageInfo {
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.TextureImageInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.TextureImageInfo result = new com.texture_image.proto.ImageInfo.TextureImageInfo(this);
+      public com.texture_image.proto.ImageInfo.ImageRequestInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageRequestInfo result = new com.texture_image.proto.ImageInfo.ImageRequestInfo(this);
         result.url_ = url_;
         result.width_ = width_;
         result.height_ = height_;
         result.errorPlaceholder_ = errorPlaceholder_;
         result.placeholder_ = placeholder_;
+        result.fit_ = fit_;
         if (borderRadiusBuilder_ == null) {
           result.borderRadius_ = borderRadius_;
         } else {
@@ -704,16 +834,16 @@ public final class ImageInfo {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.TextureImageInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.TextureImageInfo)other);
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageRequestInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageRequestInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.TextureImageInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.TextureImageInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageRequestInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageRequestInfo.getDefaultInstance()) return this;
         if (!other.getUrl().isEmpty()) {
           url_ = other.url_;
           onChanged();
@@ -731,6 +861,9 @@ public final class ImageInfo {
         if (!other.getPlaceholder().isEmpty()) {
           placeholder_ = other.placeholder_;
           onChanged();
+        }
+        if (other.fit_ != 0) {
+          setFitValue(other.getFitValue());
         }
         if (other.hasBorderRadius()) {
           mergeBorderRadius(other.getBorderRadius());
@@ -750,11 +883,11 @@ public final class ImageInfo {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.TextureImageInfo parsedMessage = null;
+        com.texture_image.proto.ImageInfo.ImageRequestInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.TextureImageInfo) e.getUnfinishedMessage();
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageRequestInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -904,6 +1037,10 @@ public final class ImageInfo {
 
       private java.lang.Object errorPlaceholder_ = "";
       /**
+       * <pre>
+       * Image to be shown when loading failed, can be URL or local file path
+       * </pre>
+       *
        * <code>string errorPlaceholder = 4;</code>
        * @return The errorPlaceholder.
        */
@@ -920,6 +1057,10 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * Image to be shown when loading failed, can be URL or local file path
+       * </pre>
+       *
        * <code>string errorPlaceholder = 4;</code>
        * @return The bytes for errorPlaceholder.
        */
@@ -937,6 +1078,10 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * Image to be shown when loading failed, can be URL or local file path
+       * </pre>
+       *
        * <code>string errorPlaceholder = 4;</code>
        * @param value The errorPlaceholder to set.
        * @return This builder for chaining.
@@ -952,6 +1097,10 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * Image to be shown when loading failed, can be URL or local file path
+       * </pre>
+       *
        * <code>string errorPlaceholder = 4;</code>
        * @return This builder for chaining.
        */
@@ -962,6 +1111,10 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * Image to be shown when loading failed, can be URL or local file path
+       * </pre>
+       *
        * <code>string errorPlaceholder = 4;</code>
        * @param value The bytes for errorPlaceholder to set.
        * @return This builder for chaining.
@@ -980,6 +1133,10 @@ public final class ImageInfo {
 
       private java.lang.Object placeholder_ = "";
       /**
+       * <pre>
+       * Can be URL or local file path
+       * </pre>
+       *
        * <code>string placeholder = 5;</code>
        * @return The placeholder.
        */
@@ -996,6 +1153,10 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * Can be URL or local file path
+       * </pre>
+       *
        * <code>string placeholder = 5;</code>
        * @return The bytes for placeholder.
        */
@@ -1013,6 +1174,10 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * Can be URL or local file path
+       * </pre>
+       *
        * <code>string placeholder = 5;</code>
        * @param value The placeholder to set.
        * @return This builder for chaining.
@@ -1028,6 +1193,10 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * Can be URL or local file path
+       * </pre>
+       *
        * <code>string placeholder = 5;</code>
        * @return This builder for chaining.
        */
@@ -1038,6 +1207,10 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * Can be URL or local file path
+       * </pre>
+       *
        * <code>string placeholder = 5;</code>
        * @param value The bytes for placeholder to set.
        * @return This builder for chaining.
@@ -1054,31 +1227,117 @@ public final class ImageInfo {
         return this;
       }
 
-      private com.texture_image.proto.BorderRadius.ImageBorderRadius borderRadius_;
-      private com.google.protobuf.SingleFieldBuilderV3<
-          com.texture_image.proto.BorderRadius.ImageBorderRadius, com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder, com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder> borderRadiusBuilder_;
+      private int fit_ = 0;
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Refer to [BoxFit] in enum.proto
+       * </pre>
+       *
+       * <code>.BoxFit fit = 6;</code>
+       * @return The enum numeric value on the wire for fit.
+       */
+      @java.lang.Override public int getFitValue() {
+        return fit_;
+      }
+      /**
+       * <pre>
+       * Refer to [BoxFit] in enum.proto
+       * </pre>
+       *
+       * <code>.BoxFit fit = 6;</code>
+       * @param value The enum numeric value on the wire for fit to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFitValue(int value) {
+        
+        fit_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Refer to [BoxFit] in enum.proto
+       * </pre>
+       *
+       * <code>.BoxFit fit = 6;</code>
+       * @return The fit.
+       */
+      @java.lang.Override
+      public com.texture_image.proto.Enum.BoxFit getFit() {
+        @SuppressWarnings("deprecation")
+        com.texture_image.proto.Enum.BoxFit result = com.texture_image.proto.Enum.BoxFit.valueOf(fit_);
+        return result == null ? com.texture_image.proto.Enum.BoxFit.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Refer to [BoxFit] in enum.proto
+       * </pre>
+       *
+       * <code>.BoxFit fit = 6;</code>
+       * @param value The fit to set.
+       * @return This builder for chaining.
+       */
+      public Builder setFit(com.texture_image.proto.Enum.BoxFit value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        fit_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Refer to [BoxFit] in enum.proto
+       * </pre>
+       *
+       * <code>.BoxFit fit = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearFit() {
+        
+        fit_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private com.texture_image.proto.ImageInfo.ImageBorderRadius borderRadius_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder> borderRadiusBuilder_;
+      /**
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        * @return Whether the borderRadius field is set.
        */
       public boolean hasBorderRadius() {
         return borderRadiusBuilder_ != null || borderRadius_ != null;
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        * @return The borderRadius.
        */
-      public com.texture_image.proto.BorderRadius.ImageBorderRadius getBorderRadius() {
+      public com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius() {
         if (borderRadiusBuilder_ == null) {
-          return borderRadius_ == null ? com.texture_image.proto.BorderRadius.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+          return borderRadius_ == null ? com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
         } else {
           return borderRadiusBuilder_.getMessage();
         }
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
-      public Builder setBorderRadius(com.texture_image.proto.BorderRadius.ImageBorderRadius value) {
+      public Builder setBorderRadius(com.texture_image.proto.ImageInfo.ImageBorderRadius value) {
         if (borderRadiusBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
@@ -1092,10 +1351,14 @@ public final class ImageInfo {
         return this;
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
       public Builder setBorderRadius(
-          com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder builderForValue) {
+          com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder builderForValue) {
         if (borderRadiusBuilder_ == null) {
           borderRadius_ = builderForValue.build();
           onChanged();
@@ -1106,13 +1369,17 @@ public final class ImageInfo {
         return this;
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
-      public Builder mergeBorderRadius(com.texture_image.proto.BorderRadius.ImageBorderRadius value) {
+      public Builder mergeBorderRadius(com.texture_image.proto.ImageInfo.ImageBorderRadius value) {
         if (borderRadiusBuilder_ == null) {
           if (borderRadius_ != null) {
             borderRadius_ =
-              com.texture_image.proto.BorderRadius.ImageBorderRadius.newBuilder(borderRadius_).mergeFrom(value).buildPartial();
+              com.texture_image.proto.ImageInfo.ImageBorderRadius.newBuilder(borderRadius_).mergeFrom(value).buildPartial();
           } else {
             borderRadius_ = value;
           }
@@ -1124,7 +1391,11 @@ public final class ImageInfo {
         return this;
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
       public Builder clearBorderRadius() {
         if (borderRadiusBuilder_ == null) {
@@ -1138,33 +1409,45 @@ public final class ImageInfo {
         return this;
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
-      public com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder getBorderRadiusBuilder() {
+      public com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder getBorderRadiusBuilder() {
         
         onChanged();
         return getBorderRadiusFieldBuilder().getBuilder();
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
-      public com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
+      public com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
         if (borderRadiusBuilder_ != null) {
           return borderRadiusBuilder_.getMessageOrBuilder();
         } else {
           return borderRadius_ == null ?
-              com.texture_image.proto.BorderRadius.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+              com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
         }
       }
       /**
-       * <code>.ImageBorderRadius borderRadius = 6;</code>
+       * <pre>
+       * Whether to make a rounded rect style or not
+       * </pre>
+       *
+       * <code>.ImageBorderRadius borderRadius = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.texture_image.proto.BorderRadius.ImageBorderRadius, com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder, com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder> 
+          com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder> 
           getBorderRadiusFieldBuilder() {
         if (borderRadiusBuilder_ == null) {
           borderRadiusBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.texture_image.proto.BorderRadius.ImageBorderRadius, com.texture_image.proto.BorderRadius.ImageBorderRadius.Builder, com.texture_image.proto.BorderRadius.ImageBorderRadiusOrBuilder>(
+              com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder>(
                   getBorderRadius(),
                   getParentForChildren(),
                   isClean());
@@ -1185,51 +1468,1414 @@ public final class ImageInfo {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:TextureImageInfo)
+      // @@protoc_insertion_point(builder_scope:ImageRequestInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:TextureImageInfo)
-    private static final com.texture_image.proto.ImageInfo.TextureImageInfo DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:ImageRequestInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageRequestInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.TextureImageInfo();
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageRequestInfo();
     }
 
-    public static com.texture_image.proto.ImageInfo.TextureImageInfo getDefaultInstance() {
+    public static com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<TextureImageInfo>
-        PARSER = new com.google.protobuf.AbstractParser<TextureImageInfo>() {
+    private static final com.google.protobuf.Parser<ImageRequestInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageRequestInfo>() {
       @java.lang.Override
-      public TextureImageInfo parsePartialFrom(
+      public ImageRequestInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new TextureImageInfo(input, extensionRegistry);
+        return new ImageRequestInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<TextureImageInfo> parser() {
+    public static com.google.protobuf.Parser<ImageRequestInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<TextureImageInfo> getParserForType() {
+    public com.google.protobuf.Parser<ImageRequestInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.TextureImageInfo getDefaultInstanceForType() {
+    public com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ImageRequestCancelInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageRequestCancelInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>string url = 1;</code>
+     * @return The url.
+     */
+    java.lang.String getUrl();
+    /**
+     * <code>string url = 1;</code>
+     * @return The bytes for url.
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
+    /**
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    long getTextureId();
+  }
+  /**
+   * <pre>
+   * This info is sent when plugin wants to cancel an on going image loading task
+   * </pre>
+   *
+   * Protobuf type {@code ImageRequestCancelInfo}
+   */
+  public static final class ImageRequestCancelInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ImageRequestCancelInfo)
+      ImageRequestCancelInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ImageRequestCancelInfo.newBuilder() to construct.
+    private ImageRequestCancelInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ImageRequestCancelInfo() {
+      url_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ImageRequestCancelInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageRequestCancelInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              url_ = s;
+              break;
+            }
+            case 16: {
+
+              textureId_ = input.readInt64();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.class, com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.Builder.class);
+    }
+
+    public static final int URL_FIELD_NUMBER = 1;
+    private volatile java.lang.Object url_;
+    /**
+     * <code>string url = 1;</code>
+     * @return The url.
+     */
+    @java.lang.Override
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        url_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string url = 1;</code>
+     * @return The bytes for url.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int TEXTUREID_FIELD_NUMBER = 2;
+    private long textureId_;
+    /**
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    @java.lang.Override
+    public long getTextureId() {
+      return textureId_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
+      }
+      if (textureId_ != 0L) {
+        output.writeInt64(2, textureId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
+      }
+      if (textureId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, textureId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageRequestCancelInfo)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ImageRequestCancelInfo other = (com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) obj;
+
+      if (!getUrl()
+          .equals(other.getUrl())) return false;
+      if (getTextureId()
+          != other.getTextureId()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + URL_FIELD_NUMBER;
+      hash = (53 * hash) + getUrl().hashCode();
+      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTextureId());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageRequestCancelInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * This info is sent when plugin wants to cancel an on going image loading task
+     * </pre>
+     *
+     * Protobuf type {@code ImageRequestCancelInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageRequestCancelInfo)
+        com.texture_image.proto.ImageInfo.ImageRequestCancelInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.class, com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        url_ = "";
+
+        textureId_ = 0L;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo build() {
+        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo result = new com.texture_image.proto.ImageInfo.ImageRequestCancelInfo(this);
+        result.url_ = url_;
+        result.textureId_ = textureId_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageRequestCancelInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageRequestCancelInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.getDefaultInstance()) return this;
+        if (!other.getUrl().isEmpty()) {
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.getTextureId() != 0L) {
+          setTextureId(other.getTextureId());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object url_ = "";
+      /**
+       * <code>string url = 1;</code>
+       * @return The url.
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string url = 1;</code>
+       * @return The bytes for url.
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string url = 1;</code>
+       * @param value The url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string url = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUrl() {
+        
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string url = 1;</code>
+       * @param value The bytes for url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      private long textureId_ ;
+      /**
+       * <code>int64 textureId = 2;</code>
+       * @return The textureId.
+       */
+      @java.lang.Override
+      public long getTextureId() {
+        return textureId_;
+      }
+      /**
+       * <code>int64 textureId = 2;</code>
+       * @param value The textureId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTextureId(long value) {
+        
+        textureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 textureId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTextureId() {
+        
+        textureId_ = 0L;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ImageRequestCancelInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageRequestCancelInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageRequestCancelInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageRequestCancelInfo();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ImageRequestCancelInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageRequestCancelInfo>() {
+      @java.lang.Override
+      public ImageRequestCancelInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageRequestCancelInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ImageRequestCancelInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageRequestCancelInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ImageBorderRadiusOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageBorderRadius)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>double topLeft = 1;</code>
+     * @return The topLeft.
+     */
+    double getTopLeft();
+
+    /**
+     * <code>double topRight = 2;</code>
+     * @return The topRight.
+     */
+    double getTopRight();
+
+    /**
+     * <code>double bottomLeft = 3;</code>
+     * @return The bottomLeft.
+     */
+    double getBottomLeft();
+
+    /**
+     * <code>double bottomRight = 4;</code>
+     * @return The bottomRight.
+     */
+    double getBottomRight();
+  }
+  /**
+   * Protobuf type {@code ImageBorderRadius}
+   */
+  public static final class ImageBorderRadius extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ImageBorderRadius)
+      ImageBorderRadiusOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ImageBorderRadius.newBuilder() to construct.
+    private ImageBorderRadius(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ImageBorderRadius() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ImageBorderRadius();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageBorderRadius(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 9: {
+
+              topLeft_ = input.readDouble();
+              break;
+            }
+            case 17: {
+
+              topRight_ = input.readDouble();
+              break;
+            }
+            case 25: {
+
+              bottomLeft_ = input.readDouble();
+              break;
+            }
+            case 33: {
+
+              bottomRight_ = input.readDouble();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ImageBorderRadius.class, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder.class);
+    }
+
+    public static final int TOPLEFT_FIELD_NUMBER = 1;
+    private double topLeft_;
+    /**
+     * <code>double topLeft = 1;</code>
+     * @return The topLeft.
+     */
+    @java.lang.Override
+    public double getTopLeft() {
+      return topLeft_;
+    }
+
+    public static final int TOPRIGHT_FIELD_NUMBER = 2;
+    private double topRight_;
+    /**
+     * <code>double topRight = 2;</code>
+     * @return The topRight.
+     */
+    @java.lang.Override
+    public double getTopRight() {
+      return topRight_;
+    }
+
+    public static final int BOTTOMLEFT_FIELD_NUMBER = 3;
+    private double bottomLeft_;
+    /**
+     * <code>double bottomLeft = 3;</code>
+     * @return The bottomLeft.
+     */
+    @java.lang.Override
+    public double getBottomLeft() {
+      return bottomLeft_;
+    }
+
+    public static final int BOTTOMRIGHT_FIELD_NUMBER = 4;
+    private double bottomRight_;
+    /**
+     * <code>double bottomRight = 4;</code>
+     * @return The bottomRight.
+     */
+    @java.lang.Override
+    public double getBottomRight() {
+      return bottomRight_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (topLeft_ != 0D) {
+        output.writeDouble(1, topLeft_);
+      }
+      if (topRight_ != 0D) {
+        output.writeDouble(2, topRight_);
+      }
+      if (bottomLeft_ != 0D) {
+        output.writeDouble(3, bottomLeft_);
+      }
+      if (bottomRight_ != 0D) {
+        output.writeDouble(4, bottomRight_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (topLeft_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(1, topLeft_);
+      }
+      if (topRight_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(2, topRight_);
+      }
+      if (bottomLeft_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(3, bottomLeft_);
+      }
+      if (bottomRight_ != 0D) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeDoubleSize(4, bottomRight_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageBorderRadius)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ImageBorderRadius other = (com.texture_image.proto.ImageInfo.ImageBorderRadius) obj;
+
+      if (java.lang.Double.doubleToLongBits(getTopLeft())
+          != java.lang.Double.doubleToLongBits(
+              other.getTopLeft())) return false;
+      if (java.lang.Double.doubleToLongBits(getTopRight())
+          != java.lang.Double.doubleToLongBits(
+              other.getTopRight())) return false;
+      if (java.lang.Double.doubleToLongBits(getBottomLeft())
+          != java.lang.Double.doubleToLongBits(
+              other.getBottomLeft())) return false;
+      if (java.lang.Double.doubleToLongBits(getBottomRight())
+          != java.lang.Double.doubleToLongBits(
+              other.getBottomRight())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + TOPLEFT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getTopLeft()));
+      hash = (37 * hash) + TOPRIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getTopRight()));
+      hash = (37 * hash) + BOTTOMLEFT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getBottomLeft()));
+      hash = (37 * hash) + BOTTOMRIGHT_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getBottomRight()));
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageBorderRadius prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ImageBorderRadius}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageBorderRadius)
+        com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ImageBorderRadius.class, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ImageBorderRadius.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        topLeft_ = 0D;
+
+        topRight_ = 0D;
+
+        bottomLeft_ = 0D;
+
+        bottomRight_ = 0D;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageBorderRadius build() {
+        com.texture_image.proto.ImageInfo.ImageBorderRadius result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageBorderRadius buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageBorderRadius result = new com.texture_image.proto.ImageInfo.ImageBorderRadius(this);
+        result.topLeft_ = topLeft_;
+        result.topRight_ = topRight_;
+        result.bottomLeft_ = bottomLeft_;
+        result.bottomRight_ = bottomRight_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageBorderRadius) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageBorderRadius)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageBorderRadius other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance()) return this;
+        if (other.getTopLeft() != 0D) {
+          setTopLeft(other.getTopLeft());
+        }
+        if (other.getTopRight() != 0D) {
+          setTopRight(other.getTopRight());
+        }
+        if (other.getBottomLeft() != 0D) {
+          setBottomLeft(other.getBottomLeft());
+        }
+        if (other.getBottomRight() != 0D) {
+          setBottomRight(other.getBottomRight());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ImageBorderRadius parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageBorderRadius) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private double topLeft_ ;
+      /**
+       * <code>double topLeft = 1;</code>
+       * @return The topLeft.
+       */
+      @java.lang.Override
+      public double getTopLeft() {
+        return topLeft_;
+      }
+      /**
+       * <code>double topLeft = 1;</code>
+       * @param value The topLeft to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTopLeft(double value) {
+        
+        topLeft_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double topLeft = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTopLeft() {
+        
+        topLeft_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double topRight_ ;
+      /**
+       * <code>double topRight = 2;</code>
+       * @return The topRight.
+       */
+      @java.lang.Override
+      public double getTopRight() {
+        return topRight_;
+      }
+      /**
+       * <code>double topRight = 2;</code>
+       * @param value The topRight to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTopRight(double value) {
+        
+        topRight_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double topRight = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTopRight() {
+        
+        topRight_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bottomLeft_ ;
+      /**
+       * <code>double bottomLeft = 3;</code>
+       * @return The bottomLeft.
+       */
+      @java.lang.Override
+      public double getBottomLeft() {
+        return bottomLeft_;
+      }
+      /**
+       * <code>double bottomLeft = 3;</code>
+       * @param value The bottomLeft to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBottomLeft(double value) {
+        
+        bottomLeft_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double bottomLeft = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBottomLeft() {
+        
+        bottomLeft_ = 0D;
+        onChanged();
+        return this;
+      }
+
+      private double bottomRight_ ;
+      /**
+       * <code>double bottomRight = 4;</code>
+       * @return The bottomRight.
+       */
+      @java.lang.Override
+      public double getBottomRight() {
+        return bottomRight_;
+      }
+      /**
+       * <code>double bottomRight = 4;</code>
+       * @param value The bottomRight to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBottomRight(double value) {
+        
+        bottomRight_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>double bottomRight = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBottomRight() {
+        
+        bottomRight_ = 0D;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ImageBorderRadius)
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageBorderRadius)
+    private static final com.texture_image.proto.ImageInfo.ImageBorderRadius DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageBorderRadius();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ImageBorderRadius>
+        PARSER = new com.google.protobuf.AbstractParser<ImageBorderRadius>() {
+      @java.lang.Override
+      public ImageBorderRadius parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageBorderRadius(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ImageBorderRadius> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageBorderRadius> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_TextureImageInfo_descriptor;
+    internal_static_ImageRequestInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_TextureImageInfo_fieldAccessorTable;
+      internal_static_ImageRequestInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageRequestCancelInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ImageRequestCancelInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageBorderRadius_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ImageBorderRadius_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -1239,25 +2885,41 @@ public final class ImageInfo {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020image_info.proto\032\023border_radius.proto\"" +
-      "\227\001\n\020TextureImageInfo\022\013\n\003url\030\001 \001(\t\022\r\n\005wid" +
-      "th\030\002 \001(\005\022\016\n\006height\030\003 \001(\005\022\030\n\020errorPlaceho" +
-      "lder\030\004 \001(\t\022\023\n\013placeholder\030\005 \001(\t\022(\n\014borde" +
-      "rRadius\030\006 \001(\0132\022.ImageBorderRadiusB\031\n\027com" +
-      ".texture_image.protob\006proto3"
+      "\n\020image_info.proto\032\nenum.proto\"\255\001\n\020Image" +
+      "RequestInfo\022\013\n\003url\030\001 \001(\t\022\r\n\005width\030\002 \001(\005\022" +
+      "\016\n\006height\030\003 \001(\005\022\030\n\020errorPlaceholder\030\004 \001(" +
+      "\t\022\023\n\013placeholder\030\005 \001(\t\022\024\n\003fit\030\006 \001(\0162\007.Bo" +
+      "xFit\022(\n\014borderRadius\030\007 \001(\0132\022.ImageBorder" +
+      "Radius\"8\n\026ImageRequestCancelInfo\022\013\n\003url\030" +
+      "\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\"_\n\021ImageBorderR" +
+      "adius\022\017\n\007topLeft\030\001 \001(\001\022\020\n\010topRight\030\002 \001(\001" +
+      "\022\022\n\nbottomLeft\030\003 \001(\001\022\023\n\013bottomRight\030\004 \001(" +
+      "\001B\031\n\027com.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.texture_image.proto.BorderRadius.getDescriptor(),
+          com.texture_image.proto.Enum.getDescriptor(),
         });
-    internal_static_TextureImageInfo_descriptor =
+    internal_static_ImageRequestInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_TextureImageInfo_fieldAccessorTable = new
+    internal_static_ImageRequestInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_TextureImageInfo_descriptor,
-        new java.lang.String[] { "Url", "Width", "Height", "ErrorPlaceholder", "Placeholder", "BorderRadius", });
-    com.texture_image.proto.BorderRadius.getDescriptor();
+        internal_static_ImageRequestInfo_descriptor,
+        new java.lang.String[] { "Url", "Width", "Height", "ErrorPlaceholder", "Placeholder", "Fit", "BorderRadius", });
+    internal_static_ImageRequestCancelInfo_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_ImageRequestCancelInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ImageRequestCancelInfo_descriptor,
+        new java.lang.String[] { "Url", "TextureId", });
+    internal_static_ImageBorderRadius_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_ImageBorderRadius_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ImageBorderRadius_descriptor,
+        new java.lang.String[] { "TopLeft", "TopRight", "BottomLeft", "BottomRight", });
+    com.texture_image.proto.Enum.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

@@ -1,22 +1,28 @@
 syntax = "proto3";
 option java_package = "com.texture_image.proto";
 
-enum ImageTaskState {
-  initialized = 0;
-  loading = 1;
-  completed = 2;
-  canceled = 3;
-  failed = 4 ;
-}
+import "enum.proto";
 
+// An object to describe image request API invoking result
+// Flutter side may use the [textureId] to rebuild its UI
+// when receiving the result, but the target image may not
+// be shown right away because it maybe downloading by now
+// you can check [state] for the relative task's newest status
 message ImageResult {
+  // The result code of process, if this code's value is not 200
+  // then the [textureId] shall be invalid and error placeholder
+  // is supposed to be shown on this situation
   int32 code = 1;
 
-  string message = 2;
+  // Relative underlay Texture id for this image
+  int64 textureId = 2;
 
-  int32 textureId = 3;
+  // Description for the result
+  string message = 3;
 
-  ImageTaskState state = 4;
+  // Image url
+  string url = 4;
 
-  string url = 5;
+  // Relative image fetching task's current status
+  ImageTaskState state = 5;
 }

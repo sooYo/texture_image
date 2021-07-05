@@ -28,6 +28,7 @@
 CF_EXTERN_C_BEGIN
 
 @class ImageBorderRadius;
+GPB_ENUM_FWD_DECLARE(BoxFit);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -46,18 +47,22 @@ NS_ASSUME_NONNULL_BEGIN
 GPB_FINAL @interface ImageInfoRoot : GPBRootObject
 @end
 
-#pragma mark - TextureImageInfo
+#pragma mark - ImageRequestInfo
 
-typedef GPB_ENUM(TextureImageInfo_FieldNumber) {
-  TextureImageInfo_FieldNumber_URL = 1,
-  TextureImageInfo_FieldNumber_Width = 2,
-  TextureImageInfo_FieldNumber_Height = 3,
-  TextureImageInfo_FieldNumber_ErrorPlaceholder = 4,
-  TextureImageInfo_FieldNumber_Placeholder = 5,
-  TextureImageInfo_FieldNumber_BorderRadius = 6,
+typedef GPB_ENUM(ImageRequestInfo_FieldNumber) {
+  ImageRequestInfo_FieldNumber_URL = 1,
+  ImageRequestInfo_FieldNumber_Width = 2,
+  ImageRequestInfo_FieldNumber_Height = 3,
+  ImageRequestInfo_FieldNumber_ErrorPlaceholder = 4,
+  ImageRequestInfo_FieldNumber_Placeholder = 5,
+  ImageRequestInfo_FieldNumber_Fit = 6,
+  ImageRequestInfo_FieldNumber_BorderRadius = 7,
 };
 
-GPB_FINAL @interface TextureImageInfo : GPBMessage
+/**
+ * Send this info to native side when plugin wants to load an image
+ **/
+GPB_FINAL @interface ImageRequestInfo : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
 
@@ -65,13 +70,70 @@ GPB_FINAL @interface TextureImageInfo : GPBMessage
 
 @property(nonatomic, readwrite) int32_t height;
 
+/** Image to be shown when loading failed, can be URL or local file path */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *errorPlaceholder;
 
+/** Can be URL or local file path */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *placeholder;
 
+/** Refer to [BoxFit] in enum.proto */
+@property(nonatomic, readwrite) enum BoxFit fit;
+
+/** Whether to make a rounded rect style or not */
 @property(nonatomic, readwrite, strong, null_resettable) ImageBorderRadius *borderRadius;
 /** Test to see if @c borderRadius has been set. */
 @property(nonatomic, readwrite) BOOL hasBorderRadius;
+
+@end
+
+/**
+ * Fetches the raw value of a @c ImageRequestInfo's @c fit property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ImageRequestInfo_Fit_RawValue(ImageRequestInfo *message);
+/**
+ * Sets the raw value of an @c ImageRequestInfo's @c fit property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetImageRequestInfo_Fit_RawValue(ImageRequestInfo *message, int32_t value);
+
+#pragma mark - ImageRequestCancelInfo
+
+typedef GPB_ENUM(ImageRequestCancelInfo_FieldNumber) {
+  ImageRequestCancelInfo_FieldNumber_URL = 1,
+  ImageRequestCancelInfo_FieldNumber_TextureId = 2,
+};
+
+/**
+ * This info is sent when plugin wants to cancel an on going image loading task
+ **/
+GPB_FINAL @interface ImageRequestCancelInfo : GPBMessage
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
+@property(nonatomic, readwrite) int64_t textureId;
+
+@end
+
+#pragma mark - ImageBorderRadius
+
+typedef GPB_ENUM(ImageBorderRadius_FieldNumber) {
+  ImageBorderRadius_FieldNumber_TopLeft = 1,
+  ImageBorderRadius_FieldNumber_TopRight = 2,
+  ImageBorderRadius_FieldNumber_BottomLeft = 3,
+  ImageBorderRadius_FieldNumber_BottomRight = 4,
+};
+
+GPB_FINAL @interface ImageBorderRadius : GPBMessage
+
+@property(nonatomic, readwrite) double topLeft;
+
+@property(nonatomic, readwrite) double topRight;
+
+@property(nonatomic, readwrite) double bottomLeft;
+
+@property(nonatomic, readwrite) double bottomRight;
 
 @end
 

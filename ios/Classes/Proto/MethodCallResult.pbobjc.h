@@ -27,31 +27,9 @@
 
 CF_EXTERN_C_BEGIN
 
+GPB_ENUM_FWD_DECLARE(ImageTaskState);
+
 NS_ASSUME_NONNULL_BEGIN
-
-#pragma mark - Enum ImageTaskState
-
-typedef GPB_ENUM(ImageTaskState) {
-  /**
-   * Value used if any message's field encounters a value that is not defined
-   * by this enum. The message will also have C functions to get/set the rawValue
-   * of the field.
-   **/
-  ImageTaskState_GPBUnrecognizedEnumeratorValue = kGPBUnrecognizedEnumeratorValue,
-  ImageTaskState_Initialized = 0,
-  ImageTaskState_Loading = 1,
-  ImageTaskState_Completed = 2,
-  ImageTaskState_Canceled = 3,
-  ImageTaskState_Failed = 4,
-};
-
-GPBEnumDescriptor *ImageTaskState_EnumDescriptor(void);
-
-/**
- * Checks to see if the given value is defined by the enum or was not known at
- * the time this source was generated.
- **/
-BOOL ImageTaskState_IsValidValue(int32_t value);
 
 #pragma mark - MethodCallResultRoot
 
@@ -72,23 +50,39 @@ GPB_FINAL @interface MethodCallResultRoot : GPBRootObject
 
 typedef GPB_ENUM(ImageResult_FieldNumber) {
   ImageResult_FieldNumber_Code = 1,
-  ImageResult_FieldNumber_Message = 2,
-  ImageResult_FieldNumber_TextureId = 3,
-  ImageResult_FieldNumber_State = 4,
-  ImageResult_FieldNumber_URL = 5,
+  ImageResult_FieldNumber_TextureId = 2,
+  ImageResult_FieldNumber_Message = 3,
+  ImageResult_FieldNumber_URL = 4,
+  ImageResult_FieldNumber_State = 5,
 };
 
+/**
+ * An object to describe image request API invoking result
+ * Flutter side may use the [textureId] to rebuild its UI
+ * when receiving the result, but the target image may not
+ * be shown right away because it maybe downloading by now
+ * you can check [state] for the relative task's newest status
+ **/
 GPB_FINAL @interface ImageResult : GPBMessage
 
+/**
+ * The result code of process, if this code's value is not 200
+ * then the [textureId] shall be invalid and error placeholder
+ * is supposed to be shown on this situation
+ **/
 @property(nonatomic, readwrite) int32_t code;
 
+/** Relative underlay Texture id for this image */
+@property(nonatomic, readwrite) int64_t textureId;
+
+/** Description for the result */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *message;
 
-@property(nonatomic, readwrite) int32_t textureId;
-
-@property(nonatomic, readwrite) ImageTaskState state;
-
+/** Image url */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
+/** Relative image fetching task's current status */
+@property(nonatomic, readwrite) enum ImageTaskState state;
 
 @end
 

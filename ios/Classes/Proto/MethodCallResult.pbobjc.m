@@ -13,9 +13,8 @@
  #import "GPBProtocolBuffers_RuntimeSupport.h"
 #endif
 
-#import <stdatomic.h>
-
 #import "MethodCallResult.pbobjc.h"
+#import "Enum.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -25,8 +24,8 @@
 
 @implementation MethodCallResultRoot
 
-// No extensions in the file and no imports, so no need to generate
-// +extensionRegistry.
+// No extensions in the file and none of the imports (direct or indirect)
+// defined extensions, so no need to generate +extensionRegistry.
 
 @end
 
@@ -44,67 +43,23 @@ static GPBFileDescriptor *MethodCallResultRoot_FileDescriptor(void) {
   return descriptor;
 }
 
-#pragma mark - Enum ImageTaskState
-
-GPBEnumDescriptor *ImageTaskState_EnumDescriptor(void) {
-  static _Atomic(GPBEnumDescriptor*) descriptor = nil;
-  if (!descriptor) {
-    static const char *valueNames =
-        "Initialized\000Loading\000Completed\000Canceled\000F"
-        "ailed\000";
-    static const int32_t values[] = {
-        ImageTaskState_Initialized,
-        ImageTaskState_Loading,
-        ImageTaskState_Completed,
-        ImageTaskState_Canceled,
-        ImageTaskState_Failed,
-    };
-    static const char *extraTextFormatInfo = "\005\000+\000\001\'\000\002)\000\003(\000\004&\000";
-    GPBEnumDescriptor *worker =
-        [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(ImageTaskState)
-                                       valueNames:valueNames
-                                           values:values
-                                            count:(uint32_t)(sizeof(values) / sizeof(int32_t))
-                                     enumVerifier:ImageTaskState_IsValidValue
-                              extraTextFormatInfo:extraTextFormatInfo];
-    GPBEnumDescriptor *expected = nil;
-    if (!atomic_compare_exchange_strong(&descriptor, &expected, worker)) {
-      [worker release];
-    }
-  }
-  return descriptor;
-}
-
-BOOL ImageTaskState_IsValidValue(int32_t value__) {
-  switch (value__) {
-    case ImageTaskState_Initialized:
-    case ImageTaskState_Loading:
-    case ImageTaskState_Completed:
-    case ImageTaskState_Canceled:
-    case ImageTaskState_Failed:
-      return YES;
-    default:
-      return NO;
-  }
-}
-
 #pragma mark - ImageResult
 
 @implementation ImageResult
 
 @dynamic code;
-@dynamic message;
 @dynamic textureId;
-@dynamic state;
+@dynamic message;
 @dynamic URL;
+@dynamic state;
 
 typedef struct ImageResult__storage_ {
   uint32_t _has_storage_[1];
   int32_t code;
-  int32_t textureId;
   ImageTaskState state;
   NSString *message;
   NSString *URL;
+  int64_t textureId;
 } ImageResult__storage_;
 
 // This method is threadsafe because it is initially called
@@ -123,40 +78,40 @@ typedef struct ImageResult__storage_ {
         .dataType = GPBDataTypeInt32,
       },
       {
+        .name = "textureId",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageResult_FieldNumber_TextureId,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ImageResult__storage_, textureId),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt64,
+      },
+      {
         .name = "message",
         .dataTypeSpecific.clazz = Nil,
         .number = ImageResult_FieldNumber_Message,
-        .hasIndex = 1,
+        .hasIndex = 2,
         .offset = (uint32_t)offsetof(ImageResult__storage_, message),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
       {
-        .name = "textureId",
+        .name = "URL",
         .dataTypeSpecific.clazz = Nil,
-        .number = ImageResult_FieldNumber_TextureId,
-        .hasIndex = 2,
-        .offset = (uint32_t)offsetof(ImageResult__storage_, textureId),
+        .number = ImageResult_FieldNumber_URL,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(ImageResult__storage_, URL),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeInt32,
+        .dataType = GPBDataTypeString,
       },
       {
         .name = "state",
         .dataTypeSpecific.enumDescFunc = ImageTaskState_EnumDescriptor,
         .number = ImageResult_FieldNumber_State,
-        .hasIndex = 3,
+        .hasIndex = 4,
         .offset = (uint32_t)offsetof(ImageResult__storage_, state),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeEnum,
-      },
-      {
-        .name = "URL",
-        .dataTypeSpecific.clazz = Nil,
-        .number = ImageResult_FieldNumber_URL,
-        .hasIndex = 4,
-        .offset = (uint32_t)offsetof(ImageResult__storage_, URL),
-        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeString,
       },
     };
     GPBDescriptor *localDescriptor =
@@ -169,7 +124,7 @@ typedef struct ImageResult__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\002\003\t\000\005!!!\000";
+        "\002\002\t\000\004!!!\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

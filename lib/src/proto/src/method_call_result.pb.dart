@@ -7,45 +7,44 @@
 
 import 'dart:core' as $core;
 
+import 'package:fixnum/fixnum.dart' as $fixnum;
 import 'package:protobuf/protobuf.dart' as $pb;
 
-import 'method_call_result.pbenum.dart';
-
-export 'method_call_result.pbenum.dart';
+import 'enum.pbenum.dart' as $0;
 
 class ImageResult extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageResult', createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', $pb.PbFieldType.O3, protoName: 'textureId')
-    ..e<ImageTaskState>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: ImageTaskState.initialized, valueOf: ImageTaskState.valueOf, enumValues: ImageTaskState.values)
-    ..aOS(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
+    ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', protoName: 'textureId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
+    ..e<$0.ImageTaskState>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $0.ImageTaskState.initialized, valueOf: $0.ImageTaskState.valueOf, enumValues: $0.ImageTaskState.values)
     ..hasRequiredFields = false
   ;
 
   ImageResult._() : super();
   factory ImageResult({
     $core.int? code,
+    $fixnum.Int64? textureId,
     $core.String? message,
-    $core.int? textureId,
-    ImageTaskState? state,
     $core.String? url,
+    $0.ImageTaskState? state,
   }) {
     final _result = create();
     if (code != null) {
       _result.code = code;
     }
-    if (message != null) {
-      _result.message = message;
-    }
     if (textureId != null) {
       _result.textureId = textureId;
     }
-    if (state != null) {
-      _result.state = state;
+    if (message != null) {
+      _result.message = message;
     }
     if (url != null) {
       _result.url = url;
+    }
+    if (state != null) {
+      _result.state = state;
     }
     return _result;
   }
@@ -80,39 +79,39 @@ class ImageResult extends $pb.GeneratedMessage {
   void clearCode() => clearField(1);
 
   @$pb.TagNumber(2)
-  $core.String get message => $_getSZ(1);
+  $fixnum.Int64 get textureId => $_getI64(1);
   @$pb.TagNumber(2)
-  set message($core.String v) { $_setString(1, v); }
+  set textureId($fixnum.Int64 v) { $_setInt64(1, v); }
   @$pb.TagNumber(2)
-  $core.bool hasMessage() => $_has(1);
+  $core.bool hasTextureId() => $_has(1);
   @$pb.TagNumber(2)
-  void clearMessage() => clearField(2);
+  void clearTextureId() => clearField(2);
 
   @$pb.TagNumber(3)
-  $core.int get textureId => $_getIZ(2);
+  $core.String get message => $_getSZ(2);
   @$pb.TagNumber(3)
-  set textureId($core.int v) { $_setSignedInt32(2, v); }
+  set message($core.String v) { $_setString(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasTextureId() => $_has(2);
+  $core.bool hasMessage() => $_has(2);
   @$pb.TagNumber(3)
-  void clearTextureId() => clearField(3);
+  void clearMessage() => clearField(3);
 
   @$pb.TagNumber(4)
-  ImageTaskState get state => $_getN(3);
+  $core.String get url => $_getSZ(3);
   @$pb.TagNumber(4)
-  set state(ImageTaskState v) { setField(4, v); }
+  set url($core.String v) { $_setString(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasState() => $_has(3);
+  $core.bool hasUrl() => $_has(3);
   @$pb.TagNumber(4)
-  void clearState() => clearField(4);
+  void clearUrl() => clearField(4);
 
   @$pb.TagNumber(5)
-  $core.String get url => $_getSZ(4);
+  $0.ImageTaskState get state => $_getN(4);
   @$pb.TagNumber(5)
-  set url($core.String v) { $_setString(4, v); }
+  set state($0.ImageTaskState v) { setField(5, v); }
   @$pb.TagNumber(5)
-  $core.bool hasUrl() => $_has(4);
+  $core.bool hasState() => $_has(4);
   @$pb.TagNumber(5)
-  void clearUrl() => clearField(5);
+  void clearState() => clearField(5);
 }
 

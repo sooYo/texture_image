@@ -14,7 +14,7 @@
 #endif
 
 #import "ImageInfo.pbobjc.h"
-#import "BorderRadius.pbobjc.h"
+#import "Enum.pbobjc.h"
 // @@protoc_insertion_point(imports)
 
 #pragma clang diagnostic push
@@ -50,26 +50,28 @@ static GPBFileDescriptor *ImageInfoRoot_FileDescriptor(void) {
   return descriptor;
 }
 
-#pragma mark - TextureImageInfo
+#pragma mark - ImageRequestInfo
 
-@implementation TextureImageInfo
+@implementation ImageRequestInfo
 
 @dynamic URL;
 @dynamic width;
 @dynamic height;
 @dynamic errorPlaceholder;
 @dynamic placeholder;
+@dynamic fit;
 @dynamic hasBorderRadius, borderRadius;
 
-typedef struct TextureImageInfo__storage_ {
+typedef struct ImageRequestInfo__storage_ {
   uint32_t _has_storage_[1];
   int32_t width;
   int32_t height;
+  BoxFit fit;
   NSString *URL;
   NSString *errorPlaceholder;
   NSString *placeholder;
   ImageBorderRadius *borderRadius;
-} TextureImageInfo__storage_;
+} ImageRequestInfo__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -80,69 +82,234 @@ typedef struct TextureImageInfo__storage_ {
       {
         .name = "URL",
         .dataTypeSpecific.clazz = Nil,
-        .number = TextureImageInfo_FieldNumber_URL,
+        .number = ImageRequestInfo_FieldNumber_URL,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, URL),
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, URL),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "width",
         .dataTypeSpecific.clazz = Nil,
-        .number = TextureImageInfo_FieldNumber_Width,
+        .number = ImageRequestInfo_FieldNumber_Width,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, width),
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, width),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "height",
         .dataTypeSpecific.clazz = Nil,
-        .number = TextureImageInfo_FieldNumber_Height,
+        .number = ImageRequestInfo_FieldNumber_Height,
         .hasIndex = 2,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, height),
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, height),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeInt32,
       },
       {
         .name = "errorPlaceholder",
         .dataTypeSpecific.clazz = Nil,
-        .number = TextureImageInfo_FieldNumber_ErrorPlaceholder,
+        .number = ImageRequestInfo_FieldNumber_ErrorPlaceholder,
         .hasIndex = 3,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, errorPlaceholder),
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, errorPlaceholder),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "placeholder",
         .dataTypeSpecific.clazz = Nil,
-        .number = TextureImageInfo_FieldNumber_Placeholder,
+        .number = ImageRequestInfo_FieldNumber_Placeholder,
         .hasIndex = 4,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, placeholder),
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, placeholder),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
       {
+        .name = "fit",
+        .dataTypeSpecific.enumDescFunc = BoxFit_EnumDescriptor,
+        .number = ImageRequestInfo_FieldNumber_Fit,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, fit),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeEnum,
+      },
+      {
         .name = "borderRadius",
         .dataTypeSpecific.clazz = GPBObjCClass(ImageBorderRadius),
-        .number = TextureImageInfo_FieldNumber_BorderRadius,
-        .hasIndex = 5,
-        .offset = (uint32_t)offsetof(TextureImageInfo__storage_, borderRadius),
+        .number = ImageRequestInfo_FieldNumber_BorderRadius,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(ImageRequestInfo__storage_, borderRadius),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[TextureImageInfo class]
+        [GPBDescriptor allocDescriptorForClass:[ImageRequestInfo class]
                                      rootClass:[ImageInfoRoot class]
                                           file:ImageInfoRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(TextureImageInfo__storage_)
+                                   storageSize:sizeof(ImageRequestInfo__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\003\001!!!\000\004\020\000\006\014\000";
+        "\003\001!!!\000\004\020\000\007\014\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+int32_t ImageRequestInfo_Fit_RawValue(ImageRequestInfo *message) {
+  GPBDescriptor *descriptor = [ImageRequestInfo descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:ImageRequestInfo_FieldNumber_Fit];
+  return GPBGetMessageRawEnumField(message, field);
+}
+
+void SetImageRequestInfo_Fit_RawValue(ImageRequestInfo *message, int32_t value) {
+  GPBDescriptor *descriptor = [ImageRequestInfo descriptor];
+  GPBFieldDescriptor *field = [descriptor fieldWithNumber:ImageRequestInfo_FieldNumber_Fit];
+  GPBSetMessageRawEnumField(message, field, value);
+}
+
+#pragma mark - ImageRequestCancelInfo
+
+@implementation ImageRequestCancelInfo
+
+@dynamic URL;
+@dynamic textureId;
+
+typedef struct ImageRequestCancelInfo__storage_ {
+  uint32_t _has_storage_[1];
+  NSString *URL;
+  int64_t textureId;
+} ImageRequestCancelInfo__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "URL",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageRequestCancelInfo_FieldNumber_URL,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ImageRequestCancelInfo__storage_, URL),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "textureId",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageRequestCancelInfo_FieldNumber_TextureId,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ImageRequestCancelInfo__storage_, textureId),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt64,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ImageRequestCancelInfo class]
+                                     rootClass:[ImageInfoRoot class]
+                                          file:ImageInfoRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ImageRequestCancelInfo__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\002\001!!!\000\002\t\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - ImageBorderRadius
+
+@implementation ImageBorderRadius
+
+@dynamic topLeft;
+@dynamic topRight;
+@dynamic bottomLeft;
+@dynamic bottomRight;
+
+typedef struct ImageBorderRadius__storage_ {
+  uint32_t _has_storage_[1];
+  double topLeft;
+  double topRight;
+  double bottomLeft;
+  double bottomRight;
+} ImageBorderRadius__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "topLeft",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageBorderRadius_FieldNumber_TopLeft,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ImageBorderRadius__storage_, topLeft),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "topRight",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageBorderRadius_FieldNumber_TopRight,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ImageBorderRadius__storage_, topRight),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "bottomLeft",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageBorderRadius_FieldNumber_BottomLeft,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(ImageBorderRadius__storage_, bottomLeft),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeDouble,
+      },
+      {
+        .name = "bottomRight",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageBorderRadius_FieldNumber_BottomRight,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(ImageBorderRadius__storage_, bottomRight),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeDouble,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ImageBorderRadius class]
+                                     rootClass:[ImageInfoRoot class]
+                                          file:ImageInfoRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ImageBorderRadius__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\004\001\007\000\002\010\000\003\n\000\004\013\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

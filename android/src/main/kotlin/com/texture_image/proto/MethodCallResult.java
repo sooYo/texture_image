@@ -14,193 +14,100 @@ public final class MethodCallResult {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  /**
-   * Protobuf enum {@code ImageTaskState}
-   */
-  public enum ImageTaskState
-      implements com.google.protobuf.ProtocolMessageEnum {
-    /**
-     * <code>initialized = 0;</code>
-     */
-    initialized(0),
-    /**
-     * <code>loading = 1;</code>
-     */
-    loading(1),
-    /**
-     * <code>completed = 2;</code>
-     */
-    completed(2),
-    /**
-     * <code>canceled = 3;</code>
-     */
-    canceled(3),
-    /**
-     * <code>failed = 4;</code>
-     */
-    failed(4),
-    UNRECOGNIZED(-1),
-    ;
-
-    /**
-     * <code>initialized = 0;</code>
-     */
-    public static final int initialized_VALUE = 0;
-    /**
-     * <code>loading = 1;</code>
-     */
-    public static final int loading_VALUE = 1;
-    /**
-     * <code>completed = 2;</code>
-     */
-    public static final int completed_VALUE = 2;
-    /**
-     * <code>canceled = 3;</code>
-     */
-    public static final int canceled_VALUE = 3;
-    /**
-     * <code>failed = 4;</code>
-     */
-    public static final int failed_VALUE = 4;
-
-
-    public final int getNumber() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalArgumentException(
-            "Can't get the number of an unknown enum value.");
-      }
-      return value;
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
-    public static ImageTaskState valueOf(int value) {
-      return forNumber(value);
-    }
-
-    /**
-     * @param value The numeric wire value of the corresponding enum entry.
-     * @return The enum associated with the given numeric wire value.
-     */
-    public static ImageTaskState forNumber(int value) {
-      switch (value) {
-        case 0: return initialized;
-        case 1: return loading;
-        case 2: return completed;
-        case 3: return canceled;
-        case 4: return failed;
-        default: return null;
-      }
-    }
-
-    public static com.google.protobuf.Internal.EnumLiteMap<ImageTaskState>
-        internalGetValueMap() {
-      return internalValueMap;
-    }
-    private static final com.google.protobuf.Internal.EnumLiteMap<
-        ImageTaskState> internalValueMap =
-          new com.google.protobuf.Internal.EnumLiteMap<ImageTaskState>() {
-            public ImageTaskState findValueByNumber(int number) {
-              return ImageTaskState.forNumber(number);
-            }
-          };
-
-    public final com.google.protobuf.Descriptors.EnumValueDescriptor
-        getValueDescriptor() {
-      if (this == UNRECOGNIZED) {
-        throw new java.lang.IllegalStateException(
-            "Can't get the descriptor of an unrecognized enum value.");
-      }
-      return getDescriptor().getValues().get(ordinal());
-    }
-    public final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptorForType() {
-      return getDescriptor();
-    }
-    public static final com.google.protobuf.Descriptors.EnumDescriptor
-        getDescriptor() {
-      return com.texture_image.proto.MethodCallResult.getDescriptor().getEnumTypes().get(0);
-    }
-
-    private static final ImageTaskState[] VALUES = values();
-
-    public static ImageTaskState valueOf(
-        com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
-      if (desc.getType() != getDescriptor()) {
-        throw new java.lang.IllegalArgumentException(
-          "EnumValueDescriptor is not for this type.");
-      }
-      if (desc.getIndex() == -1) {
-        return UNRECOGNIZED;
-      }
-      return VALUES[desc.getIndex()];
-    }
-
-    private final int value;
-
-    private ImageTaskState(int value) {
-      this.value = value;
-    }
-
-    // @@protoc_insertion_point(enum_scope:ImageTaskState)
-  }
-
   public interface ImageResultOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ImageResult)
       com.google.protobuf.MessageOrBuilder {
 
     /**
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
      * <code>int32 code = 1;</code>
      * @return The code.
      */
     int getCode();
 
     /**
-     * <code>string message = 2;</code>
+     * <pre>
+     * Relative underlay Texture id for this image
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    long getTextureId();
+
+    /**
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
      * @return The message.
      */
     java.lang.String getMessage();
     /**
-     * <code>string message = 2;</code>
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
      * @return The bytes for message.
      */
     com.google.protobuf.ByteString
         getMessageBytes();
 
     /**
-     * <code>int32 textureId = 3;</code>
-     * @return The textureId.
-     */
-    int getTextureId();
-
-    /**
-     * <code>.ImageTaskState state = 4;</code>
-     * @return The enum numeric value on the wire for state.
-     */
-    int getStateValue();
-    /**
-     * <code>.ImageTaskState state = 4;</code>
-     * @return The state.
-     */
-    com.texture_image.proto.MethodCallResult.ImageTaskState getState();
-
-    /**
-     * <code>string url = 5;</code>
+     * <pre>
+     * Image url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The url.
      */
     java.lang.String getUrl();
     /**
-     * <code>string url = 5;</code>
+     * <pre>
+     * Image url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The bytes for url.
      */
     com.google.protobuf.ByteString
         getUrlBytes();
+
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.ImageTaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    int getStateValue();
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.ImageTaskState state = 5;</code>
+     * @return The state.
+     */
+    com.texture_image.proto.Enum.ImageTaskState getState();
   }
   /**
+   * <pre>
+   * An object to describe image request API invoking result
+   * Flutter side may use the [textureId] to rebuild its UI
+   * when receiving the result, but the target image may not
+   * be shown right away because it maybe downloading by now
+   * you can check [state] for the relative task's newest status
+   * </pre>
+   *
    * Protobuf type {@code ImageResult}
    */
   public static final class ImageResult extends
@@ -214,8 +121,8 @@ public final class MethodCallResult {
     }
     private ImageResult() {
       message_ = "";
-      state_ = 0;
       url_ = "";
+      state_ = 0;
     }
 
     @java.lang.Override
@@ -253,27 +160,27 @@ public final class MethodCallResult {
               code_ = input.readInt32();
               break;
             }
-            case 18: {
+            case 16: {
+
+              textureId_ = input.readInt64();
+              break;
+            }
+            case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
               message_ = s;
               break;
             }
-            case 24: {
-
-              textureId_ = input.readInt32();
-              break;
-            }
-            case 32: {
-              int rawValue = input.readEnum();
-
-              state_ = rawValue;
-              break;
-            }
-            case 42: {
+            case 34: {
               java.lang.String s = input.readStringRequireUtf8();
 
               url_ = s;
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+
+              state_ = rawValue;
               break;
             }
             default: {
@@ -311,6 +218,12 @@ public final class MethodCallResult {
     public static final int CODE_FIELD_NUMBER = 1;
     private int code_;
     /**
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
      * <code>int32 code = 1;</code>
      * @return The code.
      */
@@ -319,10 +232,29 @@ public final class MethodCallResult {
       return code_;
     }
 
-    public static final int MESSAGE_FIELD_NUMBER = 2;
+    public static final int TEXTUREID_FIELD_NUMBER = 2;
+    private long textureId_;
+    /**
+     * <pre>
+     * Relative underlay Texture id for this image
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    @java.lang.Override
+    public long getTextureId() {
+      return textureId_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 3;
     private volatile java.lang.Object message_;
     /**
-     * <code>string message = 2;</code>
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
      * @return The message.
      */
     @java.lang.Override
@@ -339,7 +271,11 @@ public final class MethodCallResult {
       }
     }
     /**
-     * <code>string message = 2;</code>
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
      * @return The bytes for message.
      */
     @java.lang.Override
@@ -357,40 +293,14 @@ public final class MethodCallResult {
       }
     }
 
-    public static final int TEXTUREID_FIELD_NUMBER = 3;
-    private int textureId_;
-    /**
-     * <code>int32 textureId = 3;</code>
-     * @return The textureId.
-     */
-    @java.lang.Override
-    public int getTextureId() {
-      return textureId_;
-    }
-
-    public static final int STATE_FIELD_NUMBER = 4;
-    private int state_;
-    /**
-     * <code>.ImageTaskState state = 4;</code>
-     * @return The enum numeric value on the wire for state.
-     */
-    @java.lang.Override public int getStateValue() {
-      return state_;
-    }
-    /**
-     * <code>.ImageTaskState state = 4;</code>
-     * @return The state.
-     */
-    @java.lang.Override public com.texture_image.proto.MethodCallResult.ImageTaskState getState() {
-      @SuppressWarnings("deprecation")
-      com.texture_image.proto.MethodCallResult.ImageTaskState result = com.texture_image.proto.MethodCallResult.ImageTaskState.valueOf(state_);
-      return result == null ? com.texture_image.proto.MethodCallResult.ImageTaskState.UNRECOGNIZED : result;
-    }
-
-    public static final int URL_FIELD_NUMBER = 5;
+    public static final int URL_FIELD_NUMBER = 4;
     private volatile java.lang.Object url_;
     /**
-     * <code>string url = 5;</code>
+     * <pre>
+     * Image url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The url.
      */
     @java.lang.Override
@@ -407,7 +317,11 @@ public final class MethodCallResult {
       }
     }
     /**
-     * <code>string url = 5;</code>
+     * <pre>
+     * Image url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The bytes for url.
      */
     @java.lang.Override
@@ -423,6 +337,33 @@ public final class MethodCallResult {
       } else {
         return (com.google.protobuf.ByteString) ref;
       }
+    }
+
+    public static final int STATE_FIELD_NUMBER = 5;
+    private int state_;
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.ImageTaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.ImageTaskState state = 5;</code>
+     * @return The state.
+     */
+    @java.lang.Override public com.texture_image.proto.Enum.ImageTaskState getState() {
+      @SuppressWarnings("deprecation")
+      com.texture_image.proto.Enum.ImageTaskState result = com.texture_image.proto.Enum.ImageTaskState.valueOf(state_);
+      return result == null ? com.texture_image.proto.Enum.ImageTaskState.UNRECOGNIZED : result;
     }
 
     private byte memoizedIsInitialized = -1;
@@ -442,17 +383,17 @@ public final class MethodCallResult {
       if (code_ != 0) {
         output.writeInt32(1, code_);
       }
+      if (textureId_ != 0L) {
+        output.writeInt64(2, textureId_);
+      }
       if (!getMessageBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
-      }
-      if (textureId_ != 0) {
-        output.writeInt32(3, textureId_);
-      }
-      if (state_ != com.texture_image.proto.MethodCallResult.ImageTaskState.initialized.getNumber()) {
-        output.writeEnum(4, state_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
       }
       if (!getUrlBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, url_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, url_);
+      }
+      if (state_ != com.texture_image.proto.Enum.ImageTaskState.initialized.getNumber()) {
+        output.writeEnum(5, state_);
       }
       unknownFields.writeTo(output);
     }
@@ -467,19 +408,19 @@ public final class MethodCallResult {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, code_);
       }
+      if (textureId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, textureId_);
+      }
       if (!getMessageBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
-      }
-      if (textureId_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, textureId_);
-      }
-      if (state_ != com.texture_image.proto.MethodCallResult.ImageTaskState.initialized.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(4, state_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
       }
       if (!getUrlBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, url_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, url_);
+      }
+      if (state_ != com.texture_image.proto.Enum.ImageTaskState.initialized.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, state_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -498,13 +439,13 @@ public final class MethodCallResult {
 
       if (getCode()
           != other.getCode()) return false;
-      if (!getMessage()
-          .equals(other.getMessage())) return false;
       if (getTextureId()
           != other.getTextureId()) return false;
-      if (state_ != other.state_) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
       if (!getUrl()
           .equals(other.getUrl())) return false;
+      if (state_ != other.state_) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -518,14 +459,15 @@ public final class MethodCallResult {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + CODE_FIELD_NUMBER;
       hash = (53 * hash) + getCode();
+      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTextureId());
       hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
       hash = (53 * hash) + getMessage().hashCode();
-      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
-      hash = (53 * hash) + getTextureId();
-      hash = (37 * hash) + STATE_FIELD_NUMBER;
-      hash = (53 * hash) + state_;
       hash = (37 * hash) + URL_FIELD_NUMBER;
       hash = (53 * hash) + getUrl().hashCode();
+      hash = (37 * hash) + STATE_FIELD_NUMBER;
+      hash = (53 * hash) + state_;
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -622,6 +564,14 @@ public final class MethodCallResult {
       return builder;
     }
     /**
+     * <pre>
+     * An object to describe image request API invoking result
+     * Flutter side may use the [textureId] to rebuild its UI
+     * when receiving the result, but the target image may not
+     * be shown right away because it maybe downloading by now
+     * you can check [state] for the relative task's newest status
+     * </pre>
+     *
      * Protobuf type {@code ImageResult}
      */
     public static final class Builder extends
@@ -661,13 +611,13 @@ public final class MethodCallResult {
         super.clear();
         code_ = 0;
 
+        textureId_ = 0L;
+
         message_ = "";
 
-        textureId_ = 0;
+        url_ = "";
 
         state_ = 0;
-
-        url_ = "";
 
         return this;
       }
@@ -696,10 +646,10 @@ public final class MethodCallResult {
       public com.texture_image.proto.MethodCallResult.ImageResult buildPartial() {
         com.texture_image.proto.MethodCallResult.ImageResult result = new com.texture_image.proto.MethodCallResult.ImageResult(this);
         result.code_ = code_;
-        result.message_ = message_;
         result.textureId_ = textureId_;
-        result.state_ = state_;
+        result.message_ = message_;
         result.url_ = url_;
+        result.state_ = state_;
         onBuilt();
         return result;
       }
@@ -751,19 +701,19 @@ public final class MethodCallResult {
         if (other.getCode() != 0) {
           setCode(other.getCode());
         }
+        if (other.getTextureId() != 0L) {
+          setTextureId(other.getTextureId());
+        }
         if (!other.getMessage().isEmpty()) {
           message_ = other.message_;
           onChanged();
         }
-        if (other.getTextureId() != 0) {
-          setTextureId(other.getTextureId());
-        }
-        if (other.state_ != 0) {
-          setStateValue(other.getStateValue());
-        }
         if (!other.getUrl().isEmpty()) {
           url_ = other.url_;
           onChanged();
+        }
+        if (other.state_ != 0) {
+          setStateValue(other.getStateValue());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -796,6 +746,12 @@ public final class MethodCallResult {
 
       private int code_ ;
       /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
        * <code>int32 code = 1;</code>
        * @return The code.
        */
@@ -804,6 +760,12 @@ public final class MethodCallResult {
         return code_;
       }
       /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
        * <code>int32 code = 1;</code>
        * @param value The code to set.
        * @return This builder for chaining.
@@ -815,6 +777,12 @@ public final class MethodCallResult {
         return this;
       }
       /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
        * <code>int32 code = 1;</code>
        * @return This builder for chaining.
        */
@@ -825,9 +793,56 @@ public final class MethodCallResult {
         return this;
       }
 
+      private long textureId_ ;
+      /**
+       * <pre>
+       * Relative underlay Texture id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return The textureId.
+       */
+      @java.lang.Override
+      public long getTextureId() {
+        return textureId_;
+      }
+      /**
+       * <pre>
+       * Relative underlay Texture id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @param value The textureId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTextureId(long value) {
+        
+        textureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative underlay Texture id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTextureId() {
+        
+        textureId_ = 0L;
+        onChanged();
+        return this;
+      }
+
       private java.lang.Object message_ = "";
       /**
-       * <code>string message = 2;</code>
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
        * @return The message.
        */
       public java.lang.String getMessage() {
@@ -843,7 +858,11 @@ public final class MethodCallResult {
         }
       }
       /**
-       * <code>string message = 2;</code>
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
        * @return The bytes for message.
        */
       public com.google.protobuf.ByteString
@@ -860,7 +879,11 @@ public final class MethodCallResult {
         }
       }
       /**
-       * <code>string message = 2;</code>
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
        * @param value The message to set.
        * @return This builder for chaining.
        */
@@ -875,7 +898,11 @@ public final class MethodCallResult {
         return this;
       }
       /**
-       * <code>string message = 2;</code>
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearMessage() {
@@ -885,7 +912,11 @@ public final class MethodCallResult {
         return this;
       }
       /**
-       * <code>string message = 2;</code>
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
        * @param value The bytes for message to set.
        * @return This builder for chaining.
        */
@@ -901,94 +932,13 @@ public final class MethodCallResult {
         return this;
       }
 
-      private int textureId_ ;
-      /**
-       * <code>int32 textureId = 3;</code>
-       * @return The textureId.
-       */
-      @java.lang.Override
-      public int getTextureId() {
-        return textureId_;
-      }
-      /**
-       * <code>int32 textureId = 3;</code>
-       * @param value The textureId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTextureId(int value) {
-        
-        textureId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 textureId = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTextureId() {
-        
-        textureId_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int state_ = 0;
-      /**
-       * <code>.ImageTaskState state = 4;</code>
-       * @return The enum numeric value on the wire for state.
-       */
-      @java.lang.Override public int getStateValue() {
-        return state_;
-      }
-      /**
-       * <code>.ImageTaskState state = 4;</code>
-       * @param value The enum numeric value on the wire for state to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStateValue(int value) {
-        
-        state_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ImageTaskState state = 4;</code>
-       * @return The state.
-       */
-      @java.lang.Override
-      public com.texture_image.proto.MethodCallResult.ImageTaskState getState() {
-        @SuppressWarnings("deprecation")
-        com.texture_image.proto.MethodCallResult.ImageTaskState result = com.texture_image.proto.MethodCallResult.ImageTaskState.valueOf(state_);
-        return result == null ? com.texture_image.proto.MethodCallResult.ImageTaskState.UNRECOGNIZED : result;
-      }
-      /**
-       * <code>.ImageTaskState state = 4;</code>
-       * @param value The state to set.
-       * @return This builder for chaining.
-       */
-      public Builder setState(com.texture_image.proto.MethodCallResult.ImageTaskState value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        state_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>.ImageTaskState state = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearState() {
-        
-        state_ = 0;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object url_ = "";
       /**
-       * <code>string url = 5;</code>
+       * <pre>
+       * Image url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
        * @return The url.
        */
       public java.lang.String getUrl() {
@@ -1004,7 +954,11 @@ public final class MethodCallResult {
         }
       }
       /**
-       * <code>string url = 5;</code>
+       * <pre>
+       * Image url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
        * @return The bytes for url.
        */
       public com.google.protobuf.ByteString
@@ -1021,7 +975,11 @@ public final class MethodCallResult {
         }
       }
       /**
-       * <code>string url = 5;</code>
+       * <pre>
+       * Image url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
        * @param value The url to set.
        * @return This builder for chaining.
        */
@@ -1036,7 +994,11 @@ public final class MethodCallResult {
         return this;
       }
       /**
-       * <code>string url = 5;</code>
+       * <pre>
+       * Image url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearUrl() {
@@ -1046,7 +1008,11 @@ public final class MethodCallResult {
         return this;
       }
       /**
-       * <code>string url = 5;</code>
+       * <pre>
+       * Image url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
        * @param value The bytes for url to set.
        * @return This builder for chaining.
        */
@@ -1058,6 +1024,80 @@ public final class MethodCallResult {
   checkByteStringIsUtf8(value);
         
         url_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int state_ = 0;
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.ImageTaskState state = 5;</code>
+       * @return The enum numeric value on the wire for state.
+       */
+      @java.lang.Override public int getStateValue() {
+        return state_;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.ImageTaskState state = 5;</code>
+       * @param value The enum numeric value on the wire for state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStateValue(int value) {
+        
+        state_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.ImageTaskState state = 5;</code>
+       * @return The state.
+       */
+      @java.lang.Override
+      public com.texture_image.proto.Enum.ImageTaskState getState() {
+        @SuppressWarnings("deprecation")
+        com.texture_image.proto.Enum.ImageTaskState result = com.texture_image.proto.Enum.ImageTaskState.valueOf(state_);
+        return result == null ? com.texture_image.proto.Enum.ImageTaskState.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.ImageTaskState state = 5;</code>
+       * @param value The state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setState(com.texture_image.proto.Enum.ImageTaskState value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        state_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.ImageTaskState state = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearState() {
+        
+        state_ = 0;
         onChanged();
         return this;
       }
@@ -1128,24 +1168,24 @@ public final class MethodCallResult {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\030method_call_result.proto\"l\n\013ImageResul" +
-      "t\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\022\021\n\ttext" +
-      "ureId\030\003 \001(\005\022\036\n\005state\030\004 \001(\0162\017.ImageTaskSt" +
-      "ate\022\013\n\003url\030\005 \001(\t*W\n\016ImageTaskState\022\017\n\013in" +
-      "itialized\020\000\022\013\n\007loading\020\001\022\r\n\tcompleted\020\002\022" +
-      "\014\n\010canceled\020\003\022\n\n\006failed\020\004B\031\n\027com.texture" +
-      "_image.protob\006proto3"
+      "\n\030method_call_result.proto\032\nenum.proto\"l" +
+      "\n\013ImageResult\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId" +
+      "\030\002 \001(\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\036\n\005" +
+      "state\030\005 \001(\0162\017.ImageTaskStateB\031\n\027com.text" +
+      "ure_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
+          com.texture_image.proto.Enum.getDescriptor(),
         });
     internal_static_ImageResult_descriptor =
       getDescriptor().getMessageTypes().get(0);
     internal_static_ImageResult_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageResult_descriptor,
-        new java.lang.String[] { "Code", "Message", "TextureId", "State", "Url", });
+        new java.lang.String[] { "Code", "TextureId", "Message", "Url", "State", });
+    com.texture_image.proto.Enum.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)
