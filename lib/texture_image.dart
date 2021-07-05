@@ -4,14 +4,14 @@ import 'package:texture_image/texture_image_plugin.dart';
 class TextureImage extends StatefulWidget {
   TextureImage(
     this.url, {
-    this.width,
-    this.height,
+    required this.width,
+    required this.height,
     this.placeholder,
   });
 
   final String url;
-  final double? width;
-  final double? height;
+  final double width;
+  final double height;
 
   final Widget? placeholder;
 

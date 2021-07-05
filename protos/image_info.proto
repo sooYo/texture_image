@@ -1,18 +1,36 @@
 syntax = "proto3";
 option java_package = "com.texture_image.proto";
 
-import "border_radius.proto";
+import "enum.proto";
 
-message TextureImageInfo {
+// Send this info to native side when plugin wants to load an image
+message ImageRequestInfo {
   string url = 1;
-
   int32 width = 2;
-
   int32 height = 3;
 
+  // Image to be shown when loading failed, can be URL or local file path
   string errorPlaceholder = 4;
 
+  // Can be URL or local file path
   string placeholder = 5;
 
-  ImageBorderRadius borderRadius = 6;
+  // Refer to [BoxFit] in enum.proto
+  BoxFit fit = 6;
+
+  // Whether to make a rounded rect style or not
+  ImageBorderRadius borderRadius = 7;
+}
+
+// This info is sent when plugin wants to cancel an on going image loading task
+message ImageRequestCancelInfo {
+  string url = 1;
+  int64 textureId = 2;
+}
+
+message ImageBorderRadius {
+  double topLeft = 1;
+  double topRight = 2;
+  double bottomLeft = 3;
+  double bottomRight = 4;
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/services.dart';
+import 'package:texture_image/src/proto/pb_header.dart';
 
 class TextureImagePlugin {
   static const MethodChannel _channel = const MethodChannel('texture_image');
@@ -12,20 +13,27 @@ class TextureImagePlugin {
 
   static Future<int> createImageTexture(
     String url, {
-    double? width,
-    double? height,
+    required double width,
+    required double height,
   }) async {
-    final params = <String, dynamic>{'url': url};
-    if (width != null) {
-      params['width'] = width;
-    }
+    final imageInfo = ImageRequestInfo()
+      ..url = url
+      ..width = width.toInt()
+      ..height = height.toInt()
+      ..fit = BoxFit.contain
+      ..borderRadius = ImageBorderRadius(
+        topLeft: 10,
+        topRight: 10,
+        bottomLeft: 10,
+        bottomRight: 10,
+      );
 
-    if (height != null) {
-      params['height'] = height;
-    }
+    final result = await _channel.invokeMethod(
+      'createImageTexture',
+      imageInfo.writeToBuffer(),
+    );
 
-    final result = await _channel.invokeMethod('createImageTexture', params);
-    return int.parse(result);
+    return result;
   }
 
   static Future<void> destroyImageTexture(int textureId) {
