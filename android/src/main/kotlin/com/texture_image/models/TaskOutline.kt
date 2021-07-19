@@ -7,10 +7,10 @@ import com.texture_image.constants.SurfaceTextureEntry
 import com.texture_image.proto.ImageUtils.TaskState
 
 class TaskOutline(
-        val imageUrl: String,
-        val request: ImageRequest,
-        val entry: SurfaceTextureEntry,
-        val cancelToken: Disposable,
+    val imageUrl: String,
+    val request: ImageRequest,
+    val entry: SurfaceTextureEntry,
+    val cancelToken: Disposable,
 ) {
     private var mRetryCount: Int = 0
     private var mSurface: Surface? = null

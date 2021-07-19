@@ -15,9 +15,9 @@ import coil.request.ImageRequest
  * @param networkCache refers to [ImageRequest.networkCachePolicy]
  */
 class CachePolicy(
-        private val memoryCache: Boolean = true,
-        private val diskCache: Boolean = true,
-        private val networkCache: Boolean = true,
+    private val memoryCache: Boolean = true,
+    private val diskCache: Boolean = true,
+    private val networkCache: Boolean = true,
 ) {
     val coilDiskCache: CachePolicy
         get() {

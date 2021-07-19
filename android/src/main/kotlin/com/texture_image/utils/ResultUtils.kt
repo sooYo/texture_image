@@ -7,25 +7,31 @@ import com.texture_image.proto.ImageUtils
 
 object ResultUtils {
     private fun makeResult(
-            code: ErrorCode,
-            message: String,
-            url: String? = null,
-            textureId: Long? = null,
-            state: ImageUtils.TaskState? = null
+        code: ErrorCode,
+        message: String,
+        url: String? = null,
+        textureId: Long? = null,
+        state: ImageUtils.TaskState? = null
     ): ByteArray {
         return ImageInfo.ImageFetchResultInfo.newBuilder()
-                .setCode(code.code)
-                .setMessage(message)
-                .setUrl(url ?: "")
-                .setTextureId(textureId ?: -1)
-                .setState(state)
-                .build()
-                .toByteArray()
+            .setCode(code.code)
+            .setMessage(message)
+            .setUrl(url ?: "")
+            .setTextureId(textureId ?: -1)
+            .setState(state)
+            .build()
+            .toByteArray()
     }
 
     // region Concrete Makers
     fun success(outline: TaskOutline): ByteArray {
-        return makeResult(ErrorCode.OK, "success", outline.imageUrl, outline.entry.id(), outline.state)
+        return makeResult(
+            ErrorCode.OK,
+            "success",
+            outline.imageUrl,
+            outline.entry.id(),
+            outline.state
+        )
     }
 
     fun protoParseFailed(clz: String, method: String): ByteArray {
@@ -33,8 +39,13 @@ object ResultUtils {
         return makeResult(ErrorCode.PB_PARSE_FAILED, message)
     }
 
-    fun argTypeError(method: String, argument: String, expected: String? = null): ByteArray {
-        val message = "$method: Argument ($argument) type error${if (expected != null) ", excepted: $expected" else ""}"
+    fun argTypeError(
+        method: String,
+        argument: String,
+        expected: String? = null
+    ): ByteArray {
+        val message =
+            "$method: Argument ($argument) type error${if (expected != null) ", excepted: $expected" else ""}"
         return makeResult(ErrorCode.ARGUMENT_TYPE_ERROR, message)
     }
     // endregion Concrete Makers
