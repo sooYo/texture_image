@@ -1,7 +1,7 @@
 package com.texture_image.image_loader
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -11,8 +11,10 @@ import coil.request.ImageRequest
 import coil.size.PixelSize
 import coil.target.Target
 import com.texture_image.constants.SurfaceTextureEntry
+import com.texture_image.constants.TaskMap
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
+import com.texture_image.models.TaskOutlineBuilder
 import com.texture_image.proto.ImageUtils
 
 interface ImageRequestScheduler {
@@ -26,10 +28,11 @@ class ImageLoaderTask(
     private val cachePolicy: CachePolicy,
     private val textureEntry: SurfaceTextureEntry
 ) : Target {
-    private var outline: TaskOutline? = null
+    private lateinit var mOutline: TaskOutline
+    val outline: TaskOutline get() = mOutline
 
-    fun buildWithScheduler(scheduler: ImageRequestScheduler): TaskOutline {
-        val builder = ImageRequest
+    fun scheduleWith(scheduler: ImageRequestScheduler): ImageLoaderTask {
+        val request = ImageRequest
             .Builder(context)
             .target(this)
             .data(imageUrl)
@@ -37,64 +40,85 @@ class ImageLoaderTask(
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
+            .build()
 
-        val request = builder.build()
+        mOutline = TaskOutlineBuilder()
+            .setRequest(request)
+            .setImageUrl(imageUrl)
+            .setEntry(textureEntry)
+            .build()
+
         val cancelToken = scheduler.schedule(request)
 
-        outline = TaskOutline(
-            imageUrl = imageUrl,
-            request = request,
-            entry = textureEntry,
-            cancelToken = cancelToken,
-        )
+        if (!outline.isCompleted) {
+            mOutline = TaskOutlineBuilder()
+                .clone(mOutline)
+                .setCancelToken(cancelToken)
+                .build()
+        }
 
-        return outline!!
+        return this
     }
 
-    fun cancel() {
-        if (outline == null) {
-            return
+    fun cancel(): TaskOutline {
+        if (mOutline.didStop) {
+            return mOutline
         }
 
-        if (outline?.isLoading != true) {
-            return
+        mOutline.cancelToken?.dispose()
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setState(ImageUtils.TaskState.canceled)
+            .build()
+
+        return mOutline
+    }
+
+    fun joinTaskMap(taskMap: TaskMap): TaskOutline {
+        val taskId = mOutline.id
+        if (taskId >= 0) {
+            taskMap[taskId] = this
         }
 
-        if (outline?.cancelToken == null) {
-            error("-2: No token to be canceled")
-        }
-
-        outline?.cancelToken?.dispose()
+        return mOutline
     }
 
     // region Coil Target
     override fun onError(error: Drawable?) {
-        super.onError(error)
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setState(ImageUtils.TaskState.failed)
+            .build()
     }
 
+    @SuppressLint("Recycle")
     override fun onSuccess(result: Drawable) {
         if (result !is BitmapDrawable) {
             return
         }
 
-        val rect = Rect(0, 0, geometry.width, 1300)
+        val rect = Rect(0, 0, geometry.width, geometry.height)
         val surfaceTexture = textureEntry.surfaceTexture()
 
         surfaceTexture.setDefaultBufferSize(rect.width(), rect.height())
         val surface = Surface(surfaceTexture)
         val canvas = surface.lockCanvas(rect)
 
-        val paint = Paint()
-        paint.isAntiAlias = true
-        paint.isFilterBitmap = true
-        paint.isDither = true
-
-        canvas.drawBitmap(result.bitmap, null, rect, paint)
+        canvas.drawBitmap(result.bitmap, null, rect, null)
         surface.unlockCanvasAndPost(canvas)
+
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setSurface(surface)
+            .setState(ImageUtils.TaskState.completed)
+            .build()
     }
 
     override fun onStart(placeholder: Drawable?) {
-        super.onStart(placeholder)
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setState(ImageUtils.TaskState.loading)
+            .build()
     }
     // endRegion Coil Target
 }

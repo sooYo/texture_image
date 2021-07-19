@@ -42,7 +42,7 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
                 call,
                 result
             )
-            "dispose" -> _imageLoader?.disposeTextureImage(call, result)
+            "destroyImageTexture" -> _imageLoader?.disposeTextureImage(call, result)
             else -> result.notImplemented()
         }
     }

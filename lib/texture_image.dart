@@ -29,6 +29,12 @@ class _ImageState extends State<TextureImage> {
   }
 
   @override
+  void dispose() {
+    _disposeImage();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final content = _textureId != null
         ? Texture(textureId: _textureId!)
@@ -55,5 +61,9 @@ class _ImageState extends State<TextureImage> {
     setState(() {
       _textureId = textureId;
     });
+  }
+
+  void _disposeImage() async {
+    TextureImagePlugin.destroyImageTexture(_textureId, widget.url);
   }
 }

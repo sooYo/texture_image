@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import 'package:fixnum/fixnum.dart';
 import 'package:flutter/services.dart';
 import 'package:texture_image/src/proto/pb_header.dart';
 
@@ -31,15 +33,23 @@ class TextureImagePlugin {
       ..url = url
       ..geometry = geometry;
 
-    final result = await _channel.invokeMethod(
+    final base64Data = await _channel.invokeMethod(
       'createImageTexture',
       imageInfo.writeToBuffer(),
     );
 
-    return result;
+    final result = ImageFetchResultInfo.fromBuffer(base64Data);
+    return result.textureId.toInt();
   }
 
-  static Future<void> destroyImageTexture(int textureId) {
-    return _channel.invokeMethod('destroyImageTexture', textureId);
+  static Future<void> destroyImageTexture(int? textureId, String url) {
+    final cancelInfo = ImageFetchCancelInfo()
+      ..textureId = Int64(textureId ?? -1)
+      ..url = url;
+
+    return _channel.invokeMethod(
+      'destroyImageTexture',
+      cancelInfo.writeToBuffer(),
+    );
   }
 }

@@ -5,10 +5,6 @@ import com.texture_image.models.TaskOutline
 import io.flutter.view.TextureRegistry
 
 typealias SurfaceTextureEntry = TextureRegistry.SurfaceTextureEntry
-typealias SurfaceTextureMap = LinkedHashMap<String, SurfaceTextureEntry>
-typealias ImageLoadCallback = (Map<String, String>) -> Unit
+typealias TaskMap = LinkedHashMap<Long, ImageLoaderTask> // Surface ID -> ImageLoaderTask
+typealias TaskOutlineCache = ArrayDeque<TaskOutline>
 
-/**
- * A map referring to a [ImageLoaderTask] by its charged surface ID
- */
-typealias LoaderTaskMap = LinkedHashMap<Long, TaskOutline>

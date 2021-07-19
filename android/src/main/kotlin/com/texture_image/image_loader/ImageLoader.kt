@@ -7,8 +7,10 @@ import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.util.CoilUtils
-import com.texture_image.constants.LoaderTaskMap
+import com.texture_image.constants.TaskMap
+import com.texture_image.constants.TaskOutlineCache
 import com.texture_image.models.CachePolicy
+import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.utils.ResultUtils
@@ -23,9 +25,11 @@ class ImageLoader(
 ) : ImageRequestScheduler {
     companion object {
         val TAG = ImageLoader::class.simpleName
+        const val maxCacheSize: Int = 20
     }
 
-    private val taskMap: LoaderTaskMap = LoaderTaskMap()
+    private val taskMap: TaskMap = TaskMap()
+    private val outlineCache: TaskOutlineCache = TaskOutlineCache(maxCacheSize)
     private val loaderCore: coil.ImageLoader by lazy(LazyThreadSafetyMode.NONE) {
         val httpClient = OkHttpClient.Builder()
             .cache(CoilUtils.createDefaultCache(context))
@@ -67,8 +71,12 @@ class ImageLoader(
             return
         }
 
-        val textureId = loadImage(imageInfo.url, imageInfo.geometry)
-        result.success(textureId)
+        val taskOutline = findReusableTask(imageInfo) ?: loadImage(
+            imageInfo.url,
+            imageInfo.geometry
+        )
+
+        result.success(ResultUtils.success(taskOutline))
     }
 
     fun disposeTextureImage(
@@ -83,51 +91,60 @@ class ImageLoader(
         val cancelInfo = try {
             ImageInfo.ImageFetchCancelInfo.parseFrom(base64Data)
         } catch (e: Exception) {
-            Log.e(
-                TAG,
-                "disposeTextureImage: build ImageRequestCancelInfo failed: $e"
-            )
+            Log.e(TAG, "disposeTextureImage: build CancelInfo failed: $e")
             null
         }
 
         if (cancelInfo == null) {
             result.success(
                 ResultUtils.protoParseFailed(
-                    "ImageRequestCancelInfo",
+                    "ImageFetchCancelInfo",
                     "disposeTextureImage"
                 )
             )
             return
         }
 
-        destroyImage(cancelInfo.url)
+        val outline = destroyImage(cancelInfo.textureId, cancelInfo.url)
+        result.success(ResultUtils.success(outline))
     }
     // endregion Channel Handlers
 
-    // region Core
+    // region Core Methods
     private fun loadImage(
         url: String,
         geometry: ImageUtils.Geometry,
         cachePolicy: CachePolicy = CachePolicy()
-    ): Long {
+    ): TaskOutline {
         val entry = textureRegistry.createSurfaceTexture()
-        val taskOutline = ImageLoaderTask(
+        val task = ImageLoaderTask(
             context,
             url,
             geometry,
             cachePolicy,
             entry
-        ).buildWithScheduler(this)
+        ).scheduleWith(this)
 
-        taskMap[entry.id()] = taskOutline
-        return entry.id()
+        return task.joinTaskMap(taskMap)
     }
 
-    private fun destroyImage(url: String) {
-        val outline = taskMap.values.first { e -> e.request.data == url }
-        outline.cancelToken.dispose()
+    private fun destroyImage(textureId: Long, url: String): TaskOutline? {
+        val task: ImageLoaderTask? = try {
+            if (textureId >= 0) {
+                taskMap[textureId]
+            } else {
+                taskMap.values.first { e -> e.outline.imageUrl == url }
+            }
+        } catch (e: Exception) {
+            null
+        }
+
+        val outline = task?.cancel()
+        cacheTaskIfPossible(outline)
+        return outline
     }
-    // endregion core
+
+    // endregion Core Methods
 
     // region Helper Methods
     private fun checkArgumentType(
@@ -146,6 +163,46 @@ class ImageLoader(
         }
 
         return true
+    }
+
+    private fun cacheTaskIfPossible(taskOutline: TaskOutline?): Boolean {
+        if (taskOutline == null) {
+            return false
+        }
+
+        taskMap.remove(taskOutline.id)
+
+        if (!taskOutline.isCompleted) {
+            return false
+        }
+
+        if (outlineCache.contains(taskOutline)) {
+            return true
+        }
+
+        if (outlineCache.size > maxCacheSize) {
+            val evict = outlineCache.removeFirst()
+            evict.release()
+        }
+
+        outlineCache.addLast(taskOutline)
+        return true
+    }
+
+    private fun findReusableTask(imageInfo: ImageInfo.ImageFetchInfo): TaskOutline? {
+        val find = { list: Collection<TaskOutline> ->
+            try {
+                list.first { e ->
+                    e.imageUrl == imageInfo.url && (e.isReusable || e.isCompleted)
+                }
+            } catch (e: Exception) {
+                null
+            }
+        }
+
+        val outlineMap = taskMap.values.map { e -> e.outline }
+        val result = find(outlineMap) ?: find(outlineCache)
+        return result
     }
     // endregion Helper Methods
 }

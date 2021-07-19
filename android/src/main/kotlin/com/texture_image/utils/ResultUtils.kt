@@ -18,19 +18,19 @@ object ResultUtils {
             .setMessage(message)
             .setUrl(url ?: "")
             .setTextureId(textureId ?: -1)
-            .setState(state)
+            .setState(state ?: ImageUtils.TaskState.completed)
             .build()
             .toByteArray()
     }
 
     // region Concrete Makers
-    fun success(outline: TaskOutline): ByteArray {
+    fun success(outline: TaskOutline?): ByteArray {
         return makeResult(
             ErrorCode.OK,
             "success",
-            outline.imageUrl,
-            outline.entry.id(),
-            outline.state
+            outline?.imageUrl,
+            outline?.id,
+            outline?.state
         )
     }
 
