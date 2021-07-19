@@ -1,10 +1,9 @@
 package com.texture_image.utils
 
 import com.texture_image.constants.ErrorCode
-import com.texture_image.constants.TaskState
 import com.texture_image.models.TaskOutline
-import com.texture_image.proto.Enum
-import com.texture_image.proto.MethodCallResult
+import com.texture_image.proto.ImageInfo
+import com.texture_image.proto.ImageUtils
 
 object ResultUtils {
     private fun makeResult(
@@ -12,23 +11,14 @@ object ResultUtils {
             message: String,
             url: String? = null,
             textureId: Long? = null,
-            state: TaskState? = null
+            state: ImageUtils.TaskState? = null
     ): ByteArray {
-        val resultState = when (state) {
-            TaskState.LOADING -> Enum.ImageTaskState.loading
-            TaskState.FAILED -> Enum.ImageTaskState.failed
-            TaskState.COMPLETE -> Enum.ImageTaskState.completed
-            TaskState.CANCELED -> Enum.ImageTaskState.canceled
-            TaskState.INITIALIZED -> Enum.ImageTaskState.initialized
-            else -> Enum.ImageTaskState.UNRECOGNIZED
-        }
-
-        return MethodCallResult.ImageResult.newBuilder()
+        return ImageInfo.ImageFetchResultInfo.newBuilder()
                 .setCode(code.code)
                 .setMessage(message)
                 .setUrl(url ?: "")
                 .setTextureId(textureId ?: -1)
-                .setState(resultState)
+                .setState(state)
                 .build()
                 .toByteArray()
     }
@@ -48,5 +38,4 @@ object ResultUtils {
         return makeResult(ErrorCode.ARGUMENT_TYPE_ERROR, message)
     }
     // endregion Concrete Makers
-
 }

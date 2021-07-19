@@ -16,17 +16,20 @@ class TextureImagePlugin {
     required double width,
     required double height,
   }) async {
-    final imageInfo = ImageRequestInfo()
-      ..url = url
+    final geometry = Geometry()
       ..width = width.toInt()
       ..height = height.toInt()
       ..fit = BoxFit.contain
-      ..borderRadius = ImageBorderRadius(
+      ..borderRadius = BorderRadius(
         topLeft: 10,
         topRight: 10,
         bottomLeft: 10,
         bottomRight: 10,
       );
+
+    final imageInfo = ImageFetchInfo()
+      ..url = url
+      ..geometry = geometry;
 
     final result = await _channel.invokeMethod(
       'createImageTexture',

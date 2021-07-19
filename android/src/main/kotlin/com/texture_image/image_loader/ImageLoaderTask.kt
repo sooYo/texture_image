@@ -6,51 +6,56 @@ import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.Surface
+import coil.request.Disposable
 import coil.request.ImageRequest
+import coil.size.PixelSize
 import coil.target.Target
 import com.texture_image.constants.SurfaceTextureEntry
-import com.texture_image.constants.TaskState
 import com.texture_image.models.CachePolicy
-import com.texture_image.models.Geometry
 import com.texture_image.models.TaskOutline
+import com.texture_image.proto.ImageUtils
+
+interface ImageRequestScheduler {
+    fun schedule(request: ImageRequest): Disposable
+}
 
 class ImageLoaderTask(
-        private val context: Context,
-        private val imageUrl: String,
-        private val geometry: Geometry,
-        private val cachePolicy: CachePolicy,
-        private val textureEntry: SurfaceTextureEntry
+    private val context: Context,
+    private val imageUrl: String,
+    private val geometry: ImageUtils.Geometry,
+    private val cachePolicy: CachePolicy,
+    private val textureEntry: SurfaceTextureEntry
 ) : Target {
     private var outline: TaskOutline? = null
 
-    fun build(): TaskOutline? {
+    fun buildWithScheduler(scheduler: ImageRequestScheduler): TaskOutline {
         val builder = ImageRequest
-                .Builder(context)
-                .target(this)
-                .data(imageUrl)
-                .diskCachePolicy(cachePolicy.coilDiskCache)
-                .memoryCachePolicy(cachePolicy.coilMemCache)
-                .networkCachePolicy(cachePolicy.coilNetworkCache)
+            .Builder(context)
+            .target(this)
+            .data(imageUrl)
+            .size(PixelSize(geometry.width, geometry.height))
+            .diskCachePolicy(cachePolicy.coilDiskCache)
+            .memoryCachePolicy(cachePolicy.coilMemCache)
+            .networkCachePolicy(cachePolicy.coilNetworkCache)
 
-        val size = geometry.size
-        if (size != null) {
-            builder.size(size)
-        }
+        val request = builder.build()
+        val cancelToken = scheduler.schedule(request)
 
         outline = TaskOutline(
-                request = builder.build(),
-                state = TaskState.INITIALIZED,
-                cancelToken = null,
-                surface = null,
-                retryCount = 0,
-                entry = textureEntry,
-                imageUrl = imageUrl
+            imageUrl = imageUrl,
+            request = request,
+            entry = textureEntry,
+            cancelToken = cancelToken,
         )
 
-        return outline
+        return outline!!
     }
 
     fun cancel() {
+        if (outline == null) {
+            return
+        }
+
         if (outline?.isLoading != true) {
             return
         }
@@ -72,7 +77,7 @@ class ImageLoaderTask(
             return
         }
 
-        val rect = Rect(0, 0, geometry.width!!, 1300)
+        val rect = Rect(0, 0, geometry.width, 1300)
         val surfaceTexture = textureEntry.surfaceTexture()
 
         surfaceTexture.setDefaultBufferSize(rect.width(), rect.height())

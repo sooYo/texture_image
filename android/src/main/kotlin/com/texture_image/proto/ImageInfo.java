@@ -14,8 +14,8 @@ public final class ImageInfo {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
-  public interface ImageRequestInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ImageRequestInfo)
+  public interface ImageFetchInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageFetchInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -31,23 +31,11 @@ public final class ImageInfo {
         getUrlBytes();
 
     /**
-     * <code>int32 width = 2;</code>
-     * @return The width.
-     */
-    int getWidth();
-
-    /**
-     * <code>int32 height = 3;</code>
-     * @return The height.
-     */
-    int getHeight();
-
-    /**
      * <pre>
      * Image to be shown when loading failed, can be URL or local file path
      * </pre>
      *
-     * <code>string errorPlaceholder = 4;</code>
+     * <code>string errorPlaceholder = 2;</code>
      * @return The errorPlaceholder.
      */
     java.lang.String getErrorPlaceholder();
@@ -56,7 +44,7 @@ public final class ImageInfo {
      * Image to be shown when loading failed, can be URL or local file path
      * </pre>
      *
-     * <code>string errorPlaceholder = 4;</code>
+     * <code>string errorPlaceholder = 2;</code>
      * @return The bytes for errorPlaceholder.
      */
     com.google.protobuf.ByteString
@@ -67,7 +55,7 @@ public final class ImageInfo {
      * Can be URL or local file path
      * </pre>
      *
-     * <code>string placeholder = 5;</code>
+     * <code>string placeholder = 3;</code>
      * @return The placeholder.
      */
     java.lang.String getPlaceholder();
@@ -76,7 +64,7 @@ public final class ImageInfo {
      * Can be URL or local file path
      * </pre>
      *
-     * <code>string placeholder = 5;</code>
+     * <code>string placeholder = 3;</code>
      * @return The bytes for placeholder.
      */
     com.google.protobuf.ByteString
@@ -84,78 +72,58 @@ public final class ImageInfo {
 
     /**
      * <pre>
-     * Refer to [BoxFit] in enum.proto
+     * Geometry info
      * </pre>
      *
-     * <code>.BoxFit fit = 6;</code>
-     * @return The enum numeric value on the wire for fit.
+     * <code>.Geometry geometry = 4;</code>
+     * @return Whether the geometry field is set.
      */
-    int getFitValue();
+    boolean hasGeometry();
     /**
      * <pre>
-     * Refer to [BoxFit] in enum.proto
+     * Geometry info
      * </pre>
      *
-     * <code>.BoxFit fit = 6;</code>
-     * @return The fit.
+     * <code>.Geometry geometry = 4;</code>
+     * @return The geometry.
      */
-    com.texture_image.proto.Enum.BoxFit getFit();
-
+    com.texture_image.proto.ImageUtils.Geometry getGeometry();
     /**
      * <pre>
-     * Whether to make a rounded rect style or not
+     * Geometry info
      * </pre>
      *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
-     * @return Whether the borderRadius field is set.
+     * <code>.Geometry geometry = 4;</code>
      */
-    boolean hasBorderRadius();
-    /**
-     * <pre>
-     * Whether to make a rounded rect style or not
-     * </pre>
-     *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
-     * @return The borderRadius.
-     */
-    com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius();
-    /**
-     * <pre>
-     * Whether to make a rounded rect style or not
-     * </pre>
-     *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
-     */
-    com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder();
+    com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder();
   }
   /**
    * <pre>
-   * Send this info to native side when plugin wants to load an image
+   * Request to load an image
    * </pre>
    *
-   * Protobuf type {@code ImageRequestInfo}
+   * Protobuf type {@code ImageFetchInfo}
    */
-  public static final class ImageRequestInfo extends
+  public static final class ImageFetchInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ImageRequestInfo)
-      ImageRequestInfoOrBuilder {
+      // @@protoc_insertion_point(message_implements:ImageFetchInfo)
+      ImageFetchInfoOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use ImageRequestInfo.newBuilder() to construct.
-    private ImageRequestInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use ImageFetchInfo.newBuilder() to construct.
+    private ImageFetchInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ImageRequestInfo() {
+    private ImageFetchInfo() {
       url_ = "";
       errorPlaceholder_ = "";
       placeholder_ = "";
-      fit_ = 0;
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new ImageRequestInfo();
+      return new ImageFetchInfo();
     }
 
     @java.lang.Override
@@ -163,7 +131,7 @@ public final class ImageInfo {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ImageRequestInfo(
+    private ImageFetchInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -187,43 +155,27 @@ public final class ImageInfo {
               url_ = s;
               break;
             }
-            case 16: {
-
-              width_ = input.readInt32();
-              break;
-            }
-            case 24: {
-
-              height_ = input.readInt32();
-              break;
-            }
-            case 34: {
+            case 18: {
               java.lang.String s = input.readStringRequireUtf8();
 
               errorPlaceholder_ = s;
               break;
             }
-            case 42: {
+            case 26: {
               java.lang.String s = input.readStringRequireUtf8();
 
               placeholder_ = s;
               break;
             }
-            case 48: {
-              int rawValue = input.readEnum();
-
-              fit_ = rawValue;
-              break;
-            }
-            case 58: {
-              com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder subBuilder = null;
-              if (borderRadius_ != null) {
-                subBuilder = borderRadius_.toBuilder();
+            case 34: {
+              com.texture_image.proto.ImageUtils.Geometry.Builder subBuilder = null;
+              if (geometry_ != null) {
+                subBuilder = geometry_.toBuilder();
               }
-              borderRadius_ = input.readMessage(com.texture_image.proto.ImageInfo.ImageBorderRadius.parser(), extensionRegistry);
+              geometry_ = input.readMessage(com.texture_image.proto.ImageUtils.Geometry.parser(), extensionRegistry);
               if (subBuilder != null) {
-                subBuilder.mergeFrom(borderRadius_);
-                borderRadius_ = subBuilder.buildPartial();
+                subBuilder.mergeFrom(geometry_);
+                geometry_ = subBuilder.buildPartial();
               }
 
               break;
@@ -249,15 +201,15 @@ public final class ImageInfo {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_fieldAccessorTable
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ImageRequestInfo.class, com.texture_image.proto.ImageInfo.ImageRequestInfo.Builder.class);
+              com.texture_image.proto.ImageInfo.ImageFetchInfo.class, com.texture_image.proto.ImageInfo.ImageFetchInfo.Builder.class);
     }
 
     public static final int URL_FIELD_NUMBER = 1;
@@ -298,36 +250,14 @@ public final class ImageInfo {
       }
     }
 
-    public static final int WIDTH_FIELD_NUMBER = 2;
-    private int width_;
-    /**
-     * <code>int32 width = 2;</code>
-     * @return The width.
-     */
-    @java.lang.Override
-    public int getWidth() {
-      return width_;
-    }
-
-    public static final int HEIGHT_FIELD_NUMBER = 3;
-    private int height_;
-    /**
-     * <code>int32 height = 3;</code>
-     * @return The height.
-     */
-    @java.lang.Override
-    public int getHeight() {
-      return height_;
-    }
-
-    public static final int ERRORPLACEHOLDER_FIELD_NUMBER = 4;
+    public static final int ERRORPLACEHOLDER_FIELD_NUMBER = 2;
     private volatile java.lang.Object errorPlaceholder_;
     /**
      * <pre>
      * Image to be shown when loading failed, can be URL or local file path
      * </pre>
      *
-     * <code>string errorPlaceholder = 4;</code>
+     * <code>string errorPlaceholder = 2;</code>
      * @return The errorPlaceholder.
      */
     @java.lang.Override
@@ -348,7 +278,7 @@ public final class ImageInfo {
      * Image to be shown when loading failed, can be URL or local file path
      * </pre>
      *
-     * <code>string errorPlaceholder = 4;</code>
+     * <code>string errorPlaceholder = 2;</code>
      * @return The bytes for errorPlaceholder.
      */
     @java.lang.Override
@@ -366,14 +296,14 @@ public final class ImageInfo {
       }
     }
 
-    public static final int PLACEHOLDER_FIELD_NUMBER = 5;
+    public static final int PLACEHOLDER_FIELD_NUMBER = 3;
     private volatile java.lang.Object placeholder_;
     /**
      * <pre>
      * Can be URL or local file path
      * </pre>
      *
-     * <code>string placeholder = 5;</code>
+     * <code>string placeholder = 3;</code>
      * @return The placeholder.
      */
     @java.lang.Override
@@ -394,7 +324,7 @@ public final class ImageInfo {
      * Can be URL or local file path
      * </pre>
      *
-     * <code>string placeholder = 5;</code>
+     * <code>string placeholder = 3;</code>
      * @return The bytes for placeholder.
      */
     @java.lang.Override
@@ -412,69 +342,42 @@ public final class ImageInfo {
       }
     }
 
-    public static final int FIT_FIELD_NUMBER = 6;
-    private int fit_;
+    public static final int GEOMETRY_FIELD_NUMBER = 4;
+    private com.texture_image.proto.ImageUtils.Geometry geometry_;
     /**
      * <pre>
-     * Refer to [BoxFit] in enum.proto
+     * Geometry info
      * </pre>
      *
-     * <code>.BoxFit fit = 6;</code>
-     * @return The enum numeric value on the wire for fit.
-     */
-    @java.lang.Override public int getFitValue() {
-      return fit_;
-    }
-    /**
-     * <pre>
-     * Refer to [BoxFit] in enum.proto
-     * </pre>
-     *
-     * <code>.BoxFit fit = 6;</code>
-     * @return The fit.
-     */
-    @java.lang.Override public com.texture_image.proto.Enum.BoxFit getFit() {
-      @SuppressWarnings("deprecation")
-      com.texture_image.proto.Enum.BoxFit result = com.texture_image.proto.Enum.BoxFit.valueOf(fit_);
-      return result == null ? com.texture_image.proto.Enum.BoxFit.UNRECOGNIZED : result;
-    }
-
-    public static final int BORDERRADIUS_FIELD_NUMBER = 7;
-    private com.texture_image.proto.ImageInfo.ImageBorderRadius borderRadius_;
-    /**
-     * <pre>
-     * Whether to make a rounded rect style or not
-     * </pre>
-     *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
-     * @return Whether the borderRadius field is set.
+     * <code>.Geometry geometry = 4;</code>
+     * @return Whether the geometry field is set.
      */
     @java.lang.Override
-    public boolean hasBorderRadius() {
-      return borderRadius_ != null;
+    public boolean hasGeometry() {
+      return geometry_ != null;
     }
     /**
      * <pre>
-     * Whether to make a rounded rect style or not
+     * Geometry info
      * </pre>
      *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
-     * @return The borderRadius.
+     * <code>.Geometry geometry = 4;</code>
+     * @return The geometry.
      */
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius() {
-      return borderRadius_ == null ? com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+    public com.texture_image.proto.ImageUtils.Geometry getGeometry() {
+      return geometry_ == null ? com.texture_image.proto.ImageUtils.Geometry.getDefaultInstance() : geometry_;
     }
     /**
      * <pre>
-     * Whether to make a rounded rect style or not
+     * Geometry info
      * </pre>
      *
-     * <code>.ImageBorderRadius borderRadius = 7;</code>
+     * <code>.Geometry geometry = 4;</code>
      */
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
-      return getBorderRadius();
+    public com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder() {
+      return getGeometry();
     }
 
     private byte memoizedIsInitialized = -1;
@@ -494,23 +397,14 @@ public final class ImageInfo {
       if (!getUrlBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, url_);
       }
-      if (width_ != 0) {
-        output.writeInt32(2, width_);
-      }
-      if (height_ != 0) {
-        output.writeInt32(3, height_);
-      }
       if (!getErrorPlaceholderBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, errorPlaceholder_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, errorPlaceholder_);
       }
       if (!getPlaceholderBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 5, placeholder_);
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, placeholder_);
       }
-      if (fit_ != com.texture_image.proto.Enum.BoxFit.fill.getNumber()) {
-        output.writeEnum(6, fit_);
-      }
-      if (borderRadius_ != null) {
-        output.writeMessage(7, getBorderRadius());
+      if (geometry_ != null) {
+        output.writeMessage(4, getGeometry());
       }
       unknownFields.writeTo(output);
     }
@@ -524,27 +418,15 @@ public final class ImageInfo {
       if (!getUrlBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, url_);
       }
-      if (width_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, width_);
-      }
-      if (height_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(3, height_);
-      }
       if (!getErrorPlaceholderBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, errorPlaceholder_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, errorPlaceholder_);
       }
       if (!getPlaceholderBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(5, placeholder_);
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, placeholder_);
       }
-      if (fit_ != com.texture_image.proto.Enum.BoxFit.fill.getNumber()) {
+      if (geometry_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(6, fit_);
-      }
-      if (borderRadius_ != null) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(7, getBorderRadius());
+          .computeMessageSize(4, getGeometry());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -556,26 +438,21 @@ public final class ImageInfo {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageRequestInfo)) {
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageFetchInfo)) {
         return super.equals(obj);
       }
-      com.texture_image.proto.ImageInfo.ImageRequestInfo other = (com.texture_image.proto.ImageInfo.ImageRequestInfo) obj;
+      com.texture_image.proto.ImageInfo.ImageFetchInfo other = (com.texture_image.proto.ImageInfo.ImageFetchInfo) obj;
 
       if (!getUrl()
           .equals(other.getUrl())) return false;
-      if (getWidth()
-          != other.getWidth()) return false;
-      if (getHeight()
-          != other.getHeight()) return false;
       if (!getErrorPlaceholder()
           .equals(other.getErrorPlaceholder())) return false;
       if (!getPlaceholder()
           .equals(other.getPlaceholder())) return false;
-      if (fit_ != other.fit_) return false;
-      if (hasBorderRadius() != other.hasBorderRadius()) return false;
-      if (hasBorderRadius()) {
-        if (!getBorderRadius()
-            .equals(other.getBorderRadius())) return false;
+      if (hasGeometry() != other.hasGeometry()) return false;
+      if (hasGeometry()) {
+        if (!getGeometry()
+            .equals(other.getGeometry())) return false;
       }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -590,88 +467,82 @@ public final class ImageInfo {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + URL_FIELD_NUMBER;
       hash = (53 * hash) + getUrl().hashCode();
-      hash = (37 * hash) + WIDTH_FIELD_NUMBER;
-      hash = (53 * hash) + getWidth();
-      hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + getHeight();
       hash = (37 * hash) + ERRORPLACEHOLDER_FIELD_NUMBER;
       hash = (53 * hash) + getErrorPlaceholder().hashCode();
       hash = (37 * hash) + PLACEHOLDER_FIELD_NUMBER;
       hash = (53 * hash) + getPlaceholder().hashCode();
-      hash = (37 * hash) + FIT_FIELD_NUMBER;
-      hash = (53 * hash) + fit_;
-      if (hasBorderRadius()) {
-        hash = (37 * hash) + BORDERRADIUS_FIELD_NUMBER;
-        hash = (53 * hash) + getBorderRadius().hashCode();
+      if (hasGeometry()) {
+        hash = (37 * hash) + GEOMETRY_FIELD_NUMBER;
+        hash = (53 * hash) + getGeometry().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(byte[] data)
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseDelimitedFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -684,7 +555,7 @@ public final class ImageInfo {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageRequestInfo prototype) {
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageFetchInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -701,29 +572,29 @@ public final class ImageInfo {
     }
     /**
      * <pre>
-     * Send this info to native side when plugin wants to load an image
+     * Request to load an image
      * </pre>
      *
-     * Protobuf type {@code ImageRequestInfo}
+     * Protobuf type {@code ImageFetchInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ImageRequestInfo)
-        com.texture_image.proto.ImageInfo.ImageRequestInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:ImageFetchInfo)
+        com.texture_image.proto.ImageInfo.ImageFetchInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_fieldAccessorTable
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ImageRequestInfo.class, com.texture_image.proto.ImageInfo.ImageRequestInfo.Builder.class);
+                com.texture_image.proto.ImageInfo.ImageFetchInfo.class, com.texture_image.proto.ImageInfo.ImageFetchInfo.Builder.class);
       }
 
-      // Construct using com.texture_image.proto.ImageInfo.ImageRequestInfo.newBuilder()
+      // Construct using com.texture_image.proto.ImageInfo.ImageFetchInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -743,21 +614,15 @@ public final class ImageInfo {
         super.clear();
         url_ = "";
 
-        width_ = 0;
-
-        height_ = 0;
-
         errorPlaceholder_ = "";
 
         placeholder_ = "";
 
-        fit_ = 0;
-
-        if (borderRadiusBuilder_ == null) {
-          borderRadius_ = null;
+        if (geometryBuilder_ == null) {
+          geometry_ = null;
         } else {
-          borderRadius_ = null;
-          borderRadiusBuilder_ = null;
+          geometry_ = null;
+          geometryBuilder_ = null;
         }
         return this;
       }
@@ -765,17 +630,17 @@ public final class ImageInfo {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchInfo_descriptor;
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ImageRequestInfo.getDefaultInstance();
+      public com.texture_image.proto.ImageInfo.ImageFetchInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageFetchInfo.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestInfo build() {
-        com.texture_image.proto.ImageInfo.ImageRequestInfo result = buildPartial();
+      public com.texture_image.proto.ImageInfo.ImageFetchInfo build() {
+        com.texture_image.proto.ImageInfo.ImageFetchInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -783,18 +648,15 @@ public final class ImageInfo {
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.ImageRequestInfo result = new com.texture_image.proto.ImageInfo.ImageRequestInfo(this);
+      public com.texture_image.proto.ImageInfo.ImageFetchInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageFetchInfo result = new com.texture_image.proto.ImageInfo.ImageFetchInfo(this);
         result.url_ = url_;
-        result.width_ = width_;
-        result.height_ = height_;
         result.errorPlaceholder_ = errorPlaceholder_;
         result.placeholder_ = placeholder_;
-        result.fit_ = fit_;
-        if (borderRadiusBuilder_ == null) {
-          result.borderRadius_ = borderRadius_;
+        if (geometryBuilder_ == null) {
+          result.geometry_ = geometry_;
         } else {
-          result.borderRadius_ = borderRadiusBuilder_.build();
+          result.geometry_ = geometryBuilder_.build();
         }
         onBuilt();
         return result;
@@ -834,25 +696,19 @@ public final class ImageInfo {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ImageRequestInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ImageRequestInfo)other);
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageFetchInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageFetchInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageRequestInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.ImageRequestInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageFetchInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageFetchInfo.getDefaultInstance()) return this;
         if (!other.getUrl().isEmpty()) {
           url_ = other.url_;
           onChanged();
-        }
-        if (other.getWidth() != 0) {
-          setWidth(other.getWidth());
-        }
-        if (other.getHeight() != 0) {
-          setHeight(other.getHeight());
         }
         if (!other.getErrorPlaceholder().isEmpty()) {
           errorPlaceholder_ = other.errorPlaceholder_;
@@ -862,11 +718,8 @@ public final class ImageInfo {
           placeholder_ = other.placeholder_;
           onChanged();
         }
-        if (other.fit_ != 0) {
-          setFitValue(other.getFitValue());
-        }
-        if (other.hasBorderRadius()) {
-          mergeBorderRadius(other.getBorderRadius());
+        if (other.hasGeometry()) {
+          mergeGeometry(other.getGeometry());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -883,11 +736,11 @@ public final class ImageInfo {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ImageRequestInfo parsedMessage = null;
+        com.texture_image.proto.ImageInfo.ImageFetchInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ImageRequestInfo) e.getUnfinishedMessage();
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageFetchInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -973,75 +826,13 @@ public final class ImageInfo {
         return this;
       }
 
-      private int width_ ;
-      /**
-       * <code>int32 width = 2;</code>
-       * @return The width.
-       */
-      @java.lang.Override
-      public int getWidth() {
-        return width_;
-      }
-      /**
-       * <code>int32 width = 2;</code>
-       * @param value The width to set.
-       * @return This builder for chaining.
-       */
-      public Builder setWidth(int value) {
-        
-        width_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 width = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearWidth() {
-        
-        width_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int height_ ;
-      /**
-       * <code>int32 height = 3;</code>
-       * @return The height.
-       */
-      @java.lang.Override
-      public int getHeight() {
-        return height_;
-      }
-      /**
-       * <code>int32 height = 3;</code>
-       * @param value The height to set.
-       * @return This builder for chaining.
-       */
-      public Builder setHeight(int value) {
-        
-        height_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 height = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearHeight() {
-        
-        height_ = 0;
-        onChanged();
-        return this;
-      }
-
       private java.lang.Object errorPlaceholder_ = "";
       /**
        * <pre>
        * Image to be shown when loading failed, can be URL or local file path
        * </pre>
        *
-       * <code>string errorPlaceholder = 4;</code>
+       * <code>string errorPlaceholder = 2;</code>
        * @return The errorPlaceholder.
        */
       public java.lang.String getErrorPlaceholder() {
@@ -1061,7 +852,7 @@ public final class ImageInfo {
        * Image to be shown when loading failed, can be URL or local file path
        * </pre>
        *
-       * <code>string errorPlaceholder = 4;</code>
+       * <code>string errorPlaceholder = 2;</code>
        * @return The bytes for errorPlaceholder.
        */
       public com.google.protobuf.ByteString
@@ -1082,7 +873,7 @@ public final class ImageInfo {
        * Image to be shown when loading failed, can be URL or local file path
        * </pre>
        *
-       * <code>string errorPlaceholder = 4;</code>
+       * <code>string errorPlaceholder = 2;</code>
        * @param value The errorPlaceholder to set.
        * @return This builder for chaining.
        */
@@ -1101,7 +892,7 @@ public final class ImageInfo {
        * Image to be shown when loading failed, can be URL or local file path
        * </pre>
        *
-       * <code>string errorPlaceholder = 4;</code>
+       * <code>string errorPlaceholder = 2;</code>
        * @return This builder for chaining.
        */
       public Builder clearErrorPlaceholder() {
@@ -1115,7 +906,7 @@ public final class ImageInfo {
        * Image to be shown when loading failed, can be URL or local file path
        * </pre>
        *
-       * <code>string errorPlaceholder = 4;</code>
+       * <code>string errorPlaceholder = 2;</code>
        * @param value The bytes for errorPlaceholder to set.
        * @return This builder for chaining.
        */
@@ -1137,7 +928,7 @@ public final class ImageInfo {
        * Can be URL or local file path
        * </pre>
        *
-       * <code>string placeholder = 5;</code>
+       * <code>string placeholder = 3;</code>
        * @return The placeholder.
        */
       public java.lang.String getPlaceholder() {
@@ -1157,7 +948,7 @@ public final class ImageInfo {
        * Can be URL or local file path
        * </pre>
        *
-       * <code>string placeholder = 5;</code>
+       * <code>string placeholder = 3;</code>
        * @return The bytes for placeholder.
        */
       public com.google.protobuf.ByteString
@@ -1178,7 +969,7 @@ public final class ImageInfo {
        * Can be URL or local file path
        * </pre>
        *
-       * <code>string placeholder = 5;</code>
+       * <code>string placeholder = 3;</code>
        * @param value The placeholder to set.
        * @return This builder for chaining.
        */
@@ -1197,7 +988,7 @@ public final class ImageInfo {
        * Can be URL or local file path
        * </pre>
        *
-       * <code>string placeholder = 5;</code>
+       * <code>string placeholder = 3;</code>
        * @return This builder for chaining.
        */
       public Builder clearPlaceholder() {
@@ -1211,7 +1002,7 @@ public final class ImageInfo {
        * Can be URL or local file path
        * </pre>
        *
-       * <code>string placeholder = 5;</code>
+       * <code>string placeholder = 3;</code>
        * @param value The bytes for placeholder to set.
        * @return This builder for chaining.
        */
@@ -1227,233 +1018,159 @@ public final class ImageInfo {
         return this;
       }
 
-      private int fit_ = 0;
-      /**
-       * <pre>
-       * Refer to [BoxFit] in enum.proto
-       * </pre>
-       *
-       * <code>.BoxFit fit = 6;</code>
-       * @return The enum numeric value on the wire for fit.
-       */
-      @java.lang.Override public int getFitValue() {
-        return fit_;
-      }
-      /**
-       * <pre>
-       * Refer to [BoxFit] in enum.proto
-       * </pre>
-       *
-       * <code>.BoxFit fit = 6;</code>
-       * @param value The enum numeric value on the wire for fit to set.
-       * @return This builder for chaining.
-       */
-      public Builder setFitValue(int value) {
-        
-        fit_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Refer to [BoxFit] in enum.proto
-       * </pre>
-       *
-       * <code>.BoxFit fit = 6;</code>
-       * @return The fit.
-       */
-      @java.lang.Override
-      public com.texture_image.proto.Enum.BoxFit getFit() {
-        @SuppressWarnings("deprecation")
-        com.texture_image.proto.Enum.BoxFit result = com.texture_image.proto.Enum.BoxFit.valueOf(fit_);
-        return result == null ? com.texture_image.proto.Enum.BoxFit.UNRECOGNIZED : result;
-      }
-      /**
-       * <pre>
-       * Refer to [BoxFit] in enum.proto
-       * </pre>
-       *
-       * <code>.BoxFit fit = 6;</code>
-       * @param value The fit to set.
-       * @return This builder for chaining.
-       */
-      public Builder setFit(com.texture_image.proto.Enum.BoxFit value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        fit_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Refer to [BoxFit] in enum.proto
-       * </pre>
-       *
-       * <code>.BoxFit fit = 6;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearFit() {
-        
-        fit_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private com.texture_image.proto.ImageInfo.ImageBorderRadius borderRadius_;
+      private com.texture_image.proto.ImageUtils.Geometry geometry_;
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder> borderRadiusBuilder_;
+          com.texture_image.proto.ImageUtils.Geometry, com.texture_image.proto.ImageUtils.Geometry.Builder, com.texture_image.proto.ImageUtils.GeometryOrBuilder> geometryBuilder_;
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
-       * @return Whether the borderRadius field is set.
+       * <code>.Geometry geometry = 4;</code>
+       * @return Whether the geometry field is set.
        */
-      public boolean hasBorderRadius() {
-        return borderRadiusBuilder_ != null || borderRadius_ != null;
+      public boolean hasGeometry() {
+        return geometryBuilder_ != null || geometry_ != null;
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
-       * @return The borderRadius.
+       * <code>.Geometry geometry = 4;</code>
+       * @return The geometry.
        */
-      public com.texture_image.proto.ImageInfo.ImageBorderRadius getBorderRadius() {
-        if (borderRadiusBuilder_ == null) {
-          return borderRadius_ == null ? com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+      public com.texture_image.proto.ImageUtils.Geometry getGeometry() {
+        if (geometryBuilder_ == null) {
+          return geometry_ == null ? com.texture_image.proto.ImageUtils.Geometry.getDefaultInstance() : geometry_;
         } else {
-          return borderRadiusBuilder_.getMessage();
+          return geometryBuilder_.getMessage();
         }
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public Builder setBorderRadius(com.texture_image.proto.ImageInfo.ImageBorderRadius value) {
-        if (borderRadiusBuilder_ == null) {
+      public Builder setGeometry(com.texture_image.proto.ImageUtils.Geometry value) {
+        if (geometryBuilder_ == null) {
           if (value == null) {
             throw new NullPointerException();
           }
-          borderRadius_ = value;
+          geometry_ = value;
           onChanged();
         } else {
-          borderRadiusBuilder_.setMessage(value);
+          geometryBuilder_.setMessage(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public Builder setBorderRadius(
-          com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder builderForValue) {
-        if (borderRadiusBuilder_ == null) {
-          borderRadius_ = builderForValue.build();
+      public Builder setGeometry(
+          com.texture_image.proto.ImageUtils.Geometry.Builder builderForValue) {
+        if (geometryBuilder_ == null) {
+          geometry_ = builderForValue.build();
           onChanged();
         } else {
-          borderRadiusBuilder_.setMessage(builderForValue.build());
+          geometryBuilder_.setMessage(builderForValue.build());
         }
 
         return this;
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public Builder mergeBorderRadius(com.texture_image.proto.ImageInfo.ImageBorderRadius value) {
-        if (borderRadiusBuilder_ == null) {
-          if (borderRadius_ != null) {
-            borderRadius_ =
-              com.texture_image.proto.ImageInfo.ImageBorderRadius.newBuilder(borderRadius_).mergeFrom(value).buildPartial();
+      public Builder mergeGeometry(com.texture_image.proto.ImageUtils.Geometry value) {
+        if (geometryBuilder_ == null) {
+          if (geometry_ != null) {
+            geometry_ =
+              com.texture_image.proto.ImageUtils.Geometry.newBuilder(geometry_).mergeFrom(value).buildPartial();
           } else {
-            borderRadius_ = value;
+            geometry_ = value;
           }
           onChanged();
         } else {
-          borderRadiusBuilder_.mergeFrom(value);
+          geometryBuilder_.mergeFrom(value);
         }
 
         return this;
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public Builder clearBorderRadius() {
-        if (borderRadiusBuilder_ == null) {
-          borderRadius_ = null;
+      public Builder clearGeometry() {
+        if (geometryBuilder_ == null) {
+          geometry_ = null;
           onChanged();
         } else {
-          borderRadius_ = null;
-          borderRadiusBuilder_ = null;
+          geometry_ = null;
+          geometryBuilder_ = null;
         }
 
         return this;
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder getBorderRadiusBuilder() {
+      public com.texture_image.proto.ImageUtils.Geometry.Builder getGeometryBuilder() {
         
         onChanged();
-        return getBorderRadiusFieldBuilder().getBuilder();
+        return getGeometryFieldBuilder().getBuilder();
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
-      public com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder getBorderRadiusOrBuilder() {
-        if (borderRadiusBuilder_ != null) {
-          return borderRadiusBuilder_.getMessageOrBuilder();
+      public com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder() {
+        if (geometryBuilder_ != null) {
+          return geometryBuilder_.getMessageOrBuilder();
         } else {
-          return borderRadius_ == null ?
-              com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance() : borderRadius_;
+          return geometry_ == null ?
+              com.texture_image.proto.ImageUtils.Geometry.getDefaultInstance() : geometry_;
         }
       }
       /**
        * <pre>
-       * Whether to make a rounded rect style or not
+       * Geometry info
        * </pre>
        *
-       * <code>.ImageBorderRadius borderRadius = 7;</code>
+       * <code>.Geometry geometry = 4;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
-          com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder> 
-          getBorderRadiusFieldBuilder() {
-        if (borderRadiusBuilder_ == null) {
-          borderRadiusBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
-              com.texture_image.proto.ImageInfo.ImageBorderRadius, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder, com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder>(
-                  getBorderRadius(),
+          com.texture_image.proto.ImageUtils.Geometry, com.texture_image.proto.ImageUtils.Geometry.Builder, com.texture_image.proto.ImageUtils.GeometryOrBuilder> 
+          getGeometryFieldBuilder() {
+        if (geometryBuilder_ == null) {
+          geometryBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.texture_image.proto.ImageUtils.Geometry, com.texture_image.proto.ImageUtils.Geometry.Builder, com.texture_image.proto.ImageUtils.GeometryOrBuilder>(
+                  getGeometry(),
                   getParentForChildren(),
                   isClean());
-          borderRadius_ = null;
+          geometry_ = null;
         }
-        return borderRadiusBuilder_;
+        return geometryBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -1468,93 +1185,162 @@ public final class ImageInfo {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:ImageRequestInfo)
+      // @@protoc_insertion_point(builder_scope:ImageFetchInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:ImageRequestInfo)
-    private static final com.texture_image.proto.ImageInfo.ImageRequestInfo DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:ImageFetchInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageFetchInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageRequestInfo();
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageFetchInfo();
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstance() {
+    public static com.texture_image.proto.ImageInfo.ImageFetchInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ImageRequestInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ImageRequestInfo>() {
+    private static final com.google.protobuf.Parser<ImageFetchInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageFetchInfo>() {
       @java.lang.Override
-      public ImageRequestInfo parsePartialFrom(
+      public ImageFetchInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ImageRequestInfo(input, extensionRegistry);
+        return new ImageFetchInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ImageRequestInfo> parser() {
+    public static com.google.protobuf.Parser<ImageFetchInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ImageRequestInfo> getParserForType() {
+    public com.google.protobuf.Parser<ImageFetchInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageRequestInfo getDefaultInstanceForType() {
+    public com.texture_image.proto.ImageInfo.ImageFetchInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
-  public interface ImageRequestCancelInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ImageRequestCancelInfo)
+  public interface ImageFetchResultInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageFetchResultInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>string url = 1;</code>
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    int getCode();
+
+    /**
+     * <pre>
+     * Texture widget id for this image
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    long getTextureId();
+
+    /**
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+
+    /**
+     * <pre>
+     * Requesting image's url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The url.
      */
     java.lang.String getUrl();
     /**
-     * <code>string url = 1;</code>
+     * <pre>
+     * Requesting image's url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
      * @return The bytes for url.
      */
     com.google.protobuf.ByteString
         getUrlBytes();
 
     /**
-     * <code>int64 textureId = 2;</code>
-     * @return The textureId.
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
      */
-    long getTextureId();
+    int getStateValue();
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The state.
+     */
+    com.texture_image.proto.ImageUtils.TaskState getState();
   }
   /**
    * <pre>
-   * This info is sent when plugin wants to cancel an on going image loading task
+   * An object to describe image request API invoking result
+   * Flutter side may use the [textureId] to rebuild its UI
+   * when receiving the result, but the target image may not
+   * be visible right now because it maybe downloading by now
+   * you can check [state] for relative task's newest status
    * </pre>
    *
-   * Protobuf type {@code ImageRequestCancelInfo}
+   * Protobuf type {@code ImageFetchResultInfo}
    */
-  public static final class ImageRequestCancelInfo extends
+  public static final class ImageFetchResultInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ImageRequestCancelInfo)
-      ImageRequestCancelInfoOrBuilder {
+      // @@protoc_insertion_point(message_implements:ImageFetchResultInfo)
+      ImageFetchResultInfoOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use ImageRequestCancelInfo.newBuilder() to construct.
-    private ImageRequestCancelInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use ImageFetchResultInfo.newBuilder() to construct.
+    private ImageFetchResultInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ImageRequestCancelInfo() {
+    private ImageFetchResultInfo() {
+      message_ = "";
       url_ = "";
+      state_ = 0;
     }
 
     @java.lang.Override
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new ImageRequestCancelInfo();
+      return new ImageFetchResultInfo();
     }
 
     @java.lang.Override
@@ -1562,7 +1348,1101 @@ public final class ImageInfo {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ImageRequestCancelInfo(
+    private ImageFetchResultInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              code_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              textureId_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              url_ = s;
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+
+              state_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ImageFetchResultInfo.class, com.texture_image.proto.ImageInfo.ImageFetchResultInfo.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    @java.lang.Override
+    public int getCode() {
+      return code_;
+    }
+
+    public static final int TEXTUREID_FIELD_NUMBER = 2;
+    private long textureId_;
+    /**
+     * <pre>
+     * Texture widget id for this image
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    @java.lang.Override
+    public long getTextureId() {
+      return textureId_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object message_;
+    /**
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The message.
+     */
+    @java.lang.Override
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Description for the result
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The bytes for message.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int URL_FIELD_NUMBER = 4;
+    private volatile java.lang.Object url_;
+    /**
+     * <pre>
+     * Requesting image's url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The url.
+     */
+    @java.lang.Override
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        url_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Requesting image's url
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The bytes for url.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STATE_FIELD_NUMBER = 5;
+    private int state_;
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The state.
+     */
+    @java.lang.Override public com.texture_image.proto.ImageUtils.TaskState getState() {
+      @SuppressWarnings("deprecation")
+      com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
+      return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != 0) {
+        output.writeInt32(1, code_);
+      }
+      if (textureId_ != 0L) {
+        output.writeInt64(2, textureId_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
+      }
+      if (!getUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, url_);
+      }
+      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
+        output.writeEnum(5, state_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, code_);
+      }
+      if (textureId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, textureId_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
+      }
+      if (!getUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, url_);
+      }
+      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, state_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageFetchResultInfo)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ImageFetchResultInfo other = (com.texture_image.proto.ImageInfo.ImageFetchResultInfo) obj;
+
+      if (getCode()
+          != other.getCode()) return false;
+      if (getTextureId()
+          != other.getTextureId()) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!getUrl()
+          .equals(other.getUrl())) return false;
+      if (state_ != other.state_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getCode();
+      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTextureId());
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + URL_FIELD_NUMBER;
+      hash = (53 * hash) + getUrl().hashCode();
+      hash = (37 * hash) + STATE_FIELD_NUMBER;
+      hash = (53 * hash) + state_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageFetchResultInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * An object to describe image request API invoking result
+     * Flutter side may use the [textureId] to rebuild its UI
+     * when receiving the result, but the target image may not
+     * be visible right now because it maybe downloading by now
+     * you can check [state] for relative task's newest status
+     * </pre>
+     *
+     * Protobuf type {@code ImageFetchResultInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageFetchResultInfo)
+        com.texture_image.proto.ImageInfo.ImageFetchResultInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ImageFetchResultInfo.class, com.texture_image.proto.ImageInfo.ImageFetchResultInfo.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ImageFetchResultInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        textureId_ = 0L;
+
+        message_ = "";
+
+        url_ = "";
+
+        state_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageFetchResultInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo build() {
+        com.texture_image.proto.ImageInfo.ImageFetchResultInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageFetchResultInfo result = new com.texture_image.proto.ImageInfo.ImageFetchResultInfo(this);
+        result.code_ = code_;
+        result.textureId_ = textureId_;
+        result.message_ = message_;
+        result.url_ = url_;
+        result.state_ = state_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageFetchResultInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageFetchResultInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageFetchResultInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageFetchResultInfo.getDefaultInstance()) return this;
+        if (other.getCode() != 0) {
+          setCode(other.getCode());
+        }
+        if (other.getTextureId() != 0L) {
+          setTextureId(other.getTextureId());
+        }
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getUrl().isEmpty()) {
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.state_ != 0) {
+          setStateValue(other.getStateValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ImageFetchResultInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageFetchResultInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ ;
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @return The code.
+       */
+      @java.lang.Override
+      public int getCode() {
+        return code_;
+      }
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @param value The code to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCode(int value) {
+        
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long textureId_ ;
+      /**
+       * <pre>
+       * Texture widget id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return The textureId.
+       */
+      @java.lang.Override
+      public long getTextureId() {
+        return textureId_;
+      }
+      /**
+       * <pre>
+       * Texture widget id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @param value The textureId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTextureId(long value) {
+        
+        textureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Texture widget id for this image
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTextureId() {
+        
+        textureId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Description for the result
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object url_ = "";
+      /**
+       * <pre>
+       * Requesting image's url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return The url.
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Requesting image's url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return The bytes for url.
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Requesting image's url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @param value The url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Requesting image's url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUrl() {
+        
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Requesting image's url
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @param value The bytes for url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int state_ = 0;
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return The enum numeric value on the wire for state.
+       */
+      @java.lang.Override public int getStateValue() {
+        return state_;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @param value The enum numeric value on the wire for state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStateValue(int value) {
+        
+        state_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return The state.
+       */
+      @java.lang.Override
+      public com.texture_image.proto.ImageUtils.TaskState getState() {
+        @SuppressWarnings("deprecation")
+        com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
+        return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @param value The state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setState(com.texture_image.proto.ImageUtils.TaskState value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        state_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearState() {
+        
+        state_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ImageFetchResultInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageFetchResultInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageFetchResultInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageFetchResultInfo();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ImageFetchResultInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageFetchResultInfo>() {
+      @java.lang.Override
+      public ImageFetchResultInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageFetchResultInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ImageFetchResultInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageFetchResultInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ImageFetchCancelInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageFetchCancelInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * You have to provide this property then image loaders from
+     * native sides can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets gets
+     * disposed before start loading channel API replies a result,
+     * and thus widget cannot provide a correct texture id to cancel
+     * ongoing download task, then this property would help
+     * </pre>
+     *
+     * <code>string url = 1;</code>
+     * @return The url.
+     */
+    java.lang.String getUrl();
+    /**
+     * <pre>
+     * You have to provide this property then image loaders from
+     * native sides can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets gets
+     * disposed before start loading channel API replies a result,
+     * and thus widget cannot provide a correct texture id to cancel
+     * ongoing download task, then this property would help
+     * </pre>
+     *
+     * <code>string url = 1;</code>
+     * @return The bytes for url.
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
+    /**
+     * <pre>
+     * Given this property for loaders to search download task more
+     * efficiently if you have one
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    long getTextureId();
+  }
+  /**
+   * <pre>
+   * Request to cancel an ongoing loading task
+   * </pre>
+   *
+   * Protobuf type {@code ImageFetchCancelInfo}
+   */
+  public static final class ImageFetchCancelInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ImageFetchCancelInfo)
+      ImageFetchCancelInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ImageFetchCancelInfo.newBuilder() to construct.
+    private ImageFetchCancelInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ImageFetchCancelInfo() {
+      url_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ImageFetchCancelInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageFetchCancelInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1612,20 +2492,29 @@ public final class ImageInfo {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_fieldAccessorTable
+      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.class, com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.Builder.class);
+              com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.class, com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.Builder.class);
     }
 
     public static final int URL_FIELD_NUMBER = 1;
     private volatile java.lang.Object url_;
     /**
+     * <pre>
+     * You have to provide this property then image loaders from
+     * native sides can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets gets
+     * disposed before start loading channel API replies a result,
+     * and thus widget cannot provide a correct texture id to cancel
+     * ongoing download task, then this property would help
+     * </pre>
+     *
      * <code>string url = 1;</code>
      * @return The url.
      */
@@ -1643,6 +2532,15 @@ public final class ImageInfo {
       }
     }
     /**
+     * <pre>
+     * You have to provide this property then image loaders from
+     * native sides can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets gets
+     * disposed before start loading channel API replies a result,
+     * and thus widget cannot provide a correct texture id to cancel
+     * ongoing download task, then this property would help
+     * </pre>
+     *
      * <code>string url = 1;</code>
      * @return The bytes for url.
      */
@@ -1664,6 +2562,11 @@ public final class ImageInfo {
     public static final int TEXTUREID_FIELD_NUMBER = 2;
     private long textureId_;
     /**
+     * <pre>
+     * Given this property for loaders to search download task more
+     * efficiently if you have one
+     * </pre>
+     *
      * <code>int64 textureId = 2;</code>
      * @return The textureId.
      */
@@ -1718,10 +2621,10 @@ public final class ImageInfo {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageRequestCancelInfo)) {
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageFetchCancelInfo)) {
         return super.equals(obj);
       }
-      com.texture_image.proto.ImageInfo.ImageRequestCancelInfo other = (com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) obj;
+      com.texture_image.proto.ImageInfo.ImageFetchCancelInfo other = (com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) obj;
 
       if (!getUrl()
           .equals(other.getUrl())) return false;
@@ -1748,69 +2651,69 @@ public final class ImageInfo {
       return hash;
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(byte[] data)
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseDelimitedFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -1823,7 +2726,7 @@ public final class ImageInfo {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageRequestCancelInfo prototype) {
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageFetchCancelInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -1840,29 +2743,29 @@ public final class ImageInfo {
     }
     /**
      * <pre>
-     * This info is sent when plugin wants to cancel an on going image loading task
+     * Request to cancel an ongoing loading task
      * </pre>
      *
-     * Protobuf type {@code ImageRequestCancelInfo}
+     * Protobuf type {@code ImageFetchCancelInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ImageRequestCancelInfo)
-        com.texture_image.proto.ImageInfo.ImageRequestCancelInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:ImageFetchCancelInfo)
+        com.texture_image.proto.ImageInfo.ImageFetchCancelInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_fieldAccessorTable
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.class, com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.Builder.class);
+                com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.class, com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.Builder.class);
       }
 
-      // Construct using com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.newBuilder()
+      // Construct using com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -1890,17 +2793,17 @@ public final class ImageInfo {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageRequestCancelInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.getDefaultInstance();
+      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo build() {
-        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo result = buildPartial();
+      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo build() {
+        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -1908,8 +2811,8 @@ public final class ImageInfo {
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo result = new com.texture_image.proto.ImageInfo.ImageRequestCancelInfo(this);
+      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo result = new com.texture_image.proto.ImageInfo.ImageFetchCancelInfo(this);
         result.url_ = url_;
         result.textureId_ = textureId_;
         onBuilt();
@@ -1950,16 +2853,16 @@ public final class ImageInfo {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ImageRequestCancelInfo)other);
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageFetchCancelInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageRequestCancelInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.ImageRequestCancelInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageFetchCancelInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.getDefaultInstance()) return this;
         if (!other.getUrl().isEmpty()) {
           url_ = other.url_;
           onChanged();
@@ -1982,11 +2885,11 @@ public final class ImageInfo {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ImageRequestCancelInfo parsedMessage = null;
+        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ImageRequestCancelInfo) e.getUnfinishedMessage();
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -1998,6 +2901,15 @@ public final class ImageInfo {
 
       private java.lang.Object url_ = "";
       /**
+       * <pre>
+       * You have to provide this property then image loaders from
+       * native sides can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets gets
+       * disposed before start loading channel API replies a result,
+       * and thus widget cannot provide a correct texture id to cancel
+       * ongoing download task, then this property would help
+       * </pre>
+       *
        * <code>string url = 1;</code>
        * @return The url.
        */
@@ -2014,6 +2926,15 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * You have to provide this property then image loaders from
+       * native sides can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets gets
+       * disposed before start loading channel API replies a result,
+       * and thus widget cannot provide a correct texture id to cancel
+       * ongoing download task, then this property would help
+       * </pre>
+       *
        * <code>string url = 1;</code>
        * @return The bytes for url.
        */
@@ -2031,6 +2952,15 @@ public final class ImageInfo {
         }
       }
       /**
+       * <pre>
+       * You have to provide this property then image loaders from
+       * native sides can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets gets
+       * disposed before start loading channel API replies a result,
+       * and thus widget cannot provide a correct texture id to cancel
+       * ongoing download task, then this property would help
+       * </pre>
+       *
        * <code>string url = 1;</code>
        * @param value The url to set.
        * @return This builder for chaining.
@@ -2046,6 +2976,15 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * You have to provide this property then image loaders from
+       * native sides can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets gets
+       * disposed before start loading channel API replies a result,
+       * and thus widget cannot provide a correct texture id to cancel
+       * ongoing download task, then this property would help
+       * </pre>
+       *
        * <code>string url = 1;</code>
        * @return This builder for chaining.
        */
@@ -2056,6 +2995,15 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * You have to provide this property then image loaders from
+       * native sides can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets gets
+       * disposed before start loading channel API replies a result,
+       * and thus widget cannot provide a correct texture id to cancel
+       * ongoing download task, then this property would help
+       * </pre>
+       *
        * <code>string url = 1;</code>
        * @param value The bytes for url to set.
        * @return This builder for chaining.
@@ -2074,6 +3022,11 @@ public final class ImageInfo {
 
       private long textureId_ ;
       /**
+       * <pre>
+       * Given this property for loaders to search download task more
+       * efficiently if you have one
+       * </pre>
+       *
        * <code>int64 textureId = 2;</code>
        * @return The textureId.
        */
@@ -2082,6 +3035,11 @@ public final class ImageInfo {
         return textureId_;
       }
       /**
+       * <pre>
+       * Given this property for loaders to search download task more
+       * efficiently if you have one
+       * </pre>
+       *
        * <code>int64 textureId = 2;</code>
        * @param value The textureId to set.
        * @return This builder for chaining.
@@ -2093,6 +3051,11 @@ public final class ImageInfo {
         return this;
       }
       /**
+       * <pre>
+       * Given this property for loaders to search download task more
+       * efficiently if you have one
+       * </pre>
+       *
        * <code>int64 textureId = 2;</code>
        * @return This builder for chaining.
        */
@@ -2115,767 +3078,61 @@ public final class ImageInfo {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:ImageRequestCancelInfo)
+      // @@protoc_insertion_point(builder_scope:ImageFetchCancelInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:ImageRequestCancelInfo)
-    private static final com.texture_image.proto.ImageInfo.ImageRequestCancelInfo DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:ImageFetchCancelInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageFetchCancelInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageRequestCancelInfo();
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageFetchCancelInfo();
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstance() {
+    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ImageRequestCancelInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ImageRequestCancelInfo>() {
+    private static final com.google.protobuf.Parser<ImageFetchCancelInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageFetchCancelInfo>() {
       @java.lang.Override
-      public ImageRequestCancelInfo parsePartialFrom(
+      public ImageFetchCancelInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ImageRequestCancelInfo(input, extensionRegistry);
+        return new ImageFetchCancelInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ImageRequestCancelInfo> parser() {
+    public static com.google.protobuf.Parser<ImageFetchCancelInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ImageRequestCancelInfo> getParserForType() {
+    public com.google.protobuf.Parser<ImageFetchCancelInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageRequestCancelInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ImageBorderRadiusOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ImageBorderRadius)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>double topLeft = 1;</code>
-     * @return The topLeft.
-     */
-    double getTopLeft();
-
-    /**
-     * <code>double topRight = 2;</code>
-     * @return The topRight.
-     */
-    double getTopRight();
-
-    /**
-     * <code>double bottomLeft = 3;</code>
-     * @return The bottomLeft.
-     */
-    double getBottomLeft();
-
-    /**
-     * <code>double bottomRight = 4;</code>
-     * @return The bottomRight.
-     */
-    double getBottomRight();
-  }
-  /**
-   * Protobuf type {@code ImageBorderRadius}
-   */
-  public static final class ImageBorderRadius extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ImageBorderRadius)
-      ImageBorderRadiusOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ImageBorderRadius.newBuilder() to construct.
-    private ImageBorderRadius(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ImageBorderRadius() {
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ImageBorderRadius();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ImageBorderRadius(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 9: {
-
-              topLeft_ = input.readDouble();
-              break;
-            }
-            case 17: {
-
-              topRight_ = input.readDouble();
-              break;
-            }
-            case 25: {
-
-              bottomLeft_ = input.readDouble();
-              break;
-            }
-            case 33: {
-
-              bottomRight_ = input.readDouble();
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ImageBorderRadius.class, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder.class);
-    }
-
-    public static final int TOPLEFT_FIELD_NUMBER = 1;
-    private double topLeft_;
-    /**
-     * <code>double topLeft = 1;</code>
-     * @return The topLeft.
-     */
-    @java.lang.Override
-    public double getTopLeft() {
-      return topLeft_;
-    }
-
-    public static final int TOPRIGHT_FIELD_NUMBER = 2;
-    private double topRight_;
-    /**
-     * <code>double topRight = 2;</code>
-     * @return The topRight.
-     */
-    @java.lang.Override
-    public double getTopRight() {
-      return topRight_;
-    }
-
-    public static final int BOTTOMLEFT_FIELD_NUMBER = 3;
-    private double bottomLeft_;
-    /**
-     * <code>double bottomLeft = 3;</code>
-     * @return The bottomLeft.
-     */
-    @java.lang.Override
-    public double getBottomLeft() {
-      return bottomLeft_;
-    }
-
-    public static final int BOTTOMRIGHT_FIELD_NUMBER = 4;
-    private double bottomRight_;
-    /**
-     * <code>double bottomRight = 4;</code>
-     * @return The bottomRight.
-     */
-    @java.lang.Override
-    public double getBottomRight() {
-      return bottomRight_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (topLeft_ != 0D) {
-        output.writeDouble(1, topLeft_);
-      }
-      if (topRight_ != 0D) {
-        output.writeDouble(2, topRight_);
-      }
-      if (bottomLeft_ != 0D) {
-        output.writeDouble(3, bottomLeft_);
-      }
-      if (bottomRight_ != 0D) {
-        output.writeDouble(4, bottomRight_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (topLeft_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(1, topLeft_);
-      }
-      if (topRight_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(2, topRight_);
-      }
-      if (bottomLeft_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(3, bottomLeft_);
-      }
-      if (bottomRight_ != 0D) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeDoubleSize(4, bottomRight_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageBorderRadius)) {
-        return super.equals(obj);
-      }
-      com.texture_image.proto.ImageInfo.ImageBorderRadius other = (com.texture_image.proto.ImageInfo.ImageBorderRadius) obj;
-
-      if (java.lang.Double.doubleToLongBits(getTopLeft())
-          != java.lang.Double.doubleToLongBits(
-              other.getTopLeft())) return false;
-      if (java.lang.Double.doubleToLongBits(getTopRight())
-          != java.lang.Double.doubleToLongBits(
-              other.getTopRight())) return false;
-      if (java.lang.Double.doubleToLongBits(getBottomLeft())
-          != java.lang.Double.doubleToLongBits(
-              other.getBottomLeft())) return false;
-      if (java.lang.Double.doubleToLongBits(getBottomRight())
-          != java.lang.Double.doubleToLongBits(
-              other.getBottomRight())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + TOPLEFT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getTopLeft()));
-      hash = (37 * hash) + TOPRIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getTopRight()));
-      hash = (37 * hash) + BOTTOMLEFT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getBottomLeft()));
-      hash = (37 * hash) + BOTTOMRIGHT_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          java.lang.Double.doubleToLongBits(getBottomRight()));
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageBorderRadius prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code ImageBorderRadius}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ImageBorderRadius)
-        com.texture_image.proto.ImageInfo.ImageBorderRadiusOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ImageBorderRadius.class, com.texture_image.proto.ImageInfo.ImageBorderRadius.Builder.class);
-      }
-
-      // Construct using com.texture_image.proto.ImageInfo.ImageBorderRadius.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        topLeft_ = 0D;
-
-        topRight_ = 0D;
-
-        bottomLeft_ = 0D;
-
-        bottomRight_ = 0D;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageBorderRadius_descriptor;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageBorderRadius build() {
-        com.texture_image.proto.ImageInfo.ImageBorderRadius result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageBorderRadius buildPartial() {
-        com.texture_image.proto.ImageInfo.ImageBorderRadius result = new com.texture_image.proto.ImageInfo.ImageBorderRadius(this);
-        result.topLeft_ = topLeft_;
-        result.topRight_ = topRight_;
-        result.bottomLeft_ = bottomLeft_;
-        result.bottomRight_ = bottomRight_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ImageBorderRadius) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ImageBorderRadius)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageBorderRadius other) {
-        if (other == com.texture_image.proto.ImageInfo.ImageBorderRadius.getDefaultInstance()) return this;
-        if (other.getTopLeft() != 0D) {
-          setTopLeft(other.getTopLeft());
-        }
-        if (other.getTopRight() != 0D) {
-          setTopRight(other.getTopRight());
-        }
-        if (other.getBottomLeft() != 0D) {
-          setBottomLeft(other.getBottomLeft());
-        }
-        if (other.getBottomRight() != 0D) {
-          setBottomRight(other.getBottomRight());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ImageBorderRadius parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ImageBorderRadius) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private double topLeft_ ;
-      /**
-       * <code>double topLeft = 1;</code>
-       * @return The topLeft.
-       */
-      @java.lang.Override
-      public double getTopLeft() {
-        return topLeft_;
-      }
-      /**
-       * <code>double topLeft = 1;</code>
-       * @param value The topLeft to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTopLeft(double value) {
-        
-        topLeft_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double topLeft = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTopLeft() {
-        
-        topLeft_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double topRight_ ;
-      /**
-       * <code>double topRight = 2;</code>
-       * @return The topRight.
-       */
-      @java.lang.Override
-      public double getTopRight() {
-        return topRight_;
-      }
-      /**
-       * <code>double topRight = 2;</code>
-       * @param value The topRight to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTopRight(double value) {
-        
-        topRight_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double topRight = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTopRight() {
-        
-        topRight_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double bottomLeft_ ;
-      /**
-       * <code>double bottomLeft = 3;</code>
-       * @return The bottomLeft.
-       */
-      @java.lang.Override
-      public double getBottomLeft() {
-        return bottomLeft_;
-      }
-      /**
-       * <code>double bottomLeft = 3;</code>
-       * @param value The bottomLeft to set.
-       * @return This builder for chaining.
-       */
-      public Builder setBottomLeft(double value) {
-        
-        bottomLeft_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double bottomLeft = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearBottomLeft() {
-        
-        bottomLeft_ = 0D;
-        onChanged();
-        return this;
-      }
-
-      private double bottomRight_ ;
-      /**
-       * <code>double bottomRight = 4;</code>
-       * @return The bottomRight.
-       */
-      @java.lang.Override
-      public double getBottomRight() {
-        return bottomRight_;
-      }
-      /**
-       * <code>double bottomRight = 4;</code>
-       * @param value The bottomRight to set.
-       * @return This builder for chaining.
-       */
-      public Builder setBottomRight(double value) {
-        
-        bottomRight_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>double bottomRight = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearBottomRight() {
-        
-        bottomRight_ = 0D;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:ImageBorderRadius)
-    }
-
-    // @@protoc_insertion_point(class_scope:ImageBorderRadius)
-    private static final com.texture_image.proto.ImageInfo.ImageBorderRadius DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageBorderRadius();
-    }
-
-    public static com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ImageBorderRadius>
-        PARSER = new com.google.protobuf.AbstractParser<ImageBorderRadius>() {
-      @java.lang.Override
-      public ImageBorderRadius parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ImageBorderRadius(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ImageBorderRadius> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ImageBorderRadius> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageBorderRadius getDefaultInstanceForType() {
+    public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ImageRequestInfo_descriptor;
+    internal_static_ImageFetchInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ImageRequestInfo_fieldAccessorTable;
+      internal_static_ImageFetchInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ImageRequestCancelInfo_descriptor;
+    internal_static_ImageFetchResultInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ImageRequestCancelInfo_fieldAccessorTable;
+      internal_static_ImageFetchResultInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ImageBorderRadius_descriptor;
+    internal_static_ImageFetchCancelInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ImageBorderRadius_fieldAccessorTable;
+      internal_static_ImageFetchCancelInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2885,41 +3142,40 @@ public final class ImageInfo {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020image_info.proto\032\nenum.proto\"\255\001\n\020Image" +
-      "RequestInfo\022\013\n\003url\030\001 \001(\t\022\r\n\005width\030\002 \001(\005\022" +
-      "\016\n\006height\030\003 \001(\005\022\030\n\020errorPlaceholder\030\004 \001(" +
-      "\t\022\023\n\013placeholder\030\005 \001(\t\022\024\n\003fit\030\006 \001(\0162\007.Bo" +
-      "xFit\022(\n\014borderRadius\030\007 \001(\0132\022.ImageBorder" +
-      "Radius\"8\n\026ImageRequestCancelInfo\022\013\n\003url\030" +
-      "\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\"_\n\021ImageBorderR" +
-      "adius\022\017\n\007topLeft\030\001 \001(\001\022\020\n\010topRight\030\002 \001(\001" +
-      "\022\022\n\nbottomLeft\030\003 \001(\001\022\023\n\013bottomRight\030\004 \001(" +
-      "\001B\031\n\027com.texture_image.protob\006proto3"
+      "\n\020image_info.proto\032\021image_utils.proto\"i\n" +
+      "\016ImageFetchInfo\022\013\n\003url\030\001 \001(\t\022\030\n\020errorPla" +
+      "ceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\033\n\010g" +
+      "eometry\030\004 \001(\0132\t.Geometry\"p\n\024ImageFetchRe" +
+      "sultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(" +
+      "\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state" +
+      "\030\005 \001(\0162\n.TaskState\"6\n\024ImageFetchCancelIn" +
+      "fo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003B\031\n\027co" +
+      "m.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
-          com.texture_image.proto.Enum.getDescriptor(),
+          com.texture_image.proto.ImageUtils.getDescriptor(),
         });
-    internal_static_ImageRequestInfo_descriptor =
+    internal_static_ImageFetchInfo_descriptor =
       getDescriptor().getMessageTypes().get(0);
-    internal_static_ImageRequestInfo_fieldAccessorTable = new
+    internal_static_ImageFetchInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ImageRequestInfo_descriptor,
-        new java.lang.String[] { "Url", "Width", "Height", "ErrorPlaceholder", "Placeholder", "Fit", "BorderRadius", });
-    internal_static_ImageRequestCancelInfo_descriptor =
+        internal_static_ImageFetchInfo_descriptor,
+        new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "Geometry", });
+    internal_static_ImageFetchResultInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
-    internal_static_ImageRequestCancelInfo_fieldAccessorTable = new
+    internal_static_ImageFetchResultInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ImageRequestCancelInfo_descriptor,
-        new java.lang.String[] { "Url", "TextureId", });
-    internal_static_ImageBorderRadius_descriptor =
+        internal_static_ImageFetchResultInfo_descriptor,
+        new java.lang.String[] { "Code", "TextureId", "Message", "Url", "State", });
+    internal_static_ImageFetchCancelInfo_descriptor =
       getDescriptor().getMessageTypes().get(2);
-    internal_static_ImageBorderRadius_fieldAccessorTable = new
+    internal_static_ImageFetchCancelInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ImageBorderRadius_descriptor,
-        new java.lang.String[] { "TopLeft", "TopRight", "BottomLeft", "BottomRight", });
-    com.texture_image.proto.Enum.getDescriptor();
+        internal_static_ImageFetchCancelInfo_descriptor,
+        new java.lang.String[] { "Url", "TextureId", });
+    com.texture_image.proto.ImageUtils.getDescriptor();
   }
 
   // @@protoc_insertion_point(outer_class_scope)

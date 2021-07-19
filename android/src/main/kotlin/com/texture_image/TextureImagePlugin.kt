@@ -19,16 +19,29 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
     private var _imageLoader: ImageLoader? = null
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-        channel = MethodChannel(flutterPluginBinding.binaryMessenger, "texture_image")
+        channel = MethodChannel(
+            flutterPluginBinding.binaryMessenger,
+            "texture_image"
+        )
+
         channel.setMethodCallHandler(this)
 
-        _imageLoader = ImageLoader(flutterPluginBinding.applicationContext, flutterPluginBinding.textureRegistry)
+        _imageLoader = ImageLoader(
+            flutterPluginBinding.applicationContext,
+            flutterPluginBinding.textureRegistry
+        )
     }
 
-    override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    override fun onMethodCall(
+        @NonNull call: MethodCall,
+        @NonNull result: Result
+    ) {
         when (call.method) {
             "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
-            "createImageTexture" -> _imageLoader?.createTextureImage(call, result)
+            "createImageTexture" -> _imageLoader?.createTextureImage(
+                call,
+                result
+            )
             "dispose" -> _imageLoader?.disposeTextureImage(call, result)
             else -> result.notImplemented()
         }

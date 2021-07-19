@@ -1,36 +1,58 @@
 syntax = "proto3";
 option java_package = "com.texture_image.proto";
 
-import "enum.proto";
+import "image_utils.proto";
 
-// Send this info to native side when plugin wants to load an image
-message ImageRequestInfo {
+// Request to load an image
+message ImageFetchInfo {
   string url = 1;
-  int32 width = 2;
-  int32 height = 3;
 
   // Image to be shown when loading failed, can be URL or local file path
-  string errorPlaceholder = 4;
+  string errorPlaceholder = 2;
 
   // Can be URL or local file path
-  string placeholder = 5;
+  string placeholder = 3;
 
-  // Refer to [BoxFit] in enum.proto
-  BoxFit fit = 6;
-
-  // Whether to make a rounded rect style or not
-  ImageBorderRadius borderRadius = 7;
+  // Geometry info
+  Geometry geometry = 4;
 }
 
-// This info is sent when plugin wants to cancel an on going image loading task
-message ImageRequestCancelInfo {
+// An object to describe image request API invoking result
+// Flutter side may use the [textureId] to rebuild its UI
+// when receiving the result, but the target image may not
+// be visible right now because it maybe downloading by now
+// you can check [state] for relative task's newest status
+message ImageFetchResultInfo {
+  // The result code of process, if this code's value is not 200
+  // then the [textureId] shall be invalid and error placeholder
+  // is supposed to be shown on this situation
+  int32 code = 1;
+
+  // Texture widget id for this image
+  int64 textureId = 2;
+
+  // Description for the result
+  string message = 3;
+
+  // Requesting image's url
+  string url = 4;
+
+  // Relative image fetching task's current status
+  TaskState state = 5;
+}
+
+// Request to cancel an ongoing loading task
+message ImageFetchCancelInfo {
+  // You have to provide this property then image loaders from
+  // native sides can guarantee that at least they can find origin
+  // task by url in a slower way. At some situation widgets gets
+  // disposed before start loading channel API replies a result,
+  // and thus widget cannot provide a correct texture id to cancel
+  // ongoing download task, then this property would help
   string url = 1;
+
+  // Given this property for loaders to search download task more
+  // efficiently if you have one
   int64 textureId = 2;
 }
 
-message ImageBorderRadius {
-  double topLeft = 1;
-  double topRight = 2;
-  double bottomLeft = 3;
-  double bottomRight = 4;
-}

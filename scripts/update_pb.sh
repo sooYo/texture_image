@@ -2,9 +2,13 @@
 
 mkdir -p ../lib/src/proto/src
 chmod 777 ../lib/src/proto/src ../lib/src/proto ../lib/src/ ../lib
+rm -r ../lib/src/proto/src/*
 
 mkdir -p ../ios/Classes/Proto
 chmod 777 ../ios/Classes/Proto ../ios/Classes ../ios
+rm -r ../ios/Classes/Proto/*
+
+rm -r ../android/src/main/kotlin/com/texture_image/proto/*
 
 if [ -d "../protos" ]; then
   cd ../protos || (echo "Update failed: proto source dir not exists" && exit)

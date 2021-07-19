@@ -1,0 +1,33 @@
+syntax = "proto3";
+option java_package = "com.texture_image.proto";
+
+enum BoxFit {
+  fill = 0;
+  contain = 1;
+  cover = 2;
+  fitWidth = 3;
+  fitHeight = 4;
+}
+
+// Image task state
+enum TaskState {
+  initialized = 0; // Task is now ready to start
+  loading = 1;
+  completed = 2; // Task completed successfully
+  canceled = 3;
+  failed = 4 ;
+}
+
+message BorderRadius {
+  double topLeft = 1;
+  double topRight = 2;
+  double bottomLeft = 3;
+  double bottomRight = 4;
+}
+
+message Geometry {
+  int32 width = 1;
+  int32 height = 2;
+  BoxFit fit = 3;
+  BorderRadius borderRadius = 4;
+}

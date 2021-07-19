@@ -27,8 +27,8 @@
 
 CF_EXTERN_C_BEGIN
 
-@class ImageBorderRadius;
-GPB_ENUM_FWD_DECLARE(BoxFit);
+@class Geometry;
+GPB_ENUM_FWD_DECLARE(TaskState);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,28 +47,21 @@ NS_ASSUME_NONNULL_BEGIN
 GPB_FINAL @interface ImageInfoRoot : GPBRootObject
 @end
 
-#pragma mark - ImageRequestInfo
+#pragma mark - ImageFetchInfo
 
-typedef GPB_ENUM(ImageRequestInfo_FieldNumber) {
-  ImageRequestInfo_FieldNumber_URL = 1,
-  ImageRequestInfo_FieldNumber_Width = 2,
-  ImageRequestInfo_FieldNumber_Height = 3,
-  ImageRequestInfo_FieldNumber_ErrorPlaceholder = 4,
-  ImageRequestInfo_FieldNumber_Placeholder = 5,
-  ImageRequestInfo_FieldNumber_Fit = 6,
-  ImageRequestInfo_FieldNumber_BorderRadius = 7,
+typedef GPB_ENUM(ImageFetchInfo_FieldNumber) {
+  ImageFetchInfo_FieldNumber_URL = 1,
+  ImageFetchInfo_FieldNumber_ErrorPlaceholder = 2,
+  ImageFetchInfo_FieldNumber_Placeholder = 3,
+  ImageFetchInfo_FieldNumber_Geometry = 4,
 };
 
 /**
- * Send this info to native side when plugin wants to load an image
+ * Request to load an image
  **/
-GPB_FINAL @interface ImageRequestInfo : GPBMessage
+GPB_FINAL @interface ImageFetchInfo : GPBMessage
 
 @property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
-
-@property(nonatomic, readwrite) int32_t width;
-
-@property(nonatomic, readwrite) int32_t height;
 
 /** Image to be shown when loading failed, can be URL or local file path */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *errorPlaceholder;
@@ -76,64 +69,92 @@ GPB_FINAL @interface ImageRequestInfo : GPBMessage
 /** Can be URL or local file path */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *placeholder;
 
-/** Refer to [BoxFit] in enum.proto */
-@property(nonatomic, readwrite) enum BoxFit fit;
+/** Geometry info */
+@property(nonatomic, readwrite, strong, null_resettable) Geometry *geometry;
+/** Test to see if @c geometry has been set. */
+@property(nonatomic, readwrite) BOOL hasGeometry;
 
-/** Whether to make a rounded rect style or not */
-@property(nonatomic, readwrite, strong, null_resettable) ImageBorderRadius *borderRadius;
-/** Test to see if @c borderRadius has been set. */
-@property(nonatomic, readwrite) BOOL hasBorderRadius;
+@end
+
+#pragma mark - ImageFetchResultInfo
+
+typedef GPB_ENUM(ImageFetchResultInfo_FieldNumber) {
+  ImageFetchResultInfo_FieldNumber_Code = 1,
+  ImageFetchResultInfo_FieldNumber_TextureId = 2,
+  ImageFetchResultInfo_FieldNumber_Message = 3,
+  ImageFetchResultInfo_FieldNumber_URL = 4,
+  ImageFetchResultInfo_FieldNumber_State = 5,
+};
+
+/**
+ * An object to describe image request API invoking result
+ * Flutter side may use the [textureId] to rebuild its UI
+ * when receiving the result, but the target image may not
+ * be visible right now because it maybe downloading by now
+ * you can check [state] for relative task's newest status
+ **/
+GPB_FINAL @interface ImageFetchResultInfo : GPBMessage
+
+/**
+ * The result code of process, if this code's value is not 200
+ * then the [textureId] shall be invalid and error placeholder
+ * is supposed to be shown on this situation
+ **/
+@property(nonatomic, readwrite) int32_t code;
+
+/** Texture widget id for this image */
+@property(nonatomic, readwrite) int64_t textureId;
+
+/** Description for the result */
+@property(nonatomic, readwrite, copy, null_resettable) NSString *message;
+
+/** Requesting image's url */
+@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
+/** Relative image fetching task's current status */
+@property(nonatomic, readwrite) enum TaskState state;
 
 @end
 
 /**
- * Fetches the raw value of a @c ImageRequestInfo's @c fit property, even
+ * Fetches the raw value of a @c ImageFetchResultInfo's @c state property, even
  * if the value was not defined by the enum at the time the code was generated.
  **/
-int32_t ImageRequestInfo_Fit_RawValue(ImageRequestInfo *message);
+int32_t ImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message);
 /**
- * Sets the raw value of an @c ImageRequestInfo's @c fit property, allowing
+ * Sets the raw value of an @c ImageFetchResultInfo's @c state property, allowing
  * it to be set to a value that was not defined by the enum at the time the code
  * was generated.
  **/
-void SetImageRequestInfo_Fit_RawValue(ImageRequestInfo *message, int32_t value);
+void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32_t value);
 
-#pragma mark - ImageRequestCancelInfo
+#pragma mark - ImageFetchCancelInfo
 
-typedef GPB_ENUM(ImageRequestCancelInfo_FieldNumber) {
-  ImageRequestCancelInfo_FieldNumber_URL = 1,
-  ImageRequestCancelInfo_FieldNumber_TextureId = 2,
+typedef GPB_ENUM(ImageFetchCancelInfo_FieldNumber) {
+  ImageFetchCancelInfo_FieldNumber_URL = 1,
+  ImageFetchCancelInfo_FieldNumber_TextureId = 2,
 };
 
 /**
- * This info is sent when plugin wants to cancel an on going image loading task
+ * Request to cancel an ongoing loading task
  **/
-GPB_FINAL @interface ImageRequestCancelInfo : GPBMessage
+GPB_FINAL @interface ImageFetchCancelInfo : GPBMessage
 
+/**
+ * You have to provide this property then image loaders from
+ * native sides can guarantee that at least they can find origin
+ * task by url in a slower way. At some situation widgets gets
+ * disposed before start loading channel API replies a result,
+ * and thus widget cannot provide a correct texture id to cancel
+ * ongoing download task, then this property would help
+ **/
 @property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
 
+/**
+ * Given this property for loaders to search download task more
+ * efficiently if you have one
+ **/
 @property(nonatomic, readwrite) int64_t textureId;
-
-@end
-
-#pragma mark - ImageBorderRadius
-
-typedef GPB_ENUM(ImageBorderRadius_FieldNumber) {
-  ImageBorderRadius_FieldNumber_TopLeft = 1,
-  ImageBorderRadius_FieldNumber_TopRight = 2,
-  ImageBorderRadius_FieldNumber_BottomLeft = 3,
-  ImageBorderRadius_FieldNumber_BottomRight = 4,
-};
-
-GPB_FINAL @interface ImageBorderRadius : GPBMessage
-
-@property(nonatomic, readwrite) double topLeft;
-
-@property(nonatomic, readwrite) double topRight;
-
-@property(nonatomic, readwrite) double bottomLeft;
-
-@property(nonatomic, readwrite) double bottomRight;
 
 @end
 
