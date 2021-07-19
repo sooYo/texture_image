@@ -85,9 +85,9 @@ class ImageLoaderTask(
         val canvas = surface.lockCanvas(rect)
 
         val paint = Paint()
-        paint.isAntiAlias = true;
-        paint.isFilterBitmap = true;
-        paint.isDither = true;
+        paint.isAntiAlias = true
+        paint.isFilterBitmap = true
+        paint.isDither = true
 
         canvas.drawBitmap(result.bitmap, null, rect, paint)
         surface.unlockCanvasAndPost(canvas)
