@@ -15,7 +15,8 @@ enum TaskState {
   loading = 1;
   completed = 2; // Task completed successfully
   canceled = 3;
-  failed = 4 ;
+  failed = 4;
+  undefined = 5; // For initialization only
 }
 
 message BorderRadius {

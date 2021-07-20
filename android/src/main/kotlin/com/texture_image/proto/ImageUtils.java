@@ -186,6 +186,14 @@ public final class ImageUtils {
      * <code>failed = 4;</code>
      */
     failed(4),
+    /**
+     * <pre>
+     * For initialization only
+     * </pre>
+     *
+     * <code>undefined = 5;</code>
+     */
+    undefined(5),
     UNRECOGNIZED(-1),
     ;
 
@@ -217,6 +225,14 @@ public final class ImageUtils {
      * <code>failed = 4;</code>
      */
     public static final int failed_VALUE = 4;
+    /**
+     * <pre>
+     * For initialization only
+     * </pre>
+     *
+     * <code>undefined = 5;</code>
+     */
+    public static final int undefined_VALUE = 5;
 
 
     public final int getNumber() {
@@ -248,6 +264,7 @@ public final class ImageUtils {
         case 2: return completed;
         case 3: return canceled;
         case 4: return failed;
+        case 5: return undefined;
         default: return null;
       }
     }
@@ -1904,10 +1921,10 @@ public final class ImageUtils {
       "t\030\003 \001(\0162\007.BoxFit\022#\n\014borderRadius\030\004 \001(\0132\r" +
       ".BorderRadius*G\n\006BoxFit\022\010\n\004fill\020\000\022\013\n\007con" +
       "tain\020\001\022\t\n\005cover\020\002\022\014\n\010fitWidth\020\003\022\r\n\tfitHe" +
-      "ight\020\004*R\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007" +
+      "ight\020\004*a\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007" +
       "loading\020\001\022\r\n\tcompleted\020\002\022\014\n\010canceled\020\003\022\n" +
-      "\n\006failed\020\004B\031\n\027com.texture_image.protob\006p" +
-      "roto3"
+      "\n\006failed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture" +
+      "_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

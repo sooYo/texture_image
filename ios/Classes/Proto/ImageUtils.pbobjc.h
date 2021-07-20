@@ -73,6 +73,9 @@ typedef GPB_ENUM(TaskState) {
   TaskState_Completed = 2,
   TaskState_Canceled = 3,
   TaskState_Failed = 4,
+
+  /** For initialization only */
+  TaskState_Undefined = 5,
 };
 
 GPBEnumDescriptor *TaskState_EnumDescriptor(void);
