@@ -2,6 +2,7 @@ package com.texture_image
 
 import androidx.annotation.NonNull
 import com.texture_image.image_loader.ImageLoader
+import com.texture_image.utils.LogUtil
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
@@ -37,12 +38,15 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
         @NonNull result: Result
     ) {
         when (call.method) {
-            "getPlatformVersion" -> result.success("Android ${android.os.Build.VERSION.RELEASE}")
             "createImageTexture" -> _imageLoader?.createTextureImage(
                 call,
                 result
             )
-            "destroyImageTexture" -> _imageLoader?.disposeTextureImage(call, result)
+            "destroyImageTexture" -> _imageLoader?.disposeTextureImage(
+                call,
+                result
+            )
+            "enableLog" -> LogUtil.enableLog(call, result)
             else -> result.notImplemented()
         }
     }

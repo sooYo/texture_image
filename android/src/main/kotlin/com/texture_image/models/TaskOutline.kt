@@ -14,6 +14,13 @@ class TaskOutline(
     val entry: SurfaceTextureEntry? = null,
     val state: TaskState = TaskState.initialized
 ) {
+    companion object {
+        val undefined = TaskOutline(
+            imageUrl = "",
+            state = TaskState.undefined
+        )
+    }
+
     constructor(builder: TaskOutlineBuilder) : this(
         builder.imageUrl,
         builder.surface,
@@ -25,6 +32,7 @@ class TaskOutline(
 
     val id: Long get() = entry?.id() ?: -1
     val isCompleted: Boolean get() = state == TaskState.completed
+    val isInitialized: Boolean get() = state == TaskState.initialized
 
     val didStop: Boolean
         get() {

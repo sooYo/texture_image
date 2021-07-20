@@ -2,10 +2,8 @@ package com.texture_image.image_loader
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.annotation.NonNull
 import coil.request.Disposable
-import coil.request.ImageRequest
 import coil.util.CoilUtils
 import com.texture_image.constants.TaskMap
 import com.texture_image.constants.TaskOutlineCache
@@ -13,6 +11,7 @@ import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
+import com.texture_image.utils.LogUtil
 import com.texture_image.utils.ResultUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
@@ -22,9 +21,8 @@ import okhttp3.OkHttpClient
 class ImageLoader(
     private val context: Context,
     private val textureRegistry: TextureRegistry
-) : ImageRequestScheduler {
+) : LoaderTaskScheduler {
     companion object {
-        val TAG = ImageLoader::class.simpleName
         const val maxCacheSize: Int = 20
     }
 
@@ -43,9 +41,22 @@ class ImageLoader(
             .build()
     }
 
-    override fun schedule(request: ImageRequest): Disposable {
+    // region Task Scheduler
+    override fun schedule(task: ImageLoaderTask): Disposable? {
+        val request = task.outline.request ?: return null
         return loaderCore.enqueue(request)
     }
+
+    override fun onTaskStateUpdated(task: ImageLoaderTask) {
+        LogUtil.d("State updated: ${task.outline.id}: ${task.outline.state}")
+
+        if (task.outline.didStop) {
+            removeTaskFromMap(task).also { e -> cacheTaskIfPossible(e) }
+        } else if (task.outline.isInitialized) {
+            saveTaskToMap(task)
+        }
+    }
+    // endregion Task Scheduler
 
     // region Channel Handlers
     fun createTextureImage(@NonNull call: MethodCall, @NonNull result: Result) {
@@ -57,7 +68,7 @@ class ImageLoader(
         val imageInfo = try {
             ImageInfo.ImageFetchInfo.parseFrom(base64Data)
         } catch (e: Exception) {
-            Log.e(TAG, "createTextureImage: build ImageRequestInfo failed: $e")
+            LogUtil.e("createTextureImage: build ImageRequestInfo failed: $e")
             null
         }
 
@@ -91,7 +102,7 @@ class ImageLoader(
         val cancelInfo = try {
             ImageInfo.ImageFetchCancelInfo.parseFrom(base64Data)
         } catch (e: Exception) {
-            Log.e(TAG, "disposeTextureImage: build CancelInfo failed: $e")
+            LogUtil.e("disposeTextureImage: build CancelInfo failed: $e")
             null
         }
 
@@ -125,7 +136,7 @@ class ImageLoader(
             entry
         ).scheduleWith(this)
 
-        return task.joinTaskMap(taskMap)
+        return task.outline
     }
 
     private fun destroyImage(textureId: Long, url: String): TaskOutline? {
@@ -139,9 +150,7 @@ class ImageLoader(
             null
         }
 
-        val outline = task?.cancel()
-        cacheTaskIfPossible(outline)
-        return outline
+        return task?.cancel()
     }
 
     // endregion Core Methods
@@ -166,13 +175,7 @@ class ImageLoader(
     }
 
     private fun cacheTaskIfPossible(taskOutline: TaskOutline?): Boolean {
-        if (taskOutline == null) {
-            return false
-        }
-
-        taskMap.remove(taskOutline.id)
-
-        if (!taskOutline.isCompleted) {
+        if (taskOutline == null || !taskOutline.isCompleted) {
             return false
         }
 
@@ -184,6 +187,8 @@ class ImageLoader(
             val evict = outlineCache.removeFirst()
             evict.release()
         }
+
+        LogUtil.d("cacheTaskIfPossible: ${taskOutline.id}")
 
         outlineCache.addLast(taskOutline)
         return true
@@ -201,8 +206,31 @@ class ImageLoader(
         }
 
         val outlineMap = taskMap.values.map { e -> e.outline }
-        val result = find(outlineMap) ?: find(outlineCache)
-        return result
+        return (find(outlineMap) ?: find(outlineCache)).also { e ->
+            LogUtil.d("findReusableTask: ${e?.id}")
+        }
+    }
+
+    private fun saveTaskToMap(task: ImageLoaderTask): TaskOutline {
+        LogUtil.d("saveTaskToMap: ${task.outline.id}")
+
+        val taskId = task.outline.id
+        if (taskId >= 0) {
+            taskMap[taskId] = task
+        }
+
+        return task.outline
+    }
+
+    private fun removeTaskFromMap(task: ImageLoaderTask?): TaskOutline? {
+        if (task == null) {
+            return null
+        }
+
+        LogUtil.d("removeTaskFromMap: ${task.outline.id}")
+
+        taskMap.remove(task.outline.id)
+        return task.outline
     }
     // endregion Helper Methods
 }
