@@ -9,11 +9,13 @@ import android.view.Surface
 import coil.request.ImageRequest
 import coil.size.PixelSize
 import coil.target.Target
+import coil.transform.Transformation
 import com.texture_image.constants.SurfaceTextureEntry
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.models.TaskOutlineBuilder
 import com.texture_image.proto.ImageUtils
+import com.texture_image.utils.parseCoilShapeTransform
 import kotlin.properties.Delegates
 
 class ImageLoaderTask(
@@ -38,6 +40,13 @@ class ImageLoaderTask(
     fun scheduleWith(scheduler: LoaderTaskScheduler): ImageLoaderTask {
         this.scheduler = scheduler
 
+        // Collect transformations as much as possible
+        val transform = ArrayList<Transformation>()
+        val shapeTransform = geometry.parseCoilShapeTransform()
+        if (shapeTransform != null) {
+            transform.add(shapeTransform)
+        }
+
         val request = ImageRequest
             .Builder(context)
             .target(this)
@@ -46,6 +55,7 @@ class ImageLoaderTask(
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
+            .transformations(transform)
             .build()
 
         mOutline = TaskOutlineBuilder()
