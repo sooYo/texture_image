@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/services.dart';
@@ -17,17 +16,13 @@ class TextureImagePlugin {
     String url, {
     required double width,
     required double height,
+    BoxFit fit = BoxFit.contain,
   }) async {
     final geometry = Geometry()
       ..width = width.toInt()
       ..height = height.toInt()
-      ..fit = BoxFit.contain
-      ..borderRadius = BorderRadius(
-        topLeft: 10,
-        topRight: 10,
-        bottomLeft: 10,
-        bottomRight: 10,
-      );
+      ..fit = fit
+      ..borderRadius = BorderRadius();
 
     final imageInfo = ImageFetchInfo()
       ..url = url

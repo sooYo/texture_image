@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:texture_image/texture_image.dart';
+import 'package:texture_image/texture_image.dart' as $ti;
 
 void main() {
   runApp(MyApp());
@@ -12,6 +13,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final _images = <String>[
+    'https://chingflowers.com.tw/wp-content/uploads/2020/10/AF4C4483-87A8-407F-B71D-3009CDEF6EF2.jpeg',
     'https://wallpapercave.com/wp/Rwl8nSj.jpg',
     'https://www.swellnet.com/sites/default/files/inline-images/img_0490-2.jpg',
     'https://cdn.wallpapersafari.com/58/43/z2Ixq3.jpg',
@@ -26,6 +28,8 @@ class _MyAppState extends State<MyApp> {
     'https://wallpapercrafter.com/desktop/206459-aerial-drone-shot-of-red-deserts-of-oljato-monumen.jpg',
   ];
 
+  final useTextureImage = true;
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -33,17 +37,45 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: ListView.builder(
+        // body: ListView.builder(
+        //   itemCount: _images.length,
+        //   itemBuilder: (context, index) {
+        //     return useTextureImage
+        //         ? TextureImage(
+        //             _images[index],
+        //             width: 375,
+        //             height: 180,
+        //             fit: BoxFit.cover,
+        //           )
+        //         : CachedNetworkImage(
+        //             imageUrl: _images[index],
+        //             height: 180,
+        //           );
+        //   },
+        // ),
+        body: GridView.builder(
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+          ),
           itemCount: _images.length,
           itemBuilder: (context, index) {
-            // return CachedNetworkImage(
-            //   imageUrl: _images[index],
-            //   height: 180,
-            // );
-            return TextureImage(
-              _images[index],
-              width: 375,
-              height: 180,
+            return LayoutBuilder(
+              builder: (context, constraint) {
+                return useTextureImage
+                    ? $ti.TextureImage(
+                        _images[index],
+                        width: constraint.maxWidth,
+                        height: constraint.maxHeight,
+                        fit: $ti.BoxFit.cover,
+                      )
+                    : CachedNetworkImage(
+                        imageUrl: _images[index],
+                        height: constraint.maxHeight,
+                        fit: BoxFit.contain,
+                        memCacheWidth: constraint.maxWidth.toInt(),
+                        memCacheHeight: constraint.maxHeight.toInt(),
+                      );
+              },
             );
           },
         ),

@@ -2,6 +2,8 @@ package com.texture_image.image_loader
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -15,7 +17,8 @@ import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.models.TaskOutlineBuilder
 import com.texture_image.proto.ImageUtils
-import com.texture_image.utils.parseCoilShapeTransform
+import com.texture_image.proto.ImageUtils.BoxFit.*
+import com.texture_image.utils.*
 import kotlin.properties.Delegates
 
 class ImageLoaderTask(
@@ -109,15 +112,24 @@ class ImageLoaderTask(
             return
         }
 
-        val rect = Rect(0, 0, geometry.width, geometry.height)
-        val surfaceTexture = textureEntry.surfaceTexture()
+        val width = geometry.width
+        val height = geometry.height
+        val bitmap = result.bitmap
 
-        surfaceTexture.setDefaultBufferSize(rect.width(), rect.height())
-        val surface = Surface(surfaceTexture)
-        val canvas = surface.lockCanvas(rect)
+        val surface = textureEntry.surfaceTexture().apply {
+            setDefaultBufferSize(width, height)
+        }.let { Surface(it) }
 
-        canvas.drawBitmap(result.bitmap, null, rect, null)
-        surface.unlockCanvasAndPost(canvas)
+        Rect(0, 0, width, height).let { surface.lockCanvas(it) }.apply {
+            drawBitmap(
+                bitmap,
+                null,
+                canvasTargetRect(bitmap, geometry),
+                Paint(Paint.FILTER_BITMAP_FLAG)
+            )
+
+            surface.unlockCanvasAndPost(this)
+        }
 
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
@@ -132,5 +144,39 @@ class ImageLoaderTask(
             .setState(ImageUtils.TaskState.loading)
             .build()
     }
-    // endRegion Coil Target
+    // endregion Coil Target
+
+    private fun scaleBitmap(
+        bitmap: Bitmap,
+        geometry: ImageUtils.Geometry
+    ): Bitmap {
+        val width = geometry.width
+        val height = geometry.height
+
+        return when (geometry.fit) {
+            fitHeight -> bitmap.boxFitFitHeight(height)
+            fitWidth -> bitmap.boxFitFitWidth(width)
+            cover -> bitmap.boxFitCover(width, height)
+            contain -> bitmap.boxFitContains(width, height)
+            fill -> bitmap.boxFitFill(width, height)
+            else -> bitmap
+        }
+    }
+
+    private fun canvasTargetRect(
+        bitmap: Bitmap,
+        geometry: ImageUtils.Geometry
+    ): Rect {
+        val width = geometry.width
+        val height = geometry.height
+
+        return when (geometry.fit) {
+            fitHeight -> bitmap.rectBoxFitHeight(width, height)
+            fitWidth -> bitmap.rectBoxFitWidth(width, height)
+            cover -> bitmap.rectBoxFitCover(width, height)
+            contain -> bitmap.rectBoxFitContains(width, height)
+            fill -> bitmap.rectBoxFitFill(width, height)
+            else -> Rect(0, 0, bitmap.width, bitmap.height)
+        }
+    }
 }

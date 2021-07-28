@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  cached_network_image: ^3.1.0
   texture_image:
     # When depending on this package from a real application you should use:
     #   texture_image: ^x.y.z

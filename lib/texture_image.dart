@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide BoxFit;
+import 'package:texture_image/src/proto/pb_header.dart';
 import 'package:texture_image/texture_image_plugin.dart';
+
+export 'package:texture_image/src/proto/pb_header.dart';
 
 class TextureImage extends StatefulWidget {
   TextureImage(
@@ -7,12 +10,13 @@ class TextureImage extends StatefulWidget {
     required this.width,
     required this.height,
     this.placeholder,
+    this.fit = BoxFit.contain,
   });
 
   final String url;
   final double width;
   final double height;
-
+  final BoxFit fit;
   final Widget? placeholder;
 
   @override
@@ -52,6 +56,7 @@ class _ImageState extends State<TextureImage> {
       widget.url,
       width: widget.width,
       height: widget.height,
+      fit: widget.fit,
     );
 
     if (!mounted) {
