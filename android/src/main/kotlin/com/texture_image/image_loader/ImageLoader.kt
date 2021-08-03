@@ -35,7 +35,6 @@ class ImageLoader(
 
         coil.ImageLoader.Builder(context)
             .crossfade(true)
-            .availableMemoryPercentage(0.25)
             .bitmapConfig(Bitmap.Config.ARGB_8888)
             .okHttpClient(httpClient)
             .build()
@@ -50,9 +49,13 @@ class ImageLoader(
     override fun onTaskStateUpdated(task: ImageLoaderTask) {
         LogUtil.d("State updated: ${task.outline.id}: ${task.outline.state}")
 
-        if (task.outline.didStop) {
-            removeTaskFromMap(task).also { e -> cacheTaskIfPossible(e) }
-        } else if (task.outline.isInitialized) {
+//        if (task.outline.didStop) {
+//            removeTaskFromMap(task).also { cacheTaskIfPossible(it) }
+//        } else if (task.outline.isInitialized) {
+//            saveTaskToMap(task)
+//        }
+
+        if (task.outline.isInitialized) {
             saveTaskToMap(task)
         }
     }
@@ -82,12 +85,9 @@ class ImageLoader(
             return
         }
 
-        val taskOutline = findReusableTask(imageInfo) ?: loadImage(
-            imageInfo.url,
-            imageInfo.geometry
-        )
-
-        result.success(ResultUtils.success(taskOutline))
+        loadImage(imageInfo.url, imageInfo.geometry).also {
+            result.success(ResultUtils.success(it))
+        }
     }
 
     fun disposeTextureImage(
@@ -116,8 +116,9 @@ class ImageLoader(
             return
         }
 
-        val outline = destroyImage(cancelInfo.textureId, cancelInfo.url)
-        result.success(ResultUtils.success(outline))
+        destroyImage(cancelInfo.textureId, cancelInfo.url).also {
+            result.success(ResultUtils.success(it))
+        }
     }
     // endregion Channel Handlers
 
@@ -144,13 +145,14 @@ class ImageLoader(
             if (textureId >= 0) {
                 taskMap[textureId]
             } else {
-                taskMap.values.first { e -> e.outline.imageUrl == url }
+                taskMap.values.first { it.outline.imageUrl == url }
             }
         } catch (e: Exception) {
             null
         }
 
-        return task?.cancel()
+        task?.dispose()
+        return removeTaskFromMap(task)
     }
 
     // endregion Core Methods
@@ -197,17 +199,17 @@ class ImageLoader(
     private fun findReusableTask(imageInfo: ImageInfo.ImageFetchInfo): TaskOutline? {
         val find = { list: Collection<TaskOutline> ->
             try {
-                list.first { e ->
-                    e.imageUrl == imageInfo.url && (e.isReusable || e.isCompleted)
+                list.first {
+                    it.imageUrl == imageInfo.url && it.isCompleted
                 }
             } catch (e: Exception) {
                 null
             }
         }
 
-        val outlineMap = taskMap.values.map { e -> e.outline }
-        return (find(outlineMap) ?: find(outlineCache)).also { e ->
-            LogUtil.d("findReusableTask: ${e?.id}")
+        val outlineMap = taskMap.values.map { it.outline }
+        return (find(outlineMap) ?: find(outlineCache)).also {
+            LogUtil.d("findReusableTask: ${it?.id}")
         }
     }
 

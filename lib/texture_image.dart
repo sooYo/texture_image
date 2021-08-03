@@ -40,9 +40,14 @@ class _ImageState extends State<TextureImage> {
 
   @override
   Widget build(BuildContext context) {
-    final content = _textureId != null
+    final content = _textureId != null && _textureId! >= 0
         ? Texture(textureId: _textureId!)
-        : (widget.placeholder ?? Container(color: Colors.grey));
+        : (widget.placeholder ??
+            Container(
+              color: Colors.grey,
+              height: widget.height,
+              width: widget.width,
+            ));
 
     return Container(
       width: widget.width,

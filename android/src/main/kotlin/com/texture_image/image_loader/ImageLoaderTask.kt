@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Paint
+import android.graphics.PaintFlagsDrawFilter
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
@@ -79,20 +80,15 @@ class ImageLoaderTask(
         return this
     }
 
-    fun cancel(): TaskOutline {
-        if (mOutline.didStop) {
-            return mOutline
-        }
-
-        if (!mOutline.isCompleted) {
-            mOutline.surface?.release()
-            mOutline.entry?.release()
-        }
-
-        mOutline.cancelToken?.dispose()
+    fun dispose(): TaskOutline {
+        mOutline.release()
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
-            .setState(ImageUtils.TaskState.canceled)
+            .setTexture(null)
+            .setEntry(null)
+            .setSurface(null)
+            .setCancelToken(null)
+            .setState(ImageUtils.TaskState.disposed)
             .build()
 
         return mOutline
@@ -100,40 +96,57 @@ class ImageLoaderTask(
 
     // region Coil Target
     override fun onError(error: Drawable?) {
+        LogUtil.d("OnError: ${outline.imageUrl}")
+
+        mOutline.release()
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
+            .setTexture(null)
+            .setEntry(null)
+            .setSurface(null)
+            .setCancelToken(null)
             .setState(ImageUtils.TaskState.failed)
             .build()
     }
 
     @SuppressLint("Recycle")
     override fun onSuccess(result: Drawable) {
+        LogUtil.d("onSuccess: ${outline.imageUrl}")
+
         if (result !is BitmapDrawable) {
             return
         }
 
         val width = geometry.width
         val height = geometry.height
-        val bitmap = result.bitmap
+        val bitmap = result.bitmap.copy(Bitmap.Config.ARGB_8888, true)
 
-        val surface = textureEntry.surfaceTexture().apply {
+        val texture = textureEntry.surfaceTexture()
+        val surface = texture.apply {
             setDefaultBufferSize(width, height)
         }.let { Surface(it) }
 
-        Rect(0, 0, width, height).let { surface.lockCanvas(it) }.apply {
+        Rect(0, 0, 0, 0).let { surface.lockCanvas(it) }.apply {
+            drawFilter = PaintFlagsDrawFilter(
+                0,
+                Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
+            )
+
             drawBitmap(
                 bitmap,
                 null,
                 canvasTargetRect(bitmap, geometry),
-                Paint(Paint.FILTER_BITMAP_FLAG)
+                null
             )
 
             surface.unlockCanvasAndPost(this)
+            bitmap.recycle()
         }
 
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
             .setSurface(surface)
+            .setTexture(texture)
             .setState(ImageUtils.TaskState.completed)
             .build()
     }
@@ -146,6 +159,7 @@ class ImageLoaderTask(
     }
     // endregion Coil Target
 
+    @Suppress("unused")
     private fun scaleBitmap(
         bitmap: Bitmap,
         geometry: ImageUtils.Geometry

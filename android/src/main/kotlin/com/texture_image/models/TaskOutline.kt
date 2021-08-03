@@ -1,5 +1,6 @@
 package com.texture_image.models
 
+import android.graphics.SurfaceTexture
 import android.view.Surface
 import coil.request.Disposable
 import coil.request.ImageRequest
@@ -12,6 +13,7 @@ class TaskOutline(
     val request: ImageRequest? = null,
     val cancelToken: Disposable? = null,
     val entry: SurfaceTextureEntry? = null,
+    val texture: SurfaceTexture? = null,
     val state: TaskState = TaskState.initialized
 ) {
     companion object {
@@ -27,42 +29,32 @@ class TaskOutline(
         builder.request,
         builder.cancelToken,
         builder.entry,
+        builder.texture,
         builder.state,
     )
 
     val id: Long get() = entry?.id() ?: -1
+    val isLoading: Boolean get() = state == TaskState.loading
     val isCompleted: Boolean get() = state == TaskState.completed
     val isInitialized: Boolean get() = state == TaskState.initialized
-
-    val didStop: Boolean
-        get() {
-            return state == TaskState.canceled ||
-                    state == TaskState.completed ||
-                    state == TaskState.failed
-        }
-
-    val isReusable: Boolean
-        get() {
-            return entry != null &&
-                    surface != null &&
-                    state != TaskState.failed &&
-                    state != TaskState.canceled
-        }
 
     fun release() {
         surface?.release()
         entry?.release()
         cancelToken?.dispose()
+        texture?.release()
     }
 }
 
 class TaskOutlineBuilder {
     lateinit var imageUrl: String
     var request: ImageRequest? = null
-    var entry: SurfaceTextureEntry? = null
     var cancelToken: Disposable? = null
-    var surface: Surface? = null
     var state: TaskState = TaskState.initialized
+
+    var entry: SurfaceTextureEntry? = null
+    var texture: SurfaceTexture? = null
+    var surface: Surface? = null
 
     fun clone(outline: TaskOutline?): TaskOutlineBuilder {
         if (outline != null) {
@@ -72,6 +64,7 @@ class TaskOutlineBuilder {
             cancelToken = outline.cancelToken
             surface = outline.surface
             state = outline.state
+            texture = outline.texture
         }
 
         return this
@@ -104,6 +97,11 @@ class TaskOutlineBuilder {
 
     fun setState(state: TaskState): TaskOutlineBuilder {
         this.state = state
+        return this
+    }
+
+    fun setTexture(texture: SurfaceTexture?): TaskOutlineBuilder {
+        this.texture = texture
         return this
     }
 
