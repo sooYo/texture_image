@@ -1225,6 +1225,644 @@ public final class ImageInfo {
 
   }
 
+  public interface ResultInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ResultInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    int getCode();
+
+    /**
+     * <code>string message = 2;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+  }
+  /**
+   * Protobuf type {@code ResultInfo}
+   */
+  public static final class ResultInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ResultInfo)
+      ResultInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ResultInfo.newBuilder() to construct.
+    private ResultInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResultInfo() {
+      message_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ResultInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ResultInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              code_ = input.readInt32();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    @java.lang.Override
+    public int getCode() {
+      return code_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 2;
+    private volatile java.lang.Object message_;
+    /**
+     * <code>string message = 2;</code>
+     * @return The message.
+     */
+    @java.lang.Override
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string message = 2;</code>
+     * @return The bytes for message.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != 0) {
+        output.writeInt32(1, code_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, code_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ResultInfo)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ResultInfo other = (com.texture_image.proto.ImageInfo.ResultInfo) obj;
+
+      if (getCode()
+          != other.getCode()) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getCode();
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ResultInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * Protobuf type {@code ResultInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ResultInfo)
+        com.texture_image.proto.ImageInfo.ResultInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ResultInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        message_ = "";
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo build() {
+        com.texture_image.proto.ImageInfo.ResultInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ResultInfo result = new com.texture_image.proto.ImageInfo.ResultInfo(this);
+        result.code_ = code_;
+        result.message_ = message_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ResultInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ResultInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ResultInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance()) return this;
+        if (other.getCode() != 0) {
+          setCode(other.getCode());
+        }
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ResultInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ResultInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ ;
+      /**
+       * <code>int32 code = 1;</code>
+       * @return The code.
+       */
+      @java.lang.Override
+      public int getCode() {
+        return code_;
+      }
+      /**
+       * <code>int32 code = 1;</code>
+       * @param value The code to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCode(int value) {
+        
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 code = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <code>string message = 2;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string message = 2;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string message = 2;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string message = 2;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ResultInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ResultInfo)
+    private static final com.texture_image.proto.ImageInfo.ResultInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ResultInfo();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResultInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ResultInfo>() {
+      @java.lang.Override
+      public ResultInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ResultInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResultInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResultInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface ImageFetchResultInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ImageFetchResultInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -2365,8 +3003,8 @@ public final class ImageInfo {
 
   }
 
-  public interface ImageFetchCancelInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ImageFetchCancelInfo)
+  public interface ImageDisposeInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageDisposeInfo)
       com.google.protobuf.MessageOrBuilder {
 
     /**
@@ -2415,18 +3053,18 @@ public final class ImageInfo {
    * Request to cancel an ongoing loading task
    * </pre>
    *
-   * Protobuf type {@code ImageFetchCancelInfo}
+   * Protobuf type {@code ImageDisposeInfo}
    */
-  public static final class ImageFetchCancelInfo extends
+  public static final class ImageDisposeInfo extends
       com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ImageFetchCancelInfo)
-      ImageFetchCancelInfoOrBuilder {
+      // @@protoc_insertion_point(message_implements:ImageDisposeInfo)
+      ImageDisposeInfoOrBuilder {
   private static final long serialVersionUID = 0L;
-    // Use ImageFetchCancelInfo.newBuilder() to construct.
-    private ImageFetchCancelInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+    // Use ImageDisposeInfo.newBuilder() to construct.
+    private ImageDisposeInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
       super(builder);
     }
-    private ImageFetchCancelInfo() {
+    private ImageDisposeInfo() {
       url_ = "";
     }
 
@@ -2434,7 +3072,7 @@ public final class ImageInfo {
     @SuppressWarnings({"unused"})
     protected java.lang.Object newInstance(
         UnusedPrivateParameter unused) {
-      return new ImageFetchCancelInfo();
+      return new ImageDisposeInfo();
     }
 
     @java.lang.Override
@@ -2442,7 +3080,7 @@ public final class ImageInfo {
     getUnknownFields() {
       return this.unknownFields;
     }
-    private ImageFetchCancelInfo(
+    private ImageDisposeInfo(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2492,15 +3130,15 @@ public final class ImageInfo {
     }
     public static final com.google.protobuf.Descriptors.Descriptor
         getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
+      return com.texture_image.proto.ImageInfo.internal_static_ImageDisposeInfo_descriptor;
     }
 
     @java.lang.Override
     protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
         internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_fieldAccessorTable
+      return com.texture_image.proto.ImageInfo.internal_static_ImageDisposeInfo_fieldAccessorTable
           .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.class, com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.Builder.class);
+              com.texture_image.proto.ImageInfo.ImageDisposeInfo.class, com.texture_image.proto.ImageInfo.ImageDisposeInfo.Builder.class);
     }
 
     public static final int URL_FIELD_NUMBER = 1;
@@ -2621,10 +3259,10 @@ public final class ImageInfo {
       if (obj == this) {
        return true;
       }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageFetchCancelInfo)) {
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageDisposeInfo)) {
         return super.equals(obj);
       }
-      com.texture_image.proto.ImageInfo.ImageFetchCancelInfo other = (com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) obj;
+      com.texture_image.proto.ImageInfo.ImageDisposeInfo other = (com.texture_image.proto.ImageInfo.ImageDisposeInfo) obj;
 
       if (!getUrl()
           .equals(other.getUrl())) return false;
@@ -2651,69 +3289,69 @@ public final class ImageInfo {
       return hash;
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         java.nio.ByteBuffer data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         java.nio.ByteBuffer data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         com.google.protobuf.ByteString data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         com.google.protobuf.ByteString data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(byte[] data)
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(byte[] data)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         byte[] data,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
       return PARSER.parseFrom(data, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseDelimitedFrom(java.io.InputStream input)
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseDelimitedFrom(java.io.InputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseDelimitedFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseDelimitedFrom(
         java.io.InputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         com.google.protobuf.CodedInputStream input)
         throws java.io.IOException {
       return com.google.protobuf.GeneratedMessageV3
           .parseWithIOException(PARSER, input);
     }
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parseFrom(
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo parseFrom(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws java.io.IOException {
@@ -2726,7 +3364,7 @@ public final class ImageInfo {
     public static Builder newBuilder() {
       return DEFAULT_INSTANCE.toBuilder();
     }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageFetchCancelInfo prototype) {
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageDisposeInfo prototype) {
       return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
     }
     @java.lang.Override
@@ -2746,26 +3384,26 @@ public final class ImageInfo {
      * Request to cancel an ongoing loading task
      * </pre>
      *
-     * Protobuf type {@code ImageFetchCancelInfo}
+     * Protobuf type {@code ImageDisposeInfo}
      */
     public static final class Builder extends
         com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ImageFetchCancelInfo)
-        com.texture_image.proto.ImageInfo.ImageFetchCancelInfoOrBuilder {
+        // @@protoc_insertion_point(builder_implements:ImageDisposeInfo)
+        com.texture_image.proto.ImageInfo.ImageDisposeInfoOrBuilder {
       public static final com.google.protobuf.Descriptors.Descriptor
           getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageDisposeInfo_descriptor;
       }
 
       @java.lang.Override
       protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
           internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_fieldAccessorTable
+        return com.texture_image.proto.ImageInfo.internal_static_ImageDisposeInfo_fieldAccessorTable
             .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.class, com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.Builder.class);
+                com.texture_image.proto.ImageInfo.ImageDisposeInfo.class, com.texture_image.proto.ImageInfo.ImageDisposeInfo.Builder.class);
       }
 
-      // Construct using com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.newBuilder()
+      // Construct using com.texture_image.proto.ImageInfo.ImageDisposeInfo.newBuilder()
       private Builder() {
         maybeForceBuilderInitialization();
       }
@@ -2793,17 +3431,17 @@ public final class ImageInfo {
       @java.lang.Override
       public com.google.protobuf.Descriptors.Descriptor
           getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchCancelInfo_descriptor;
+        return com.texture_image.proto.ImageInfo.internal_static_ImageDisposeInfo_descriptor;
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.getDefaultInstance();
+      public com.texture_image.proto.ImageInfo.ImageDisposeInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageDisposeInfo.getDefaultInstance();
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo build() {
-        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo result = buildPartial();
+      public com.texture_image.proto.ImageInfo.ImageDisposeInfo build() {
+        com.texture_image.proto.ImageInfo.ImageDisposeInfo result = buildPartial();
         if (!result.isInitialized()) {
           throw newUninitializedMessageException(result);
         }
@@ -2811,8 +3449,8 @@ public final class ImageInfo {
       }
 
       @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo result = new com.texture_image.proto.ImageInfo.ImageFetchCancelInfo(this);
+      public com.texture_image.proto.ImageInfo.ImageDisposeInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageDisposeInfo result = new com.texture_image.proto.ImageInfo.ImageDisposeInfo(this);
         result.url_ = url_;
         result.textureId_ = textureId_;
         onBuilt();
@@ -2853,16 +3491,16 @@ public final class ImageInfo {
       }
       @java.lang.Override
       public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ImageFetchCancelInfo)other);
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageDisposeInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageDisposeInfo)other);
         } else {
           super.mergeFrom(other);
           return this;
         }
       }
 
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageFetchCancelInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.ImageFetchCancelInfo.getDefaultInstance()) return this;
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageDisposeInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageDisposeInfo.getDefaultInstance()) return this;
         if (!other.getUrl().isEmpty()) {
           url_ = other.url_;
           onChanged();
@@ -2885,11 +3523,11 @@ public final class ImageInfo {
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ImageFetchCancelInfo parsedMessage = null;
+        com.texture_image.proto.ImageInfo.ImageDisposeInfo parsedMessage = null;
         try {
           parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
         } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ImageFetchCancelInfo) e.getUnfinishedMessage();
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageDisposeInfo) e.getUnfinishedMessage();
           throw e.unwrapIOException();
         } finally {
           if (parsedMessage != null) {
@@ -3078,41 +3716,1195 @@ public final class ImageInfo {
       }
 
 
-      // @@protoc_insertion_point(builder_scope:ImageFetchCancelInfo)
+      // @@protoc_insertion_point(builder_scope:ImageDisposeInfo)
     }
 
-    // @@protoc_insertion_point(class_scope:ImageFetchCancelInfo)
-    private static final com.texture_image.proto.ImageInfo.ImageFetchCancelInfo DEFAULT_INSTANCE;
+    // @@protoc_insertion_point(class_scope:ImageDisposeInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageDisposeInfo DEFAULT_INSTANCE;
     static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageFetchCancelInfo();
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageDisposeInfo();
     }
 
-    public static com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstance() {
+    public static com.texture_image.proto.ImageInfo.ImageDisposeInfo getDefaultInstance() {
       return DEFAULT_INSTANCE;
     }
 
-    private static final com.google.protobuf.Parser<ImageFetchCancelInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ImageFetchCancelInfo>() {
+    private static final com.google.protobuf.Parser<ImageDisposeInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageDisposeInfo>() {
       @java.lang.Override
-      public ImageFetchCancelInfo parsePartialFrom(
+      public ImageDisposeInfo parsePartialFrom(
           com.google.protobuf.CodedInputStream input,
           com.google.protobuf.ExtensionRegistryLite extensionRegistry)
           throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ImageFetchCancelInfo(input, extensionRegistry);
+        return new ImageDisposeInfo(input, extensionRegistry);
       }
     };
 
-    public static com.google.protobuf.Parser<ImageFetchCancelInfo> parser() {
+    public static com.google.protobuf.Parser<ImageDisposeInfo> parser() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.google.protobuf.Parser<ImageFetchCancelInfo> getParserForType() {
+    public com.google.protobuf.Parser<ImageDisposeInfo> getParserForType() {
       return PARSER;
     }
 
     @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageFetchCancelInfo getDefaultInstanceForType() {
+    public com.texture_image.proto.ImageInfo.ImageDisposeInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface ImageConfigInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ImageConfigInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Placeholder that's used globally. If [ImageFetchInfo] does not
+     * explicitly assign a path to `placeholder` property, then this
+     * path will be used as the default placeholder when network task
+     * still at a pending state
+     * </pre>
+     *
+     * <code>string placeholder = 1;</code>
+     * @return The placeholder.
+     */
+    java.lang.String getPlaceholder();
+    /**
+     * <pre>
+     * Placeholder that's used globally. If [ImageFetchInfo] does not
+     * explicitly assign a path to `placeholder` property, then this
+     * path will be used as the default placeholder when network task
+     * still at a pending state
+     * </pre>
+     *
+     * <code>string placeholder = 1;</code>
+     * @return The bytes for placeholder.
+     */
+    com.google.protobuf.ByteString
+        getPlaceholderBytes();
+
+    /**
+     * <pre>
+     * Same as `placeholder` above, except that this one only comes into
+     * view when the network task encounters error
+     * </pre>
+     *
+     * <code>string errorPlaceholder = 2;</code>
+     * @return The errorPlaceholder.
+     */
+    java.lang.String getErrorPlaceholder();
+    /**
+     * <pre>
+     * Same as `placeholder` above, except that this one only comes into
+     * view when the network task encounters error
+     * </pre>
+     *
+     * <code>string errorPlaceholder = 2;</code>
+     * @return The bytes for errorPlaceholder.
+     */
+    com.google.protobuf.ByteString
+        getErrorPlaceholderBytes();
+
+    /**
+     * <pre>
+     * Sets the default background color of all texture image widget, once
+     * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+     * the widget will display this color when it's loading or it encounters
+     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * </pre>
+     *
+     * <code>string backgroundColor = 3;</code>
+     * @return The backgroundColor.
+     */
+    java.lang.String getBackgroundColor();
+    /**
+     * <pre>
+     * Sets the default background color of all texture image widget, once
+     * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+     * the widget will display this color when it's loading or it encounters
+     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * </pre>
+     *
+     * <code>string backgroundColor = 3;</code>
+     * @return The bytes for backgroundColor.
+     */
+    com.google.protobuf.ByteString
+        getBackgroundColorBytes();
+
+    /**
+     * <pre>
+     * Percentage of available memory to devote to the loader cache and
+     * bitmap pool, this config item only makes sense on Android platform.
+     * Range from 0.0, which means `disable`, to 1.0, which means `use
+     * when it's possible`. Default value is 0.2
+     * </pre>
+     *
+     * <code>float androidAvailableMemoryPercentage = 4;</code>
+     * @return The androidAvailableMemoryPercentage.
+     */
+    float getAndroidAvailableMemoryPercentage();
+  }
+  /**
+   * <pre>
+   * Global config of ImageLoader
+   * </pre>
+   *
+   * Protobuf type {@code ImageConfigInfo}
+   */
+  public static final class ImageConfigInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ImageConfigInfo)
+      ImageConfigInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ImageConfigInfo.newBuilder() to construct.
+    private ImageConfigInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ImageConfigInfo() {
+      placeholder_ = "";
+      errorPlaceholder_ = "";
+      backgroundColor_ = "";
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ImageConfigInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ImageConfigInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 10: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              placeholder_ = s;
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              errorPlaceholder_ = s;
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              backgroundColor_ = s;
+              break;
+            }
+            case 37: {
+
+              androidAvailableMemoryPercentage_ = input.readFloat();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageConfigInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ImageConfigInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ImageConfigInfo.class, com.texture_image.proto.ImageInfo.ImageConfigInfo.Builder.class);
+    }
+
+    public static final int PLACEHOLDER_FIELD_NUMBER = 1;
+    private volatile java.lang.Object placeholder_;
+    /**
+     * <pre>
+     * Placeholder that's used globally. If [ImageFetchInfo] does not
+     * explicitly assign a path to `placeholder` property, then this
+     * path will be used as the default placeholder when network task
+     * still at a pending state
+     * </pre>
+     *
+     * <code>string placeholder = 1;</code>
+     * @return The placeholder.
+     */
+    @java.lang.Override
+    public java.lang.String getPlaceholder() {
+      java.lang.Object ref = placeholder_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        placeholder_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Placeholder that's used globally. If [ImageFetchInfo] does not
+     * explicitly assign a path to `placeholder` property, then this
+     * path will be used as the default placeholder when network task
+     * still at a pending state
+     * </pre>
+     *
+     * <code>string placeholder = 1;</code>
+     * @return The bytes for placeholder.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getPlaceholderBytes() {
+      java.lang.Object ref = placeholder_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        placeholder_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ERRORPLACEHOLDER_FIELD_NUMBER = 2;
+    private volatile java.lang.Object errorPlaceholder_;
+    /**
+     * <pre>
+     * Same as `placeholder` above, except that this one only comes into
+     * view when the network task encounters error
+     * </pre>
+     *
+     * <code>string errorPlaceholder = 2;</code>
+     * @return The errorPlaceholder.
+     */
+    @java.lang.Override
+    public java.lang.String getErrorPlaceholder() {
+      java.lang.Object ref = errorPlaceholder_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        errorPlaceholder_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Same as `placeholder` above, except that this one only comes into
+     * view when the network task encounters error
+     * </pre>
+     *
+     * <code>string errorPlaceholder = 2;</code>
+     * @return The bytes for errorPlaceholder.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getErrorPlaceholderBytes() {
+      java.lang.Object ref = errorPlaceholder_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        errorPlaceholder_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int BACKGROUNDCOLOR_FIELD_NUMBER = 3;
+    private volatile java.lang.Object backgroundColor_;
+    /**
+     * <pre>
+     * Sets the default background color of all texture image widget, once
+     * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+     * the widget will display this color when it's loading or it encounters
+     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * </pre>
+     *
+     * <code>string backgroundColor = 3;</code>
+     * @return The backgroundColor.
+     */
+    @java.lang.Override
+    public java.lang.String getBackgroundColor() {
+      java.lang.Object ref = backgroundColor_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        backgroundColor_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Sets the default background color of all texture image widget, once
+     * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+     * the widget will display this color when it's loading or it encounters
+     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * </pre>
+     *
+     * <code>string backgroundColor = 3;</code>
+     * @return The bytes for backgroundColor.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getBackgroundColorBytes() {
+      java.lang.Object ref = backgroundColor_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        backgroundColor_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int ANDROIDAVAILABLEMEMORYPERCENTAGE_FIELD_NUMBER = 4;
+    private float androidAvailableMemoryPercentage_;
+    /**
+     * <pre>
+     * Percentage of available memory to devote to the loader cache and
+     * bitmap pool, this config item only makes sense on Android platform.
+     * Range from 0.0, which means `disable`, to 1.0, which means `use
+     * when it's possible`. Default value is 0.2
+     * </pre>
+     *
+     * <code>float androidAvailableMemoryPercentage = 4;</code>
+     * @return The androidAvailableMemoryPercentage.
+     */
+    @java.lang.Override
+    public float getAndroidAvailableMemoryPercentage() {
+      return androidAvailableMemoryPercentage_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (!getPlaceholderBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 1, placeholder_);
+      }
+      if (!getErrorPlaceholderBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, errorPlaceholder_);
+      }
+      if (!getBackgroundColorBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, backgroundColor_);
+      }
+      if (androidAvailableMemoryPercentage_ != 0F) {
+        output.writeFloat(4, androidAvailableMemoryPercentage_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (!getPlaceholderBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, placeholder_);
+      }
+      if (!getErrorPlaceholderBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, errorPlaceholder_);
+      }
+      if (!getBackgroundColorBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, backgroundColor_);
+      }
+      if (androidAvailableMemoryPercentage_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(4, androidAvailableMemoryPercentage_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageConfigInfo)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ImageConfigInfo other = (com.texture_image.proto.ImageInfo.ImageConfigInfo) obj;
+
+      if (!getPlaceholder()
+          .equals(other.getPlaceholder())) return false;
+      if (!getErrorPlaceholder()
+          .equals(other.getErrorPlaceholder())) return false;
+      if (!getBackgroundColor()
+          .equals(other.getBackgroundColor())) return false;
+      if (java.lang.Float.floatToIntBits(getAndroidAvailableMemoryPercentage())
+          != java.lang.Float.floatToIntBits(
+              other.getAndroidAvailableMemoryPercentage())) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + PLACEHOLDER_FIELD_NUMBER;
+      hash = (53 * hash) + getPlaceholder().hashCode();
+      hash = (37 * hash) + ERRORPLACEHOLDER_FIELD_NUMBER;
+      hash = (53 * hash) + getErrorPlaceholder().hashCode();
+      hash = (37 * hash) + BACKGROUNDCOLOR_FIELD_NUMBER;
+      hash = (53 * hash) + getBackgroundColor().hashCode();
+      hash = (37 * hash) + ANDROIDAVAILABLEMEMORYPERCENTAGE_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getAndroidAvailableMemoryPercentage());
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageConfigInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Global config of ImageLoader
+     * </pre>
+     *
+     * Protobuf type {@code ImageConfigInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ImageConfigInfo)
+        com.texture_image.proto.ImageInfo.ImageConfigInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageConfigInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageConfigInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ImageConfigInfo.class, com.texture_image.proto.ImageInfo.ImageConfigInfo.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ImageConfigInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        placeholder_ = "";
+
+        errorPlaceholder_ = "";
+
+        backgroundColor_ = "";
+
+        androidAvailableMemoryPercentage_ = 0F;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ImageConfigInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageConfigInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ImageConfigInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageConfigInfo build() {
+        com.texture_image.proto.ImageInfo.ImageConfigInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ImageConfigInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ImageConfigInfo result = new com.texture_image.proto.ImageInfo.ImageConfigInfo(this);
+        result.placeholder_ = placeholder_;
+        result.errorPlaceholder_ = errorPlaceholder_;
+        result.backgroundColor_ = backgroundColor_;
+        result.androidAvailableMemoryPercentage_ = androidAvailableMemoryPercentage_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ImageConfigInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ImageConfigInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageConfigInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ImageConfigInfo.getDefaultInstance()) return this;
+        if (!other.getPlaceholder().isEmpty()) {
+          placeholder_ = other.placeholder_;
+          onChanged();
+        }
+        if (!other.getErrorPlaceholder().isEmpty()) {
+          errorPlaceholder_ = other.errorPlaceholder_;
+          onChanged();
+        }
+        if (!other.getBackgroundColor().isEmpty()) {
+          backgroundColor_ = other.backgroundColor_;
+          onChanged();
+        }
+        if (other.getAndroidAvailableMemoryPercentage() != 0F) {
+          setAndroidAvailableMemoryPercentage(other.getAndroidAvailableMemoryPercentage());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ImageConfigInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ImageConfigInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private java.lang.Object placeholder_ = "";
+      /**
+       * <pre>
+       * Placeholder that's used globally. If [ImageFetchInfo] does not
+       * explicitly assign a path to `placeholder` property, then this
+       * path will be used as the default placeholder when network task
+       * still at a pending state
+       * </pre>
+       *
+       * <code>string placeholder = 1;</code>
+       * @return The placeholder.
+       */
+      public java.lang.String getPlaceholder() {
+        java.lang.Object ref = placeholder_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          placeholder_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Placeholder that's used globally. If [ImageFetchInfo] does not
+       * explicitly assign a path to `placeholder` property, then this
+       * path will be used as the default placeholder when network task
+       * still at a pending state
+       * </pre>
+       *
+       * <code>string placeholder = 1;</code>
+       * @return The bytes for placeholder.
+       */
+      public com.google.protobuf.ByteString
+          getPlaceholderBytes() {
+        java.lang.Object ref = placeholder_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          placeholder_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Placeholder that's used globally. If [ImageFetchInfo] does not
+       * explicitly assign a path to `placeholder` property, then this
+       * path will be used as the default placeholder when network task
+       * still at a pending state
+       * </pre>
+       *
+       * <code>string placeholder = 1;</code>
+       * @param value The placeholder to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPlaceholder(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        placeholder_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Placeholder that's used globally. If [ImageFetchInfo] does not
+       * explicitly assign a path to `placeholder` property, then this
+       * path will be used as the default placeholder when network task
+       * still at a pending state
+       * </pre>
+       *
+       * <code>string placeholder = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearPlaceholder() {
+        
+        placeholder_ = getDefaultInstance().getPlaceholder();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Placeholder that's used globally. If [ImageFetchInfo] does not
+       * explicitly assign a path to `placeholder` property, then this
+       * path will be used as the default placeholder when network task
+       * still at a pending state
+       * </pre>
+       *
+       * <code>string placeholder = 1;</code>
+       * @param value The bytes for placeholder to set.
+       * @return This builder for chaining.
+       */
+      public Builder setPlaceholderBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        placeholder_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object errorPlaceholder_ = "";
+      /**
+       * <pre>
+       * Same as `placeholder` above, except that this one only comes into
+       * view when the network task encounters error
+       * </pre>
+       *
+       * <code>string errorPlaceholder = 2;</code>
+       * @return The errorPlaceholder.
+       */
+      public java.lang.String getErrorPlaceholder() {
+        java.lang.Object ref = errorPlaceholder_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          errorPlaceholder_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Same as `placeholder` above, except that this one only comes into
+       * view when the network task encounters error
+       * </pre>
+       *
+       * <code>string errorPlaceholder = 2;</code>
+       * @return The bytes for errorPlaceholder.
+       */
+      public com.google.protobuf.ByteString
+          getErrorPlaceholderBytes() {
+        java.lang.Object ref = errorPlaceholder_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          errorPlaceholder_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Same as `placeholder` above, except that this one only comes into
+       * view when the network task encounters error
+       * </pre>
+       *
+       * <code>string errorPlaceholder = 2;</code>
+       * @param value The errorPlaceholder to set.
+       * @return This builder for chaining.
+       */
+      public Builder setErrorPlaceholder(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        errorPlaceholder_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Same as `placeholder` above, except that this one only comes into
+       * view when the network task encounters error
+       * </pre>
+       *
+       * <code>string errorPlaceholder = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearErrorPlaceholder() {
+        
+        errorPlaceholder_ = getDefaultInstance().getErrorPlaceholder();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Same as `placeholder` above, except that this one only comes into
+       * view when the network task encounters error
+       * </pre>
+       *
+       * <code>string errorPlaceholder = 2;</code>
+       * @param value The bytes for errorPlaceholder to set.
+       * @return This builder for chaining.
+       */
+      public Builder setErrorPlaceholderBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        errorPlaceholder_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object backgroundColor_ = "";
+      /**
+       * <pre>
+       * Sets the default background color of all texture image widget, once
+       * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+       * the widget will display this color when it's loading or it encounters
+       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * </pre>
+       *
+       * <code>string backgroundColor = 3;</code>
+       * @return The backgroundColor.
+       */
+      public java.lang.String getBackgroundColor() {
+        java.lang.Object ref = backgroundColor_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          backgroundColor_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Sets the default background color of all texture image widget, once
+       * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+       * the widget will display this color when it's loading or it encounters
+       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * </pre>
+       *
+       * <code>string backgroundColor = 3;</code>
+       * @return The bytes for backgroundColor.
+       */
+      public com.google.protobuf.ByteString
+          getBackgroundColorBytes() {
+        java.lang.Object ref = backgroundColor_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          backgroundColor_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Sets the default background color of all texture image widget, once
+       * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+       * the widget will display this color when it's loading or it encounters
+       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * </pre>
+       *
+       * <code>string backgroundColor = 3;</code>
+       * @param value The backgroundColor to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBackgroundColor(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        backgroundColor_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Sets the default background color of all texture image widget, once
+       * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+       * the widget will display this color when it's loading or it encounters
+       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * </pre>
+       *
+       * <code>string backgroundColor = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBackgroundColor() {
+        
+        backgroundColor_ = getDefaultInstance().getBackgroundColor();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Sets the default background color of all texture image widget, once
+       * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+       * the widget will display this color when it's loading or it encounters
+       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * </pre>
+       *
+       * <code>string backgroundColor = 3;</code>
+       * @param value The bytes for backgroundColor to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBackgroundColorBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        backgroundColor_ = value;
+        onChanged();
+        return this;
+      }
+
+      private float androidAvailableMemoryPercentage_ ;
+      /**
+       * <pre>
+       * Percentage of available memory to devote to the loader cache and
+       * bitmap pool, this config item only makes sense on Android platform.
+       * Range from 0.0, which means `disable`, to 1.0, which means `use
+       * when it's possible`. Default value is 0.2
+       * </pre>
+       *
+       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * @return The androidAvailableMemoryPercentage.
+       */
+      @java.lang.Override
+      public float getAndroidAvailableMemoryPercentage() {
+        return androidAvailableMemoryPercentage_;
+      }
+      /**
+       * <pre>
+       * Percentage of available memory to devote to the loader cache and
+       * bitmap pool, this config item only makes sense on Android platform.
+       * Range from 0.0, which means `disable`, to 1.0, which means `use
+       * when it's possible`. Default value is 0.2
+       * </pre>
+       *
+       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * @param value The androidAvailableMemoryPercentage to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAndroidAvailableMemoryPercentage(float value) {
+        
+        androidAvailableMemoryPercentage_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Percentage of available memory to devote to the loader cache and
+       * bitmap pool, this config item only makes sense on Android platform.
+       * Range from 0.0, which means `disable`, to 1.0, which means `use
+       * when it's possible`. Default value is 0.2
+       * </pre>
+       *
+       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAndroidAvailableMemoryPercentage() {
+        
+        androidAvailableMemoryPercentage_ = 0F;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ImageConfigInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ImageConfigInfo)
+    private static final com.texture_image.proto.ImageInfo.ImageConfigInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageConfigInfo();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ImageConfigInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ImageConfigInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ImageConfigInfo>() {
+      @java.lang.Override
+      public ImageConfigInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ImageConfigInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ImageConfigInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ImageConfigInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ImageConfigInfo getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -3124,15 +4916,25 @@ public final class ImageInfo {
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ImageFetchInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ResultInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ResultInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ImageFetchResultInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ImageFetchResultInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ImageFetchCancelInfo_descriptor;
+    internal_static_ImageDisposeInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ImageFetchCancelInfo_fieldAccessorTable;
+      internal_static_ImageDisposeInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ImageConfigInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ImageConfigInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -3145,12 +4947,17 @@ public final class ImageInfo {
       "\n\020image_info.proto\032\021image_utils.proto\"i\n" +
       "\016ImageFetchInfo\022\013\n\003url\030\001 \001(\t\022\030\n\020errorPla" +
       "ceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\033\n\010g" +
-      "eometry\030\004 \001(\0132\t.Geometry\"p\n\024ImageFetchRe" +
-      "sultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(" +
-      "\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state" +
-      "\030\005 \001(\0162\n.TaskState\"6\n\024ImageFetchCancelIn" +
-      "fo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003B\031\n\027co" +
-      "m.texture_image.protob\006proto3"
+      "eometry\030\004 \001(\0132\t.Geometry\"+\n\nResultInfo\022\014" +
+      "\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\"p\n\024ImageFe" +
+      "tchResultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId" +
+      "\030\002 \001(\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005" +
+      "state\030\005 \001(\0162\n.TaskState\"2\n\020ImageDisposeI" +
+      "nfo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\"\203\001\n\017" +
+      "ImageConfigInfo\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020" +
+      "errorPlaceholder\030\002 \001(\t\022\027\n\017backgroundColo" +
+      "r\030\003 \001(\t\022(\n androidAvailableMemoryPercent" +
+      "age\030\004 \001(\002B\031\n\027com.texture_image.protob\006pr" +
+      "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -3163,18 +4970,30 @@ public final class ImageInfo {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageFetchInfo_descriptor,
         new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "Geometry", });
-    internal_static_ImageFetchResultInfo_descriptor =
+    internal_static_ResultInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_ResultInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ResultInfo_descriptor,
+        new java.lang.String[] { "Code", "Message", });
+    internal_static_ImageFetchResultInfo_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_ImageFetchResultInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageFetchResultInfo_descriptor,
         new java.lang.String[] { "Code", "TextureId", "Message", "Url", "State", });
-    internal_static_ImageFetchCancelInfo_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_ImageFetchCancelInfo_fieldAccessorTable = new
+    internal_static_ImageDisposeInfo_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ImageDisposeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ImageFetchCancelInfo_descriptor,
+        internal_static_ImageDisposeInfo_descriptor,
         new java.lang.String[] { "Url", "TextureId", });
+    internal_static_ImageConfigInfo_descriptor =
+      getDescriptor().getMessageTypes().get(4);
+    internal_static_ImageConfigInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ImageConfigInfo_descriptor,
+        new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", });
     com.texture_image.proto.ImageUtils.getDescriptor();
   }
 

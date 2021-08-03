@@ -105,6 +105,67 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
   $0.Geometry ensureGeometry() => $_ensure(3);
 }
 
+class ResultInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResultInfo', createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..hasRequiredFields = false
+  ;
+
+  ResultInfo._() : super();
+  factory ResultInfo({
+    $core.int? code,
+    $core.String? message,
+  }) {
+    final _result = create();
+    if (code != null) {
+      _result.code = code;
+    }
+    if (message != null) {
+      _result.message = message;
+    }
+    return _result;
+  }
+  factory ResultInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ResultInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ResultInfo clone() => ResultInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResultInfo copyWith(void Function(ResultInfo) updates) => super.copyWith((message) => updates(message as ResultInfo)) as ResultInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ResultInfo create() => ResultInfo._();
+  ResultInfo createEmptyInstance() => create();
+  static $pb.PbList<ResultInfo> createRepeated() => $pb.PbList<ResultInfo>();
+  @$core.pragma('dart2js:noInline')
+  static ResultInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResultInfo>(create);
+  static ResultInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get code => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set code($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get message => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set message($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMessage() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMessage() => clearField(2);
+}
+
 class ImageFetchResultInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageFetchResultInfo', createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
@@ -208,15 +269,15 @@ class ImageFetchResultInfo extends $pb.GeneratedMessage {
   void clearState() => clearField(5);
 }
 
-class ImageFetchCancelInfo extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageFetchCancelInfo', createEmptyInstance: create)
+class ImageDisposeInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageDisposeInfo', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
     ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', protoName: 'textureId')
     ..hasRequiredFields = false
   ;
 
-  ImageFetchCancelInfo._() : super();
-  factory ImageFetchCancelInfo({
+  ImageDisposeInfo._() : super();
+  factory ImageDisposeInfo({
     $core.String? url,
     $fixnum.Int64? textureId,
   }) {
@@ -229,26 +290,26 @@ class ImageFetchCancelInfo extends $pb.GeneratedMessage {
     }
     return _result;
   }
-  factory ImageFetchCancelInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ImageFetchCancelInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  factory ImageDisposeInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageDisposeInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
   'Will be removed in next major version')
-  ImageFetchCancelInfo clone() => ImageFetchCancelInfo()..mergeFromMessage(this);
+  ImageDisposeInfo clone() => ImageDisposeInfo()..mergeFromMessage(this);
   @$core.Deprecated(
   'Using this can add significant overhead to your binary. '
   'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
   'Will be removed in next major version')
-  ImageFetchCancelInfo copyWith(void Function(ImageFetchCancelInfo) updates) => super.copyWith((message) => updates(message as ImageFetchCancelInfo)) as ImageFetchCancelInfo; // ignore: deprecated_member_use
+  ImageDisposeInfo copyWith(void Function(ImageDisposeInfo) updates) => super.copyWith((message) => updates(message as ImageDisposeInfo)) as ImageDisposeInfo; // ignore: deprecated_member_use
   $pb.BuilderInfo get info_ => _i;
   @$core.pragma('dart2js:noInline')
-  static ImageFetchCancelInfo create() => ImageFetchCancelInfo._();
-  ImageFetchCancelInfo createEmptyInstance() => create();
-  static $pb.PbList<ImageFetchCancelInfo> createRepeated() => $pb.PbList<ImageFetchCancelInfo>();
+  static ImageDisposeInfo create() => ImageDisposeInfo._();
+  ImageDisposeInfo createEmptyInstance() => create();
+  static $pb.PbList<ImageDisposeInfo> createRepeated() => $pb.PbList<ImageDisposeInfo>();
   @$core.pragma('dart2js:noInline')
-  static ImageFetchCancelInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageFetchCancelInfo>(create);
-  static ImageFetchCancelInfo? _defaultInstance;
+  static ImageDisposeInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageDisposeInfo>(create);
+  static ImageDisposeInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get url => $_getSZ(0);
@@ -267,5 +328,94 @@ class ImageFetchCancelInfo extends $pb.GeneratedMessage {
   $core.bool hasTextureId() => $_has(1);
   @$pb.TagNumber(2)
   void clearTextureId() => clearField(2);
+}
+
+class ImageConfigInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageConfigInfo', createEmptyInstance: create)
+    ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placeholder')
+    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errorPlaceholder', protoName: 'errorPlaceholder')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backgroundColor', protoName: 'backgroundColor')
+    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'androidAvailableMemoryPercentage', $pb.PbFieldType.OF, protoName: 'androidAvailableMemoryPercentage')
+    ..hasRequiredFields = false
+  ;
+
+  ImageConfigInfo._() : super();
+  factory ImageConfigInfo({
+    $core.String? placeholder,
+    $core.String? errorPlaceholder,
+    $core.String? backgroundColor,
+    $core.double? androidAvailableMemoryPercentage,
+  }) {
+    final _result = create();
+    if (placeholder != null) {
+      _result.placeholder = placeholder;
+    }
+    if (errorPlaceholder != null) {
+      _result.errorPlaceholder = errorPlaceholder;
+    }
+    if (backgroundColor != null) {
+      _result.backgroundColor = backgroundColor;
+    }
+    if (androidAvailableMemoryPercentage != null) {
+      _result.androidAvailableMemoryPercentage = androidAvailableMemoryPercentage;
+    }
+    return _result;
+  }
+  factory ImageConfigInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ImageConfigInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ImageConfigInfo clone() => ImageConfigInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ImageConfigInfo copyWith(void Function(ImageConfigInfo) updates) => super.copyWith((message) => updates(message as ImageConfigInfo)) as ImageConfigInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ImageConfigInfo create() => ImageConfigInfo._();
+  ImageConfigInfo createEmptyInstance() => create();
+  static $pb.PbList<ImageConfigInfo> createRepeated() => $pb.PbList<ImageConfigInfo>();
+  @$core.pragma('dart2js:noInline')
+  static ImageConfigInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageConfigInfo>(create);
+  static ImageConfigInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.String get placeholder => $_getSZ(0);
+  @$pb.TagNumber(1)
+  set placeholder($core.String v) { $_setString(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasPlaceholder() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearPlaceholder() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.String get errorPlaceholder => $_getSZ(1);
+  @$pb.TagNumber(2)
+  set errorPlaceholder($core.String v) { $_setString(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasErrorPlaceholder() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearErrorPlaceholder() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get backgroundColor => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set backgroundColor($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasBackgroundColor() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearBackgroundColor() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.double get androidAvailableMemoryPercentage => $_getN(3);
+  @$pb.TagNumber(4)
+  set androidAvailableMemoryPercentage($core.double v) { $_setFloat(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasAndroidAvailableMemoryPercentage() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearAndroidAvailableMemoryPercentage() => clearField(4);
 }
 

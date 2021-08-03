@@ -17,6 +17,11 @@ message ImageFetchInfo {
   Geometry geometry = 4;
 }
 
+message ResultInfo {
+  int32 code = 1;
+  string  message = 2;
+}
+
 // An object to describe image request API invoking result
 // Flutter side may use the [textureId] to rebuild its UI
 // when receiving the result, but the target image may not
@@ -42,7 +47,7 @@ message ImageFetchResultInfo {
 }
 
 // Request to cancel an ongoing loading task
-message ImageFetchCancelInfo {
+message ImageDisposeInfo {
   // You have to provide this property then image loaders from
   // native sides can guarantee that at least they can find origin
   // task by url in a slower way. At some situation widgets gets
@@ -54,5 +59,30 @@ message ImageFetchCancelInfo {
   // Given this property for loaders to search download task more
   // efficiently if you have one
   int64 textureId = 2;
+}
+
+// Global config of ImageLoader
+message ImageConfigInfo {
+  // Placeholder that's used globally. If [ImageFetchInfo] does not
+  // explicitly assign a path to `placeholder` property, then this
+  // path will be used as the default placeholder when network task
+  // still at a pending state
+  string placeholder = 1;
+
+  // Same as `placeholder` above, except that this one only comes into
+  // view when the network task encounters error
+  string errorPlaceholder = 2;
+
+  // Sets the default background color of all texture image widget, once
+  // the [placeholder] or [errorPlaceholder] sets to an empty path, then
+  // the widget will display this color when it's loading or it encounters
+  // an error. The format is "0xAARRGGBB", default is "0x000000"
+  string backgroundColor = 3;
+
+  // Percentage of available memory to devote to the loader cache and
+  // bitmap pool, this config item only makes sense on Android platform.
+  // Range from 0.0, which means `disable`, to 1.0, which means `use
+  // when it's possible`. Default value is 0.2
+  float androidAvailableMemoryPercentage = 4;
 }
 

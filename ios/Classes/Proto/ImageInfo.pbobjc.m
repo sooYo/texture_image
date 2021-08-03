@@ -133,6 +133,62 @@ typedef struct ImageFetchInfo__storage_ {
 
 @end
 
+#pragma mark - ResultInfo
+
+@implementation ResultInfo
+
+@dynamic code;
+@dynamic message;
+
+typedef struct ResultInfo__storage_ {
+  uint32_t _has_storage_[1];
+  int32_t code;
+  NSString *message;
+} ResultInfo__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "code",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ResultInfo_FieldNumber_Code,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ResultInfo__storage_, code),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "message",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ResultInfo_FieldNumber_Message,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ResultInfo__storage_, message),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ResultInfo class]
+                                     rootClass:[ImageInfoRoot class]
+                                          file:ImageInfoRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ResultInfo__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 #pragma mark - ImageFetchResultInfo
 
 @implementation ImageFetchResultInfo
@@ -239,18 +295,18 @@ void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32
   GPBSetMessageRawEnumField(message, field, value);
 }
 
-#pragma mark - ImageFetchCancelInfo
+#pragma mark - ImageDisposeInfo
 
-@implementation ImageFetchCancelInfo
+@implementation ImageDisposeInfo
 
 @dynamic URL;
 @dynamic textureId;
 
-typedef struct ImageFetchCancelInfo__storage_ {
+typedef struct ImageDisposeInfo__storage_ {
   uint32_t _has_storage_[1];
   NSString *URL;
   int64_t textureId;
-} ImageFetchCancelInfo__storage_;
+} ImageDisposeInfo__storage_;
 
 // This method is threadsafe because it is initially called
 // in +initialize for each subclass.
@@ -261,33 +317,116 @@ typedef struct ImageFetchCancelInfo__storage_ {
       {
         .name = "URL",
         .dataTypeSpecific.clazz = Nil,
-        .number = ImageFetchCancelInfo_FieldNumber_URL,
+        .number = ImageDisposeInfo_FieldNumber_URL,
         .hasIndex = 0,
-        .offset = (uint32_t)offsetof(ImageFetchCancelInfo__storage_, URL),
+        .offset = (uint32_t)offsetof(ImageDisposeInfo__storage_, URL),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeString,
       },
       {
         .name = "textureId",
         .dataTypeSpecific.clazz = Nil,
-        .number = ImageFetchCancelInfo_FieldNumber_TextureId,
+        .number = ImageDisposeInfo_FieldNumber_TextureId,
         .hasIndex = 1,
-        .offset = (uint32_t)offsetof(ImageFetchCancelInfo__storage_, textureId),
+        .offset = (uint32_t)offsetof(ImageDisposeInfo__storage_, textureId),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeInt64,
       },
     };
     GPBDescriptor *localDescriptor =
-        [GPBDescriptor allocDescriptorForClass:[ImageFetchCancelInfo class]
+        [GPBDescriptor allocDescriptorForClass:[ImageDisposeInfo class]
                                      rootClass:[ImageInfoRoot class]
                                           file:ImageInfoRoot_FileDescriptor()
                                         fields:fields
                                     fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
-                                   storageSize:sizeof(ImageFetchCancelInfo__storage_)
+                                   storageSize:sizeof(ImageDisposeInfo__storage_)
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
         "\002\001!!!\000\002\t\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
+#pragma mark - ImageConfigInfo
+
+@implementation ImageConfigInfo
+
+@dynamic placeholder;
+@dynamic errorPlaceholder;
+@dynamic backgroundColor;
+@dynamic androidAvailableMemoryPercentage;
+
+typedef struct ImageConfigInfo__storage_ {
+  uint32_t _has_storage_[1];
+  float androidAvailableMemoryPercentage;
+  NSString *placeholder;
+  NSString *errorPlaceholder;
+  NSString *backgroundColor;
+} ImageConfigInfo__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "placeholder",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_Placeholder,
+        .hasIndex = 0,
+        .offset = (uint32_t)offsetof(ImageConfigInfo__storage_, placeholder),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "errorPlaceholder",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_ErrorPlaceholder,
+        .hasIndex = 1,
+        .offset = (uint32_t)offsetof(ImageConfigInfo__storage_, errorPlaceholder),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "backgroundColor",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_BackgroundColor,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(ImageConfigInfo__storage_, backgroundColor),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeString,
+      },
+      {
+        .name = "androidAvailableMemoryPercentage",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_AndroidAvailableMemoryPercentage,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(ImageConfigInfo__storage_, androidAvailableMemoryPercentage),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[ImageConfigInfo class]
+                                     rootClass:[ImageInfoRoot class]
+                                          file:ImageInfoRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(ImageConfigInfo__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\003\002\020\000\003\017\000\004\037\001\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

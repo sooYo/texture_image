@@ -76,6 +76,21 @@ GPB_FINAL @interface ImageFetchInfo : GPBMessage
 
 @end
 
+#pragma mark - ResultInfo
+
+typedef GPB_ENUM(ResultInfo_FieldNumber) {
+  ResultInfo_FieldNumber_Code = 1,
+  ResultInfo_FieldNumber_Message = 2,
+};
+
+GPB_FINAL @interface ResultInfo : GPBMessage
+
+@property(nonatomic, readwrite) int32_t code;
+
+@property(nonatomic, readwrite, copy, null_resettable) NSString *message;
+
+@end
+
 #pragma mark - ImageFetchResultInfo
 
 typedef GPB_ENUM(ImageFetchResultInfo_FieldNumber) {
@@ -128,17 +143,17 @@ int32_t ImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message);
  **/
 void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32_t value);
 
-#pragma mark - ImageFetchCancelInfo
+#pragma mark - ImageDisposeInfo
 
-typedef GPB_ENUM(ImageFetchCancelInfo_FieldNumber) {
-  ImageFetchCancelInfo_FieldNumber_URL = 1,
-  ImageFetchCancelInfo_FieldNumber_TextureId = 2,
+typedef GPB_ENUM(ImageDisposeInfo_FieldNumber) {
+  ImageDisposeInfo_FieldNumber_URL = 1,
+  ImageDisposeInfo_FieldNumber_TextureId = 2,
 };
 
 /**
  * Request to cancel an ongoing loading task
  **/
-GPB_FINAL @interface ImageFetchCancelInfo : GPBMessage
+GPB_FINAL @interface ImageDisposeInfo : GPBMessage
 
 /**
  * You have to provide this property then image loaders from
@@ -155,6 +170,52 @@ GPB_FINAL @interface ImageFetchCancelInfo : GPBMessage
  * efficiently if you have one
  **/
 @property(nonatomic, readwrite) int64_t textureId;
+
+@end
+
+#pragma mark - ImageConfigInfo
+
+typedef GPB_ENUM(ImageConfigInfo_FieldNumber) {
+  ImageConfigInfo_FieldNumber_Placeholder = 1,
+  ImageConfigInfo_FieldNumber_ErrorPlaceholder = 2,
+  ImageConfigInfo_FieldNumber_BackgroundColor = 3,
+  ImageConfigInfo_FieldNumber_AndroidAvailableMemoryPercentage = 4,
+};
+
+/**
+ * Global config of ImageLoader
+ **/
+GPB_FINAL @interface ImageConfigInfo : GPBMessage
+
+/**
+ * Placeholder that's used globally. If [ImageFetchInfo] does not
+ * explicitly assign a path to `placeholder` property, then this
+ * path will be used as the default placeholder when network task
+ * still at a pending state
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *placeholder;
+
+/**
+ * Same as `placeholder` above, except that this one only comes into
+ * view when the network task encounters error
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *errorPlaceholder;
+
+/**
+ * Sets the default background color of all texture image widget, once
+ * the [placeholder] or [errorPlaceholder] sets to an empty path, then
+ * the widget will display this color when it's loading or it encounters
+ * an error. The format is "0xAARRGGBB", default is "0x000000"
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *backgroundColor;
+
+/**
+ * Percentage of available memory to devote to the loader cache and
+ * bitmap pool, this config item only makes sense on Android platform.
+ * Range from 0.0, which means `disable`, to 1.0, which means `use
+ * when it's possible`. Default value is 0.2
+ **/
+@property(nonatomic, readwrite) float androidAvailableMemoryPercentage;
 
 @end
 
