@@ -14,8 +14,8 @@ enum TaskState {
   initialized = 0; // Task is now ready to start
   loading = 1;
   completed = 2; // Task completed successfully
-  canceled = 3;
-  failed = 4;
+  failed = 3;
+  disposed = 4; // Image widget has been disposed
   undefined = 5; // For initialization only
 }
 

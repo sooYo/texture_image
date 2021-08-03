@@ -34,16 +34,16 @@ class TaskState extends $pb.ProtobufEnum {
   static const TaskState initialized = TaskState._(0, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'initialized');
   static const TaskState loading = TaskState._(1, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'loading');
   static const TaskState completed = TaskState._(2, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'completed');
-  static const TaskState canceled = TaskState._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'canceled');
-  static const TaskState failed = TaskState._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'failed');
+  static const TaskState failed = TaskState._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'failed');
+  static const TaskState disposed = TaskState._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'disposed');
   static const TaskState undefined = TaskState._(5, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'undefined');
 
   static const $core.List<TaskState> values = <TaskState> [
     initialized,
     loading,
     completed,
-    canceled,
     failed,
+    disposed,
     undefined,
   ];
 

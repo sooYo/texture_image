@@ -3149,8 +3149,8 @@ public final class ImageInfo {
       "sultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(" +
       "\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state" +
       "\030\005 \001(\0162\n.TaskState\"6\n\024ImageFetchCancelIn" +
-      "fo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003B\033\n\027co" +
-      "m.texture_image.protoH\003b\006proto3"
+      "fo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003B\031\n\027co" +
+      "m.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

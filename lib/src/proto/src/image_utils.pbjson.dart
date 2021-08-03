@@ -29,14 +29,14 @@ const TaskState$json = const {
     const {'1': 'initialized', '2': 0},
     const {'1': 'loading', '2': 1},
     const {'1': 'completed', '2': 2},
-    const {'1': 'canceled', '2': 3},
-    const {'1': 'failed', '2': 4},
+    const {'1': 'failed', '2': 3},
+    const {'1': 'disposed', '2': 4},
     const {'1': 'undefined', '2': 5},
   ],
 };
 
 /// Descriptor for `TaskState`. Decode as a `google.protobuf.EnumDescriptorProto`.
-final $typed_data.Uint8List taskStateDescriptor = $convert.base64Decode('CglUYXNrU3RhdGUSDwoLaW5pdGlhbGl6ZWQQABILCgdsb2FkaW5nEAESDQoJY29tcGxldGVkEAISDAoIY2FuY2VsZWQQAxIKCgZmYWlsZWQQBBINCgl1bmRlZmluZWQQBQ==');
+final $typed_data.Uint8List taskStateDescriptor = $convert.base64Decode('CglUYXNrU3RhdGUSDwoLaW5pdGlhbGl6ZWQQABILCgdsb2FkaW5nEAESDQoJY29tcGxldGVkEAISCgoGZmFpbGVkEAMSDAoIZGlzcG9zZWQQBBINCgl1bmRlZmluZWQQBQ==');
 @$core.Deprecated('Use borderRadiusDescriptor instead')
 const BorderRadius$json = const {
   '1': 'BorderRadius',

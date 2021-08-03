@@ -179,13 +179,17 @@ public final class ImageUtils {
      */
     completed(2),
     /**
-     * <code>canceled = 3;</code>
+     * <code>failed = 3;</code>
      */
-    canceled(3),
+    failed(3),
     /**
-     * <code>failed = 4;</code>
+     * <pre>
+     * Image widget has been disposed
+     * </pre>
+     *
+     * <code>disposed = 4;</code>
      */
-    failed(4),
+    disposed(4),
     /**
      * <pre>
      * For initialization only
@@ -218,13 +222,17 @@ public final class ImageUtils {
      */
     public static final int completed_VALUE = 2;
     /**
-     * <code>canceled = 3;</code>
+     * <code>failed = 3;</code>
      */
-    public static final int canceled_VALUE = 3;
+    public static final int failed_VALUE = 3;
     /**
-     * <code>failed = 4;</code>
+     * <pre>
+     * Image widget has been disposed
+     * </pre>
+     *
+     * <code>disposed = 4;</code>
      */
-    public static final int failed_VALUE = 4;
+    public static final int disposed_VALUE = 4;
     /**
      * <pre>
      * For initialization only
@@ -262,8 +270,8 @@ public final class ImageUtils {
         case 0: return initialized;
         case 1: return loading;
         case 2: return completed;
-        case 3: return canceled;
-        case 4: return failed;
+        case 3: return failed;
+        case 4: return disposed;
         case 5: return undefined;
         default: return null;
       }
@@ -1922,8 +1930,8 @@ public final class ImageUtils {
       ".BorderRadius*G\n\006BoxFit\022\010\n\004fill\020\000\022\013\n\007con" +
       "tain\020\001\022\t\n\005cover\020\002\022\014\n\010fitWidth\020\003\022\r\n\tfitHe" +
       "ight\020\004*a\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007" +
-      "loading\020\001\022\r\n\tcompleted\020\002\022\014\n\010canceled\020\003\022\n" +
-      "\n\006failed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture" +
+      "loading\020\001\022\r\n\tcompleted\020\002\022\n\n\006failed\020\003\022\014\n\010" +
+      "disposed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture" +
       "_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

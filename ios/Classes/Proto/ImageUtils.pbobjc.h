@@ -71,8 +71,10 @@ typedef GPB_ENUM(TaskState) {
 
   /** Task completed successfully */
   TaskState_Completed = 2,
-  TaskState_Canceled = 3,
-  TaskState_Failed = 4,
+  TaskState_Failed = 3,
+
+  /** Image widget has been disposed */
+  TaskState_Disposed = 4,
 
   /** For initialization only */
   TaskState_Undefined = 5,
