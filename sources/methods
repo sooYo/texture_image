@@ -1,0 +1,12 @@
+// Define channel methods between Flutter and native sides, the basic format is:
+//
+// method_name[#comment]\n
+//
+// You're not supposed to alter the platform-specific method list file directly
+// because this may raise inconsistent problems. Once a new method is created,
+// please add to this file and run 'methods_gen.sh' to update all relative files
+
+createImageTexture#Create a new texture image base on a [ImageFetchInfo]
+destroyImageTexture#Release resource of a texture image once the widget i disposed, param is of [ImageFetchCancelInfo] type
+textureImageConfig#Sets the global config of the plugin, the config detail please refer to [ImageConfigInfo]
+enableLog#Enable/disable console log, param is a boolean
