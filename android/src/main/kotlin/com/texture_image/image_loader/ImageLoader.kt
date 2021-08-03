@@ -25,6 +25,8 @@ class ImageLoader(
         const val maxCacheSize: Int = 20
     }
 
+    private var globalConfig: ImageInfo.ImageConfigInfo? = null
+
     private val taskMap: TaskMap = TaskMap()
     private val outlineCache: TaskOutlineCache = TaskOutlineCache(maxCacheSize)
     private val loaderCore: coil.ImageLoader by lazy(LazyThreadSafetyMode.NONE) {
@@ -97,9 +99,9 @@ class ImageLoader(
 
         val base64Data = call.arguments as ByteArray
         val cancelInfo = try {
-            ImageInfo.ImageFetchCancelInfo.parseFrom(base64Data)
+            ImageInfo.ImageDisposeInfo.parseFrom(base64Data)
         } catch (e: Exception) {
-            LogUtil.e("disposeTextureImage: build CancelInfo failed: $e")
+            LogUtil.e("disposeTextureImage: build ImageDisposeInfo failed: $e")
             null
         }
 
@@ -118,6 +120,32 @@ class ImageLoader(
         }
     }
 
+    fun updateGlobalConfig(@NonNull call: MethodCall, @NonNull result: Result) {
+        if (!checkArgumentType(call, result)) {
+            return
+        }
+
+        val base64Data = call.arguments as ByteArray
+        val configInfo = try {
+            ImageInfo.ImageConfigInfo.parseFrom(base64Data)
+        } catch (e: Exception) {
+            LogUtil.e("updateGlobalConfig: build ImageConfigInfo failed: $e")
+            null
+        }
+
+        if (configInfo == null) {
+            result.success(
+                ResultUtils.protoParseFailed(
+                    "ImageConfigInfo",
+                    "updateGlobalConfig"
+                )
+            )
+            return
+        }
+
+        globalConfig = configInfo
+        result.success(ResultUtils.ok)
+    }
     // endregion Channel Handlers
 
     // region Core Methods

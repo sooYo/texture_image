@@ -6,6 +6,15 @@ import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 
 object ResultUtils {
+    val ok: ByteArray
+        get() {
+            return ImageInfo.ResultInfo.newBuilder()
+                .setCode(200)
+                .setMessage("success")
+                .build()
+                .toByteArray()
+        }
+
     private fun makeResult(
         code: ErrorCode,
         message: String,

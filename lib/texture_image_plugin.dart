@@ -49,7 +49,7 @@ class TextureImagePlugin {
   }
 
   static Future<void> destroyImageTexture(int? textureId, String url) {
-    final cancelInfo = ImageFetchCancelInfo()
+    final cancelInfo = ImageDisposeInfo()
       ..textureId = Int64(textureId ?? -1)
       ..url = url;
 
