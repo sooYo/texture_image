@@ -2,10 +2,7 @@ package com.texture_image.image_loader
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Paint
-import android.graphics.PaintFlagsDrawFilter
-import android.graphics.Rect
+import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.view.Surface
@@ -25,6 +22,8 @@ import kotlin.properties.Delegates
 class ImageLoaderTask(
     private val context: Context,
     private val imageUrl: String,
+    private val placeholder: String?,
+    private val errorPlaceholder: String?,
     private val geometry: ImageUtils.Geometry,
     private val cachePolicy: CachePolicy,
     private val textureEntry: SurfaceTextureEntry
@@ -51,6 +50,11 @@ class ImageLoaderTask(
             transform.add(shapeTransform)
         }
 
+        val assetManager = context.assets
+        val placeholder = assetManager.open("flutter_assets/$placeholder")
+        val bitmap = BitmapFactory.decodeStream(placeholder)
+        val d: Drawable = BitmapDrawable(context.resources, bitmap)
+
         val request = ImageRequest
             .Builder(context)
             .target(this)
@@ -60,6 +64,7 @@ class ImageLoaderTask(
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
             .transformations(transform)
+            .placeholder(d)
             .build()
 
         mOutline = TaskOutlineBuilder()

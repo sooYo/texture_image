@@ -10,7 +10,6 @@ import com.texture_image.constants.TaskOutlineCache
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
-import com.texture_image.proto.ImageUtils
 import com.texture_image.utils.LogUtil
 import com.texture_image.utils.ResultUtils
 import io.flutter.plugin.common.MethodCall
@@ -85,9 +84,7 @@ class ImageLoader(
             return
         }
 
-        loadImage(imageInfo.url, imageInfo.geometry).also {
-            result.success(ResultUtils.success(it))
-        }
+        loadImage(imageInfo).also { result.success(ResultUtils.success(it)) }
     }
 
     fun disposeTextureImage(
@@ -120,19 +117,21 @@ class ImageLoader(
             result.success(ResultUtils.success(it))
         }
     }
+
     // endregion Channel Handlers
 
     // region Core Methods
     private fun loadImage(
-        url: String,
-        geometry: ImageUtils.Geometry,
+        imageInfo: ImageInfo.ImageFetchInfo,
         cachePolicy: CachePolicy = CachePolicy()
     ): TaskOutline {
         val entry = textureRegistry.createSurfaceTexture()
         val task = ImageLoaderTask(
             context,
-            url,
-            geometry,
+            imageInfo.url,
+            imageInfo.placeholder,
+            imageInfo.errorPlaceholder,
+            imageInfo.geometry,
             cachePolicy,
             entry
         ).scheduleWith(this)

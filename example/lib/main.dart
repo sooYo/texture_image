@@ -124,6 +124,8 @@ class _MyAppState extends State<MyApp> {
                         width: constraint.maxWidth,
                         height: constraint.maxHeight,
                         fit: $ti.BoxFit.cover,
+                        placeholderPath: 'lib/assets/ic_placeholder.png',
+                        errorPlaceholderPath: 'lib/assets/ic_error.png',
                       )
                     : CachedNetworkImage(
                         imageUrl: _images[index],

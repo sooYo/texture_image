@@ -10,6 +10,8 @@ class TextureImage extends StatefulWidget {
     required this.width,
     required this.height,
     this.placeholder,
+    this.placeholderPath,
+    this.errorPlaceholderPath,
     this.fit = BoxFit.contain,
   });
 
@@ -18,6 +20,8 @@ class TextureImage extends StatefulWidget {
   final double height;
   final BoxFit fit;
   final Widget? placeholder;
+  final String? placeholderPath;
+  final String? errorPlaceholderPath;
 
   @override
   State<StatefulWidget> createState() => _ImageState();
@@ -62,6 +66,8 @@ class _ImageState extends State<TextureImage> {
       width: widget.width,
       height: widget.height,
       fit: widget.fit,
+      placeholderPath: widget.placeholderPath,
+      errorPlaceholderPath: widget.errorPlaceholderPath,
     );
 
     if (!mounted) {

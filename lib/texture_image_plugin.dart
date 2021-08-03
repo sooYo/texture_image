@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fixnum/fixnum.dart';
 import 'package:flutter/services.dart';
+import 'package:texture_image/src/constants/methods.dart';
 import 'package:texture_image/src/proto/pb_header.dart';
 
 class TextureImagePlugin {
@@ -16,6 +17,8 @@ class TextureImagePlugin {
     String url, {
     required double width,
     required double height,
+    String? placeholderPath,
+    String? errorPlaceholderPath,
     BoxFit fit = BoxFit.contain,
   }) async {
     final geometry = Geometry()
@@ -28,8 +31,16 @@ class TextureImagePlugin {
       ..url = url
       ..geometry = geometry;
 
+    if (placeholderPath?.isNotEmpty ?? false) {
+      imageInfo.placeholder = placeholderPath!;
+    }
+
+    if (errorPlaceholderPath?.isNotEmpty ?? false) {
+      imageInfo.errorPlaceholder = errorPlaceholderPath!;
+    }
+
     final base64Data = await _channel.invokeMethod(
-      'createImageTexture',
+      Methods.createImageTexture,
       imageInfo.writeToBuffer(),
     );
 
@@ -43,7 +54,7 @@ class TextureImagePlugin {
       ..url = url;
 
     return _channel.invokeMethod(
-      'destroyImageTexture',
+      Methods.destroyImageTexture,
       cancelInfo.writeToBuffer(),
     );
   }
