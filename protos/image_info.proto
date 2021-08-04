@@ -83,6 +83,6 @@ message ImageConfigInfo {
   // bitmap pool, this config item only makes sense on Android platform.
   // Range from 0.0, which means `disable`, to 1.0, which means `use
   // when it's possible`. Default value is 0.2
-  float androidAvailableMemoryPercentage = 4;
+  double androidAvailableMemoryPercentage = 4;
 }
 

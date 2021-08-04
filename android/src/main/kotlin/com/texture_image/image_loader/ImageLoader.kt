@@ -11,6 +11,7 @@ import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
 import com.texture_image.utils.LogUtil
+import com.texture_image.utils.PlaceholderUtil
 import com.texture_image.utils.ResultUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
@@ -34,10 +35,13 @@ class ImageLoader(
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
+        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.2
+
         coil.ImageLoader.Builder(context)
             .crossfade(true)
             .bitmapConfig(Bitmap.Config.ARGB_8888)
             .okHttpClient(httpClient)
+            .availableMemoryPercentage(memOp)
             .build()
     }
 
@@ -142,6 +146,8 @@ class ImageLoader(
             )
             return
         }
+
+        PlaceholderUtil.loadPlaceholders(context, configInfo)
 
         globalConfig = configInfo
         result.success(ResultUtils.ok)

@@ -1,9 +1,7 @@
 package com.texture_image.utils
 
-import android.graphics.Bitmap
-import android.graphics.Matrix
-import android.graphics.Rect
-import android.graphics.RectF
+import android.content.Context
+import android.graphics.*
 import android.util.Log
 import kotlin.math.roundToInt
 
@@ -115,6 +113,26 @@ fun Bitmap.rectBoxFitHeight(width: Int, height: Int): Rect {
 
     return Rect(0, 0, scaledWidth, height).apply {
         offsetTo(xPos.roundToInt(), 0)
+    }
+}
+
+fun bitmapFromAsset(
+    context: Context,
+    assetPath: String,
+    flutterAsset: Boolean = true
+): Bitmap? {
+    return try {
+        val stream = when (flutterAsset) {
+            true -> "flutter_assets/$assetPath"
+            else -> assetPath
+        }.run {
+            context.assets.open(this)
+        }
+
+        BitmapFactory.decodeStream(stream)
+    } catch (e: Exception) {
+        LogUtil.e("bitmapFromAsset: $e")
+        null
     }
 }
 

@@ -40,6 +40,7 @@ class ImageLoaderTask(
 
     val outline: TaskOutline get() = mOutline
 
+    @SuppressLint("Recycle")
     fun scheduleWith(scheduler: LoaderTaskScheduler): ImageLoaderTask {
         this.scheduler = scheduler
 
@@ -50,12 +51,7 @@ class ImageLoaderTask(
             transform.add(shapeTransform)
         }
 
-        val assetManager = context.assets
-        val placeholder = assetManager.open("flutter_assets/$placeholder")
-        val bitmap = BitmapFactory.decodeStream(placeholder)
-        val d: Drawable = BitmapDrawable(context.resources, bitmap)
-
-        val request = ImageRequest
+        val builder = ImageRequest
             .Builder(context)
             .target(this)
             .data(imageUrl)
@@ -64,13 +60,35 @@ class ImageLoaderTask(
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
             .transformations(transform)
-            .placeholder(d)
-            .build()
 
+        assignPlaceholder(
+            placeholder,
+            builder,
+            PlaceholderUtil.placeholder,
+            false
+        )
+
+        assignPlaceholder(
+            errorPlaceholder,
+            builder,
+            PlaceholderUtil.errorPlaceholder,
+            true
+        )
+
+        val texture = textureEntry.surfaceTexture().also {
+            it.setDefaultBufferSize(
+                geometry.width,
+                geometry.height
+            )
+        }
+
+        val surface = Surface(texture)
         mOutline = TaskOutlineBuilder()
-            .setRequest(request)
+            .setRequest(builder.build())
             .setImageUrl(imageUrl)
             .setEntry(textureEntry)
+            .setTexture(texture)
+            .setSurface(surface)
             .build()
 
         val cancelToken = scheduler.schedule(this)
@@ -100,66 +118,40 @@ class ImageLoaderTask(
     }
 
     // region Coil Target
+    override fun onStart(placeholder: Drawable?) {
+        if (placeholder is BitmapDrawable) {
+            drawBitmap(placeholder.bitmap)
+        }
+
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setState(ImageUtils.TaskState.loading)
+            .build()
+    }
+
     override fun onError(error: Drawable?) {
         LogUtil.d("OnError: ${outline.imageUrl}")
 
-        mOutline.release()
+        if (error is BitmapDrawable) {
+            drawBitmap(error.bitmap)
+        }
+
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
-            .setTexture(null)
-            .setEntry(null)
-            .setSurface(null)
-            .setCancelToken(null)
             .setState(ImageUtils.TaskState.failed)
             .build()
     }
 
-    @SuppressLint("Recycle")
     override fun onSuccess(result: Drawable) {
         LogUtil.d("onSuccess: ${outline.imageUrl}")
 
-        if (result !is BitmapDrawable) {
-            return
-        }
-
-        val width = geometry.width
-        val height = geometry.height
-        val bitmap = result.bitmap.copy(Bitmap.Config.ARGB_8888, true)
-
-        val texture = textureEntry.surfaceTexture()
-        val surface = texture.apply {
-            setDefaultBufferSize(width, height)
-        }.let { Surface(it) }
-
-        Rect(0, 0, 0, 0).let { surface.lockCanvas(it) }.apply {
-            drawFilter = PaintFlagsDrawFilter(
-                0,
-                Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
-            )
-
-            drawBitmap(
-                bitmap,
-                null,
-                canvasTargetRect(bitmap, geometry),
-                null
-            )
-
-            surface.unlockCanvasAndPost(this)
-            bitmap.recycle()
+        if (result is BitmapDrawable) {
+            drawBitmap(result.bitmap)
         }
 
         mOutline = TaskOutlineBuilder()
             .clone(mOutline)
-            .setSurface(surface)
-            .setTexture(texture)
             .setState(ImageUtils.TaskState.completed)
-            .build()
-    }
-
-    override fun onStart(placeholder: Drawable?) {
-        mOutline = TaskOutlineBuilder()
-            .clone(mOutline)
-            .setState(ImageUtils.TaskState.loading)
             .build()
     }
     // endregion Coil Target
@@ -196,6 +188,53 @@ class ImageLoaderTask(
             contain -> bitmap.rectBoxFitContains(width, height)
             fill -> bitmap.rectBoxFitFill(width, height)
             else -> Rect(0, 0, bitmap.width, bitmap.height)
+        }
+    }
+
+    private fun drawBitmap(bitmapToDraw: Bitmap) {
+        if (mOutline.texture == null || mOutline.surface == null) {
+            return
+        }
+
+        try {
+            val bitmap = bitmapToDraw.copy(Bitmap.Config.ARGB_8888, true)
+            mOutline.surface!!.lockCanvas(null).apply {
+                drawFilter = PaintFlagsDrawFilter(
+                    0,
+                    Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
+                )
+
+                drawBitmap(
+                    bitmap,
+                    null,
+                    canvasTargetRect(bitmap, geometry),
+                    null
+                )
+
+                mOutline.surface!!.unlockCanvasAndPost(this)
+                bitmap.recycle()
+            }
+        } catch (e: Exception) {
+            LogUtil.e("Draw bitmap: $e")
+        }
+    }
+
+    private fun assignPlaceholder(
+        placeholderPath: String?,
+        builder: ImageRequest.Builder,
+        replacement: Bitmap?,
+        isError: Boolean,
+    ) {
+        val bitmap = when (placeholderPath?.isNotEmpty()) {
+            true -> bitmapFromAsset(context, placeholderPath)
+            else -> replacement
+        } ?: return
+
+        BitmapDrawable(context.resources, bitmap).also {
+            when (isError) {
+                true -> builder.error(it)
+                else -> builder.placeholder(it)
+            }
         }
     }
 }

@@ -215,7 +215,7 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
  * Range from 0.0, which means `disable`, to 1.0, which means `use
  * when it's possible`. Default value is 0.2
  **/
-@property(nonatomic, readwrite) float androidAvailableMemoryPercentage;
+@property(nonatomic, readwrite) double androidAvailableMemoryPercentage;
 
 @end
 

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
+import 'package:texture_image/texture_image_plugin.dart';
 
 void main() {
   runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   final _images = <String>[
     'https://chingflowers.com.tw/wp-content/uploads/2020/10/AF4C4483-87A8-407F-B71D-3009CDEF6EF2.jpeg',
-    'https://wallpapercave.com/wp/Rwl8nSj.jpg',
+    'httbs://wallpapercave.com/wp/Rwl8nSj.jpg',
     'https://www.swellnet.com/sites/default/files/inline-images/img_0490-2.jpg',
     'https://cdn.wallpapersafari.com/58/43/z2Ixq3.jpg',
     'https://free4kwallpapers.com/uploads/originals/2019/12/24/surfing-wallpaper.jpg',
@@ -88,6 +89,12 @@ class _MyAppState extends State<MyApp> {
   final useTextureImage = true;
 
   @override
+  void initState() {
+    super.initState();
+    TextureImagePlugin.updateConfig();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
@@ -125,7 +132,7 @@ class _MyAppState extends State<MyApp> {
                         height: constraint.maxHeight,
                         fit: $ti.BoxFit.cover,
                         placeholderPath: 'lib/assets/ic_placeholder.png',
-                        errorPlaceholderPath: 'lib/assets/ic_error.png',
+                        errorPlaceholderPath: 'lib/assets/ic_error_1.png',
                       )
                     : CachedNetworkImage(
                         imageUrl: _images[index],

@@ -335,7 +335,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placeholder')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errorPlaceholder', protoName: 'errorPlaceholder')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backgroundColor', protoName: 'backgroundColor')
-    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'androidAvailableMemoryPercentage', $pb.PbFieldType.OF, protoName: 'androidAvailableMemoryPercentage')
+    ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'androidAvailableMemoryPercentage', $pb.PbFieldType.OD, protoName: 'androidAvailableMemoryPercentage')
     ..hasRequiredFields = false
   ;
 
@@ -412,7 +412,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
   @$pb.TagNumber(4)
   $core.double get androidAvailableMemoryPercentage => $_getN(3);
   @$pb.TagNumber(4)
-  set androidAvailableMemoryPercentage($core.double v) { $_setFloat(3, v); }
+  set androidAvailableMemoryPercentage($core.double v) { $_setDouble(3, v); }
   @$pb.TagNumber(4)
   $core.bool hasAndroidAvailableMemoryPercentage() => $_has(3);
   @$pb.TagNumber(4)

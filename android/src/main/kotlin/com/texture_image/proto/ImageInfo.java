@@ -3842,10 +3842,10 @@ public final class ImageInfo {
      * when it's possible`. Default value is 0.2
      * </pre>
      *
-     * <code>float androidAvailableMemoryPercentage = 4;</code>
+     * <code>double androidAvailableMemoryPercentage = 4;</code>
      * @return The androidAvailableMemoryPercentage.
      */
-    float getAndroidAvailableMemoryPercentage();
+    double getAndroidAvailableMemoryPercentage();
   }
   /**
    * <pre>
@@ -3917,9 +3917,9 @@ public final class ImageInfo {
               backgroundColor_ = s;
               break;
             }
-            case 37: {
+            case 33: {
 
-              androidAvailableMemoryPercentage_ = input.readFloat();
+              androidAvailableMemoryPercentage_ = input.readDouble();
               break;
             }
             default: {
@@ -4107,7 +4107,7 @@ public final class ImageInfo {
     }
 
     public static final int ANDROIDAVAILABLEMEMORYPERCENTAGE_FIELD_NUMBER = 4;
-    private float androidAvailableMemoryPercentage_;
+    private double androidAvailableMemoryPercentage_;
     /**
      * <pre>
      * Percentage of available memory to devote to the loader cache and
@@ -4116,11 +4116,11 @@ public final class ImageInfo {
      * when it's possible`. Default value is 0.2
      * </pre>
      *
-     * <code>float androidAvailableMemoryPercentage = 4;</code>
+     * <code>double androidAvailableMemoryPercentage = 4;</code>
      * @return The androidAvailableMemoryPercentage.
      */
     @java.lang.Override
-    public float getAndroidAvailableMemoryPercentage() {
+    public double getAndroidAvailableMemoryPercentage() {
       return androidAvailableMemoryPercentage_;
     }
 
@@ -4147,8 +4147,8 @@ public final class ImageInfo {
       if (!getBackgroundColorBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, backgroundColor_);
       }
-      if (androidAvailableMemoryPercentage_ != 0F) {
-        output.writeFloat(4, androidAvailableMemoryPercentage_);
+      if (androidAvailableMemoryPercentage_ != 0D) {
+        output.writeDouble(4, androidAvailableMemoryPercentage_);
       }
       unknownFields.writeTo(output);
     }
@@ -4168,9 +4168,9 @@ public final class ImageInfo {
       if (!getBackgroundColorBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, backgroundColor_);
       }
-      if (androidAvailableMemoryPercentage_ != 0F) {
+      if (androidAvailableMemoryPercentage_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
-          .computeFloatSize(4, androidAvailableMemoryPercentage_);
+          .computeDoubleSize(4, androidAvailableMemoryPercentage_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4193,8 +4193,8 @@ public final class ImageInfo {
           .equals(other.getErrorPlaceholder())) return false;
       if (!getBackgroundColor()
           .equals(other.getBackgroundColor())) return false;
-      if (java.lang.Float.floatToIntBits(getAndroidAvailableMemoryPercentage())
-          != java.lang.Float.floatToIntBits(
+      if (java.lang.Double.doubleToLongBits(getAndroidAvailableMemoryPercentage())
+          != java.lang.Double.doubleToLongBits(
               other.getAndroidAvailableMemoryPercentage())) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
@@ -4214,8 +4214,8 @@ public final class ImageInfo {
       hash = (37 * hash) + BACKGROUNDCOLOR_FIELD_NUMBER;
       hash = (53 * hash) + getBackgroundColor().hashCode();
       hash = (37 * hash) + ANDROIDAVAILABLEMEMORYPERCENTAGE_FIELD_NUMBER;
-      hash = (53 * hash) + java.lang.Float.floatToIntBits(
-          getAndroidAvailableMemoryPercentage());
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          java.lang.Double.doubleToLongBits(getAndroidAvailableMemoryPercentage()));
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4359,7 +4359,7 @@ public final class ImageInfo {
 
         backgroundColor_ = "";
 
-        androidAvailableMemoryPercentage_ = 0F;
+        androidAvailableMemoryPercentage_ = 0D;
 
         return this;
       }
@@ -4451,7 +4451,7 @@ public final class ImageInfo {
           backgroundColor_ = other.backgroundColor_;
           onChanged();
         }
-        if (other.getAndroidAvailableMemoryPercentage() != 0F) {
+        if (other.getAndroidAvailableMemoryPercentage() != 0D) {
           setAndroidAvailableMemoryPercentage(other.getAndroidAvailableMemoryPercentage());
         }
         this.mergeUnknownFields(other.unknownFields);
@@ -4806,7 +4806,7 @@ public final class ImageInfo {
         return this;
       }
 
-      private float androidAvailableMemoryPercentage_ ;
+      private double androidAvailableMemoryPercentage_ ;
       /**
        * <pre>
        * Percentage of available memory to devote to the loader cache and
@@ -4815,11 +4815,11 @@ public final class ImageInfo {
        * when it's possible`. Default value is 0.2
        * </pre>
        *
-       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * <code>double androidAvailableMemoryPercentage = 4;</code>
        * @return The androidAvailableMemoryPercentage.
        */
       @java.lang.Override
-      public float getAndroidAvailableMemoryPercentage() {
+      public double getAndroidAvailableMemoryPercentage() {
         return androidAvailableMemoryPercentage_;
       }
       /**
@@ -4830,11 +4830,11 @@ public final class ImageInfo {
        * when it's possible`. Default value is 0.2
        * </pre>
        *
-       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * <code>double androidAvailableMemoryPercentage = 4;</code>
        * @param value The androidAvailableMemoryPercentage to set.
        * @return This builder for chaining.
        */
-      public Builder setAndroidAvailableMemoryPercentage(float value) {
+      public Builder setAndroidAvailableMemoryPercentage(double value) {
         
         androidAvailableMemoryPercentage_ = value;
         onChanged();
@@ -4848,12 +4848,12 @@ public final class ImageInfo {
        * when it's possible`. Default value is 0.2
        * </pre>
        *
-       * <code>float androidAvailableMemoryPercentage = 4;</code>
+       * <code>double androidAvailableMemoryPercentage = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearAndroidAvailableMemoryPercentage() {
         
-        androidAvailableMemoryPercentage_ = 0F;
+        androidAvailableMemoryPercentage_ = 0D;
         onChanged();
         return this;
       }
@@ -4956,7 +4956,7 @@ public final class ImageInfo {
       "ImageConfigInfo\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020" +
       "errorPlaceholder\030\002 \001(\t\022\027\n\017backgroundColo" +
       "r\030\003 \001(\t\022(\n androidAvailableMemoryPercent" +
-      "age\030\004 \001(\002B\031\n\027com.texture_image.protob\006pr" +
+      "age\030\004 \001(\001B\031\n\027com.texture_image.protob\006pr" +
       "oto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor

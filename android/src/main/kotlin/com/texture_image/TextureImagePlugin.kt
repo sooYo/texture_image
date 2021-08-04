@@ -47,6 +47,10 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
                 call,
                 result
             )
+            Methods.textureImageConfig -> _imageLoader?.updateGlobalConfig(
+                call,
+                result
+            )
             Methods.enableLog -> LogUtil.enableLog(call, result)
             else -> result.notImplemented()
         }

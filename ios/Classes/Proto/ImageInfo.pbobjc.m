@@ -367,10 +367,10 @@ typedef struct ImageDisposeInfo__storage_ {
 
 typedef struct ImageConfigInfo__storage_ {
   uint32_t _has_storage_[1];
-  float androidAvailableMemoryPercentage;
   NSString *placeholder;
   NSString *errorPlaceholder;
   NSString *backgroundColor;
+  double androidAvailableMemoryPercentage;
 } ImageConfigInfo__storage_;
 
 // This method is threadsafe because it is initially called
@@ -413,7 +413,7 @@ typedef struct ImageConfigInfo__storage_ {
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ImageConfigInfo__storage_, androidAvailableMemoryPercentage),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
-        .dataType = GPBDataTypeFloat,
+        .dataType = GPBDataTypeDouble,
       },
     };
     GPBDescriptor *localDescriptor =

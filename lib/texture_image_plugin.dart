@@ -58,4 +58,16 @@ class TextureImagePlugin {
       cancelInfo.writeToBuffer(),
     );
   }
+
+  static Future<void> updateConfig() async {
+    final config = ImageConfigInfo()
+      ..placeholder = 'lib/assets/ic_placeholder.png'
+      ..errorPlaceholder = 'lib/assets/ic_error.png'
+      ..androidAvailableMemoryPercentage = 0.3;
+
+    return _channel.invokeMethod(
+      Methods.textureImageConfig,
+      config.writeToBuffer(),
+    );
+  }
 }
