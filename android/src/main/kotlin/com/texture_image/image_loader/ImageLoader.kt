@@ -2,6 +2,7 @@ package com.texture_image.image_loader
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.util.CoilUtils
@@ -112,7 +113,7 @@ class ImageLoader(
         if (cancelInfo == null) {
             result.success(
                 ResultUtils.protoParseFailed(
-                    "ImageFetchCancelInfo",
+                    "ImageDisposeInfo",
                     "disposeTextureImage"
                 )
             )
@@ -184,8 +185,10 @@ class ImageLoader(
             null
         }
 
-        task?.dispose()
-        return removeTaskFromMap(task)
+        return task?.run {
+            removeTaskFromMap(this)
+            dispose()
+        }
     }
 
     // endregion Core Methods
