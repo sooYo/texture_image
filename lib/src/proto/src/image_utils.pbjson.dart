@@ -56,10 +56,11 @@ const Geometry$json = const {
   '2': const [
     const {'1': 'width', '3': 1, '4': 1, '5': 5, '10': 'width'},
     const {'1': 'height', '3': 2, '4': 1, '5': 5, '10': 'height'},
-    const {'1': 'fit', '3': 3, '4': 1, '5': 14, '6': '.BoxFit', '10': 'fit'},
-    const {'1': 'borderRadius', '3': 4, '4': 1, '5': 11, '6': '.BorderRadius', '10': 'borderRadius'},
+    const {'1': 'supportAlpha', '3': 3, '4': 1, '5': 8, '10': 'supportAlpha'},
+    const {'1': 'fit', '3': 4, '4': 1, '5': 14, '6': '.BoxFit', '10': 'fit'},
+    const {'1': 'borderRadius', '3': 5, '4': 1, '5': 11, '6': '.BorderRadius', '10': 'borderRadius'},
   ],
 };
 
 /// Descriptor for `Geometry`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List geometryDescriptor = $convert.base64Decode('CghHZW9tZXRyeRIUCgV3aWR0aBgBIAEoBVIFd2lkdGgSFgoGaGVpZ2h0GAIgASgFUgZoZWlnaHQSGQoDZml0GAMgASgOMgcuQm94Rml0UgNmaXQSMQoMYm9yZGVyUmFkaXVzGAQgASgLMg0uQm9yZGVyUmFkaXVzUgxib3JkZXJSYWRpdXM=');
+final $typed_data.Uint8List geometryDescriptor = $convert.base64Decode('CghHZW9tZXRyeRIUCgV3aWR0aBgBIAEoBVIFd2lkdGgSFgoGaGVpZ2h0GAIgASgFUgZoZWlnaHQSIgoMc3VwcG9ydEFscGhhGAMgASgIUgxzdXBwb3J0QWxwaGESGQoDZml0GAQgASgOMgcuQm94Rml0UgNmaXQSMQoMYm9yZGVyUmFkaXVzGAUgASgLMg0uQm9yZGVyUmFkaXVzUgxib3JkZXJSYWRpdXM=');

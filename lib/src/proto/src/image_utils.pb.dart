@@ -106,8 +106,9 @@ class Geometry extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Geometry', createEmptyInstance: create)
     ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'width', $pb.PbFieldType.O3)
     ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'height', $pb.PbFieldType.O3)
-    ..e<BoxFit>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fit', $pb.PbFieldType.OE, defaultOrMaker: BoxFit.fill, valueOf: BoxFit.valueOf, enumValues: BoxFit.values)
-    ..aOM<BorderRadius>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'borderRadius', protoName: 'borderRadius', subBuilder: BorderRadius.create)
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'supportAlpha', protoName: 'supportAlpha')
+    ..e<BoxFit>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'fit', $pb.PbFieldType.OE, defaultOrMaker: BoxFit.fill, valueOf: BoxFit.valueOf, enumValues: BoxFit.values)
+    ..aOM<BorderRadius>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'borderRadius', protoName: 'borderRadius', subBuilder: BorderRadius.create)
     ..hasRequiredFields = false
   ;
 
@@ -115,6 +116,7 @@ class Geometry extends $pb.GeneratedMessage {
   factory Geometry({
     $core.int? width,
     $core.int? height,
+    $core.bool? supportAlpha,
     BoxFit? fit,
     BorderRadius? borderRadius,
   }) {
@@ -124,6 +126,9 @@ class Geometry extends $pb.GeneratedMessage {
     }
     if (height != null) {
       _result.height = height;
+    }
+    if (supportAlpha != null) {
+      _result.supportAlpha = supportAlpha;
     }
     if (fit != null) {
       _result.fit = fit;
@@ -173,23 +178,32 @@ class Geometry extends $pb.GeneratedMessage {
   void clearHeight() => clearField(2);
 
   @$pb.TagNumber(3)
-  BoxFit get fit => $_getN(2);
+  $core.bool get supportAlpha => $_getBF(2);
   @$pb.TagNumber(3)
-  set fit(BoxFit v) { setField(3, v); }
+  set supportAlpha($core.bool v) { $_setBool(2, v); }
   @$pb.TagNumber(3)
-  $core.bool hasFit() => $_has(2);
+  $core.bool hasSupportAlpha() => $_has(2);
   @$pb.TagNumber(3)
-  void clearFit() => clearField(3);
+  void clearSupportAlpha() => clearField(3);
 
   @$pb.TagNumber(4)
-  BorderRadius get borderRadius => $_getN(3);
+  BoxFit get fit => $_getN(3);
   @$pb.TagNumber(4)
-  set borderRadius(BorderRadius v) { setField(4, v); }
+  set fit(BoxFit v) { setField(4, v); }
   @$pb.TagNumber(4)
-  $core.bool hasBorderRadius() => $_has(3);
+  $core.bool hasFit() => $_has(3);
   @$pb.TagNumber(4)
-  void clearBorderRadius() => clearField(4);
-  @$pb.TagNumber(4)
-  BorderRadius ensureBorderRadius() => $_ensure(3);
+  void clearFit() => clearField(4);
+
+  @$pb.TagNumber(5)
+  BorderRadius get borderRadius => $_getN(4);
+  @$pb.TagNumber(5)
+  set borderRadius(BorderRadius v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasBorderRadius() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearBorderRadius() => clearField(5);
+  @$pb.TagNumber(5)
+  BorderRadius ensureBorderRadius() => $_ensure(4);
 }
 

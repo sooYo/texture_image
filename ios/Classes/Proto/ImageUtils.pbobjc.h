@@ -129,8 +129,9 @@ GPB_FINAL @interface BorderRadius : GPBMessage
 typedef GPB_ENUM(Geometry_FieldNumber) {
   Geometry_FieldNumber_Width = 1,
   Geometry_FieldNumber_Height = 2,
-  Geometry_FieldNumber_Fit = 3,
-  Geometry_FieldNumber_BorderRadius = 4,
+  Geometry_FieldNumber_SupportAlpha = 3,
+  Geometry_FieldNumber_Fit = 4,
+  Geometry_FieldNumber_BorderRadius = 5,
 };
 
 GPB_FINAL @interface Geometry : GPBMessage
@@ -138,6 +139,20 @@ GPB_FINAL @interface Geometry : GPBMessage
 @property(nonatomic, readwrite) int32_t width;
 
 @property(nonatomic, readwrite) int32_t height;
+
+/**
+ * Indicate whether this image has alpha channel
+ *
+ * On Android platform, if this is not supported,
+ * then the bitmap loader will use RGB_565 format
+ * to decode the image, result in reducing half
+ * size. Otherwise, ARGB_888 format will used,
+ * on this format, each pixel is stored on 4 bytes.
+ *
+ * It is suggested to disable this feature as if
+ * it's possible anyway.
+ **/
+@property(nonatomic, readwrite) BOOL supportAlpha;
 
 @property(nonatomic, readwrite) BoxFit fit;
 

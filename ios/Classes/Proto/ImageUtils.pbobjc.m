@@ -229,6 +229,7 @@ typedef struct BorderRadius__storage_ {
 
 @dynamic width;
 @dynamic height;
+@dynamic supportAlpha;
 @dynamic fit;
 @dynamic hasBorderRadius, borderRadius;
 
@@ -265,10 +266,19 @@ typedef struct Geometry__storage_ {
         .dataType = GPBDataTypeInt32,
       },
       {
+        .name = "supportAlpha",
+        .dataTypeSpecific.clazz = Nil,
+        .number = Geometry_FieldNumber_SupportAlpha,
+        .hasIndex = 2,
+        .offset = 3,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
         .name = "fit",
         .dataTypeSpecific.enumDescFunc = BoxFit_EnumDescriptor,
         .number = Geometry_FieldNumber_Fit,
-        .hasIndex = 2,
+        .hasIndex = 4,
         .offset = (uint32_t)offsetof(Geometry__storage_, fit),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldHasEnumDescriptor | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeEnum,
@@ -277,7 +287,7 @@ typedef struct Geometry__storage_ {
         .name = "borderRadius",
         .dataTypeSpecific.clazz = GPBObjCClass(BorderRadius),
         .number = Geometry_FieldNumber_BorderRadius,
-        .hasIndex = 3,
+        .hasIndex = 5,
         .offset = (uint32_t)offsetof(Geometry__storage_, borderRadius),
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom),
         .dataType = GPBDataTypeMessage,
@@ -293,7 +303,7 @@ typedef struct Geometry__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\001\004\014\000";
+        "\002\003\014\000\005\014\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

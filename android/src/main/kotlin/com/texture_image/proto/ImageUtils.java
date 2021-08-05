@@ -1052,28 +1052,45 @@ public final class ImageUtils {
     int getHeight();
 
     /**
-     * <code>.BoxFit fit = 3;</code>
+     * <pre>
+     * Indicate whether this image has alpha channel
+     * On Android platform, if this is not supported,
+     * then the bitmap loader will use RGB_565 format
+     * to decode the image, result in reducing half
+     * size. Otherwise, ARGB_888 format will used,
+     * on this format, each pixel is stored on 4 bytes.
+     * It is suggested to disable this feature as if
+     * it's possible anyway.
+     * </pre>
+     *
+     * <code>bool supportAlpha = 3;</code>
+     * @return The supportAlpha.
+     */
+    boolean getSupportAlpha();
+
+    /**
+     * <code>.BoxFit fit = 4;</code>
      * @return The enum numeric value on the wire for fit.
      */
     int getFitValue();
     /**
-     * <code>.BoxFit fit = 3;</code>
+     * <code>.BoxFit fit = 4;</code>
      * @return The fit.
      */
     com.texture_image.proto.ImageUtils.BoxFit getFit();
 
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      * @return Whether the borderRadius field is set.
      */
     boolean hasBorderRadius();
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      * @return The borderRadius.
      */
     com.texture_image.proto.ImageUtils.BorderRadius getBorderRadius();
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      */
     com.texture_image.proto.ImageUtils.BorderRadiusOrBuilder getBorderRadiusOrBuilder();
   }
@@ -1134,12 +1151,17 @@ public final class ImageUtils {
               break;
             }
             case 24: {
+
+              supportAlpha_ = input.readBool();
+              break;
+            }
+            case 32: {
               int rawValue = input.readEnum();
 
               fit_ = rawValue;
               break;
             }
-            case 34: {
+            case 42: {
               com.texture_image.proto.ImageUtils.BorderRadius.Builder subBuilder = null;
               if (borderRadius_ != null) {
                 subBuilder = borderRadius_.toBuilder();
@@ -1206,17 +1228,39 @@ public final class ImageUtils {
       return height_;
     }
 
-    public static final int FIT_FIELD_NUMBER = 3;
+    public static final int SUPPORTALPHA_FIELD_NUMBER = 3;
+    private boolean supportAlpha_;
+    /**
+     * <pre>
+     * Indicate whether this image has alpha channel
+     * On Android platform, if this is not supported,
+     * then the bitmap loader will use RGB_565 format
+     * to decode the image, result in reducing half
+     * size. Otherwise, ARGB_888 format will used,
+     * on this format, each pixel is stored on 4 bytes.
+     * It is suggested to disable this feature as if
+     * it's possible anyway.
+     * </pre>
+     *
+     * <code>bool supportAlpha = 3;</code>
+     * @return The supportAlpha.
+     */
+    @java.lang.Override
+    public boolean getSupportAlpha() {
+      return supportAlpha_;
+    }
+
+    public static final int FIT_FIELD_NUMBER = 4;
     private int fit_;
     /**
-     * <code>.BoxFit fit = 3;</code>
+     * <code>.BoxFit fit = 4;</code>
      * @return The enum numeric value on the wire for fit.
      */
     @java.lang.Override public int getFitValue() {
       return fit_;
     }
     /**
-     * <code>.BoxFit fit = 3;</code>
+     * <code>.BoxFit fit = 4;</code>
      * @return The fit.
      */
     @java.lang.Override public com.texture_image.proto.ImageUtils.BoxFit getFit() {
@@ -1225,10 +1269,10 @@ public final class ImageUtils {
       return result == null ? com.texture_image.proto.ImageUtils.BoxFit.UNRECOGNIZED : result;
     }
 
-    public static final int BORDERRADIUS_FIELD_NUMBER = 4;
+    public static final int BORDERRADIUS_FIELD_NUMBER = 5;
     private com.texture_image.proto.ImageUtils.BorderRadius borderRadius_;
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      * @return Whether the borderRadius field is set.
      */
     @java.lang.Override
@@ -1236,7 +1280,7 @@ public final class ImageUtils {
       return borderRadius_ != null;
     }
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      * @return The borderRadius.
      */
     @java.lang.Override
@@ -1244,7 +1288,7 @@ public final class ImageUtils {
       return borderRadius_ == null ? com.texture_image.proto.ImageUtils.BorderRadius.getDefaultInstance() : borderRadius_;
     }
     /**
-     * <code>.BorderRadius borderRadius = 4;</code>
+     * <code>.BorderRadius borderRadius = 5;</code>
      */
     @java.lang.Override
     public com.texture_image.proto.ImageUtils.BorderRadiusOrBuilder getBorderRadiusOrBuilder() {
@@ -1271,11 +1315,14 @@ public final class ImageUtils {
       if (height_ != 0) {
         output.writeInt32(2, height_);
       }
+      if (supportAlpha_ != false) {
+        output.writeBool(3, supportAlpha_);
+      }
       if (fit_ != com.texture_image.proto.ImageUtils.BoxFit.fill.getNumber()) {
-        output.writeEnum(3, fit_);
+        output.writeEnum(4, fit_);
       }
       if (borderRadius_ != null) {
-        output.writeMessage(4, getBorderRadius());
+        output.writeMessage(5, getBorderRadius());
       }
       unknownFields.writeTo(output);
     }
@@ -1294,13 +1341,17 @@ public final class ImageUtils {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(2, height_);
       }
+      if (supportAlpha_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, supportAlpha_);
+      }
       if (fit_ != com.texture_image.proto.ImageUtils.BoxFit.fill.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(3, fit_);
+          .computeEnumSize(4, fit_);
       }
       if (borderRadius_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getBorderRadius());
+          .computeMessageSize(5, getBorderRadius());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1321,6 +1372,8 @@ public final class ImageUtils {
           != other.getWidth()) return false;
       if (getHeight()
           != other.getHeight()) return false;
+      if (getSupportAlpha()
+          != other.getSupportAlpha()) return false;
       if (fit_ != other.fit_) return false;
       if (hasBorderRadius() != other.hasBorderRadius()) return false;
       if (hasBorderRadius()) {
@@ -1342,6 +1395,9 @@ public final class ImageUtils {
       hash = (53 * hash) + getWidth();
       hash = (37 * hash) + HEIGHT_FIELD_NUMBER;
       hash = (53 * hash) + getHeight();
+      hash = (37 * hash) + SUPPORTALPHA_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getSupportAlpha());
       hash = (37 * hash) + FIT_FIELD_NUMBER;
       hash = (53 * hash) + fit_;
       if (hasBorderRadius()) {
@@ -1485,6 +1541,8 @@ public final class ImageUtils {
 
         height_ = 0;
 
+        supportAlpha_ = false;
+
         fit_ = 0;
 
         if (borderRadiusBuilder_ == null) {
@@ -1521,6 +1579,7 @@ public final class ImageUtils {
         com.texture_image.proto.ImageUtils.Geometry result = new com.texture_image.proto.ImageUtils.Geometry(this);
         result.width_ = width_;
         result.height_ = height_;
+        result.supportAlpha_ = supportAlpha_;
         result.fit_ = fit_;
         if (borderRadiusBuilder_ == null) {
           result.borderRadius_ = borderRadius_;
@@ -1580,6 +1639,9 @@ public final class ImageUtils {
         }
         if (other.getHeight() != 0) {
           setHeight(other.getHeight());
+        }
+        if (other.getSupportAlpha() != false) {
+          setSupportAlpha(other.getSupportAlpha());
         }
         if (other.fit_ != 0) {
           setFitValue(other.getFitValue());
@@ -1678,16 +1740,80 @@ public final class ImageUtils {
         return this;
       }
 
+      private boolean supportAlpha_ ;
+      /**
+       * <pre>
+       * Indicate whether this image has alpha channel
+       * On Android platform, if this is not supported,
+       * then the bitmap loader will use RGB_565 format
+       * to decode the image, result in reducing half
+       * size. Otherwise, ARGB_888 format will used,
+       * on this format, each pixel is stored on 4 bytes.
+       * It is suggested to disable this feature as if
+       * it's possible anyway.
+       * </pre>
+       *
+       * <code>bool supportAlpha = 3;</code>
+       * @return The supportAlpha.
+       */
+      @java.lang.Override
+      public boolean getSupportAlpha() {
+        return supportAlpha_;
+      }
+      /**
+       * <pre>
+       * Indicate whether this image has alpha channel
+       * On Android platform, if this is not supported,
+       * then the bitmap loader will use RGB_565 format
+       * to decode the image, result in reducing half
+       * size. Otherwise, ARGB_888 format will used,
+       * on this format, each pixel is stored on 4 bytes.
+       * It is suggested to disable this feature as if
+       * it's possible anyway.
+       * </pre>
+       *
+       * <code>bool supportAlpha = 3;</code>
+       * @param value The supportAlpha to set.
+       * @return This builder for chaining.
+       */
+      public Builder setSupportAlpha(boolean value) {
+        
+        supportAlpha_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Indicate whether this image has alpha channel
+       * On Android platform, if this is not supported,
+       * then the bitmap loader will use RGB_565 format
+       * to decode the image, result in reducing half
+       * size. Otherwise, ARGB_888 format will used,
+       * on this format, each pixel is stored on 4 bytes.
+       * It is suggested to disable this feature as if
+       * it's possible anyway.
+       * </pre>
+       *
+       * <code>bool supportAlpha = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearSupportAlpha() {
+        
+        supportAlpha_ = false;
+        onChanged();
+        return this;
+      }
+
       private int fit_ = 0;
       /**
-       * <code>.BoxFit fit = 3;</code>
+       * <code>.BoxFit fit = 4;</code>
        * @return The enum numeric value on the wire for fit.
        */
       @java.lang.Override public int getFitValue() {
         return fit_;
       }
       /**
-       * <code>.BoxFit fit = 3;</code>
+       * <code>.BoxFit fit = 4;</code>
        * @param value The enum numeric value on the wire for fit to set.
        * @return This builder for chaining.
        */
@@ -1698,7 +1824,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BoxFit fit = 3;</code>
+       * <code>.BoxFit fit = 4;</code>
        * @return The fit.
        */
       @java.lang.Override
@@ -1708,7 +1834,7 @@ public final class ImageUtils {
         return result == null ? com.texture_image.proto.ImageUtils.BoxFit.UNRECOGNIZED : result;
       }
       /**
-       * <code>.BoxFit fit = 3;</code>
+       * <code>.BoxFit fit = 4;</code>
        * @param value The fit to set.
        * @return This builder for chaining.
        */
@@ -1722,7 +1848,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BoxFit fit = 3;</code>
+       * <code>.BoxFit fit = 4;</code>
        * @return This builder for chaining.
        */
       public Builder clearFit() {
@@ -1736,14 +1862,14 @@ public final class ImageUtils {
       private com.google.protobuf.SingleFieldBuilderV3<
           com.texture_image.proto.ImageUtils.BorderRadius, com.texture_image.proto.ImageUtils.BorderRadius.Builder, com.texture_image.proto.ImageUtils.BorderRadiusOrBuilder> borderRadiusBuilder_;
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        * @return Whether the borderRadius field is set.
        */
       public boolean hasBorderRadius() {
         return borderRadiusBuilder_ != null || borderRadius_ != null;
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        * @return The borderRadius.
        */
       public com.texture_image.proto.ImageUtils.BorderRadius getBorderRadius() {
@@ -1754,7 +1880,7 @@ public final class ImageUtils {
         }
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public Builder setBorderRadius(com.texture_image.proto.ImageUtils.BorderRadius value) {
         if (borderRadiusBuilder_ == null) {
@@ -1770,7 +1896,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public Builder setBorderRadius(
           com.texture_image.proto.ImageUtils.BorderRadius.Builder builderForValue) {
@@ -1784,7 +1910,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public Builder mergeBorderRadius(com.texture_image.proto.ImageUtils.BorderRadius value) {
         if (borderRadiusBuilder_ == null) {
@@ -1802,7 +1928,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public Builder clearBorderRadius() {
         if (borderRadiusBuilder_ == null) {
@@ -1816,7 +1942,7 @@ public final class ImageUtils {
         return this;
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public com.texture_image.proto.ImageUtils.BorderRadius.Builder getBorderRadiusBuilder() {
         
@@ -1824,7 +1950,7 @@ public final class ImageUtils {
         return getBorderRadiusFieldBuilder().getBuilder();
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       public com.texture_image.proto.ImageUtils.BorderRadiusOrBuilder getBorderRadiusOrBuilder() {
         if (borderRadiusBuilder_ != null) {
@@ -1835,7 +1961,7 @@ public final class ImageUtils {
         }
       }
       /**
-       * <code>.BorderRadius borderRadius = 4;</code>
+       * <code>.BorderRadius borderRadius = 5;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.texture_image.proto.ImageUtils.BorderRadius, com.texture_image.proto.ImageUtils.BorderRadius.Builder, com.texture_image.proto.ImageUtils.BorderRadiusOrBuilder> 
@@ -1924,15 +2050,16 @@ public final class ImageUtils {
     java.lang.String[] descriptorData = {
       "\n\021image_utils.proto\"Z\n\014BorderRadius\022\017\n\007t" +
       "opLeft\030\001 \001(\001\022\020\n\010topRight\030\002 \001(\001\022\022\n\nbottom" +
-      "Left\030\003 \001(\001\022\023\n\013bottomRight\030\004 \001(\001\"d\n\010Geome" +
-      "try\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\024\n\003fi" +
-      "t\030\003 \001(\0162\007.BoxFit\022#\n\014borderRadius\030\004 \001(\0132\r" +
-      ".BorderRadius*G\n\006BoxFit\022\010\n\004fill\020\000\022\013\n\007con" +
-      "tain\020\001\022\t\n\005cover\020\002\022\014\n\010fitWidth\020\003\022\r\n\tfitHe" +
-      "ight\020\004*a\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007" +
-      "loading\020\001\022\r\n\tcompleted\020\002\022\n\n\006failed\020\003\022\014\n\010" +
-      "disposed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture" +
-      "_image.protob\006proto3"
+      "Left\030\003 \001(\001\022\023\n\013bottomRight\030\004 \001(\001\"z\n\010Geome" +
+      "try\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\024\n\014su" +
+      "pportAlpha\030\003 \001(\010\022\024\n\003fit\030\004 \001(\0162\007.BoxFit\022#" +
+      "\n\014borderRadius\030\005 \001(\0132\r.BorderRadius*G\n\006B" +
+      "oxFit\022\010\n\004fill\020\000\022\013\n\007contain\020\001\022\t\n\005cover\020\002\022" +
+      "\014\n\010fitWidth\020\003\022\r\n\tfitHeight\020\004*a\n\tTaskStat" +
+      "e\022\017\n\013initialized\020\000\022\013\n\007loading\020\001\022\r\n\tcompl" +
+      "eted\020\002\022\n\n\006failed\020\003\022\014\n\010disposed\020\004\022\r\n\tunde" +
+      "fined\020\005B\031\n\027com.texture_image.protob\006prot" +
+      "o3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -1949,7 +2076,7 @@ public final class ImageUtils {
     internal_static_Geometry_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Geometry_descriptor,
-        new java.lang.String[] { "Width", "Height", "Fit", "BorderRadius", });
+        new java.lang.String[] { "Width", "Height", "SupportAlpha", "Fit", "BorderRadius", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
