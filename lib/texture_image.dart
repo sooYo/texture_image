@@ -13,6 +13,7 @@ class TextureImage extends StatefulWidget {
     this.placeholderPath,
     this.errorPlaceholderPath,
     this.fit = BoxFit.contain,
+    this.disableAlphaChannel = true,
   });
 
   final String url;
@@ -22,6 +23,8 @@ class TextureImage extends StatefulWidget {
   final Widget? placeholder;
   final String? placeholderPath;
   final String? errorPlaceholderPath;
+
+  final bool disableAlphaChannel;
 
   @override
   State<StatefulWidget> createState() => _ImageState();

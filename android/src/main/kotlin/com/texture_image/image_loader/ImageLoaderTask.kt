@@ -60,7 +60,7 @@ class ImageLoaderTask(
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
-//            .allowRgb565(true)
+            .allowRgb565(!geometry.supportAlpha)
             .transformations(transform)
 
         assignPlaceholder(

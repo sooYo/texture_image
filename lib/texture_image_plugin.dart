@@ -20,11 +20,13 @@ class TextureImagePlugin {
     String? placeholderPath,
     String? errorPlaceholderPath,
     BoxFit fit = BoxFit.contain,
+    bool disableAlphaChannel = true,
   }) async {
     final geometry = Geometry()
+      ..fit = fit
       ..width = width.toInt()
       ..height = height.toInt()
-      ..fit = fit
+      ..supportAlpha = !disableAlphaChannel
       ..borderRadius = BorderRadius();
 
     final imageInfo = ImageFetchInfo()

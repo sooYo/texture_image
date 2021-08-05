@@ -2,7 +2,6 @@ package com.texture_image.image_loader
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.util.CoilUtils
@@ -40,9 +39,9 @@ class ImageLoader(
 
         coil.ImageLoader.Builder(context)
             .crossfade(true)
-            .bitmapConfig(Bitmap.Config.ARGB_8888)
             .okHttpClient(httpClient)
             .availableMemoryPercentage(memOp)
+            .bitmapConfig(Bitmap.Config.ARGB_8888)
             .build()
     }
 
@@ -53,8 +52,6 @@ class ImageLoader(
     }
 
     override fun onTaskStateUpdated(task: ImageLoaderTask) {
-        LogUtil.d("State updated: ${task.outline.id}: ${task.outline.state}")
-
 //        if (task.outline.didStop) {
 //            removeTaskFromMap(task).also { cacheTaskIfPossible(it) }
 //        } else if (task.outline.isInitialized) {
@@ -226,8 +223,6 @@ class ImageLoader(
             evict.release()
         }
 
-        LogUtil.d("cacheTaskIfPossible: ${taskOutline.id}")
-
         outlineCache.addLast(taskOutline)
         return true
     }
@@ -250,8 +245,6 @@ class ImageLoader(
     }
 
     private fun saveTaskToMap(task: ImageLoaderTask): TaskOutline {
-        LogUtil.d("saveTaskToMap: ${task.outline.id}")
-
         val taskId = task.outline.id
         if (taskId >= 0) {
             taskMap[taskId] = task
@@ -264,8 +257,6 @@ class ImageLoader(
         if (task == null) {
             return null
         }
-
-        LogUtil.d("removeTaskFromMap: ${task.outline.id}")
 
         taskMap.remove(task.outline.id)
         return task.outline

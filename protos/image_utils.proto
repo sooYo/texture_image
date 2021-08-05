@@ -29,6 +29,19 @@ message BorderRadius {
 message Geometry {
   int32 width = 1;
   int32 height = 2;
-  BoxFit fit = 3;
-  BorderRadius borderRadius = 4;
+
+  // Indicate whether this image has alpha channel
+  //
+  // On Android platform, if this is not supported,
+  // then the bitmap loader will use RGB_565 format
+  // to decode the image, result in reducing half
+  // size. Otherwise, ARGB_888 format will used,
+  // on this format, each pixel is stored on 4 bytes.
+  //
+  // It is suggested to disable this feature as if
+  // it's possible anyway.
+  bool supportAlpha = 3;
+
+  BoxFit fit = 4;
+  BorderRadius borderRadius = 5;
 }
