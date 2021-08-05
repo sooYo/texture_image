@@ -1,11 +1,14 @@
 package com.texture_image.utils
 
+import android.content.Context
+import coil.size.PixelSize
 import coil.transform.BlurTransformation
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import coil.transform.Transformation
 import com.texture_image.proto.ImageUtils
 import kotlin.math.abs
+import kotlin.math.roundToInt
 
 fun Double.equalsDelta(other: Double, delta: Double = 0.0001): Boolean {
     return abs(this - other) < delta
@@ -55,4 +58,38 @@ fun ImageUtils.Geometry.parseCoilShapeTransform(): Transformation? {
         bottomLeft = borderRadius.bottomLeft.toFloat(),
         bottomRight = borderRadius.bottomRight.toFloat()
     )
+}
+
+/**
+ * Translate the size into pixel value from Flutter to native side
+ */
+fun ImageUtils.Geometry.pixelSize(context: Context): PixelSize {
+    val density = context.resources.displayMetrics.density
+    return PixelSize(
+        (width * density * 0.5F).roundToInt(),
+        (height * density * 0.5F).roundToInt()
+    )
+}
+
+fun ImageUtils.Geometry.resolveSizeGuard(context: Context): PixelSize {
+    val pixelSize = pixelSize(context)
+    val pixelWidth = pixelSize.width
+    val pixelHeight = pixelSize.height
+
+    val minSize = (context.resources.displayMetrics.density * 150).toInt()
+
+
+    if (pixelWidth >= minSize && pixelHeight >= minSize) {
+        return PixelSize(pixelWidth, pixelHeight)
+    }
+
+    if (pixelWidth <= minSize) {
+        val ratio = width.toFloat() / height.toFloat()
+        val scaledHeight = (minSize / ratio).roundToInt()
+        return PixelSize(minSize, scaledHeight)
+    }
+
+    val ratio = width.toFloat() / height.toFloat()
+    val scaledWidth = (minSize * ratio).roundToInt()
+    return PixelSize(scaledWidth, minSize)
 }

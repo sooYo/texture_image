@@ -101,22 +101,6 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        // body: ListView.builder(
-        //   itemCount: _images.length,
-        //   itemBuilder: (context, index) {
-        //     return useTextureImage
-        //         ? TextureImage(
-        //             _images[index],
-        //             width: 375,
-        //             height: 180,
-        //             fit: BoxFit.cover,
-        //           )
-        //         : CachedNetworkImage(
-        //             imageUrl: _images[index],
-        //             height: 180,
-        //           );
-        //   },
-        // ),
         body: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,

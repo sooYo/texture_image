@@ -28,6 +28,7 @@ class ImageLoaderTask(
     private val cachePolicy: CachePolicy,
     private val textureEntry: SurfaceTextureEntry
 ) : Target {
+    private val imageSize: PixelSize = geometry.pixelSize(context)
     private var scheduler: LoaderTaskScheduler? = null
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
@@ -55,10 +56,11 @@ class ImageLoaderTask(
             .Builder(context)
             .target(this)
             .data(imageUrl)
-            .size(PixelSize(geometry.width, geometry.height))
+            .size(imageSize)
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
+//            .allowRgb565(true)
             .transformations(transform)
 
         assignPlaceholder(
@@ -77,8 +79,8 @@ class ImageLoaderTask(
 
         val texture = textureEntry.surfaceTexture().also {
             it.setDefaultBufferSize(
-                geometry.width,
-                geometry.height
+                imageSize.width,
+                imageSize.height
             )
         }
 
@@ -130,8 +132,6 @@ class ImageLoaderTask(
     }
 
     override fun onError(error: Drawable?) {
-        LogUtil.d("OnError: ${outline.imageUrl}")
-
         if (error is BitmapDrawable) {
             drawBitmap(error.bitmap)
         }
@@ -143,8 +143,6 @@ class ImageLoaderTask(
     }
 
     override fun onSuccess(result: Drawable) {
-        LogUtil.d("onSuccess: ${outline.imageUrl}")
-
         if (result is BitmapDrawable) {
             drawBitmap(result.bitmap)
         }
@@ -157,12 +155,9 @@ class ImageLoaderTask(
     // endregion Coil Target
 
     @Suppress("unused")
-    private fun scaleBitmap(
-        bitmap: Bitmap,
-        geometry: ImageUtils.Geometry
-    ): Bitmap {
-        val width = geometry.width
-        val height = geometry.height
+    private fun scaleBitmap(bitmap: Bitmap): Bitmap {
+        val width = imageSize.width
+        val height = imageSize.height
 
         return when (geometry.fit) {
             fitHeight -> bitmap.boxFitFitHeight(height)
@@ -174,12 +169,9 @@ class ImageLoaderTask(
         }
     }
 
-    private fun canvasTargetRect(
-        bitmap: Bitmap,
-        geometry: ImageUtils.Geometry
-    ): Rect {
-        val width = geometry.width
-        val height = geometry.height
+    private fun canvasTargetRect(bitmap: Bitmap): Rect {
+        val width = imageSize.width
+        val height = imageSize.height
 
         return when (geometry.fit) {
             fitHeight -> bitmap.rectBoxFitHeight(width, height)
@@ -197,7 +189,6 @@ class ImageLoaderTask(
         }
 
         try {
-            val bitmap = bitmapToDraw.copy(Bitmap.Config.ARGB_8888, true)
             mOutline.surface!!.lockCanvas(null).apply {
                 drawFilter = PaintFlagsDrawFilter(
                     0,
@@ -205,14 +196,13 @@ class ImageLoaderTask(
                 )
 
                 drawBitmap(
-                    bitmap,
+                    bitmapToDraw,
                     null,
-                    canvasTargetRect(bitmap, geometry),
+                    canvasTargetRect(bitmapToDraw),
                     null
                 )
 
                 mOutline.surface!!.unlockCanvasAndPost(this)
-                bitmap.recycle()
             }
         } catch (e: Exception) {
             LogUtil.e("Draw bitmap: $e")
