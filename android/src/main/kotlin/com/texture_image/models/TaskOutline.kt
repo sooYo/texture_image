@@ -56,7 +56,7 @@ class TaskOutlineBuilder {
     var texture: SurfaceTexture? = null
     var surface: Surface? = null
 
-    fun clone(outline: TaskOutline?): TaskOutlineBuilder {
+    fun clone(outline: TaskOutline?) = apply {
         if (outline != null) {
             imageUrl = outline.imageUrl
             request = outline.request
@@ -66,43 +66,34 @@ class TaskOutlineBuilder {
             state = outline.state
             texture = outline.texture
         }
-
-        return this
     }
 
-    fun setImageUrl(imageUrl: String): TaskOutlineBuilder {
+    fun setImageUrl(imageUrl: String) = apply {
         this.imageUrl = imageUrl
-        return this
     }
 
-    fun setRequest(request: ImageRequest?): TaskOutlineBuilder {
+    fun setRequest(request: ImageRequest?) = apply {
         this.request = request
-        return this
     }
 
-    fun setEntry(entry: SurfaceTextureEntry?): TaskOutlineBuilder {
+    fun setEntry(entry: SurfaceTextureEntry?) = apply {
         this.entry = entry
-        return this
     }
 
-    fun setCancelToken(cancelToken: Disposable?): TaskOutlineBuilder {
+    fun setCancelToken(cancelToken: Disposable?) = apply {
         this.cancelToken = cancelToken
-        return this
     }
 
-    fun setSurface(surface: Surface?): TaskOutlineBuilder {
+    fun setSurface(surface: Surface?) = apply {
         this.surface = surface
-        return this
     }
 
-    fun setState(state: TaskState): TaskOutlineBuilder {
+    fun setState(state: TaskState) = apply {
         this.state = state
-        return this
     }
 
-    fun setTexture(texture: SurfaceTexture?): TaskOutlineBuilder {
+    fun setTexture(texture: SurfaceTexture?) = apply {
         this.texture = texture
-        return this
     }
 
     fun build(): TaskOutline {
