@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.Surface
 import coil.request.ImageRequest
 import coil.size.PixelSize
@@ -22,8 +23,8 @@ import kotlin.properties.Delegates
 class ImageLoaderTask(
     private val context: Context,
     private val imageUrl: String,
-    private val placeholder: String?,
-    private val errorPlaceholder: String?,
+    private val placeholderPath: String?,
+    private val errorPlaceholderPath: String?,
     private val geometry: ImageUtils.Geometry,
     private val cachePolicy: CachePolicy,
     private val textureEntry: SurfaceTextureEntry
@@ -57,25 +58,29 @@ class ImageLoaderTask(
             .target(this)
             .data(imageUrl)
             .size(imageSize)
+            .listener(onSuccess = { request, metadata ->
+                Log.d(
+                    "onSuccess",
+                    "Request: ${request.data}, isSampled: ${metadata.isSampled}, source: ${metadata.dataSource}\n"
+                )
+            }, onError = { request, throwable ->
+                Log.d(
+                    "onError",
+                    "Request: ${request.data}, error: $throwable\n"
+                )
+            }
+            )
+            .transformations(transform)
+            .allowRgb565(!geometry.supportAlpha)
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
-            .allowRgb565(!geometry.supportAlpha)
-            .transformations(transform)
 
-        assignPlaceholder(
-            placeholder,
-            builder,
-            PlaceholderUtil.placeholder,
-            false
-        )
 
-        assignPlaceholder(
-            errorPlaceholder,
-            builder,
-            PlaceholderUtil.errorPlaceholder,
-            true
-        )
+        PlaceholderUtil.run {
+            assignLoadingPlaceholder(context, placeholderPath, builder)
+            assignErrorPlaceholder(context, errorPlaceholderPath, builder)
+        }
 
         val texture = textureEntry.surfaceTexture().also {
             it.setDefaultBufferSize(
@@ -121,8 +126,14 @@ class ImageLoaderTask(
 
     // region Coil Target
     override fun onStart(placeholder: Drawable?) {
-        if (placeholder is BitmapDrawable) {
-            drawBitmap(placeholder.bitmap)
+        val loadingIcon = if (placeholder is BitmapDrawable) {
+            placeholder.bitmap
+        } else {
+            PlaceholderUtil.placeholder
+        }
+
+        if (loadingIcon != null) {
+            drawBitmap(loadingIcon)
         }
 
         mOutline = TaskOutlineBuilder()
@@ -132,8 +143,14 @@ class ImageLoaderTask(
     }
 
     override fun onError(error: Drawable?) {
-        if (error is BitmapDrawable) {
-            drawBitmap(error.bitmap)
+        val errorIcon = if (error is BitmapDrawable) {
+            error.bitmap
+        } else {
+            PlaceholderUtil.errorPlaceholder
+        }
+
+        if (errorIcon != null) {
+            drawBitmap(errorIcon)
         }
 
         mOutline = TaskOutlineBuilder()
@@ -144,6 +161,19 @@ class ImageLoaderTask(
 
     override fun onSuccess(result: Drawable) {
         if (result is BitmapDrawable) {
+//            val output = ByteArrayOutputStream()
+//            result.bitmap.compress(Bitmap.CompressFormat.JPEG, 10, output)
+//            val byteArray = output.toByteArray()
+//            val inputStream = ByteArrayInputStream(byteArray)
+//            val opt = BitmapFactory.Options()
+//            opt.inSampleSize = 1
+//            opt.inPreferredConfig = Bitmap.Config.RGB_565
+//            val compressed = BitmapFactory.decodeStream(inputStream, null, opt)
+//            drawBitmap(compressed ?: result.bitmap)
+//
+//            inputStream.close()
+//            compressed?.recycle()
+
             drawBitmap(result.bitmap)
         }
 
@@ -206,25 +236,6 @@ class ImageLoaderTask(
             }
         } catch (e: Exception) {
             LogUtil.e("Draw bitmap: $e")
-        }
-    }
-
-    private fun assignPlaceholder(
-        placeholderPath: String?,
-        builder: ImageRequest.Builder,
-        replacement: Bitmap?,
-        isError: Boolean,
-    ) {
-        val bitmap = when (placeholderPath?.isNotEmpty()) {
-            true -> bitmapFromAsset(context, placeholderPath)
-            else -> replacement
-        } ?: return
-
-        BitmapDrawable(context.resources, bitmap).also {
-            when (isError) {
-                true -> builder.error(it)
-                else -> builder.placeholder(it)
-            }
         }
     }
 }
