@@ -76,7 +76,6 @@ class ImageLoaderTask(
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
 
-
         PlaceholderUtil.run {
             assignLoadingPlaceholder(context, placeholderPath, builder)
             assignErrorPlaceholder(context, errorPlaceholderPath, builder)

@@ -88,7 +88,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png"
   ];
 
-  final useTextureImage = true;
+  final useTextureImage = false;
 
   @override
   void initState() {
@@ -126,8 +126,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           imageUrl: _images[index],
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
-                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
-                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+                          // memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+                          // memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
                         );
                 },
               );

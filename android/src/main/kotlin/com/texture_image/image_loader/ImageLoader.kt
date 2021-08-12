@@ -1,12 +1,10 @@
 package com.texture_image.image_loader
 
 import android.content.Context
-import android.graphics.Bitmap
 import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.util.CoilUtils
 import com.texture_image.constants.TaskMap
-import com.texture_image.constants.TaskOutlineCache
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
@@ -22,26 +20,20 @@ class ImageLoader(
     private val context: Context,
     private val textureRegistry: TextureRegistry
 ) : LoaderTaskScheduler {
-    companion object {
-        const val maxCacheSize: Int = 20
-    }
-
     private var globalConfig: ImageInfo.ImageConfigInfo? = null
 
     private val taskMap: TaskMap = TaskMap()
-    private val outlineCache: TaskOutlineCache = TaskOutlineCache(maxCacheSize)
     private val loaderCore: coil.ImageLoader by lazy(LazyThreadSafetyMode.NONE) {
         val httpClient = OkHttpClient.Builder()
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
-        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.2
+        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.02
 
         coil.ImageLoader.Builder(context)
             .crossfade(true)
             .okHttpClient(httpClient)
             .availableMemoryPercentage(memOp)
-            .bitmapConfig(Bitmap.Config.ARGB_8888)
             .build()
     }
 
@@ -52,12 +44,6 @@ class ImageLoader(
     }
 
     override fun onTaskStateUpdated(task: ImageLoaderTask) {
-//        if (task.outline.didStop) {
-//            removeTaskFromMap(task).also { cacheTaskIfPossible(it) }
-//        } else if (task.outline.isInitialized) {
-//            saveTaskToMap(task)
-//        }
-
         if (task.outline.isInitialized) {
             saveTaskToMap(task)
         }
@@ -207,41 +193,6 @@ class ImageLoader(
         }
 
         return true
-    }
-
-    private fun cacheTaskIfPossible(taskOutline: TaskOutline?): Boolean {
-        if (taskOutline == null || !taskOutline.isCompleted) {
-            return false
-        }
-
-        if (outlineCache.contains(taskOutline)) {
-            return true
-        }
-
-        if (outlineCache.size > maxCacheSize) {
-            val evict = outlineCache.removeFirst()
-            evict.release()
-        }
-
-        outlineCache.addLast(taskOutline)
-        return true
-    }
-
-    private fun findReusableTask(imageInfo: ImageInfo.ImageFetchInfo): TaskOutline? {
-        val find = { list: Collection<TaskOutline> ->
-            try {
-                list.first {
-                    it.imageUrl == imageInfo.url && it.isCompleted
-                }
-            } catch (e: Exception) {
-                null
-            }
-        }
-
-        val outlineMap = taskMap.values.map { it.outline }
-        return (find(outlineMap) ?: find(outlineCache)).also {
-            LogUtil.d("findReusableTask: ${it?.id}")
-        }
     }
 
     private fun saveTaskToMap(task: ImageLoaderTask): TaskOutline {
