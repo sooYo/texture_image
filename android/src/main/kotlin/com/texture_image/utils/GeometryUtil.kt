@@ -66,30 +66,7 @@ fun ImageUtils.Geometry.parseCoilShapeTransform(): Transformation? {
 fun ImageUtils.Geometry.pixelSize(context: Context): PixelSize {
     val density = context.resources.displayMetrics.density
     return PixelSize(
-        (width * density * 0.5F).roundToInt(),
-        (height * density * 0.5F).roundToInt()
+        (width * density * 0.5).roundToInt(),
+        (height * density * 0.5).roundToInt()
     )
-}
-
-fun ImageUtils.Geometry.resolveSizeGuard(context: Context): PixelSize {
-    val pixelSize = pixelSize(context)
-    val pixelWidth = pixelSize.width
-    val pixelHeight = pixelSize.height
-
-    val minSize = (context.resources.displayMetrics.density * 150).toInt()
-
-
-    if (pixelWidth >= minSize && pixelHeight >= minSize) {
-        return PixelSize(pixelWidth, pixelHeight)
-    }
-
-    if (pixelWidth <= minSize) {
-        val ratio = width.toFloat() / height.toFloat()
-        val scaledHeight = (minSize / ratio).roundToInt()
-        return PixelSize(minSize, scaledHeight)
-    }
-
-    val ratio = width.toFloat() / height.toFloat()
-    val scaledWidth = (minSize * ratio).roundToInt()
-    return PixelSize(scaledWidth, minSize)
 }
