@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
 import 'package:texture_image/texture_image_plugin.dart';
 
+import 'util.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -12,7 +14,7 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   final _images = <String>[
     'https://chingflowers.com.tw/wp-content/uploads/2020/10/AF4C4483-87A8-407F-B71D-3009CDEF6EF2.jpeg',
     'httbs://wallpapercave.com/wp/Rwl8nSj.jpg',
@@ -101,35 +103,48 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
+        body: ScrollConfiguration(
+          behavior: TransparentOverScrollBehavior(),
+          child: GridView.builder(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 1,
+            ),
+            itemCount: _images.length,
+            itemBuilder: (context, index) {
+              return LayoutBuilder(
+                builder: (context, constraint) {
+                  return useTextureImage
+                      ? $ti.TextureImage(
+                          _images[index],
+                          width: constraint.maxWidth,
+                          height: constraint.maxHeight,
+                          fit: $ti.BoxFit.cover,
+                          placeholderPath: 'lib/assets/ic_placeholder.png',
+                          // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: _images[index],
+                          height: constraint.maxHeight,
+                          fit: BoxFit.cover,
+                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+                        );
+                },
+              );
+            },
           ),
-          itemCount: _images.length,
-          itemBuilder: (context, index) {
-            return LayoutBuilder(
-              builder: (context, constraint) {
-                return useTextureImage
-                    ? $ti.TextureImage(
-                        _images[index],
-                        width: constraint.maxWidth,
-                        height: constraint.maxHeight,
-                        fit: $ti.BoxFit.cover,
-                        placeholderPath: 'lib/assets/ic_placeholder.png',
-                        errorPlaceholderPath: 'lib/assets/ic_error_1.png',
-                      )
-                    : CachedNetworkImage(
-                        imageUrl: _images[index],
-                        height: constraint.maxHeight,
-                        fit: BoxFit.cover,
-                        memCacheWidth: constraint.maxWidth.toInt(),
-                        memCacheHeight: constraint.maxHeight.toInt(),
-                      );
-              },
-            );
-          },
         ),
       ),
     );
   }
+}
+
+class TransparentOverScrollBehavior extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+    BuildContext context,
+    Widget child,
+    AxisDirection axisDirection,
+  ) =>
+      child;
 }
