@@ -3,7 +3,7 @@ package com.texture_image.models
 import coil.request.CachePolicy
 
 class CachePolicy(
-    memoryCache: Boolean = false,
+    memoryCache: Boolean = true,
     diskCache: Boolean = true,
     networkCache: Boolean = true,
 ) {
