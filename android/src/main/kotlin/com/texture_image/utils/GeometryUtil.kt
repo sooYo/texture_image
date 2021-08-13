@@ -64,9 +64,17 @@ fun ImageUtils.Geometry.parseCoilShapeTransform(): Transformation? {
  * Translate the size into pixel value from Flutter to native side
  */
 fun ImageUtils.Geometry.pixelSize(context: Context): PixelSize {
-    val density = context.resources.displayMetrics.density
-    return PixelSize(
-        (width * density * 0.5).roundToInt(),
-        (height * density * 0.5).roundToInt()
-    )
+    return with(context.resources.displayMetrics) {
+        val reduceFactor = when {
+            width <= 80 && height <= 80 -> 1.0
+            densityDpi in 240..400 -> 0.7
+            densityDpi > 400 -> 0.6
+            else -> 0.8
+        }
+
+        PixelSize(
+            (width * density * reduceFactor).roundToInt(),
+            (height * density * reduceFactor).roundToInt()
+        )
+    }
 }
