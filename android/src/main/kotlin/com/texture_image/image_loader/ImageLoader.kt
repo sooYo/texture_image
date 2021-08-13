@@ -1,6 +1,7 @@
 package com.texture_image.image_loader
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.util.CoilUtils
@@ -28,12 +29,12 @@ class ImageLoader(
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
-        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.02
+        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.2
 
         coil.ImageLoader.Builder(context)
-            .crossfade(true)
             .okHttpClient(httpClient)
             .availableMemoryPercentage(memOp)
+            .allowHardware(false)
             .build()
     }
 
