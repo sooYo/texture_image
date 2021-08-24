@@ -5,7 +5,7 @@ import coil.request.CachePolicy
 class CachePolicy(
     memoryCache: Boolean = true,
     diskCache: Boolean = true,
-    networkCache: Boolean = true,
+    networkCache: Boolean = false,
 ) {
     val coilDiskCache: CachePolicy = toCoilCachePolicy(diskCache)
     val coilMemCache: CachePolicy = toCoilCachePolicy(memoryCache)

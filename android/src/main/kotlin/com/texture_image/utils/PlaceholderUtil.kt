@@ -13,7 +13,7 @@ object PlaceholderUtil {
     val placeholder: Bitmap? get() = mGlobalPlaceholder
     val errorPlaceholder: Bitmap? get() = mGlobalErrorPlaceholder
 
-    val placeholderPaths = mutableListOf<String>()
+    private val placeholderPaths = mutableListOf<String>()
 
     fun loadPlaceholders(
         context: Context,
