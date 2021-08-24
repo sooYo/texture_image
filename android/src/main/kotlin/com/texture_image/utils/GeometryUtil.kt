@@ -1,14 +1,11 @@
 package com.texture_image.utils
 
-import android.content.Context
-import coil.size.PixelSize
 import coil.transform.BlurTransformation
 import coil.transform.CircleCropTransformation
 import coil.transform.RoundedCornersTransformation
 import coil.transform.Transformation
 import com.texture_image.proto.ImageUtils
 import kotlin.math.abs
-import kotlin.math.roundToInt
 
 fun Double.equalsDelta(other: Double, delta: Double = 0.0001): Boolean {
     return abs(this - other) < delta
@@ -58,23 +55,4 @@ fun ImageUtils.Geometry.parseCoilShapeTransform(): Transformation? {
         bottomLeft = borderRadius.bottomLeft.toFloat(),
         bottomRight = borderRadius.bottomRight.toFloat()
     )
-}
-
-/**
- * Translate the size into pixel value from Flutter to native side
- */
-fun ImageUtils.Geometry.pixelSize(context: Context): PixelSize {
-    return with(context.resources.displayMetrics) {
-        val reduceFactor = when {
-            width <= 80 && height <= 80 -> 1.0
-            densityDpi in 240..400 -> 0.7
-            densityDpi > 400 -> 0.6
-            else -> 0.8
-        }
-
-        PixelSize(
-            (width * density * reduceFactor).roundToInt(),
-            (height * density * reduceFactor).roundToInt()
-        )
-    }
 }
