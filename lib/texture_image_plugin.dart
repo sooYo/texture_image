@@ -8,11 +8,6 @@ import 'package:texture_image/src/proto/pb_header.dart';
 class TextureImagePlugin {
   static const MethodChannel _channel = const MethodChannel('texture_image');
 
-  static Future<String?> get platformVersion async {
-    final String? version = await _channel.invokeMethod('getPlatformVersion');
-    return version;
-  }
-
   static Future<int> createImageTexture(
     String url, {
     required double width,
@@ -29,8 +24,14 @@ class TextureImagePlugin {
       ..supportAlpha = !disableAlphaChannel
       ..borderRadius = BorderRadius();
 
+    final quality = Quality()
+      ..autoDownscale = true
+      ..minimumAutoDownscaleTriggerSize = 80
+      ..quality = 100;
+
     final imageInfo = ImageFetchInfo()
       ..url = url
+      ..quality = quality
       ..geometry = geometry;
 
     if (placeholderPath?.isNotEmpty ?? false) {
