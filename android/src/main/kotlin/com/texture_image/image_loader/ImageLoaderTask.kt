@@ -15,22 +15,25 @@ import com.texture_image.constants.SurfaceTextureEntry
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.models.TaskOutlineBuilder
+import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.proto.ImageUtils.BoxFit.*
 import com.texture_image.utils.*
+import kotlinx.coroutines.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
 import kotlin.properties.Delegates
 
 class ImageLoaderTask(
     private val context: Context,
-    private val imageUrl: String,
-    private val placeholderPath: String?,
-    private val errorPlaceholderPath: String?,
-    private val geometry: ImageUtils.Geometry,
+    private val imageInfo: ImageInfo.ImageFetchInfo,
     private val cachePolicy: CachePolicy,
-    private val textureEntry: SurfaceTextureEntry
+    private val textureEntry: SurfaceTextureEntry,
 ) : Target {
-    private val imageSize: PixelSize = geometry.pixelSize(context)
     private var scheduler: LoaderTaskScheduler? = null
+    private val imageSize: PixelSize by lazy {
+        imageInfo.pixelSize(context)
+    }
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
                 if (scheduler == null || oldValue.state == newValue.state) {
@@ -48,7 +51,7 @@ class ImageLoaderTask(
 
         // Collect transformations as much as possible
         val transform = ArrayList<Transformation>()
-        val shapeTransform = geometry.parseCoilShapeTransform()
+        val shapeTransform = imageInfo.geometry.parseCoilShapeTransform()
         if (shapeTransform != null) {
             transform.add(shapeTransform)
         }
@@ -56,7 +59,7 @@ class ImageLoaderTask(
         val builder = ImageRequest
             .Builder(context)
             .target(this)
-            .data(imageUrl)
+            .data(imageInfo.url)
             .size(imageSize)
             .listener(onSuccess = { request, metadata ->
                 Log.d(
@@ -71,14 +74,14 @@ class ImageLoaderTask(
             }
             )
             .transformations(transform)
-            .allowRgb565(!geometry.supportAlpha)
+            .allowRgb565(!imageInfo.geometry.supportAlpha)
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
 
         PlaceholderUtil.run {
-            assignLoadingPlaceholder(context, placeholderPath, builder)
-            assignErrorPlaceholder(context, errorPlaceholderPath, builder)
+            assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
+            assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
         }
 
         val texture = textureEntry.surfaceTexture().also {
@@ -91,7 +94,7 @@ class ImageLoaderTask(
         val surface = Surface(texture)
         mOutline = TaskOutlineBuilder()
             .setRequest(builder.build())
-            .setImageUrl(imageUrl)
+            .setImageUrl(imageInfo.url)
             .setEntry(textureEntry)
             .setTexture(texture)
             .setSurface(surface)
@@ -158,28 +161,45 @@ class ImageLoaderTask(
             .build()
     }
 
+    @DelicateCoroutinesApi
     override fun onSuccess(result: Drawable) {
         if (result is BitmapDrawable) {
-//            val output = ByteArrayOutputStream()
-//            result.bitmap.compress(Bitmap.CompressFormat.JPEG, 10, output)
-//            val byteArray = output.toByteArray()
-//            val inputStream = ByteArrayInputStream(byteArray)
-//            val opt = BitmapFactory.Options()
-//            opt.inSampleSize = 1
-//            opt.inPreferredConfig = Bitmap.Config.RGB_565
-//            val compressed = BitmapFactory.decodeStream(inputStream, null, opt)
-//            drawBitmap(compressed ?: result.bitmap)
-//
-//            inputStream.close()
-//            compressed?.recycle()
+            if (imageInfo.shouldCompress) {
+                GlobalScope.launch(Dispatchers.Default) {
+                    val output = ByteArrayOutputStream()
 
-            drawBitmap(result.bitmap)
+                    result.bitmap.compress(
+                        Bitmap.CompressFormat.JPEG,
+                        imageInfo.compressionQuality,
+                        output
+                    )
+
+                    val byteArray = output.toByteArray()
+                    val inputStream = ByteArrayInputStream(byteArray)
+                    val opt = BitmapFactory.Options().apply {
+                        inSampleSize = 1
+                        inPreferredConfig = Bitmap.Config.RGB_565
+                    }
+
+                    val bitmap = BitmapFactory.decodeStream(
+                        inputStream,
+                        null,
+                        opt
+                    )
+
+                    GlobalScope.launch(Dispatchers.Main) {
+                        drawBitmap(bitmap ?: result.bitmap)
+                    }
+                }
+            } else {
+                drawBitmap(result.bitmap)
+            }
+
+            mOutline = TaskOutlineBuilder()
+                .clone(mOutline)
+                .setState(ImageUtils.TaskState.completed)
+                .build()
         }
-
-        mOutline = TaskOutlineBuilder()
-            .clone(mOutline)
-            .setState(ImageUtils.TaskState.completed)
-            .build()
     }
     // endregion Coil Target
 
@@ -188,7 +208,7 @@ class ImageLoaderTask(
         val width = imageSize.width
         val height = imageSize.height
 
-        return when (geometry.fit) {
+        return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.boxFitFitHeight(height)
             fitWidth -> bitmap.boxFitFitWidth(width)
             cover -> bitmap.boxFitCover(width, height)
@@ -202,7 +222,7 @@ class ImageLoaderTask(
         val width = imageSize.width
         val height = imageSize.height
 
-        return when (geometry.fit) {
+        return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.rectBoxFitHeight(width, height)
             fitWidth -> bitmap.rectBoxFitWidth(width, height)
             cover -> bitmap.rectBoxFitCover(width, height)

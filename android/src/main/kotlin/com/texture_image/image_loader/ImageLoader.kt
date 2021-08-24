@@ -1,7 +1,6 @@
 package com.texture_image.image_loader
 
 import android.content.Context
-import android.graphics.Bitmap
 import androidx.annotation.NonNull
 import coil.request.Disposable
 import coil.util.CoilUtils
@@ -29,7 +28,7 @@ class ImageLoader(
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
-        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.2
+        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.1
 
         coil.ImageLoader.Builder(context)
             .okHttpClient(httpClient)
@@ -57,21 +56,18 @@ class ImageLoader(
             return
         }
 
-        val base64Data = call.arguments as ByteArray
         val imageInfo = try {
-            ImageInfo.ImageFetchInfo.parseFrom(base64Data)
+            ImageInfo.ImageFetchInfo.parseFrom(call.arguments as ByteArray)
         } catch (e: Exception) {
             LogUtil.e("createTextureImage: build ImageRequestInfo failed: $e")
             null
         }
 
         if (imageInfo == null) {
-            result.success(
-                ResultUtils.protoParseFailed(
-                    "ImageRequestInfo",
-                    "createTextureImage"
-                )
-            )
+            ResultUtils.protoParseFailed(
+                "ImageRequestInfo",
+                "createTextureImage"
+            ).also { result.success(it) }
             return
         }
 
@@ -86,21 +82,18 @@ class ImageLoader(
             return
         }
 
-        val base64Data = call.arguments as ByteArray
         val cancelInfo = try {
-            ImageInfo.ImageDisposeInfo.parseFrom(base64Data)
+            ImageInfo.ImageDisposeInfo.parseFrom(call.arguments as ByteArray)
         } catch (e: Exception) {
             LogUtil.e("disposeTextureImage: build ImageDisposeInfo failed: $e")
             null
         }
 
         if (cancelInfo == null) {
-            result.success(
-                ResultUtils.protoParseFailed(
-                    "ImageDisposeInfo",
-                    "disposeTextureImage"
-                )
-            )
+            ResultUtils.protoParseFailed(
+                "ImageDisposeInfo",
+                "disposeTextureImage"
+            ).also { result.success(it) }
             return
         }
 
@@ -147,12 +140,9 @@ class ImageLoader(
         val entry = textureRegistry.createSurfaceTexture()
         val task = ImageLoaderTask(
             context,
-            imageInfo.url,
-            imageInfo.placeholder,
-            imageInfo.errorPlaceholder,
-            imageInfo.geometry,
+            imageInfo,
             cachePolicy,
-            entry
+            entry,
         ).scheduleWith(this)
 
         return task.outline
