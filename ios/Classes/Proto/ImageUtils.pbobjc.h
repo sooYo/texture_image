@@ -174,6 +174,51 @@ int32_t Geometry_Fit_RawValue(Geometry *message);
  **/
 void SetGeometry_Fit_RawValue(Geometry *message, int32_t value);
 
+#pragma mark - Quality
+
+typedef GPB_ENUM(Quality_FieldNumber) {
+  Quality_FieldNumber_AutoDownscale = 1,
+  Quality_FieldNumber_MinimumAutoDownscaleTriggerSize = 2,
+  Quality_FieldNumber_Quality = 3,
+};
+
+/**
+ * Contains custom configs about setting image quality
+ **/
+GPB_FINAL @interface Quality : GPBMessage
+
+/**
+ * Allow the plugin the recalculate the image size along with
+ * target device's density DPI, this logic is in utils/GeometryUtil.kt
+ * This will result in resampling of the image and it's kind of
+ * lossy compression, but it is not as obvious as setting [quality]
+ * to this Quality object.
+ *
+ * If this is not allowed, than images will rendered using the best
+ * quality, thus more memory space is taken. It's suggested to open
+ * this setting
+ **/
+@property(nonatomic, readwrite) BOOL autoDownscale;
+
+/**
+ * If one of the image dimensions' value is lower than this value,
+ * it will not downscale automatically although [autoDownscale] is
+ * enabled to guarantee no over-reduced image quality. The default
+ * value is 80.
+ **/
+@property(nonatomic, readwrite) int32_t minimumAutoDownscaleTriggerSize;
+
+/**
+ * Image compression quality, assgining this value will trigger
+ * compression logic of target bitmap, and it's lossy compression
+ * if the target bitmap is not in PNG format. And comporess will
+ * cost CPU time to save memory space, it's not suggested to do
+ * compression if there's no memory pressure
+ **/
+@property(nonatomic, readwrite) int32_t quality;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 CF_EXTERN_C_END

@@ -207,3 +207,78 @@ class Geometry extends $pb.GeneratedMessage {
   BorderRadius ensureBorderRadius() => $_ensure(4);
 }
 
+class Quality extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'Quality', createEmptyInstance: create)
+    ..aOB(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'autoDownscale', protoName: 'autoDownscale')
+    ..a<$core.int>(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'minimumAutoDownscaleTriggerSize', $pb.PbFieldType.O3, protoName: 'minimumAutoDownscaleTriggerSize')
+    ..a<$core.int>(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quality', $pb.PbFieldType.O3)
+    ..hasRequiredFields = false
+  ;
+
+  Quality._() : super();
+  factory Quality({
+    $core.bool? autoDownscale,
+    $core.int? minimumAutoDownscaleTriggerSize,
+    $core.int? quality,
+  }) {
+    final _result = create();
+    if (autoDownscale != null) {
+      _result.autoDownscale = autoDownscale;
+    }
+    if (minimumAutoDownscaleTriggerSize != null) {
+      _result.minimumAutoDownscaleTriggerSize = minimumAutoDownscaleTriggerSize;
+    }
+    if (quality != null) {
+      _result.quality = quality;
+    }
+    return _result;
+  }
+  factory Quality.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory Quality.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  Quality clone() => Quality()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  Quality copyWith(void Function(Quality) updates) => super.copyWith((message) => updates(message as Quality)) as Quality; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static Quality create() => Quality._();
+  Quality createEmptyInstance() => create();
+  static $pb.PbList<Quality> createRepeated() => $pb.PbList<Quality>();
+  @$core.pragma('dart2js:noInline')
+  static Quality getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Quality>(create);
+  static Quality? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.bool get autoDownscale => $_getBF(0);
+  @$pb.TagNumber(1)
+  set autoDownscale($core.bool v) { $_setBool(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasAutoDownscale() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearAutoDownscale() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $core.int get minimumAutoDownscaleTriggerSize => $_getIZ(1);
+  @$pb.TagNumber(2)
+  set minimumAutoDownscaleTriggerSize($core.int v) { $_setSignedInt32(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasMinimumAutoDownscaleTriggerSize() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearMinimumAutoDownscaleTriggerSize() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.int get quality => $_getIZ(2);
+  @$pb.TagNumber(3)
+  set quality($core.int v) { $_setSignedInt32(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasQuality() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearQuality() => clearField(3);
+}
+

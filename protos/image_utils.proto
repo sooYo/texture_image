@@ -45,3 +45,30 @@ message Geometry {
   BoxFit fit = 4;
   BorderRadius borderRadius = 5;
 }
+
+// Contains custom configs about setting image quality
+message Quality {
+  // Allow the plugin the recalculate the image size along with
+  // target device's density DPI, this logic is in utils/GeometryUtil.kt
+  // This will result in resampling of the image and it's kind of
+  // lossy compression, but it is not as obvious as setting [quality]
+  // to this Quality object.
+  //
+  // If this is not allowed, than images will rendered using the best
+  // quality, thus more memory space is taken. It's suggested to open
+  // this setting
+  bool autoDownscale = 1;
+
+  // If one of the image dimensions' value is lower than this value,
+  // it will not downscale automatically although [autoDownscale] is
+  // enabled to guarantee no over-reduced image quality. The this value
+  // is not allow smaller than 80
+  int32 minimumAutoDownscaleTriggerSize = 2;
+
+  // Image compression quality, assgining this value will trigger
+  // compression logic of target bitmap, and it's lossy compression
+  // if the target bitmap is not in PNG format. Comporess will
+  // cost CPU time to save memory space, it's not suggested to do
+  // compression if there's no memory pressure
+  int32 quality = 3;
+}

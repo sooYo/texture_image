@@ -15,6 +15,9 @@ message ImageFetchInfo {
 
   // Geometry info
   Geometry geometry = 4;
+
+  // Image aqulity control
+  Quality quality = 5;
 }
 
 message ResultInfo {
@@ -84,5 +87,13 @@ message ImageConfigInfo {
   // Range from 0.0, which means `disable`, to 1.0, which means `use
   // when it's possible`. Default value is 0.2
   double androidAvailableMemoryPercentage = 4;
+
+  // To reduce images quality when detect memory pressure automatically,
+  // the quality will be reduced by half straightly in low memory state
+  // if this config is enabled. Plugin will try to resume full quality
+  // gradually later if no more memory warning is received. Be aware that,
+  // compressing image consumes CPU for saving memory. It is suggested to
+  // keep this feature disallowed if it's not a must
+  bool reduceQualityInLowMemory = 5;
 }
 

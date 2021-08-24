@@ -96,6 +96,33 @@ public final class ImageInfo {
      * <code>.Geometry geometry = 4;</code>
      */
     com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder();
+
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     * @return Whether the quality field is set.
+     */
+    boolean hasQuality();
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     * @return The quality.
+     */
+    com.texture_image.proto.ImageUtils.Quality getQuality();
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     */
+    com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder();
   }
   /**
    * <pre>
@@ -176,6 +203,19 @@ public final class ImageInfo {
               if (subBuilder != null) {
                 subBuilder.mergeFrom(geometry_);
                 geometry_ = subBuilder.buildPartial();
+              }
+
+              break;
+            }
+            case 42: {
+              com.texture_image.proto.ImageUtils.Quality.Builder subBuilder = null;
+              if (quality_ != null) {
+                subBuilder = quality_.toBuilder();
+              }
+              quality_ = input.readMessage(com.texture_image.proto.ImageUtils.Quality.parser(), extensionRegistry);
+              if (subBuilder != null) {
+                subBuilder.mergeFrom(quality_);
+                quality_ = subBuilder.buildPartial();
               }
 
               break;
@@ -380,6 +420,44 @@ public final class ImageInfo {
       return getGeometry();
     }
 
+    public static final int QUALITY_FIELD_NUMBER = 5;
+    private com.texture_image.proto.ImageUtils.Quality quality_;
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     * @return Whether the quality field is set.
+     */
+    @java.lang.Override
+    public boolean hasQuality() {
+      return quality_ != null;
+    }
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     * @return The quality.
+     */
+    @java.lang.Override
+    public com.texture_image.proto.ImageUtils.Quality getQuality() {
+      return quality_ == null ? com.texture_image.proto.ImageUtils.Quality.getDefaultInstance() : quality_;
+    }
+    /**
+     * <pre>
+     * Image aqulity control
+     * </pre>
+     *
+     * <code>.Quality quality = 5;</code>
+     */
+    @java.lang.Override
+    public com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder() {
+      return getQuality();
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -406,6 +484,9 @@ public final class ImageInfo {
       if (geometry_ != null) {
         output.writeMessage(4, getGeometry());
       }
+      if (quality_ != null) {
+        output.writeMessage(5, getQuality());
+      }
       unknownFields.writeTo(output);
     }
 
@@ -427,6 +508,10 @@ public final class ImageInfo {
       if (geometry_ != null) {
         size += com.google.protobuf.CodedOutputStream
           .computeMessageSize(4, getGeometry());
+      }
+      if (quality_ != null) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(5, getQuality());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -454,6 +539,11 @@ public final class ImageInfo {
         if (!getGeometry()
             .equals(other.getGeometry())) return false;
       }
+      if (hasQuality() != other.hasQuality()) return false;
+      if (hasQuality()) {
+        if (!getQuality()
+            .equals(other.getQuality())) return false;
+      }
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -474,6 +564,10 @@ public final class ImageInfo {
       if (hasGeometry()) {
         hash = (37 * hash) + GEOMETRY_FIELD_NUMBER;
         hash = (53 * hash) + getGeometry().hashCode();
+      }
+      if (hasQuality()) {
+        hash = (37 * hash) + QUALITY_FIELD_NUMBER;
+        hash = (53 * hash) + getQuality().hashCode();
       }
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
@@ -624,6 +718,12 @@ public final class ImageInfo {
           geometry_ = null;
           geometryBuilder_ = null;
         }
+        if (qualityBuilder_ == null) {
+          quality_ = null;
+        } else {
+          quality_ = null;
+          qualityBuilder_ = null;
+        }
         return this;
       }
 
@@ -657,6 +757,11 @@ public final class ImageInfo {
           result.geometry_ = geometry_;
         } else {
           result.geometry_ = geometryBuilder_.build();
+        }
+        if (qualityBuilder_ == null) {
+          result.quality_ = quality_;
+        } else {
+          result.quality_ = qualityBuilder_.build();
         }
         onBuilt();
         return result;
@@ -720,6 +825,9 @@ public final class ImageInfo {
         }
         if (other.hasGeometry()) {
           mergeGeometry(other.getGeometry());
+        }
+        if (other.hasQuality()) {
+          mergeQuality(other.getQuality());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1171,6 +1279,161 @@ public final class ImageInfo {
           geometry_ = null;
         }
         return geometryBuilder_;
+      }
+
+      private com.texture_image.proto.ImageUtils.Quality quality_;
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.texture_image.proto.ImageUtils.Quality, com.texture_image.proto.ImageUtils.Quality.Builder, com.texture_image.proto.ImageUtils.QualityOrBuilder> qualityBuilder_;
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       * @return Whether the quality field is set.
+       */
+      public boolean hasQuality() {
+        return qualityBuilder_ != null || quality_ != null;
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       * @return The quality.
+       */
+      public com.texture_image.proto.ImageUtils.Quality getQuality() {
+        if (qualityBuilder_ == null) {
+          return quality_ == null ? com.texture_image.proto.ImageUtils.Quality.getDefaultInstance() : quality_;
+        } else {
+          return qualityBuilder_.getMessage();
+        }
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public Builder setQuality(com.texture_image.proto.ImageUtils.Quality value) {
+        if (qualityBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          quality_ = value;
+          onChanged();
+        } else {
+          qualityBuilder_.setMessage(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public Builder setQuality(
+          com.texture_image.proto.ImageUtils.Quality.Builder builderForValue) {
+        if (qualityBuilder_ == null) {
+          quality_ = builderForValue.build();
+          onChanged();
+        } else {
+          qualityBuilder_.setMessage(builderForValue.build());
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public Builder mergeQuality(com.texture_image.proto.ImageUtils.Quality value) {
+        if (qualityBuilder_ == null) {
+          if (quality_ != null) {
+            quality_ =
+              com.texture_image.proto.ImageUtils.Quality.newBuilder(quality_).mergeFrom(value).buildPartial();
+          } else {
+            quality_ = value;
+          }
+          onChanged();
+        } else {
+          qualityBuilder_.mergeFrom(value);
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public Builder clearQuality() {
+        if (qualityBuilder_ == null) {
+          quality_ = null;
+          onChanged();
+        } else {
+          quality_ = null;
+          qualityBuilder_ = null;
+        }
+
+        return this;
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public com.texture_image.proto.ImageUtils.Quality.Builder getQualityBuilder() {
+        
+        onChanged();
+        return getQualityFieldBuilder().getBuilder();
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      public com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder() {
+        if (qualityBuilder_ != null) {
+          return qualityBuilder_.getMessageOrBuilder();
+        } else {
+          return quality_ == null ?
+              com.texture_image.proto.ImageUtils.Quality.getDefaultInstance() : quality_;
+        }
+      }
+      /**
+       * <pre>
+       * Image aqulity control
+       * </pre>
+       *
+       * <code>.Quality quality = 5;</code>
+       */
+      private com.google.protobuf.SingleFieldBuilderV3<
+          com.texture_image.proto.ImageUtils.Quality, com.texture_image.proto.ImageUtils.Quality.Builder, com.texture_image.proto.ImageUtils.QualityOrBuilder> 
+          getQualityFieldBuilder() {
+        if (qualityBuilder_ == null) {
+          qualityBuilder_ = new com.google.protobuf.SingleFieldBuilderV3<
+              com.texture_image.proto.ImageUtils.Quality, com.texture_image.proto.ImageUtils.Quality.Builder, com.texture_image.proto.ImageUtils.QualityOrBuilder>(
+                  getQuality(),
+                  getParentForChildren(),
+                  isClean());
+          quality_ = null;
+        }
+        return qualityBuilder_;
       }
       @java.lang.Override
       public final Builder setUnknownFields(
@@ -3846,6 +4109,21 @@ public final class ImageInfo {
      * @return The androidAvailableMemoryPercentage.
      */
     double getAndroidAvailableMemoryPercentage();
+
+    /**
+     * <pre>
+     * To reduce images quality when detect memory pressure automatically,
+     * the quality will be reduced by half straightly in low memory state
+     * if this config is enabled. Plugin will try to resume full quality
+     * gradually later if no more memory warning is received. Be aware that,
+     * compressing image consumes CPU for saving memory. It is suggested to
+     * keep this feature disallowed if it's not a must
+     * </pre>
+     *
+     * <code>bool reduceQualityInLowMemory = 5;</code>
+     * @return The reduceQualityInLowMemory.
+     */
+    boolean getReduceQualityInLowMemory();
   }
   /**
    * <pre>
@@ -3920,6 +4198,11 @@ public final class ImageInfo {
             case 33: {
 
               androidAvailableMemoryPercentage_ = input.readDouble();
+              break;
+            }
+            case 40: {
+
+              reduceQualityInLowMemory_ = input.readBool();
               break;
             }
             default: {
@@ -4124,6 +4407,26 @@ public final class ImageInfo {
       return androidAvailableMemoryPercentage_;
     }
 
+    public static final int REDUCEQUALITYINLOWMEMORY_FIELD_NUMBER = 5;
+    private boolean reduceQualityInLowMemory_;
+    /**
+     * <pre>
+     * To reduce images quality when detect memory pressure automatically,
+     * the quality will be reduced by half straightly in low memory state
+     * if this config is enabled. Plugin will try to resume full quality
+     * gradually later if no more memory warning is received. Be aware that,
+     * compressing image consumes CPU for saving memory. It is suggested to
+     * keep this feature disallowed if it's not a must
+     * </pre>
+     *
+     * <code>bool reduceQualityInLowMemory = 5;</code>
+     * @return The reduceQualityInLowMemory.
+     */
+    @java.lang.Override
+    public boolean getReduceQualityInLowMemory() {
+      return reduceQualityInLowMemory_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4150,6 +4453,9 @@ public final class ImageInfo {
       if (androidAvailableMemoryPercentage_ != 0D) {
         output.writeDouble(4, androidAvailableMemoryPercentage_);
       }
+      if (reduceQualityInLowMemory_ != false) {
+        output.writeBool(5, reduceQualityInLowMemory_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4171,6 +4477,10 @@ public final class ImageInfo {
       if (androidAvailableMemoryPercentage_ != 0D) {
         size += com.google.protobuf.CodedOutputStream
           .computeDoubleSize(4, androidAvailableMemoryPercentage_);
+      }
+      if (reduceQualityInLowMemory_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, reduceQualityInLowMemory_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4196,6 +4506,8 @@ public final class ImageInfo {
       if (java.lang.Double.doubleToLongBits(getAndroidAvailableMemoryPercentage())
           != java.lang.Double.doubleToLongBits(
               other.getAndroidAvailableMemoryPercentage())) return false;
+      if (getReduceQualityInLowMemory()
+          != other.getReduceQualityInLowMemory()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4216,6 +4528,9 @@ public final class ImageInfo {
       hash = (37 * hash) + ANDROIDAVAILABLEMEMORYPERCENTAGE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           java.lang.Double.doubleToLongBits(getAndroidAvailableMemoryPercentage()));
+      hash = (37 * hash) + REDUCEQUALITYINLOWMEMORY_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getReduceQualityInLowMemory());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4361,6 +4676,8 @@ public final class ImageInfo {
 
         androidAvailableMemoryPercentage_ = 0D;
 
+        reduceQualityInLowMemory_ = false;
+
         return this;
       }
 
@@ -4391,6 +4708,7 @@ public final class ImageInfo {
         result.errorPlaceholder_ = errorPlaceholder_;
         result.backgroundColor_ = backgroundColor_;
         result.androidAvailableMemoryPercentage_ = androidAvailableMemoryPercentage_;
+        result.reduceQualityInLowMemory_ = reduceQualityInLowMemory_;
         onBuilt();
         return result;
       }
@@ -4453,6 +4771,9 @@ public final class ImageInfo {
         }
         if (other.getAndroidAvailableMemoryPercentage() != 0D) {
           setAndroidAvailableMemoryPercentage(other.getAndroidAvailableMemoryPercentage());
+        }
+        if (other.getReduceQualityInLowMemory() != false) {
+          setReduceQualityInLowMemory(other.getReduceQualityInLowMemory());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -4857,6 +5178,64 @@ public final class ImageInfo {
         onChanged();
         return this;
       }
+
+      private boolean reduceQualityInLowMemory_ ;
+      /**
+       * <pre>
+       * To reduce images quality when detect memory pressure automatically,
+       * the quality will be reduced by half straightly in low memory state
+       * if this config is enabled. Plugin will try to resume full quality
+       * gradually later if no more memory warning is received. Be aware that,
+       * compressing image consumes CPU for saving memory. It is suggested to
+       * keep this feature disallowed if it's not a must
+       * </pre>
+       *
+       * <code>bool reduceQualityInLowMemory = 5;</code>
+       * @return The reduceQualityInLowMemory.
+       */
+      @java.lang.Override
+      public boolean getReduceQualityInLowMemory() {
+        return reduceQualityInLowMemory_;
+      }
+      /**
+       * <pre>
+       * To reduce images quality when detect memory pressure automatically,
+       * the quality will be reduced by half straightly in low memory state
+       * if this config is enabled. Plugin will try to resume full quality
+       * gradually later if no more memory warning is received. Be aware that,
+       * compressing image consumes CPU for saving memory. It is suggested to
+       * keep this feature disallowed if it's not a must
+       * </pre>
+       *
+       * <code>bool reduceQualityInLowMemory = 5;</code>
+       * @param value The reduceQualityInLowMemory to set.
+       * @return This builder for chaining.
+       */
+      public Builder setReduceQualityInLowMemory(boolean value) {
+        
+        reduceQualityInLowMemory_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * To reduce images quality when detect memory pressure automatically,
+       * the quality will be reduced by half straightly in low memory state
+       * if this config is enabled. Plugin will try to resume full quality
+       * gradually later if no more memory warning is received. Be aware that,
+       * compressing image consumes CPU for saving memory. It is suggested to
+       * keep this feature disallowed if it's not a must
+       * </pre>
+       *
+       * <code>bool reduceQualityInLowMemory = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearReduceQualityInLowMemory() {
+        
+        reduceQualityInLowMemory_ = false;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -4944,20 +5323,21 @@ public final class ImageInfo {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020image_info.proto\032\021image_utils.proto\"i\n" +
-      "\016ImageFetchInfo\022\013\n\003url\030\001 \001(\t\022\030\n\020errorPla" +
-      "ceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\033\n\010g" +
-      "eometry\030\004 \001(\0132\t.Geometry\"+\n\nResultInfo\022\014" +
-      "\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\"p\n\024ImageFe" +
-      "tchResultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId" +
-      "\030\002 \001(\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005" +
-      "state\030\005 \001(\0162\n.TaskState\"2\n\020ImageDisposeI" +
-      "nfo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\"\203\001\n\017" +
-      "ImageConfigInfo\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020" +
-      "errorPlaceholder\030\002 \001(\t\022\027\n\017backgroundColo" +
-      "r\030\003 \001(\t\022(\n androidAvailableMemoryPercent" +
-      "age\030\004 \001(\001B\031\n\027com.texture_image.protob\006pr" +
-      "oto3"
+      "\n\020image_info.proto\032\021image_utils.proto\"\204\001" +
+      "\n\016ImageFetchInfo\022\013\n\003url\030\001 \001(\t\022\030\n\020errorPl" +
+      "aceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\033\n\010" +
+      "geometry\030\004 \001(\0132\t.Geometry\022\031\n\007quality\030\005 \001" +
+      "(\0132\010.Quality\"+\n\nResultInfo\022\014\n\004code\030\001 \001(\005" +
+      "\022\017\n\007message\030\002 \001(\t\"p\n\024ImageFetchResultInf" +
+      "o\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(\003\022\017\n\007me" +
+      "ssage\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state\030\005 \001(\0162" +
+      "\n.TaskState\"2\n\020ImageDisposeInfo\022\013\n\003url\030\001" +
+      " \001(\t\022\021\n\ttextureId\030\002 \001(\003\"\245\001\n\017ImageConfigI" +
+      "nfo\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020errorPlaceho" +
+      "lder\030\002 \001(\t\022\027\n\017backgroundColor\030\003 \001(\t\022(\n a" +
+      "ndroidAvailableMemoryPercentage\030\004 \001(\001\022 \n" +
+      "\030reduceQualityInLowMemory\030\005 \001(\010B\031\n\027com.t" +
+      "exture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -4969,7 +5349,7 @@ public final class ImageInfo {
     internal_static_ImageFetchInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageFetchInfo_descriptor,
-        new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "Geometry", });
+        new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "Geometry", "Quality", });
     internal_static_ResultInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_ResultInfo_fieldAccessorTable = new
@@ -4993,7 +5373,7 @@ public final class ImageInfo {
     internal_static_ImageConfigInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageConfigInfo_descriptor,
-        new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", });
+        new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", "ReduceQualityInLowMemory", });
     com.texture_image.proto.ImageUtils.getDescriptor();
   }
 

@@ -328,6 +328,77 @@ void SetGeometry_Fit_RawValue(Geometry *message, int32_t value) {
   GPBSetMessageRawEnumField(message, field, value);
 }
 
+#pragma mark - Quality
+
+@implementation Quality
+
+@dynamic autoDownscale;
+@dynamic minimumAutoDownscaleTriggerSize;
+@dynamic quality;
+
+typedef struct Quality__storage_ {
+  uint32_t _has_storage_[1];
+  int32_t minimumAutoDownscaleTriggerSize;
+  int32_t quality;
+} Quality__storage_;
+
+// This method is threadsafe because it is initially called
+// in +initialize for each subclass.
++ (GPBDescriptor *)descriptor {
+  static GPBDescriptor *descriptor = nil;
+  if (!descriptor) {
+    static GPBMessageFieldDescription fields[] = {
+      {
+        .name = "autoDownscale",
+        .dataTypeSpecific.clazz = Nil,
+        .number = Quality_FieldNumber_AutoDownscale,
+        .hasIndex = 0,
+        .offset = 1,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "minimumAutoDownscaleTriggerSize",
+        .dataTypeSpecific.clazz = Nil,
+        .number = Quality_FieldNumber_MinimumAutoDownscaleTriggerSize,
+        .hasIndex = 2,
+        .offset = (uint32_t)offsetof(Quality__storage_, minimumAutoDownscaleTriggerSize),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "quality",
+        .dataTypeSpecific.clazz = Nil,
+        .number = Quality_FieldNumber_Quality,
+        .hasIndex = 3,
+        .offset = (uint32_t)offsetof(Quality__storage_, quality),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt32,
+      },
+    };
+    GPBDescriptor *localDescriptor =
+        [GPBDescriptor allocDescriptorForClass:[Quality class]
+                                     rootClass:[ImageUtilsRoot class]
+                                          file:ImageUtilsRoot_FileDescriptor()
+                                        fields:fields
+                                    fieldCount:(uint32_t)(sizeof(fields) / sizeof(GPBMessageFieldDescription))
+                                   storageSize:sizeof(Quality__storage_)
+                                         flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
+#if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    static const char *extraTextFormatInfo =
+        "\002\001\r\000\002\037\000";
+    [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
+#endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
+    #if defined(DEBUG) && DEBUG
+      NSAssert(descriptor == nil, @"Startup recursed!");
+    #endif  // DEBUG
+    descriptor = localDescriptor;
+  }
+  return descriptor;
+}
+
+@end
+
 
 #pragma clang diagnostic pop
 

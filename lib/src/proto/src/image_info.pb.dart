@@ -20,6 +20,7 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errorPlaceholder', protoName: 'errorPlaceholder')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placeholder')
     ..aOM<$0.Geometry>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geometry', subBuilder: $0.Geometry.create)
+    ..aOM<$0.Quality>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quality', subBuilder: $0.Quality.create)
     ..hasRequiredFields = false
   ;
 
@@ -29,6 +30,7 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     $core.String? errorPlaceholder,
     $core.String? placeholder,
     $0.Geometry? geometry,
+    $0.Quality? quality,
   }) {
     final _result = create();
     if (url != null) {
@@ -42,6 +44,9 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     }
     if (geometry != null) {
       _result.geometry = geometry;
+    }
+    if (quality != null) {
+      _result.quality = quality;
     }
     return _result;
   }
@@ -103,6 +108,17 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
   void clearGeometry() => clearField(4);
   @$pb.TagNumber(4)
   $0.Geometry ensureGeometry() => $_ensure(3);
+
+  @$pb.TagNumber(5)
+  $0.Quality get quality => $_getN(4);
+  @$pb.TagNumber(5)
+  set quality($0.Quality v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasQuality() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearQuality() => clearField(5);
+  @$pb.TagNumber(5)
+  $0.Quality ensureQuality() => $_ensure(4);
 }
 
 class ResultInfo extends $pb.GeneratedMessage {
@@ -336,6 +352,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errorPlaceholder', protoName: 'errorPlaceholder')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backgroundColor', protoName: 'backgroundColor')
     ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'androidAvailableMemoryPercentage', $pb.PbFieldType.OD, protoName: 'androidAvailableMemoryPercentage')
+    ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reduceQualityInLowMemory', protoName: 'reduceQualityInLowMemory')
     ..hasRequiredFields = false
   ;
 
@@ -345,6 +362,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     $core.String? errorPlaceholder,
     $core.String? backgroundColor,
     $core.double? androidAvailableMemoryPercentage,
+    $core.bool? reduceQualityInLowMemory,
   }) {
     final _result = create();
     if (placeholder != null) {
@@ -358,6 +376,9 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     }
     if (androidAvailableMemoryPercentage != null) {
       _result.androidAvailableMemoryPercentage = androidAvailableMemoryPercentage;
+    }
+    if (reduceQualityInLowMemory != null) {
+      _result.reduceQualityInLowMemory = reduceQualityInLowMemory;
     }
     return _result;
   }
@@ -417,5 +438,14 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
   $core.bool hasAndroidAvailableMemoryPercentage() => $_has(3);
   @$pb.TagNumber(4)
   void clearAndroidAvailableMemoryPercentage() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $core.bool get reduceQualityInLowMemory => $_getBF(4);
+  @$pb.TagNumber(5)
+  set reduceQualityInLowMemory($core.bool v) { $_setBool(4, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasReduceQualityInLowMemory() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearReduceQualityInLowMemory() => clearField(5);
 }
 

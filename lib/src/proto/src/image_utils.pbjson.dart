@@ -64,3 +64,15 @@ const Geometry$json = const {
 
 /// Descriptor for `Geometry`. Decode as a `google.protobuf.DescriptorProto`.
 final $typed_data.Uint8List geometryDescriptor = $convert.base64Decode('CghHZW9tZXRyeRIUCgV3aWR0aBgBIAEoBVIFd2lkdGgSFgoGaGVpZ2h0GAIgASgFUgZoZWlnaHQSIgoMc3VwcG9ydEFscGhhGAMgASgIUgxzdXBwb3J0QWxwaGESGQoDZml0GAQgASgOMgcuQm94Rml0UgNmaXQSMQoMYm9yZGVyUmFkaXVzGAUgASgLMg0uQm9yZGVyUmFkaXVzUgxib3JkZXJSYWRpdXM=');
+@$core.Deprecated('Use qualityDescriptor instead')
+const Quality$json = const {
+  '1': 'Quality',
+  '2': const [
+    const {'1': 'autoDownscale', '3': 1, '4': 1, '5': 8, '10': 'autoDownscale'},
+    const {'1': 'minimumAutoDownscaleTriggerSize', '3': 2, '4': 1, '5': 5, '10': 'minimumAutoDownscaleTriggerSize'},
+    const {'1': 'quality', '3': 3, '4': 1, '5': 5, '10': 'quality'},
+  ],
+};
+
+/// Descriptor for `Quality`. Decode as a `google.protobuf.DescriptorProto`.
+final $typed_data.Uint8List qualityDescriptor = $convert.base64Decode('CgdRdWFsaXR5EiQKDWF1dG9Eb3duc2NhbGUYASABKAhSDWF1dG9Eb3duc2NhbGUSSAofbWluaW11bUF1dG9Eb3duc2NhbGVUcmlnZ2VyU2l6ZRgCIAEoBVIfbWluaW11bUF1dG9Eb3duc2NhbGVUcmlnZ2VyU2l6ZRIYCgdxdWFsaXR5GAMgASgFUgdxdWFsaXR5');

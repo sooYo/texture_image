@@ -26,6 +26,7 @@
 // static values in struct initializers.
 // We don't use [Foo class] because it is not a static value.
 GPBObjCClassDeclaration(Geometry);
+GPBObjCClassDeclaration(Quality);
 
 #pragma mark - ImageInfoRoot
 
@@ -58,6 +59,7 @@ static GPBFileDescriptor *ImageInfoRoot_FileDescriptor(void) {
 @dynamic errorPlaceholder;
 @dynamic placeholder;
 @dynamic hasGeometry, geometry;
+@dynamic hasQuality, quality;
 
 typedef struct ImageFetchInfo__storage_ {
   uint32_t _has_storage_[1];
@@ -65,6 +67,7 @@ typedef struct ImageFetchInfo__storage_ {
   NSString *errorPlaceholder;
   NSString *placeholder;
   Geometry *geometry;
+  Quality *quality;
 } ImageFetchInfo__storage_;
 
 // This method is threadsafe because it is initially called
@@ -106,6 +109,15 @@ typedef struct ImageFetchInfo__storage_ {
         .number = ImageFetchInfo_FieldNumber_Geometry,
         .hasIndex = 3,
         .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, geometry),
+        .flags = GPBFieldOptional,
+        .dataType = GPBDataTypeMessage,
+      },
+      {
+        .name = "quality",
+        .dataTypeSpecific.clazz = GPBObjCClass(Quality),
+        .number = ImageFetchInfo_FieldNumber_Quality,
+        .hasIndex = 4,
+        .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, quality),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
       },
@@ -364,6 +376,7 @@ typedef struct ImageDisposeInfo__storage_ {
 @dynamic errorPlaceholder;
 @dynamic backgroundColor;
 @dynamic androidAvailableMemoryPercentage;
+@dynamic reduceQualityInLowMemory;
 
 typedef struct ImageConfigInfo__storage_ {
   uint32_t _has_storage_[1];
@@ -415,6 +428,15 @@ typedef struct ImageConfigInfo__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeDouble,
       },
+      {
+        .name = "reduceQualityInLowMemory",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_ReduceQualityInLowMemory,
+        .hasIndex = 4,
+        .offset = 5,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[ImageConfigInfo class]
@@ -426,7 +448,7 @@ typedef struct ImageConfigInfo__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\003\002\020\000\003\017\000\004\037\001\000";
+        "\004\002\020\000\003\017\000\004\037\001\000\005\030\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

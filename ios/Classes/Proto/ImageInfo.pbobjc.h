@@ -28,6 +28,7 @@
 CF_EXTERN_C_BEGIN
 
 @class Geometry;
+@class Quality;
 GPB_ENUM_FWD_DECLARE(TaskState);
 
 NS_ASSUME_NONNULL_BEGIN
@@ -54,6 +55,7 @@ typedef GPB_ENUM(ImageFetchInfo_FieldNumber) {
   ImageFetchInfo_FieldNumber_ErrorPlaceholder = 2,
   ImageFetchInfo_FieldNumber_Placeholder = 3,
   ImageFetchInfo_FieldNumber_Geometry = 4,
+  ImageFetchInfo_FieldNumber_Quality = 5,
 };
 
 /**
@@ -73,6 +75,11 @@ GPB_FINAL @interface ImageFetchInfo : GPBMessage
 @property(nonatomic, readwrite, strong, null_resettable) Geometry *geometry;
 /** Test to see if @c geometry has been set. */
 @property(nonatomic, readwrite) BOOL hasGeometry;
+
+/** Image aqulity control */
+@property(nonatomic, readwrite, strong, null_resettable) Quality *quality;
+/** Test to see if @c quality has been set. */
+@property(nonatomic, readwrite) BOOL hasQuality;
 
 @end
 
@@ -180,6 +187,7 @@ typedef GPB_ENUM(ImageConfigInfo_FieldNumber) {
   ImageConfigInfo_FieldNumber_ErrorPlaceholder = 2,
   ImageConfigInfo_FieldNumber_BackgroundColor = 3,
   ImageConfigInfo_FieldNumber_AndroidAvailableMemoryPercentage = 4,
+  ImageConfigInfo_FieldNumber_ReduceQualityInLowMemory = 5,
 };
 
 /**
@@ -216,6 +224,16 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
  * when it's possible`. Default value is 0.2
  **/
 @property(nonatomic, readwrite) double androidAvailableMemoryPercentage;
+
+/**
+ * To reduce images quality when detect memory pressure automatically,
+ * the quality will be reduced by half straightly in low memory state
+ * if this config is enabled. Plugin will try to resume full quality
+ * gradually later if no more memory warning is received. Be aware that,
+ * compressing image consumes CPU for saving memory. It is suggested to
+ * keep this feature disallowed if it's not a must
+ **/
+@property(nonatomic, readwrite) BOOL reduceQualityInLowMemory;
 
 @end
 

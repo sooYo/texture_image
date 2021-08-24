@@ -2029,6 +2029,773 @@ public final class ImageUtils {
 
   }
 
+  public interface QualityOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:Quality)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * Allow the plugin the recalculate the image size along with
+     * target device's density DPI, this logic is in utils/GeometryUtil.kt
+     * This will result in resampling of the image and it's kind of
+     * lossy compression, but it is not as obvious as setting [quality]
+     * to this Quality object.
+     * If this is not allowed, than images will rendered using the best
+     * quality, thus more memory space is taken. It's suggested to open
+     * this setting
+     * </pre>
+     *
+     * <code>bool autoDownscale = 1;</code>
+     * @return The autoDownscale.
+     */
+    boolean getAutoDownscale();
+
+    /**
+     * <pre>
+     * If one of the image dimensions' value is lower than this value,
+     * it will not downscale automatically although [autoDownscale] is
+     * enabled to guarantee no over-reduced image quality. The default
+     * value is 80.
+     * </pre>
+     *
+     * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
+     * @return The minimumAutoDownscaleTriggerSize.
+     */
+    int getMinimumAutoDownscaleTriggerSize();
+
+    /**
+     * <pre>
+     * Image compression quality, assgining this value will trigger
+     * compression logic of target bitmap, and it's lossy compression
+     * if the target bitmap is not in PNG format. And comporess will
+     * cost CPU time to save memory space, it's not suggested to do
+     * compression if there's no memory pressure
+     * </pre>
+     *
+     * <code>int32 quality = 3;</code>
+     * @return The quality.
+     */
+    int getQuality();
+  }
+  /**
+   * <pre>
+   * Contains custom configs about setting image quality
+   * </pre>
+   *
+   * Protobuf type {@code Quality}
+   */
+  public static final class Quality extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:Quality)
+      QualityOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use Quality.newBuilder() to construct.
+    private Quality(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private Quality() {
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new Quality();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private Quality(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              autoDownscale_ = input.readBool();
+              break;
+            }
+            case 16: {
+
+              minimumAutoDownscaleTriggerSize_ = input.readInt32();
+              break;
+            }
+            case 24: {
+
+              quality_ = input.readInt32();
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageUtils.internal_static_Quality_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageUtils.internal_static_Quality_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageUtils.Quality.class, com.texture_image.proto.ImageUtils.Quality.Builder.class);
+    }
+
+    public static final int AUTODOWNSCALE_FIELD_NUMBER = 1;
+    private boolean autoDownscale_;
+    /**
+     * <pre>
+     * Allow the plugin the recalculate the image size along with
+     * target device's density DPI, this logic is in utils/GeometryUtil.kt
+     * This will result in resampling of the image and it's kind of
+     * lossy compression, but it is not as obvious as setting [quality]
+     * to this Quality object.
+     * If this is not allowed, than images will rendered using the best
+     * quality, thus more memory space is taken. It's suggested to open
+     * this setting
+     * </pre>
+     *
+     * <code>bool autoDownscale = 1;</code>
+     * @return The autoDownscale.
+     */
+    @java.lang.Override
+    public boolean getAutoDownscale() {
+      return autoDownscale_;
+    }
+
+    public static final int MINIMUMAUTODOWNSCALETRIGGERSIZE_FIELD_NUMBER = 2;
+    private int minimumAutoDownscaleTriggerSize_;
+    /**
+     * <pre>
+     * If one of the image dimensions' value is lower than this value,
+     * it will not downscale automatically although [autoDownscale] is
+     * enabled to guarantee no over-reduced image quality. The default
+     * value is 80.
+     * </pre>
+     *
+     * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
+     * @return The minimumAutoDownscaleTriggerSize.
+     */
+    @java.lang.Override
+    public int getMinimumAutoDownscaleTriggerSize() {
+      return minimumAutoDownscaleTriggerSize_;
+    }
+
+    public static final int QUALITY_FIELD_NUMBER = 3;
+    private int quality_;
+    /**
+     * <pre>
+     * Image compression quality, assgining this value will trigger
+     * compression logic of target bitmap, and it's lossy compression
+     * if the target bitmap is not in PNG format. And comporess will
+     * cost CPU time to save memory space, it's not suggested to do
+     * compression if there's no memory pressure
+     * </pre>
+     *
+     * <code>int32 quality = 3;</code>
+     * @return The quality.
+     */
+    @java.lang.Override
+    public int getQuality() {
+      return quality_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (autoDownscale_ != false) {
+        output.writeBool(1, autoDownscale_);
+      }
+      if (minimumAutoDownscaleTriggerSize_ != 0) {
+        output.writeInt32(2, minimumAutoDownscaleTriggerSize_);
+      }
+      if (quality_ != 0) {
+        output.writeInt32(3, quality_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (autoDownscale_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, autoDownscale_);
+      }
+      if (minimumAutoDownscaleTriggerSize_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, minimumAutoDownscaleTriggerSize_);
+      }
+      if (quality_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(3, quality_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageUtils.Quality)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageUtils.Quality other = (com.texture_image.proto.ImageUtils.Quality) obj;
+
+      if (getAutoDownscale()
+          != other.getAutoDownscale()) return false;
+      if (getMinimumAutoDownscaleTriggerSize()
+          != other.getMinimumAutoDownscaleTriggerSize()) return false;
+      if (getQuality()
+          != other.getQuality()) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + AUTODOWNSCALE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getAutoDownscale());
+      hash = (37 * hash) + MINIMUMAUTODOWNSCALETRIGGERSIZE_FIELD_NUMBER;
+      hash = (53 * hash) + getMinimumAutoDownscaleTriggerSize();
+      hash = (37 * hash) + QUALITY_FIELD_NUMBER;
+      hash = (53 * hash) + getQuality();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageUtils.Quality parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageUtils.Quality prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * Contains custom configs about setting image quality
+     * </pre>
+     *
+     * Protobuf type {@code Quality}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:Quality)
+        com.texture_image.proto.ImageUtils.QualityOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageUtils.internal_static_Quality_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageUtils.internal_static_Quality_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageUtils.Quality.class, com.texture_image.proto.ImageUtils.Quality.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageUtils.Quality.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        autoDownscale_ = false;
+
+        minimumAutoDownscaleTriggerSize_ = 0;
+
+        quality_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageUtils.internal_static_Quality_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageUtils.Quality getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageUtils.Quality.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageUtils.Quality build() {
+        com.texture_image.proto.ImageUtils.Quality result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageUtils.Quality buildPartial() {
+        com.texture_image.proto.ImageUtils.Quality result = new com.texture_image.proto.ImageUtils.Quality(this);
+        result.autoDownscale_ = autoDownscale_;
+        result.minimumAutoDownscaleTriggerSize_ = minimumAutoDownscaleTriggerSize_;
+        result.quality_ = quality_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageUtils.Quality) {
+          return mergeFrom((com.texture_image.proto.ImageUtils.Quality)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageUtils.Quality other) {
+        if (other == com.texture_image.proto.ImageUtils.Quality.getDefaultInstance()) return this;
+        if (other.getAutoDownscale() != false) {
+          setAutoDownscale(other.getAutoDownscale());
+        }
+        if (other.getMinimumAutoDownscaleTriggerSize() != 0) {
+          setMinimumAutoDownscaleTriggerSize(other.getMinimumAutoDownscaleTriggerSize());
+        }
+        if (other.getQuality() != 0) {
+          setQuality(other.getQuality());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageUtils.Quality parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageUtils.Quality) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean autoDownscale_ ;
+      /**
+       * <pre>
+       * Allow the plugin the recalculate the image size along with
+       * target device's density DPI, this logic is in utils/GeometryUtil.kt
+       * This will result in resampling of the image and it's kind of
+       * lossy compression, but it is not as obvious as setting [quality]
+       * to this Quality object.
+       * If this is not allowed, than images will rendered using the best
+       * quality, thus more memory space is taken. It's suggested to open
+       * this setting
+       * </pre>
+       *
+       * <code>bool autoDownscale = 1;</code>
+       * @return The autoDownscale.
+       */
+      @java.lang.Override
+      public boolean getAutoDownscale() {
+        return autoDownscale_;
+      }
+      /**
+       * <pre>
+       * Allow the plugin the recalculate the image size along with
+       * target device's density DPI, this logic is in utils/GeometryUtil.kt
+       * This will result in resampling of the image and it's kind of
+       * lossy compression, but it is not as obvious as setting [quality]
+       * to this Quality object.
+       * If this is not allowed, than images will rendered using the best
+       * quality, thus more memory space is taken. It's suggested to open
+       * this setting
+       * </pre>
+       *
+       * <code>bool autoDownscale = 1;</code>
+       * @param value The autoDownscale to set.
+       * @return This builder for chaining.
+       */
+      public Builder setAutoDownscale(boolean value) {
+        
+        autoDownscale_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Allow the plugin the recalculate the image size along with
+       * target device's density DPI, this logic is in utils/GeometryUtil.kt
+       * This will result in resampling of the image and it's kind of
+       * lossy compression, but it is not as obvious as setting [quality]
+       * to this Quality object.
+       * If this is not allowed, than images will rendered using the best
+       * quality, thus more memory space is taken. It's suggested to open
+       * this setting
+       * </pre>
+       *
+       * <code>bool autoDownscale = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearAutoDownscale() {
+        
+        autoDownscale_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int minimumAutoDownscaleTriggerSize_ ;
+      /**
+       * <pre>
+       * If one of the image dimensions' value is lower than this value,
+       * it will not downscale automatically although [autoDownscale] is
+       * enabled to guarantee no over-reduced image quality. The default
+       * value is 80.
+       * </pre>
+       *
+       * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
+       * @return The minimumAutoDownscaleTriggerSize.
+       */
+      @java.lang.Override
+      public int getMinimumAutoDownscaleTriggerSize() {
+        return minimumAutoDownscaleTriggerSize_;
+      }
+      /**
+       * <pre>
+       * If one of the image dimensions' value is lower than this value,
+       * it will not downscale automatically although [autoDownscale] is
+       * enabled to guarantee no over-reduced image quality. The default
+       * value is 80.
+       * </pre>
+       *
+       * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
+       * @param value The minimumAutoDownscaleTriggerSize to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMinimumAutoDownscaleTriggerSize(int value) {
+        
+        minimumAutoDownscaleTriggerSize_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * If one of the image dimensions' value is lower than this value,
+       * it will not downscale automatically although [autoDownscale] is
+       * enabled to guarantee no over-reduced image quality. The default
+       * value is 80.
+       * </pre>
+       *
+       * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMinimumAutoDownscaleTriggerSize() {
+        
+        minimumAutoDownscaleTriggerSize_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int quality_ ;
+      /**
+       * <pre>
+       * Image compression quality, assgining this value will trigger
+       * compression logic of target bitmap, and it's lossy compression
+       * if the target bitmap is not in PNG format. And comporess will
+       * cost CPU time to save memory space, it's not suggested to do
+       * compression if there's no memory pressure
+       * </pre>
+       *
+       * <code>int32 quality = 3;</code>
+       * @return The quality.
+       */
+      @java.lang.Override
+      public int getQuality() {
+        return quality_;
+      }
+      /**
+       * <pre>
+       * Image compression quality, assgining this value will trigger
+       * compression logic of target bitmap, and it's lossy compression
+       * if the target bitmap is not in PNG format. And comporess will
+       * cost CPU time to save memory space, it's not suggested to do
+       * compression if there's no memory pressure
+       * </pre>
+       *
+       * <code>int32 quality = 3;</code>
+       * @param value The quality to set.
+       * @return This builder for chaining.
+       */
+      public Builder setQuality(int value) {
+        
+        quality_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Image compression quality, assgining this value will trigger
+       * compression logic of target bitmap, and it's lossy compression
+       * if the target bitmap is not in PNG format. And comporess will
+       * cost CPU time to save memory space, it's not suggested to do
+       * compression if there's no memory pressure
+       * </pre>
+       *
+       * <code>int32 quality = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearQuality() {
+        
+        quality_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:Quality)
+    }
+
+    // @@protoc_insertion_point(class_scope:Quality)
+    private static final com.texture_image.proto.ImageUtils.Quality DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageUtils.Quality();
+    }
+
+    public static com.texture_image.proto.ImageUtils.Quality getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<Quality>
+        PARSER = new com.google.protobuf.AbstractParser<Quality>() {
+      @java.lang.Override
+      public Quality parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new Quality(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<Quality> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<Quality> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageUtils.Quality getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_BorderRadius_descriptor;
   private static final 
@@ -2039,6 +2806,11 @@ public final class ImageUtils {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_Geometry_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_Quality_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_Quality_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2053,13 +2825,15 @@ public final class ImageUtils {
       "Left\030\003 \001(\001\022\023\n\013bottomRight\030\004 \001(\001\"z\n\010Geome" +
       "try\022\r\n\005width\030\001 \001(\005\022\016\n\006height\030\002 \001(\005\022\024\n\014su" +
       "pportAlpha\030\003 \001(\010\022\024\n\003fit\030\004 \001(\0162\007.BoxFit\022#" +
-      "\n\014borderRadius\030\005 \001(\0132\r.BorderRadius*G\n\006B" +
-      "oxFit\022\010\n\004fill\020\000\022\013\n\007contain\020\001\022\t\n\005cover\020\002\022" +
-      "\014\n\010fitWidth\020\003\022\r\n\tfitHeight\020\004*a\n\tTaskStat" +
-      "e\022\017\n\013initialized\020\000\022\013\n\007loading\020\001\022\r\n\tcompl" +
-      "eted\020\002\022\n\n\006failed\020\003\022\014\n\010disposed\020\004\022\r\n\tunde" +
-      "fined\020\005B\031\n\027com.texture_image.protob\006prot" +
-      "o3"
+      "\n\014borderRadius\030\005 \001(\0132\r.BorderRadius\"Z\n\007Q" +
+      "uality\022\025\n\rautoDownscale\030\001 \001(\010\022\'\n\037minimum" +
+      "AutoDownscaleTriggerSize\030\002 \001(\005\022\017\n\007qualit" +
+      "y\030\003 \001(\005*G\n\006BoxFit\022\010\n\004fill\020\000\022\013\n\007contain\020\001" +
+      "\022\t\n\005cover\020\002\022\014\n\010fitWidth\020\003\022\r\n\tfitHeight\020\004" +
+      "*a\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007loadin" +
+      "g\020\001\022\r\n\tcompleted\020\002\022\n\n\006failed\020\003\022\014\n\010dispos" +
+      "ed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture_image" +
+      ".protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -2077,6 +2851,12 @@ public final class ImageUtils {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_Geometry_descriptor,
         new java.lang.String[] { "Width", "Height", "SupportAlpha", "Fit", "BorderRadius", });
+    internal_static_Quality_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_Quality_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_Quality_descriptor,
+        new java.lang.String[] { "AutoDownscale", "MinimumAutoDownscaleTriggerSize", "Quality", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
