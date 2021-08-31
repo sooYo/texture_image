@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import coil.request.ImageRequest
+import com.texture_image.extensions.bitmapFromAsset
 import com.texture_image.proto.ImageInfo
 
 object PlaceholderUtil {

@@ -5,13 +5,13 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.view.Surface
 import coil.request.ImageRequest
 import coil.size.PixelSize
 import coil.target.Target
 import coil.transform.Transformation
 import com.texture_image.constants.SurfaceTextureEntry
+import com.texture_image.extensions.*
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.models.TaskOutlineBuilder
@@ -61,18 +61,6 @@ class ImageLoaderTask(
             .target(this)
             .data(imageInfo.url)
             .size(imageSize)
-            .listener(onSuccess = { request, metadata ->
-                Log.d(
-                    "onSuccess",
-                    "Request: ${request.data}, isSampled: ${metadata.isSampled}, source: ${metadata.dataSource}\n"
-                )
-            }, onError = { request, throwable ->
-                Log.d(
-                    "onError",
-                    "Request: ${request.data}, error: $throwable\n"
-                )
-            }
-            )
             .transformations(transform)
             .allowRgb565(!imageInfo.geometry.supportAlpha)
             .diskCachePolicy(cachePolicy.coilDiskCache)

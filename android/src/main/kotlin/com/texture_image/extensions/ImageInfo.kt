@@ -1,4 +1,4 @@
-package com.texture_image.utils
+package com.texture_image.extensions
 
 import android.content.Context
 import coil.size.PixelSize

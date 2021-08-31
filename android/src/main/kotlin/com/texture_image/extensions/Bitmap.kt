@@ -1,8 +1,9 @@
-package com.texture_image.utils
+package com.texture_image.extensions
 
 import android.content.Context
 import android.graphics.*
 import android.util.Log
+import com.texture_image.utils.LogUtil
 import kotlin.math.roundToInt
 
 fun Bitmap.boxFitFill(width: Int, height: Int): Bitmap {
