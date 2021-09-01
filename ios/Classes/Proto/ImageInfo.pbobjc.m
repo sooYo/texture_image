@@ -313,6 +313,7 @@ void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32
 
 @dynamic URL;
 @dynamic textureId;
+@dynamic canBeReused;
 
 typedef struct ImageDisposeInfo__storage_ {
   uint32_t _has_storage_[1];
@@ -344,6 +345,15 @@ typedef struct ImageDisposeInfo__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeInt64,
       },
+      {
+        .name = "canBeReused",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageDisposeInfo_FieldNumber_CanBeReused,
+        .hasIndex = 2,
+        .offset = 3,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[ImageDisposeInfo class]
@@ -355,7 +365,7 @@ typedef struct ImageDisposeInfo__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\002\001!!!\000\002\t\000";
+        "\003\001!!!\000\002\t\000\003\013\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG

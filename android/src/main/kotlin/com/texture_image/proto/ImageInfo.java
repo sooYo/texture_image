@@ -3310,6 +3310,17 @@ public final class ImageInfo {
      * @return The textureId.
      */
     long getTextureId();
+
+    /**
+     * <pre>
+     * Dispose this image and allow/disallow the backend SurfaceTexture
+     * to be resued. Plugin reuses Textures by their sizes.
+     * </pre>
+     *
+     * <code>bool canBeReused = 3;</code>
+     * @return The canBeReused.
+     */
+    boolean getCanBeReused();
   }
   /**
    * <pre>
@@ -3370,6 +3381,11 @@ public final class ImageInfo {
             case 16: {
 
               textureId_ = input.readInt64();
+              break;
+            }
+            case 24: {
+
+              canBeReused_ = input.readBool();
               break;
             }
             default: {
@@ -3476,6 +3492,22 @@ public final class ImageInfo {
       return textureId_;
     }
 
+    public static final int CANBEREUSED_FIELD_NUMBER = 3;
+    private boolean canBeReused_;
+    /**
+     * <pre>
+     * Dispose this image and allow/disallow the backend SurfaceTexture
+     * to be resued. Plugin reuses Textures by their sizes.
+     * </pre>
+     *
+     * <code>bool canBeReused = 3;</code>
+     * @return The canBeReused.
+     */
+    @java.lang.Override
+    public boolean getCanBeReused() {
+      return canBeReused_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -3496,6 +3528,9 @@ public final class ImageInfo {
       if (textureId_ != 0L) {
         output.writeInt64(2, textureId_);
       }
+      if (canBeReused_ != false) {
+        output.writeBool(3, canBeReused_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -3511,6 +3546,10 @@ public final class ImageInfo {
       if (textureId_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt64Size(2, textureId_);
+      }
+      if (canBeReused_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(3, canBeReused_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -3531,6 +3570,8 @@ public final class ImageInfo {
           .equals(other.getUrl())) return false;
       if (getTextureId()
           != other.getTextureId()) return false;
+      if (getCanBeReused()
+          != other.getCanBeReused()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -3547,6 +3588,9 @@ public final class ImageInfo {
       hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getTextureId());
+      hash = (37 * hash) + CANBEREUSED_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getCanBeReused());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -3688,6 +3732,8 @@ public final class ImageInfo {
 
         textureId_ = 0L;
 
+        canBeReused_ = false;
+
         return this;
       }
 
@@ -3716,6 +3762,7 @@ public final class ImageInfo {
         com.texture_image.proto.ImageInfo.ImageDisposeInfo result = new com.texture_image.proto.ImageInfo.ImageDisposeInfo(this);
         result.url_ = url_;
         result.textureId_ = textureId_;
+        result.canBeReused_ = canBeReused_;
         onBuilt();
         return result;
       }
@@ -3770,6 +3817,9 @@ public final class ImageInfo {
         }
         if (other.getTextureId() != 0L) {
           setTextureId(other.getTextureId());
+        }
+        if (other.getCanBeReused() != false) {
+          setCanBeReused(other.getCanBeReused());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -3963,6 +4013,52 @@ public final class ImageInfo {
       public Builder clearTextureId() {
         
         textureId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private boolean canBeReused_ ;
+      /**
+       * <pre>
+       * Dispose this image and allow/disallow the backend SurfaceTexture
+       * to be resued. Plugin reuses Textures by their sizes.
+       * </pre>
+       *
+       * <code>bool canBeReused = 3;</code>
+       * @return The canBeReused.
+       */
+      @java.lang.Override
+      public boolean getCanBeReused() {
+        return canBeReused_;
+      }
+      /**
+       * <pre>
+       * Dispose this image and allow/disallow the backend SurfaceTexture
+       * to be resued. Plugin reuses Textures by their sizes.
+       * </pre>
+       *
+       * <code>bool canBeReused = 3;</code>
+       * @param value The canBeReused to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCanBeReused(boolean value) {
+        
+        canBeReused_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Dispose this image and allow/disallow the backend SurfaceTexture
+       * to be resued. Plugin reuses Textures by their sizes.
+       * </pre>
+       *
+       * <code>bool canBeReused = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCanBeReused() {
+        
+        canBeReused_ = false;
         onChanged();
         return this;
       }
@@ -5331,13 +5427,14 @@ public final class ImageInfo {
       "\022\017\n\007message\030\002 \001(\t\"p\n\024ImageFetchResultInf" +
       "o\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(\003\022\017\n\007me" +
       "ssage\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state\030\005 \001(\0162" +
-      "\n.TaskState\"2\n\020ImageDisposeInfo\022\013\n\003url\030\001" +
-      " \001(\t\022\021\n\ttextureId\030\002 \001(\003\"\245\001\n\017ImageConfigI" +
-      "nfo\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020errorPlaceho" +
-      "lder\030\002 \001(\t\022\027\n\017backgroundColor\030\003 \001(\t\022(\n a" +
-      "ndroidAvailableMemoryPercentage\030\004 \001(\001\022 \n" +
-      "\030reduceQualityInLowMemory\030\005 \001(\010B\031\n\027com.t" +
-      "exture_image.protob\006proto3"
+      "\n.TaskState\"G\n\020ImageDisposeInfo\022\013\n\003url\030\001" +
+      " \001(\t\022\021\n\ttextureId\030\002 \001(\003\022\023\n\013canBeReused\030\003" +
+      " \001(\010\"\245\001\n\017ImageConfigInfo\022\023\n\013placeholder\030" +
+      "\001 \001(\t\022\030\n\020errorPlaceholder\030\002 \001(\t\022\027\n\017backg" +
+      "roundColor\030\003 \001(\t\022(\n androidAvailableMemo" +
+      "ryPercentage\030\004 \001(\001\022 \n\030reduceQualityInLow" +
+      "Memory\030\005 \001(\010B\031\n\027com.texture_image.protob" +
+      "\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5367,7 +5464,7 @@ public final class ImageInfo {
     internal_static_ImageDisposeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageDisposeInfo_descriptor,
-        new java.lang.String[] { "Url", "TextureId", });
+        new java.lang.String[] { "Url", "TextureId", "CanBeReused", });
     internal_static_ImageConfigInfo_descriptor =
       getDescriptor().getMessageTypes().get(4);
     internal_static_ImageConfigInfo_fieldAccessorTable = new

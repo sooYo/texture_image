@@ -289,6 +289,7 @@ class ImageDisposeInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageDisposeInfo', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
     ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', protoName: 'textureId')
+    ..aOB(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'canBeReused', protoName: 'canBeReused')
     ..hasRequiredFields = false
   ;
 
@@ -296,6 +297,7 @@ class ImageDisposeInfo extends $pb.GeneratedMessage {
   factory ImageDisposeInfo({
     $core.String? url,
     $fixnum.Int64? textureId,
+    $core.bool? canBeReused,
   }) {
     final _result = create();
     if (url != null) {
@@ -303,6 +305,9 @@ class ImageDisposeInfo extends $pb.GeneratedMessage {
     }
     if (textureId != null) {
       _result.textureId = textureId;
+    }
+    if (canBeReused != null) {
+      _result.canBeReused = canBeReused;
     }
     return _result;
   }
@@ -344,6 +349,15 @@ class ImageDisposeInfo extends $pb.GeneratedMessage {
   $core.bool hasTextureId() => $_has(1);
   @$pb.TagNumber(2)
   void clearTextureId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.bool get canBeReused => $_getBF(2);
+  @$pb.TagNumber(3)
+  set canBeReused($core.bool v) { $_setBool(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasCanBeReused() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearCanBeReused() => clearField(3);
 }
 
 class ImageConfigInfo extends $pb.GeneratedMessage {

@@ -53,11 +53,12 @@ const ImageDisposeInfo$json = const {
   '2': const [
     const {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
     const {'1': 'textureId', '3': 2, '4': 1, '5': 3, '10': 'textureId'},
+    const {'1': 'canBeReused', '3': 3, '4': 1, '5': 8, '10': 'canBeReused'},
   ],
 };
 
 /// Descriptor for `ImageDisposeInfo`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageDisposeInfoDescriptor = $convert.base64Decode('ChBJbWFnZURpc3Bvc2VJbmZvEhAKA3VybBgBIAEoCVIDdXJsEhwKCXRleHR1cmVJZBgCIAEoA1IJdGV4dHVyZUlk');
+final $typed_data.Uint8List imageDisposeInfoDescriptor = $convert.base64Decode('ChBJbWFnZURpc3Bvc2VJbmZvEhAKA3VybBgBIAEoCVIDdXJsEhwKCXRleHR1cmVJZBgCIAEoA1IJdGV4dHVyZUlkEiAKC2NhbkJlUmV1c2VkGAMgASgIUgtjYW5CZVJldXNlZA==');
 @$core.Deprecated('Use imageConfigInfoDescriptor instead')
 const ImageConfigInfo$json = const {
   '1': 'ImageConfigInfo',

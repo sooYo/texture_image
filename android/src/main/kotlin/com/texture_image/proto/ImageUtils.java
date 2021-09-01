@@ -2054,8 +2054,8 @@ public final class ImageUtils {
      * <pre>
      * If one of the image dimensions' value is lower than this value,
      * it will not downscale automatically although [autoDownscale] is
-     * enabled to guarantee no over-reduced image quality. The default
-     * value is 80.
+     * enabled to guarantee no over-reduced image quality. The this value
+     * is not allow smaller than 80
      * </pre>
      *
      * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
@@ -2067,7 +2067,7 @@ public final class ImageUtils {
      * <pre>
      * Image compression quality, assgining this value will trigger
      * compression logic of target bitmap, and it's lossy compression
-     * if the target bitmap is not in PNG format. And comporess will
+     * if the target bitmap is not in PNG format. Comporess will
      * cost CPU time to save memory space, it's not suggested to do
      * compression if there's no memory pressure
      * </pre>
@@ -2201,8 +2201,8 @@ public final class ImageUtils {
      * <pre>
      * If one of the image dimensions' value is lower than this value,
      * it will not downscale automatically although [autoDownscale] is
-     * enabled to guarantee no over-reduced image quality. The default
-     * value is 80.
+     * enabled to guarantee no over-reduced image quality. The this value
+     * is not allow smaller than 80
      * </pre>
      *
      * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
@@ -2219,7 +2219,7 @@ public final class ImageUtils {
      * <pre>
      * Image compression quality, assgining this value will trigger
      * compression logic of target bitmap, and it's lossy compression
-     * if the target bitmap is not in PNG format. And comporess will
+     * if the target bitmap is not in PNG format. Comporess will
      * cost CPU time to save memory space, it's not suggested to do
      * compression if there's no memory pressure
      * </pre>
@@ -2642,8 +2642,8 @@ public final class ImageUtils {
        * <pre>
        * If one of the image dimensions' value is lower than this value,
        * it will not downscale automatically although [autoDownscale] is
-       * enabled to guarantee no over-reduced image quality. The default
-       * value is 80.
+       * enabled to guarantee no over-reduced image quality. The this value
+       * is not allow smaller than 80
        * </pre>
        *
        * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
@@ -2657,8 +2657,8 @@ public final class ImageUtils {
        * <pre>
        * If one of the image dimensions' value is lower than this value,
        * it will not downscale automatically although [autoDownscale] is
-       * enabled to guarantee no over-reduced image quality. The default
-       * value is 80.
+       * enabled to guarantee no over-reduced image quality. The this value
+       * is not allow smaller than 80
        * </pre>
        *
        * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
@@ -2675,8 +2675,8 @@ public final class ImageUtils {
        * <pre>
        * If one of the image dimensions' value is lower than this value,
        * it will not downscale automatically although [autoDownscale] is
-       * enabled to guarantee no over-reduced image quality. The default
-       * value is 80.
+       * enabled to guarantee no over-reduced image quality. The this value
+       * is not allow smaller than 80
        * </pre>
        *
        * <code>int32 minimumAutoDownscaleTriggerSize = 2;</code>
@@ -2694,7 +2694,7 @@ public final class ImageUtils {
        * <pre>
        * Image compression quality, assgining this value will trigger
        * compression logic of target bitmap, and it's lossy compression
-       * if the target bitmap is not in PNG format. And comporess will
+       * if the target bitmap is not in PNG format. Comporess will
        * cost CPU time to save memory space, it's not suggested to do
        * compression if there's no memory pressure
        * </pre>
@@ -2710,7 +2710,7 @@ public final class ImageUtils {
        * <pre>
        * Image compression quality, assgining this value will trigger
        * compression logic of target bitmap, and it's lossy compression
-       * if the target bitmap is not in PNG format. And comporess will
+       * if the target bitmap is not in PNG format. Comporess will
        * cost CPU time to save memory space, it's not suggested to do
        * compression if there's no memory pressure
        * </pre>
@@ -2729,7 +2729,7 @@ public final class ImageUtils {
        * <pre>
        * Image compression quality, assgining this value will trigger
        * compression logic of target bitmap, and it's lossy compression
-       * if the target bitmap is not in PNG format. And comporess will
+       * if the target bitmap is not in PNG format. Comporess will
        * cost CPU time to save memory space, it's not suggested to do
        * compression if there's no memory pressure
        * </pre>

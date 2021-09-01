@@ -155,6 +155,7 @@ void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32
 typedef GPB_ENUM(ImageDisposeInfo_FieldNumber) {
   ImageDisposeInfo_FieldNumber_URL = 1,
   ImageDisposeInfo_FieldNumber_TextureId = 2,
+  ImageDisposeInfo_FieldNumber_CanBeReused = 3,
 };
 
 /**
@@ -177,6 +178,12 @@ GPB_FINAL @interface ImageDisposeInfo : GPBMessage
  * efficiently if you have one
  **/
 @property(nonatomic, readwrite) int64_t textureId;
+
+/**
+ * Dispose this image and allow/disallow the backend SurfaceTexture
+ * to be resued. Plugin reuses Textures by their sizes.
+ **/
+@property(nonatomic, readwrite) BOOL canBeReused;
 
 @end
 

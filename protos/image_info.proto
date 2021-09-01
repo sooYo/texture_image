@@ -62,6 +62,10 @@ message ImageDisposeInfo {
   // Given this property for loaders to search download task more
   // efficiently if you have one
   int64 textureId = 2;
+
+  // Dispose this image and allow/disallow the backend SurfaceTexture
+  // to be resued. Plugin reuses Textures by their sizes.
+  bool canBeReused = 3;
 }
 
 // Global config of ImageLoader
