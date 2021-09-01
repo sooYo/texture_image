@@ -5,12 +5,14 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.util.Log
+import android.util.Size
 import android.view.Surface
+import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.PixelSize
 import coil.target.Target
 import coil.transform.Transformation
-import com.texture_image.constants.SurfaceTextureEntry
 import com.texture_image.extensions.*
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
@@ -19,6 +21,7 @@ import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.proto.ImageUtils.BoxFit.*
 import com.texture_image.utils.*
+import io.flutter.view.TextureRegistry
 import kotlinx.coroutines.*
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -28,15 +31,20 @@ class ImageLoaderTask(
     private val context: Context,
     private val imageInfo: ImageInfo.ImageFetchInfo,
     private val cachePolicy: CachePolicy,
-    private val textureEntry: SurfaceTextureEntry,
+    private val registry: TextureRegistry,
 ) : Target {
     private var scheduler: LoaderTaskScheduler? = null
-    private val imageSize: PixelSize by lazy {
+    private var mImageRequest: ImageRequest? = null
+    private var mCancelToken: Disposable? = null
+    private val mImagePixelSize: PixelSize by lazy {
         imageInfo.pixelSize(context)
     }
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
-                if (scheduler == null || oldValue.state == newValue.state) {
+                if (scheduler == null ||
+                    newValue.state == ImageUtils.TaskState.undefined ||
+                    oldValue.state == newValue.state
+                ) {
                     return@observable
                 }
 
@@ -44,82 +52,83 @@ class ImageLoaderTask(
             }
 
     val outline: TaskOutline get() = mOutline
+    val imageRequest: ImageRequest? get() = mImageRequest
+    val imageSizeKey: Size
+        get() = Size(
+            imageInfo.geometry.width,
+            imageInfo.geometry.height
+        )
 
     @SuppressLint("Recycle")
     fun scheduleWith(scheduler: LoaderTaskScheduler): ImageLoaderTask {
         this.scheduler = scheduler
+        this.mImageRequest = coilRequest()
 
-        // Collect transformations as much as possible
-        val transform = ArrayList<Transformation>()
-        val shapeTransform = imageInfo.geometry.parseCoilShapeTransform()
-        if (shapeTransform != null) {
-            transform.add(shapeTransform)
+        val outlineBuilder = TaskOutlineBuilder()
+
+        if (mOutline.entry == null) {
+            val textureEntry = registry.createSurfaceTexture()
+            val texture = textureEntry.surfaceTexture().also {
+                it.setDefaultBufferSize(
+                    mImagePixelSize.width,
+                    mImagePixelSize.height
+                )
+            }
+
+            outlineBuilder
+                .setEntry(textureEntry)
+                .setTexture(texture)
+                .setSurface(Surface(texture))
+        } else {
+            outlineBuilder.clone(mOutline)
         }
 
-        val builder = ImageRequest
-            .Builder(context)
-            .target(this)
-            .data(imageInfo.url)
-            .size(imageSize)
-            .transformations(transform)
-            .allowRgb565(!imageInfo.geometry.supportAlpha)
-            .diskCachePolicy(cachePolicy.coilDiskCache)
-            .memoryCachePolicy(cachePolicy.coilMemCache)
-            .networkCachePolicy(cachePolicy.coilNetworkCache)
+        Log.d("TAG", "scheduleWith: ${mOutline.id}")
 
-        PlaceholderUtil.run {
-            assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
-            assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
-        }
-
-        val texture = textureEntry.surfaceTexture().also {
-            it.setDefaultBufferSize(
-                imageSize.width,
-                imageSize.height
-            )
-        }
-
-        val surface = Surface(texture)
-        mOutline = TaskOutlineBuilder()
-            .setRequest(builder.build())
+        mOutline = outlineBuilder
             .setImageUrl(imageInfo.url)
-            .setEntry(textureEntry)
-            .setTexture(texture)
-            .setSurface(surface)
+            .setState(ImageUtils.TaskState.initialized)
             .build()
 
-        val cancelToken = scheduler.schedule(this)
-
-        if (!outline.isCompleted) {
-            mOutline = TaskOutlineBuilder()
-                .clone(mOutline)
-                .setCancelToken(cancelToken)
-                .build()
-        }
-
+        mCancelToken = scheduler.schedule(this)
         return this
     }
 
-    fun dispose(): TaskOutline {
-        mOutline.release()
-        mOutline = TaskOutlineBuilder()
-            .clone(mOutline)
-            .setTexture(null)
-            .setEntry(null)
-            .setSurface(null)
-            .setCancelToken(null)
-            .setState(ImageUtils.TaskState.disposed)
-            .build()
+    fun dispose(prepareReuse: Boolean = false): TaskOutline {
+        mCancelToken?.dispose()
+        mOutline.release(prepareReuse)
+
+        scheduler = null
+        mCancelToken = null
+        mImageRequest = null
+
+        TaskOutlineBuilder().run {
+            clone(mOutline)
+            setState(
+                when (prepareReuse) {
+                    true -> ImageUtils.TaskState.prepreReuse
+                    else -> ImageUtils.TaskState.disposed
+                }
+            )
+
+            if (!prepareReuse) {
+                Log.d("TAG", "dispose: ${outline.id} ")
+                setTexture(null)
+                setEntry(null)
+                setSurface(null)
+            }
+
+            mOutline = build()
+        }
 
         return mOutline
     }
 
     // region Coil Target
     override fun onStart(placeholder: Drawable?) {
-        val loadingIcon = if (placeholder is BitmapDrawable) {
-            placeholder.bitmap
-        } else {
-            PlaceholderUtil.placeholder
+        val loadingIcon = when (placeholder is BitmapDrawable) {
+            true -> placeholder.bitmap
+            else -> PlaceholderUtil.placeholder
         }
 
         if (loadingIcon != null) {
@@ -133,10 +142,9 @@ class ImageLoaderTask(
     }
 
     override fun onError(error: Drawable?) {
-        val errorIcon = if (error is BitmapDrawable) {
-            error.bitmap
-        } else {
-            PlaceholderUtil.errorPlaceholder
+        val errorIcon = when (error is BitmapDrawable) {
+            true -> error.bitmap
+            else -> PlaceholderUtil.errorPlaceholder
         }
 
         if (errorIcon != null) {
@@ -191,10 +199,37 @@ class ImageLoaderTask(
     }
     // endregion Coil Target
 
+    private fun coilRequest(): ImageRequest {
+        // Collect transformations as much as possible
+        val transform = ArrayList<Transformation>()
+        val shapeTransform = imageInfo.geometry.parseCoilShapeTransform()
+        if (shapeTransform != null) {
+            transform.add(shapeTransform)
+        }
+
+        val builder = ImageRequest
+            .Builder(context)
+            .target(this)
+            .data(imageInfo.url)
+            .size(mImagePixelSize)
+            .transformations(transform)
+            .allowRgb565(!imageInfo.geometry.supportAlpha)
+            .diskCachePolicy(cachePolicy.coilDiskCache)
+            .memoryCachePolicy(cachePolicy.coilMemCache)
+            .networkCachePolicy(cachePolicy.coilNetworkCache)
+
+        PlaceholderUtil.run {
+            assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
+            assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
+        }
+
+        return builder.build()
+    }
+
     @Suppress("unused")
     private fun scaleBitmap(bitmap: Bitmap): Bitmap {
-        val width = imageSize.width
-        val height = imageSize.height
+        val width = mImagePixelSize.width
+        val height = mImagePixelSize.height
 
         return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.boxFitFitHeight(height)
@@ -207,8 +242,8 @@ class ImageLoaderTask(
     }
 
     private fun canvasTargetRect(bitmap: Bitmap): Rect {
-        val width = imageSize.width
-        val height = imageSize.height
+        val width = mImagePixelSize.width
+        val height = mImagePixelSize.height
 
         return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.rectBoxFitHeight(width, height)

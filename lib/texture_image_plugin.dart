@@ -54,10 +54,11 @@ class TextureImagePlugin {
   static Future<void> destroyImageTexture(int? textureId, String url) {
     final cancelInfo = ImageDisposeInfo()
       ..textureId = Int64(textureId ?? -1)
-      ..url = url;
+      ..url = url
+      ..canBeReused = true;
 
     return _channel.invokeMethod(
-      Methods.destroyImageTexture,
+      Methods.disposeImageTexture,
       cancelInfo.writeToBuffer(),
     );
   }

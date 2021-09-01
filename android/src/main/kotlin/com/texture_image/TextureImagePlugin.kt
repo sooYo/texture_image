@@ -18,7 +18,7 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
     /// when the Flutter Engine is detached from the Activity
     private lateinit var channel: MethodChannel
 
-    private var _imageLoader: ImageLoader? = null
+    private lateinit var _imageLoader: ImageLoader
 
     override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         channel = MethodChannel(
@@ -39,15 +39,19 @@ class TextureImagePlugin : FlutterPlugin, MethodCallHandler {
         @NonNull result: Result
     ) {
         when (call.method) {
-            Methods.createImageTexture -> _imageLoader?.createTextureImage(
+            Methods.createImageTexture -> _imageLoader.createTextureImage(
                 call,
                 result
             )
-            Methods.destroyImageTexture -> _imageLoader?.disposeTextureImage(
+            Methods.disposeImageTexture -> _imageLoader.disposeTextureImage(
                 call,
                 result
             )
-            Methods.textureImageConfig -> _imageLoader?.updateGlobalConfig(
+            Methods.textureImageConfig -> _imageLoader.updateGlobalConfig(
+                call,
+                result
+            )
+            Methods.releaseImageTextureCaches -> _imageLoader.releaseAllFreeTasks(
                 call,
                 result
             )
