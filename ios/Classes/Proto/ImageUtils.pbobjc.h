@@ -78,6 +78,9 @@ typedef GPB_ENUM(TaskState) {
 
   /** For initialization only */
   TaskState_Undefined = 5,
+
+  /** Watiing for reusing */
+  TaskState_PrepreReuse = 6,
 };
 
 GPBEnumDescriptor *TaskState_EnumDescriptor(void);

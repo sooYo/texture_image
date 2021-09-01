@@ -37,6 +37,7 @@ class TaskState extends $pb.ProtobufEnum {
   static const TaskState failed = TaskState._(3, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'failed');
   static const TaskState disposed = TaskState._(4, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'disposed');
   static const TaskState undefined = TaskState._(5, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'undefined');
+  static const TaskState prepreReuse = TaskState._(6, const $core.bool.fromEnvironment('protobuf.omit_enum_names') ? '' : 'prepreReuse');
 
   static const $core.List<TaskState> values = <TaskState> [
     initialized,
@@ -45,6 +46,7 @@ class TaskState extends $pb.ProtobufEnum {
     failed,
     disposed,
     undefined,
+    prepreReuse,
   ];
 
   static final $core.Map<$core.int, TaskState> _byValue = $pb.ProtobufEnum.initByValue(values);

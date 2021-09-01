@@ -17,6 +17,7 @@ enum TaskState {
   failed = 3;
   disposed = 4; // Image widget has been disposed
   undefined = 5; // For initialization only
+  prepreReuse = 6; // Watiing for reusing
 }
 
 message BorderRadius {

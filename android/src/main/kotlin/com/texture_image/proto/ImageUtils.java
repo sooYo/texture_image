@@ -198,6 +198,14 @@ public final class ImageUtils {
      * <code>undefined = 5;</code>
      */
     undefined(5),
+    /**
+     * <pre>
+     * Watiing for reusing
+     * </pre>
+     *
+     * <code>prepreReuse = 6;</code>
+     */
+    prepreReuse(6),
     UNRECOGNIZED(-1),
     ;
 
@@ -241,6 +249,14 @@ public final class ImageUtils {
      * <code>undefined = 5;</code>
      */
     public static final int undefined_VALUE = 5;
+    /**
+     * <pre>
+     * Watiing for reusing
+     * </pre>
+     *
+     * <code>prepreReuse = 6;</code>
+     */
+    public static final int prepreReuse_VALUE = 6;
 
 
     public final int getNumber() {
@@ -273,6 +289,7 @@ public final class ImageUtils {
         case 3: return failed;
         case 4: return disposed;
         case 5: return undefined;
+        case 6: return prepreReuse;
         default: return null;
       }
     }
@@ -2830,10 +2847,10 @@ public final class ImageUtils {
       "AutoDownscaleTriggerSize\030\002 \001(\005\022\017\n\007qualit" +
       "y\030\003 \001(\005*G\n\006BoxFit\022\010\n\004fill\020\000\022\013\n\007contain\020\001" +
       "\022\t\n\005cover\020\002\022\014\n\010fitWidth\020\003\022\r\n\tfitHeight\020\004" +
-      "*a\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007loadin" +
+      "*r\n\tTaskState\022\017\n\013initialized\020\000\022\013\n\007loadin" +
       "g\020\001\022\r\n\tcompleted\020\002\022\n\n\006failed\020\003\022\014\n\010dispos" +
-      "ed\020\004\022\r\n\tundefined\020\005B\031\n\027com.texture_image" +
-      ".protob\006proto3"
+      "ed\020\004\022\r\n\tundefined\020\005\022\017\n\013prepreReuse\020\006B\031\n\027" +
+      "com.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

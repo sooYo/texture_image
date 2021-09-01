@@ -101,7 +101,7 @@ GPBEnumDescriptor *TaskState_EnumDescriptor(void) {
   if (!descriptor) {
     static const char *valueNames =
         "Initialized\000Loading\000Completed\000Failed\000Dis"
-        "posed\000Undefined\000";
+        "posed\000Undefined\000PrepreReuse\000";
     static const int32_t values[] = {
         TaskState_Initialized,
         TaskState_Loading,
@@ -109,8 +109,9 @@ GPBEnumDescriptor *TaskState_EnumDescriptor(void) {
         TaskState_Failed,
         TaskState_Disposed,
         TaskState_Undefined,
+        TaskState_PrepreReuse,
     };
-    static const char *extraTextFormatInfo = "\006\000+\000\001\'\000\002)\000\003&\000\004(\000\005)\000";
+    static const char *extraTextFormatInfo = "\007\000+\000\001\'\000\002)\000\003&\000\004(\000\005)\000\006+\000";
     GPBEnumDescriptor *worker =
         [GPBEnumDescriptor allocDescriptorForName:GPBNSStringifySymbol(TaskState)
                                        valueNames:valueNames
@@ -134,6 +135,7 @@ BOOL TaskState_IsValidValue(int32_t value__) {
     case TaskState_Failed:
     case TaskState_Disposed:
     case TaskState_Undefined:
+    case TaskState_PrepreReuse:
       return YES;
     default:
       return NO;
