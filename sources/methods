@@ -7,6 +7,7 @@
 // please add to this file and run 'methods_gen.sh' to update all relative files
 
 createImageTexture#Create a new texture image base on a [ImageFetchInfo]
-destroyImageTexture#Release resource of a texture image once the widget i disposed, param is of [ImageFetchCancelInfo] type
+disposeImageTexture#Release or cache resource of a texture image once the widget is disposed, param is of [ImageFetchCancelInfo] type
 textureImageConfig#Sets the global config of the plugin, the config detail please refer to [ImageConfigInfo]
+releaseImageTextureCaches#Release all texures waiting in the to-be-reused queue, has no effect on those occupied by Flutter widgets
 enableLog#Enable/disable console log, param is a boolean

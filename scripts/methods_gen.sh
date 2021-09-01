@@ -70,7 +70,7 @@ function genTemplateFiles() {
 
 function fillDartTemplateFile() {
   sed -i '' -e "/}/ i \\
-  // $1\\
+  /// $1\\
   static const $2 = \"$2\";\\
   " "$DART_SOURCE"
 }
