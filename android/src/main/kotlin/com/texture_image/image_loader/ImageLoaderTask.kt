@@ -20,6 +20,7 @@ import com.texture_image.models.TaskOutlineBuilder
 import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.proto.ImageUtils.BoxFit.*
+import com.texture_image.render.ImageRender
 import com.texture_image.utils.*
 import io.flutter.view.TextureRegistry
 import kotlinx.coroutines.*
@@ -35,10 +36,12 @@ class ImageLoaderTask(
 ) : Target {
     private var scheduler: LoaderTaskScheduler? = null
     private var mImageRequest: ImageRequest? = null
-    private var mCancelToken: Disposable? = null
-    private val mImagePixelSize: PixelSize by lazy {
+    private var cancelToken: Disposable? = null
+    private var imageRender: ImageRender? = null
+    private val imagePixelSize: PixelSize by lazy {
         imageInfo.pixelSize(context)
     }
+
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
                 if (scheduler == null ||
@@ -70,8 +73,8 @@ class ImageLoaderTask(
             val textureEntry = registry.createSurfaceTexture()
             val texture = textureEntry.surfaceTexture().also {
                 it.setDefaultBufferSize(
-                    mImagePixelSize.width,
-                    mImagePixelSize.height
+                    imagePixelSize.width,
+                    imagePixelSize.height
                 )
             }
 
@@ -90,16 +93,21 @@ class ImageLoaderTask(
             .setState(ImageUtils.TaskState.initialized)
             .build()
 
-        mCancelToken = scheduler.schedule(this)
+        cancelToken = scheduler.schedule(this)
         return this
     }
 
     fun dispose(prepareReuse: Boolean = false): TaskOutline {
-        mCancelToken?.dispose()
+        cancelToken?.dispose()
         mOutline.release(prepareReuse)
 
+        if (!prepareReuse) {
+            imageRender?.release()
+            imageRender = null
+        }
+
         scheduler = null
-        mCancelToken = null
+        cancelToken = null
         mImageRequest = null
 
         TaskOutlineBuilder().run {
@@ -211,7 +219,7 @@ class ImageLoaderTask(
             .Builder(context)
             .target(this)
             .data(imageInfo.url)
-            .size(mImagePixelSize)
+            .size(imagePixelSize)
             .transformations(transform)
             .allowRgb565(!imageInfo.geometry.supportAlpha)
             .diskCachePolicy(cachePolicy.coilDiskCache)
@@ -228,8 +236,8 @@ class ImageLoaderTask(
 
     @Suppress("unused")
     private fun scaleBitmap(bitmap: Bitmap): Bitmap {
-        val width = mImagePixelSize.width
-        val height = mImagePixelSize.height
+        val width = imagePixelSize.width
+        val height = imagePixelSize.height
 
         return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.boxFitFitHeight(height)
@@ -242,8 +250,8 @@ class ImageLoaderTask(
     }
 
     private fun canvasTargetRect(bitmap: Bitmap): Rect {
-        val width = mImagePixelSize.width
-        val height = mImagePixelSize.height
+        val width = imagePixelSize.width
+        val height = imagePixelSize.height
 
         return when (imageInfo.geometry.fit) {
             fitHeight -> bitmap.rectBoxFitHeight(width, height)
@@ -260,24 +268,30 @@ class ImageLoaderTask(
             return
         }
 
-        try {
-            mOutline.surface!!.lockCanvas(null).apply {
-                drawFilter = PaintFlagsDrawFilter(
-                    0,
-                    Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
-                )
-
-                drawBitmap(
-                    bitmapToDraw,
-                    null,
-                    canvasTargetRect(bitmapToDraw),
-                    null
-                )
-
-                mOutline.surface!!.unlockCanvasAndPost(this)
-            }
-        } catch (e: Exception) {
-            LogUtil.e("Draw bitmap: $e")
+        if (imageRender == null) {
+            imageRender = ImageRender(mOutline.id, mOutline.texture!!)
         }
+
+        imageRender?.render(scaleBitmap(bitmapToDraw))
+
+//        try {
+//            mOutline.surface!!.lockCanvas(null).apply {
+//                drawFilter = PaintFlagsDrawFilter(
+//                    0,
+//                    Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
+//                )
+//
+//                drawBitmap(
+//                    bitmapToDraw,
+//                    null,
+//                    canvasTargetRect(bitmapToDraw),
+//                    null
+//                )
+//
+//                mOutline.surface!!.unlockCanvasAndPost(this)
+//            }
+//        } catch (e: Exception) {
+//            LogUtil.e("Draw bitmap: $e")
+//        }
     }
 }
