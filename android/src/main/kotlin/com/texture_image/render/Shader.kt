@@ -20,9 +20,10 @@ class Shader(private val textureId: Long) {
             "attribute vec4 av_Position;\n" +
                     "attribute vec2 af_Position;\n" +
                     "varying vec2 v_texPo;\n" +
+                    "uniform mat4 v_matrix;\n" +
                     "void main() {\n" +
                     "    v_texPo = af_Position;\n" +
-                    "    gl_Position = av_Position;\n" +
+                    "    gl_Position = av_Position * v_matrix;\n" +
                     "}"
 
         private val vertexData = floatArrayOf(
@@ -49,6 +50,8 @@ class Shader(private val textureId: Long) {
     private var program: Int = 0
     private var vertexShader: Int = 0
     private var fragmentShader: Int = 0
+
+    var matrixLocation: Int = 0
 
     fun prepareShaderProgram() {
         program = compileAndLinkShaders().also {
@@ -113,6 +116,8 @@ class Shader(private val textureId: Long) {
 
         val avPosition = GLES20.glGetAttribLocation(program, "av_Position")
         val afPosition = GLES20.glGetAttribLocation(program, "af_Position")
+
+        matrixLocation = GLES20.glGetUniformLocation(program, "v_matrix")
 
         GLES20.glClearColor(0f, 0f, 0f, 1f)
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)

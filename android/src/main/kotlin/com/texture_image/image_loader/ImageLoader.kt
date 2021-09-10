@@ -23,16 +23,27 @@ class ImageLoader(
     private val context: Context,
     private val textureRegistry: TextureRegistry
 ) : LoaderTaskScheduler {
-    private var globalConfig: ImageInfo.ImageConfigInfo? = null
+    companion object {
+        private val defaultConfig: ImageInfo.ImageConfigInfo
+            get() {
+                return ImageInfo.ImageConfigInfo.newBuilder()
+                    .setBackgroundColor("0x00000000")
+                    .setUseOpenGLRendering(true)
+                    .setReduceQualityInLowMemory(true)
+                    .setAndroidAvailableMemoryPercentage(0.1)
+                    .build()
+            }
+    }
 
     private val taskMap: TaskMap = TaskMap()
     private val taskReuseMap: TaskReuseMap = TaskReuseMap()
+    private var globalConfig: ImageInfo.ImageConfigInfo = defaultConfig
     private val loaderCore: coil.ImageLoader by lazy(LazyThreadSafetyMode.NONE) {
         val httpClient = OkHttpClient.Builder()
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
-        val memOp = globalConfig?.androidAvailableMemoryPercentage ?: 0.1
+        val memOp = globalConfig.androidAvailableMemoryPercentage
 
         coil.ImageLoader.Builder(context)
             .okHttpClient(httpClient)
@@ -165,9 +176,10 @@ class ImageLoader(
 
         val task = pickTaskFromReuseMap(imageInfo) ?: ImageLoaderTask(
             context,
-            imageInfo,
             cachePolicy,
             textureRegistry,
+            imageInfo,
+            globalConfig,
         )
 
         return task.scheduleWith(this).outline
@@ -205,7 +217,8 @@ class ImageLoader(
         methodCall: MethodCall,
         result: Result
     ): Boolean {
-        if (methodCall.arguments !is ByteArray) {
+        val typeMatch = methodCall.arguments is ByteArray
+        if (!typeMatch) {
             result.success(
                 ResultUtils.argTypeError(
                     methodCall.method,
@@ -213,10 +226,9 @@ class ImageLoader(
                     "ByteArray"
                 )
             )
-            return false
         }
 
-        return true
+        return typeMatch
     }
 
     private fun saveToTaskMap(task: ImageLoaderTask): TaskOutline {

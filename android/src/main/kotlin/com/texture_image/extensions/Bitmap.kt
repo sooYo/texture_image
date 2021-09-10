@@ -1,11 +1,17 @@
 package com.texture_image.extensions
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Rect
+import android.graphics.RectF
+import android.opengl.Matrix
 import android.util.Log
 import com.texture_image.utils.LogUtil
 import kotlin.math.roundToInt
 
+// region Scaled Bitmap
+@Suppress("unused")
 fun Bitmap.boxFitFill(width: Int, height: Int): Bitmap {
     return try {
         Bitmap.createScaledBitmap(this, width, height, true)
@@ -15,6 +21,7 @@ fun Bitmap.boxFitFill(width: Int, height: Int): Bitmap {
     }
 }
 
+@Suppress("unused")
 fun Bitmap.boxFitContains(width: Int, height: Int): Bitmap {
     val matrix = matrixKeepAspectRatio(width, height, true)
     return try {
@@ -33,6 +40,7 @@ fun Bitmap.boxFitContains(width: Int, height: Int): Bitmap {
     }
 }
 
+@Suppress("unused")
 fun Bitmap.boxFitCover(width: Int, height: Int): Bitmap {
     val matrix = matrixKeepAspectRatio(width, height, false)
     return try {
@@ -51,6 +59,7 @@ fun Bitmap.boxFitCover(width: Int, height: Int): Bitmap {
     }
 }
 
+@Suppress("unused")
 fun Bitmap.boxFitFitWidth(width: Int): Bitmap {
     return try {
         val ratio = this.width.toFloat() / this.height.toFloat()
@@ -68,6 +77,7 @@ fun Bitmap.boxFitFitWidth(width: Int): Bitmap {
     }
 }
 
+@Suppress("unused")
 fun Bitmap.boxFitFitHeight(height: Int): Bitmap {
     return try {
         val ratio = this.height.toFloat() / this.width.toFloat()
@@ -84,20 +94,26 @@ fun Bitmap.boxFitFitHeight(height: Int): Bitmap {
         this
     }
 }
+// endregion Scaled Bitmap
 
+// region Scaled Rect
+@Suppress("unused")
 fun Bitmap.rectBoxFitFill(width: Int, height: Int): Rect {
     return Rect(0, 0, width, height)
 }
 
+@Suppress("unused")
 fun Bitmap.rectBoxFitContains(width: Int, height: Int): Rect {
     return rectKeepAspectRatio(width, height, true)
 }
 
+@Suppress("unused")
 fun Bitmap.rectBoxFitCover(width: Int, height: Int): Rect {
     return rectKeepAspectRatio(width, height, false)
 }
 
-fun Bitmap.rectBoxFitWidth(width: Int, height: Int): Rect {
+@Suppress("unused")
+fun Bitmap.rectBoxFitFitWidth(width: Int, height: Int): Rect {
     val ratio = this.width.toFloat() / this.height.toFloat()
     val scaledHeight = (width / ratio).roundToInt()
     val yPos = (height - scaledHeight) * 0.5
@@ -107,7 +123,8 @@ fun Bitmap.rectBoxFitWidth(width: Int, height: Int): Rect {
     }
 }
 
-fun Bitmap.rectBoxFitHeight(width: Int, height: Int): Rect {
+@Suppress("unused")
+fun Bitmap.rectBoxFitFitHeight(width: Int, height: Int): Rect {
     val ratio = this.height.toFloat() / this.width.toFloat()
     val scaledWidth = (height / ratio).roundToInt()
     val xPos = (width - scaledWidth) * 0.5
@@ -116,7 +133,10 @@ fun Bitmap.rectBoxFitHeight(width: Int, height: Int): Rect {
         offsetTo(xPos.roundToInt(), 0)
     }
 }
+// endregion Scaled Rect
 
+// region Flutter Assets
+@Suppress("unused")
 fun bitmapFromAsset(
     context: Context,
     assetPath: String,
@@ -136,6 +156,88 @@ fun bitmapFromAsset(
         null
     }
 }
+
+// endregion Flutter Assets
+
+// region OpenGL Matrix
+@Suppress("unused")
+fun Bitmap.matrixBufferBoxFitFill(
+    @Suppress("unused_parameter") width: Int,
+    @Suppress("unused_parameter") height: Int
+): FloatArray {
+    // An identity matrix represents a scaled-fill image
+    return FloatArray(16).apply {
+        Matrix.setIdentityM(this, 0)
+    }
+}
+
+@Suppress("unused")
+fun Bitmap.matrixBufferBoxFitContains(
+    srcWidth: Int,
+    srcHeight: Int
+): FloatArray {
+    val rBitmap = width / height.toFloat()
+    val rCanvas = srcWidth / srcHeight.toFloat()
+    val fillHorizontal = rBitmap > rCanvas
+
+    return FloatArray(16).apply {
+        val left = if (fillHorizontal) -1f else -rCanvas / rBitmap
+        val top = if (fillHorizontal) 1 / rCanvas * rBitmap else 1f
+
+        Matrix.setIdentityM(this, 0)
+        Matrix.orthoM(this, 0, left, -1 * left, -1 * top, top, 1f, -1f)
+    }
+}
+
+@Suppress("unused")
+fun Bitmap.matrixBufferBoxFitCover(
+    srcWidth: Int,
+    srcHeight: Int
+): FloatArray {
+    val rBitmap = width / height.toFloat()
+    val rCanvas = srcWidth / srcHeight.toFloat()
+    val fillHorizontal = rBitmap > rCanvas
+
+    return FloatArray(16).apply {
+        val left = if (!fillHorizontal) -1f else -rCanvas / rBitmap
+        val top = if (!fillHorizontal) 1 / rCanvas * rBitmap else 1f
+
+        Matrix.setIdentityM(this, 0)
+        Matrix.orthoM(this, 0, left, -1 * left, -1 * top, top, 1f, -1f)
+    }
+}
+
+@Suppress("unused")
+fun Bitmap.matrixBufferBoxFitFitWidth(
+    srcWidth: Int,
+    srcHeight: Int
+): FloatArray {
+    val bitmapRatio = width / height.toFloat()
+    val canvasRatio = srcWidth / srcHeight.toFloat()
+
+    return FloatArray(16).apply {
+        val top = 1 / canvasRatio * bitmapRatio
+        Matrix.setIdentityM(this, 0)
+        Matrix.orthoM(this, 0, -1f, 1f, -1 * top, top, 1f, -1f)
+    }
+}
+
+@Suppress("unused")
+fun Bitmap.matrixBufferBoxFitFitHeight(
+    srcWidth: Int,
+    srcHeight: Int
+): FloatArray {
+    val bitmapRatio = width / height.toFloat()
+    val canvasRatio = srcWidth / srcHeight.toFloat()
+
+    return FloatArray(16).apply {
+        val left = -canvasRatio / bitmapRatio
+        Matrix.setIdentityM(this, 0)
+        Matrix.orthoM(this, 0, left, -1 * left, -1f, 1f, 1f, -1f)
+    }
+}
+
+// endregion OpenGL Matrix
 
 private fun Bitmap.rectKeepAspectRatio(
     width: Int,
@@ -160,7 +262,7 @@ private fun Bitmap.matrixKeepAspectRatio(
     width: Int,
     height: Int,
     fitInside: Boolean
-): Matrix {
+): android.graphics.Matrix {
     val scaledWidth = width.toFloat() / this.width
     val scaledHeight = height.toFloat() / this.height
     val scaleRatio = when (fitInside) {
@@ -168,7 +270,7 @@ private fun Bitmap.matrixKeepAspectRatio(
         else -> scaledHeight.coerceAtLeast(scaledWidth)
     }
 
-    return Matrix().apply { postScale(scaleRatio, scaleRatio) }
+    return android.graphics.Matrix().apply { postScale(scaleRatio, scaleRatio) }
 }
 
 

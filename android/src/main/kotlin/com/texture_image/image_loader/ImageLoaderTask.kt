@@ -20,24 +20,25 @@ import com.texture_image.models.TaskOutlineBuilder
 import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.proto.ImageUtils.BoxFit.*
-import com.texture_image.render.ImageRender
+import com.texture_image.render.CanvasRender
+import com.texture_image.render.OpenGLRender
+import com.texture_image.render.Renderer
 import com.texture_image.utils.*
 import io.flutter.view.TextureRegistry
 import kotlinx.coroutines.*
-import java.io.ByteArrayInputStream
-import java.io.ByteArrayOutputStream
 import kotlin.properties.Delegates
 
 class ImageLoaderTask(
     private val context: Context,
-    private val imageInfo: ImageInfo.ImageFetchInfo,
     private val cachePolicy: CachePolicy,
     private val registry: TextureRegistry,
+    private val imageInfo: ImageInfo.ImageFetchInfo,
+    private val globalConfig: ImageInfo.ImageConfigInfo,
 ) : Target {
     private var scheduler: LoaderTaskScheduler? = null
     private var mImageRequest: ImageRequest? = null
     private var cancelToken: Disposable? = null
-    private var imageRender: ImageRender? = null
+    private var imageRender: Renderer? = null
     private val imagePixelSize: PixelSize by lazy {
         imageInfo.pixelSize(context)
     }
@@ -45,8 +46,8 @@ class ImageLoaderTask(
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
                 if (scheduler == null ||
-                    newValue.state == ImageUtils.TaskState.undefined ||
-                    oldValue.state == newValue.state
+                    oldValue.state == newValue.state ||
+                    newValue.state == ImageUtils.TaskState.undefined
                 ) {
                     return@observable
                 }
@@ -168,42 +169,13 @@ class ImageLoaderTask(
     @DelicateCoroutinesApi
     override fun onSuccess(result: Drawable) {
         if (result is BitmapDrawable) {
-            if (imageInfo.shouldCompress) {
-                GlobalScope.launch(Dispatchers.Default) {
-                    val output = ByteArrayOutputStream()
-
-                    result.bitmap.compress(
-                        Bitmap.CompressFormat.JPEG,
-                        imageInfo.compressionQuality,
-                        output
-                    )
-
-                    val byteArray = output.toByteArray()
-                    val inputStream = ByteArrayInputStream(byteArray)
-                    val opt = BitmapFactory.Options().apply {
-                        inSampleSize = 1
-                        inPreferredConfig = Bitmap.Config.RGB_565
-                    }
-
-                    val bitmap = BitmapFactory.decodeStream(
-                        inputStream,
-                        null,
-                        opt
-                    )
-
-                    GlobalScope.launch(Dispatchers.Main) {
-                        drawBitmap(bitmap ?: result.bitmap)
-                    }
-                }
-            } else {
-                drawBitmap(result.bitmap)
-            }
-
-            mOutline = TaskOutlineBuilder()
-                .clone(mOutline)
-                .setState(ImageUtils.TaskState.completed)
-                .build()
+            drawBitmap(result.bitmap)
         }
+
+        mOutline = TaskOutlineBuilder()
+            .clone(mOutline)
+            .setState(ImageUtils.TaskState.completed)
+            .build()
     }
     // endregion Coil Target
 
@@ -234,64 +206,47 @@ class ImageLoaderTask(
         return builder.build()
     }
 
-    @Suppress("unused")
-    private fun scaleBitmap(bitmap: Bitmap): Bitmap {
-        val width = imagePixelSize.width
-        val height = imagePixelSize.height
-
-        return when (imageInfo.geometry.fit) {
-            fitHeight -> bitmap.boxFitFitHeight(height)
-            fitWidth -> bitmap.boxFitFitWidth(width)
-            cover -> bitmap.boxFitCover(width, height)
-            contain -> bitmap.boxFitContains(width, height)
-            fill -> bitmap.boxFitFill(width, height)
-            else -> bitmap
-        }
-    }
-
-    private fun canvasTargetRect(bitmap: Bitmap): Rect {
-        val width = imagePixelSize.width
-        val height = imagePixelSize.height
-
-        return when (imageInfo.geometry.fit) {
-            fitHeight -> bitmap.rectBoxFitHeight(width, height)
-            fitWidth -> bitmap.rectBoxFitWidth(width, height)
-            cover -> bitmap.rectBoxFitCover(width, height)
-            contain -> bitmap.rectBoxFitContains(width, height)
-            fill -> bitmap.rectBoxFitFill(width, height)
-            else -> Rect(0, 0, bitmap.width, bitmap.height)
-        }
-    }
-
     private fun drawBitmap(bitmapToDraw: Bitmap) {
-        if (mOutline.texture == null || mOutline.surface == null) {
+        createRenderIfNeeded()
+        assert(imageRender != null) { "Image render hasn't be initialized!" }
+
+        imageRender?.render(
+            bitmapToDraw,
+            imagePixelSize.width,
+            imagePixelSize.height,
+            mOutline,
+            globalConfig
+        )
+    }
+
+    /**
+     * Prepare the render if needed
+     *
+     * I'm considering if we should let the user change render type
+     * while application is running, but calling [Renderer.release]
+     * on existed render seems reasonable here
+     */
+    private fun createRenderIfNeeded() {
+        if (mOutline.entry == null || mOutline.texture == null) {
             return
         }
 
-        if (imageRender == null) {
-            imageRender = ImageRender(mOutline.id, mOutline.texture!!)
+        imageRender = when (globalConfig.useOpenGLRendering) {
+            true -> when (imageRender is OpenGLRender) {
+                true -> imageRender
+                else -> {
+                    imageRender?.release()
+                    OpenGLRender(mOutline, imageInfo.geometry)
+                }
+            }
+
+            else -> when (imageRender is CanvasRender) {
+                true -> imageRender
+                else -> {
+                    imageRender?.release()
+                    CanvasRender(imageInfo)
+                }
+            }
         }
-
-        imageRender?.render(scaleBitmap(bitmapToDraw))
-
-//        try {
-//            mOutline.surface!!.lockCanvas(null).apply {
-//                drawFilter = PaintFlagsDrawFilter(
-//                    0,
-//                    Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
-//                )
-//
-//                drawBitmap(
-//                    bitmapToDraw,
-//                    null,
-//                    canvasTargetRect(bitmapToDraw),
-//                    null
-//                )
-//
-//                mOutline.surface!!.unlockCanvasAndPost(this)
-//            }
-//        } catch (e: Exception) {
-//            LogUtil.e("Draw bitmap: $e")
-//        }
     }
 }

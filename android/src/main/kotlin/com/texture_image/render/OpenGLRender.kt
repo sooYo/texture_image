@@ -6,15 +6,23 @@ import android.opengl.GLES20
 import android.opengl.GLUtils
 import android.os.Handler
 import android.os.HandlerThread
+import com.texture_image.extensions.*
+import com.texture_image.models.TaskOutline
+import com.texture_image.proto.ImageInfo
+import com.texture_image.proto.ImageUtils
+import com.texture_image.proto.ImageUtils.BoxFit.*
 import javax.microedition.khronos.egl.*
 
-class ImageRender(
-    textureId: Long,
-    texture: SurfaceTexture,
-) {
-    private val handler: Handler
-    private val handlerThread = HandlerThread("Render")
-    private val shaderProgram: Shader = Shader(textureId)
+/**
+ * A simple render using OpenGL drawing images into target [SurfaceTexture]
+ */
+class OpenGLRender(
+    taskContext: TaskOutline,
+    private val geometry: ImageUtils.Geometry,
+) : Renderer {
+    private var handler: Handler? = null
+    private var handlerThread: HandlerThread? = null
+    private val shaderProgram: Shader = Shader(taskContext.id)
 
     private lateinit var egl: EGL10
     private lateinit var eglDisplay: EGLDisplay
@@ -39,13 +47,34 @@ class ImageRender(
         )
 
     init {
-        handlerThread.start()
-        handler = Handler(handlerThread.looper)
-        handler.post { init(texture) }
+        if (taskContext.texture == null) {
+            throw RuntimeException("Cannot create render with a null texture!")
+        }
+
+        handlerThread = HandlerThread("texture_image_plugin_render")
+        handlerThread!!.start()
+        handler = Handler(handlerThread!!.looper)
+        handler?.post { initOpenGL(taskContext.texture) }
     }
 
-    fun render(bitmap: Bitmap) {
-        handler.post {
+    override fun render(
+        bitmap: Bitmap,
+        srcWidth: Int,
+        srcHeight: Int,
+        taskContext: TaskOutline,
+        globalConfig: ImageInfo.ImageConfigInfo,
+    ) {
+        handler?.post {
+            if (shaderProgram.matrixLocation != 0) {
+                GLES20.glUniformMatrix4fv(
+                    shaderProgram.matrixLocation,
+                    1,
+                    false,
+                    openglMatrixBuffer(bitmap, srcWidth, srcHeight),
+                    0
+                )
+            }
+
             if (!bitmap.isRecycled) {
                 GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0)
             }
@@ -55,19 +84,14 @@ class ImageRender(
         }
     }
 
-    fun release() {
+    override fun release() {
         mIsReleased = true
-        handler.post { dispose() }
-        handlerThread.quitSafely()
-        handlerThread.join()
+        handler?.post { releaseOpengl() }
+        handlerThread?.quitSafely()
+        handlerThread?.join()
     }
 
-    private fun init(texture: SurfaceTexture) {
-        initOpenGL(texture)
-        initShaderProgram()
-    }
-
-    private fun dispose() {
+    private fun releaseOpengl() {
         egl.eglWaitGL()
         egl.eglMakeCurrent(
             eglDisplay,
@@ -123,13 +147,10 @@ class ImageRender(
         if (!makeCurrent) {
             throw RuntimeException("Cannot attach context to surfaces")
         }
-    }
 
-    private fun initShaderProgram() {
         shaderProgram.prepareShaderProgram()
     }
-
-// endregion Init Routine
+    // endregion Init Routine
 
     // region EGL Helpers
     private fun chooseEglConfig(): EGLConfig? {
@@ -166,5 +187,23 @@ class ImageRender(
             attrs
         )
     }
-// endregion EGL Helpers
+    // endregion EGL Helpers
+
+    // region Bitmap Fitting
+    private fun openglMatrixBuffer(
+        bitmap: Bitmap,
+        width: Int,
+        height: Int
+    ): FloatArray {
+        with(bitmap) {
+            return when (geometry.fit) {
+                fitHeight -> matrixBufferBoxFitFitHeight(width, height)
+                fitWidth -> matrixBufferBoxFitFitWidth(width, height)
+                cover -> matrixBufferBoxFitCover(width, height)
+                contain -> matrixBufferBoxFitContains(width, height)
+                else -> matrixBufferBoxFitFill(width, height)
+            }
+        }
+    }
+    // endregion Bitmap Fitting
 }
