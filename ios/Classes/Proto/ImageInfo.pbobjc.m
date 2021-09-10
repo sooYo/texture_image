@@ -387,6 +387,7 @@ typedef struct ImageDisposeInfo__storage_ {
 @dynamic backgroundColor;
 @dynamic androidAvailableMemoryPercentage;
 @dynamic reduceQualityInLowMemory;
+@dynamic useOpenGlrendering;
 
 typedef struct ImageConfigInfo__storage_ {
   uint32_t _has_storage_[1];
@@ -447,6 +448,15 @@ typedef struct ImageConfigInfo__storage_ {
         .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
         .dataType = GPBDataTypeBool,
       },
+      {
+        .name = "useOpenGlrendering",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageConfigInfo_FieldNumber_UseOpenGlrendering,
+        .hasIndex = 6,
+        .offset = 7,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
     };
     GPBDescriptor *localDescriptor =
         [GPBDescriptor allocDescriptorForClass:[ImageConfigInfo class]
@@ -458,7 +468,7 @@ typedef struct ImageConfigInfo__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\004\002\020\000\003\017\000\004\037\001\000\005\030\000";
+        "\005\002\020\000\003\017\000\004\037\001\000\005\030\000\006\010b\010\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
