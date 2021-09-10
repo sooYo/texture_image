@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
 import 'package:texture_image/texture_image_plugin.dart';
-
-import 'util.dart';
 
 void main() {
   runApp(MyApp());
@@ -125,6 +122,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   ];
 
   final useTextureImage = true;
+  final fitTest = [
+    $ti.BoxFit.fill,
+    $ti.BoxFit.fitHeight,
+    $ti.BoxFit.fitWidth,
+    $ti.BoxFit.cover,
+    $ti.BoxFit.contain,
+  ];
 
   @override
   void initState() {
@@ -139,32 +143,68 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
+        // body: LayoutBuilder(
+        //   builder: (context, constraint) {
+        //     return $ti.TextureImage(
+        //       _images[4],
+        //       width: constraint.maxWidth,
+        //       height: constraint.maxHeight,
+        //       fit: $ti.BoxFit.cover,
+        //       placeholderPath: 'lib/assets/ic_placeholder.png',
+        //       errorPlaceholderPath: 'lib/assets/ic_error_1.png',
+        //     );
+        //   },
+        // )
+        // body: ScrollConfiguration(
+        //   behavior: TransparentOverScrollBehavior(),
+        //   child: GridView.builder(
+        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //       crossAxisCount: 2,
+        //     ),
+        //     itemCount: _images.length,
+        //     itemBuilder: (context, index) {
+        //       return LayoutBuilder(
+        //         builder: (context, constraint) {
+        //           return useTextureImage
+        //               ? $ti.TextureImage(
+        //                   _images[index],
+        //                   width: constraint.maxWidth,
+        //                   height: constraint.maxHeight,
+        //                   fit: $ti.BoxFit.cover,
+        //                   placeholderPath: 'lib/assets/ic_placeholder.png',
+        //                   // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
+        //                 )
+        //               : CachedNetworkImage(
+        //                   imageUrl: _images[index],
+        //                   height: constraint.maxHeight,
+        //                   fit: BoxFit.cover,
+        //                   memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+        //                   memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+        //                 );
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ),
         body: ScrollConfiguration(
           behavior: TransparentOverScrollBehavior(),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
+              crossAxisSpacing: 5,
+              mainAxisSpacing: 5,
             ),
-            itemCount: _images.length,
+            itemCount: fitTest.length,
             itemBuilder: (context, index) {
               return LayoutBuilder(
                 builder: (context, constraint) {
-                  return useTextureImage
-                      ? $ti.TextureImage(
-                          _images[index],
-                          width: constraint.maxWidth,
-                          height: constraint.maxHeight,
-                          fit: $ti.BoxFit.cover,
-                          placeholderPath: 'lib/assets/ic_placeholder.png',
-                          // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: _images[index],
-                          height: constraint.maxHeight,
-                          fit: BoxFit.cover,
-                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
-                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
-                        );
+                  return $ti.TextureImage(
+                    _images[7],
+                    width: constraint.maxWidth,
+                    height: constraint.maxHeight,
+                    fit: fitTest[index],
+                    placeholderPath: 'lib/assets/ic_placeholder.png',
+                  );
                 },
               );
             },
