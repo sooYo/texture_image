@@ -367,6 +367,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'backgroundColor', protoName: 'backgroundColor')
     ..a<$core.double>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'androidAvailableMemoryPercentage', $pb.PbFieldType.OD, protoName: 'androidAvailableMemoryPercentage')
     ..aOB(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'reduceQualityInLowMemory', protoName: 'reduceQualityInLowMemory')
+    ..aOB(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'useOpenGLRendering', protoName: 'useOpenGLRendering')
     ..hasRequiredFields = false
   ;
 
@@ -377,6 +378,7 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     $core.String? backgroundColor,
     $core.double? androidAvailableMemoryPercentage,
     $core.bool? reduceQualityInLowMemory,
+    $core.bool? useOpenGLRendering,
   }) {
     final _result = create();
     if (placeholder != null) {
@@ -393,6 +395,9 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
     }
     if (reduceQualityInLowMemory != null) {
       _result.reduceQualityInLowMemory = reduceQualityInLowMemory;
+    }
+    if (useOpenGLRendering != null) {
+      _result.useOpenGLRendering = useOpenGLRendering;
     }
     return _result;
   }
@@ -461,5 +466,14 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
   $core.bool hasReduceQualityInLowMemory() => $_has(4);
   @$pb.TagNumber(5)
   void clearReduceQualityInLowMemory() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.bool get useOpenGLRendering => $_getBF(5);
+  @$pb.TagNumber(6)
+  set useOpenGLRendering($core.bool v) { $_setBool(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasUseOpenGLRendering() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearUseOpenGLRendering() => clearField(6);
 }
 

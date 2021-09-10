@@ -68,8 +68,9 @@ const ImageConfigInfo$json = const {
     const {'1': 'backgroundColor', '3': 3, '4': 1, '5': 9, '10': 'backgroundColor'},
     const {'1': 'androidAvailableMemoryPercentage', '3': 4, '4': 1, '5': 1, '10': 'androidAvailableMemoryPercentage'},
     const {'1': 'reduceQualityInLowMemory', '3': 5, '4': 1, '5': 8, '10': 'reduceQualityInLowMemory'},
+    const {'1': 'useOpenGLRendering', '3': 6, '4': 1, '5': 8, '10': 'useOpenGLRendering'},
   ],
 };
 
 /// Descriptor for `ImageConfigInfo`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageConfigInfoDescriptor = $convert.base64Decode('Cg9JbWFnZUNvbmZpZ0luZm8SIAoLcGxhY2Vob2xkZXIYASABKAlSC3BsYWNlaG9sZGVyEioKEGVycm9yUGxhY2Vob2xkZXIYAiABKAlSEGVycm9yUGxhY2Vob2xkZXISKAoPYmFja2dyb3VuZENvbG9yGAMgASgJUg9iYWNrZ3JvdW5kQ29sb3ISSgogYW5kcm9pZEF2YWlsYWJsZU1lbW9yeVBlcmNlbnRhZ2UYBCABKAFSIGFuZHJvaWRBdmFpbGFibGVNZW1vcnlQZXJjZW50YWdlEjoKGHJlZHVjZVF1YWxpdHlJbkxvd01lbW9yeRgFIAEoCFIYcmVkdWNlUXVhbGl0eUluTG93TWVtb3J5');
+final $typed_data.Uint8List imageConfigInfoDescriptor = $convert.base64Decode('Cg9JbWFnZUNvbmZpZ0luZm8SIAoLcGxhY2Vob2xkZXIYASABKAlSC3BsYWNlaG9sZGVyEioKEGVycm9yUGxhY2Vob2xkZXIYAiABKAlSEGVycm9yUGxhY2Vob2xkZXISKAoPYmFja2dyb3VuZENvbG9yGAMgASgJUg9iYWNrZ3JvdW5kQ29sb3ISSgogYW5kcm9pZEF2YWlsYWJsZU1lbW9yeVBlcmNlbnRhZ2UYBCABKAFSIGFuZHJvaWRBdmFpbGFibGVNZW1vcnlQZXJjZW50YWdlEjoKGHJlZHVjZVF1YWxpdHlJbkxvd01lbW9yeRgFIAEoCFIYcmVkdWNlUXVhbGl0eUluTG93TWVtb3J5Ei4KEnVzZU9wZW5HTFJlbmRlcmluZxgGIAEoCFISdXNlT3BlbkdMUmVuZGVyaW5n');

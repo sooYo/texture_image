@@ -195,6 +195,7 @@ typedef GPB_ENUM(ImageConfigInfo_FieldNumber) {
   ImageConfigInfo_FieldNumber_BackgroundColor = 3,
   ImageConfigInfo_FieldNumber_AndroidAvailableMemoryPercentage = 4,
   ImageConfigInfo_FieldNumber_ReduceQualityInLowMemory = 5,
+  ImageConfigInfo_FieldNumber_UseOpenGlrendering = 6,
 };
 
 /**
@@ -241,6 +242,13 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
  * keep this feature disallowed if it's not a must
  **/
 @property(nonatomic, readwrite) BOOL reduceQualityInLowMemory;
+
+/**
+ * Whether to use OpenGL for drawing images or not, it's suggested to
+ * enable this feature because it can lead to a better render speed,
+ * but currently OpenGL rendering is still a experimental feature in this plugin
+ **/
+@property(nonatomic, readwrite) BOOL useOpenGlrendering;
 
 @end
 

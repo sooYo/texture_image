@@ -99,5 +99,10 @@ message ImageConfigInfo {
   // compressing image consumes CPU for saving memory. It is suggested to
   // keep this feature disallowed if it's not a must
   bool reduceQualityInLowMemory = 5;
+
+  // Whether to use OpenGL for drawing images or not, it's suggested to
+  // enable this feature because it can lead to a better render speed,
+  // but currently OpenGL rendering is still a experimental feature in this plugin
+  bool useOpenGLRendering = 6;
 }
 

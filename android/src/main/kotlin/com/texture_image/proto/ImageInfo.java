@@ -4220,6 +4220,18 @@ public final class ImageInfo {
      * @return The reduceQualityInLowMemory.
      */
     boolean getReduceQualityInLowMemory();
+
+    /**
+     * <pre>
+     * Whether to use OpenGL for drawing images or not, it's suggested to
+     * enable this feature because it can lead to a better render speed,
+     * but currently OpenGL rendering is still a experimental feature in this plugin
+     * </pre>
+     *
+     * <code>bool useOpenGLRendering = 6;</code>
+     * @return The useOpenGLRendering.
+     */
+    boolean getUseOpenGLRendering();
   }
   /**
    * <pre>
@@ -4299,6 +4311,11 @@ public final class ImageInfo {
             case 40: {
 
               reduceQualityInLowMemory_ = input.readBool();
+              break;
+            }
+            case 48: {
+
+              useOpenGLRendering_ = input.readBool();
               break;
             }
             default: {
@@ -4523,6 +4540,23 @@ public final class ImageInfo {
       return reduceQualityInLowMemory_;
     }
 
+    public static final int USEOPENGLRENDERING_FIELD_NUMBER = 6;
+    private boolean useOpenGLRendering_;
+    /**
+     * <pre>
+     * Whether to use OpenGL for drawing images or not, it's suggested to
+     * enable this feature because it can lead to a better render speed,
+     * but currently OpenGL rendering is still a experimental feature in this plugin
+     * </pre>
+     *
+     * <code>bool useOpenGLRendering = 6;</code>
+     * @return The useOpenGLRendering.
+     */
+    @java.lang.Override
+    public boolean getUseOpenGLRendering() {
+      return useOpenGLRendering_;
+    }
+
     private byte memoizedIsInitialized = -1;
     @java.lang.Override
     public final boolean isInitialized() {
@@ -4552,6 +4586,9 @@ public final class ImageInfo {
       if (reduceQualityInLowMemory_ != false) {
         output.writeBool(5, reduceQualityInLowMemory_);
       }
+      if (useOpenGLRendering_ != false) {
+        output.writeBool(6, useOpenGLRendering_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -4577,6 +4614,10 @@ public final class ImageInfo {
       if (reduceQualityInLowMemory_ != false) {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, reduceQualityInLowMemory_);
+      }
+      if (useOpenGLRendering_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(6, useOpenGLRendering_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -4604,6 +4645,8 @@ public final class ImageInfo {
               other.getAndroidAvailableMemoryPercentage())) return false;
       if (getReduceQualityInLowMemory()
           != other.getReduceQualityInLowMemory()) return false;
+      if (getUseOpenGLRendering()
+          != other.getUseOpenGLRendering()) return false;
       if (!unknownFields.equals(other.unknownFields)) return false;
       return true;
     }
@@ -4627,6 +4670,9 @@ public final class ImageInfo {
       hash = (37 * hash) + REDUCEQUALITYINLOWMEMORY_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getReduceQualityInLowMemory());
+      hash = (37 * hash) + USEOPENGLRENDERING_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getUseOpenGLRendering());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -4774,6 +4820,8 @@ public final class ImageInfo {
 
         reduceQualityInLowMemory_ = false;
 
+        useOpenGLRendering_ = false;
+
         return this;
       }
 
@@ -4805,6 +4853,7 @@ public final class ImageInfo {
         result.backgroundColor_ = backgroundColor_;
         result.androidAvailableMemoryPercentage_ = androidAvailableMemoryPercentage_;
         result.reduceQualityInLowMemory_ = reduceQualityInLowMemory_;
+        result.useOpenGLRendering_ = useOpenGLRendering_;
         onBuilt();
         return result;
       }
@@ -4870,6 +4919,9 @@ public final class ImageInfo {
         }
         if (other.getReduceQualityInLowMemory() != false) {
           setReduceQualityInLowMemory(other.getReduceQualityInLowMemory());
+        }
+        if (other.getUseOpenGLRendering() != false) {
+          setUseOpenGLRendering(other.getUseOpenGLRendering());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -5332,6 +5384,55 @@ public final class ImageInfo {
         onChanged();
         return this;
       }
+
+      private boolean useOpenGLRendering_ ;
+      /**
+       * <pre>
+       * Whether to use OpenGL for drawing images or not, it's suggested to
+       * enable this feature because it can lead to a better render speed,
+       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * </pre>
+       *
+       * <code>bool useOpenGLRendering = 6;</code>
+       * @return The useOpenGLRendering.
+       */
+      @java.lang.Override
+      public boolean getUseOpenGLRendering() {
+        return useOpenGLRendering_;
+      }
+      /**
+       * <pre>
+       * Whether to use OpenGL for drawing images or not, it's suggested to
+       * enable this feature because it can lead to a better render speed,
+       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * </pre>
+       *
+       * <code>bool useOpenGLRendering = 6;</code>
+       * @param value The useOpenGLRendering to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUseOpenGLRendering(boolean value) {
+        
+        useOpenGLRendering_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Whether to use OpenGL for drawing images or not, it's suggested to
+       * enable this feature because it can lead to a better render speed,
+       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * </pre>
+       *
+       * <code>bool useOpenGLRendering = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUseOpenGLRendering() {
+        
+        useOpenGLRendering_ = false;
+        onChanged();
+        return this;
+      }
       @java.lang.Override
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
@@ -5429,12 +5530,12 @@ public final class ImageInfo {
       "ssage\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state\030\005 \001(\0162" +
       "\n.TaskState\"G\n\020ImageDisposeInfo\022\013\n\003url\030\001" +
       " \001(\t\022\021\n\ttextureId\030\002 \001(\003\022\023\n\013canBeReused\030\003" +
-      " \001(\010\"\245\001\n\017ImageConfigInfo\022\023\n\013placeholder\030" +
+      " \001(\010\"\301\001\n\017ImageConfigInfo\022\023\n\013placeholder\030" +
       "\001 \001(\t\022\030\n\020errorPlaceholder\030\002 \001(\t\022\027\n\017backg" +
       "roundColor\030\003 \001(\t\022(\n androidAvailableMemo" +
       "ryPercentage\030\004 \001(\001\022 \n\030reduceQualityInLow" +
-      "Memory\030\005 \001(\010B\031\n\027com.texture_image.protob" +
-      "\006proto3"
+      "Memory\030\005 \001(\010\022\032\n\022useOpenGLRendering\030\006 \001(\010" +
+      "B\031\n\027com.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5470,7 +5571,7 @@ public final class ImageInfo {
     internal_static_ImageConfigInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageConfigInfo_descriptor,
-        new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", "ReduceQualityInLowMemory", });
+        new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", "ReduceQualityInLowMemory", "UseOpenGLRendering", });
     com.texture_image.proto.ImageUtils.getDescriptor();
   }
 
