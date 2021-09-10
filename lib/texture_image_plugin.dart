@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:texture_image/src/constants/methods.dart';
 import 'package:texture_image/src/proto/pb_header.dart';
 
+import 'utils/double_extension.dart';
+
 class TextureImagePlugin {
   static const MethodChannel _channel = const MethodChannel('texture_image');
 
@@ -19,8 +21,8 @@ class TextureImagePlugin {
   }) async {
     final geometry = Geometry()
       ..fit = fit
-      ..width = width.toInt()
-      ..height = height.toInt()
+      ..width = width.evenSize
+      ..height = height.evenSize
       ..supportAlpha = !disableAlphaChannel
       ..borderRadius = BorderRadius();
 
@@ -67,7 +69,8 @@ class TextureImagePlugin {
     final config = ImageConfigInfo()
       ..placeholder = 'lib/assets/ic_placeholder.png'
       ..errorPlaceholder = 'lib/assets/ic_error.png'
-      ..androidAvailableMemoryPercentage = 0.3;
+      ..androidAvailableMemoryPercentage = 0.3
+      ..useOpenGLRendering = true;
 
     return _channel.invokeMethod(
       Methods.textureImageConfig,
