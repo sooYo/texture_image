@@ -166,7 +166,6 @@ class ImageLoaderTask(
             .build()
     }
 
-    @DelicateCoroutinesApi
     override fun onSuccess(result: Drawable) {
         if (result is BitmapDrawable) {
             drawBitmap(result.bitmap)
@@ -208,7 +207,9 @@ class ImageLoaderTask(
 
     private fun drawBitmap(bitmapToDraw: Bitmap) {
         createRenderIfNeeded()
+
         assert(imageRender != null) { "Image render hasn't be initialized!" }
+        assert(imageRender?.isReleased ?: false) { "Render has been released!" }
 
         imageRender?.render(
             bitmapToDraw,

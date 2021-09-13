@@ -5,6 +5,8 @@ import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
 
 interface Renderer {
+    val isReleased: Boolean
+
     fun render(
         bitmap: Bitmap,
         srcWidth: Int,

@@ -30,6 +30,8 @@ class CanvasRender(
 
     override fun release() {}
 
+    override val isReleased: Boolean = false
+
     @DelicateCoroutinesApi
     private fun compressBeforeDrawing(
         bitmap: Bitmap,

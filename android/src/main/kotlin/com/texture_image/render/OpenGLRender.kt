@@ -51,11 +51,15 @@ class OpenGLRender(
             throw RuntimeException("Cannot create render with a null texture!")
         }
 
+        mIsReleased = false
         handlerThread = HandlerThread("texture_image_plugin_render")
         handlerThread!!.start()
         handler = Handler(handlerThread!!.looper)
         handler?.post { initOpenGL(taskContext.texture) }
     }
+
+    override val isReleased: Boolean
+        get() = mIsReleased
 
     override fun render(
         bitmap: Bitmap,
