@@ -3,8 +3,9 @@ package com.texture_image.render
 import android.graphics.*
 import com.texture_image.extensions.*
 import com.texture_image.models.TaskOutline
-import com.texture_image.proto.ImageInfo
+import com.texture_image.proto.ImageInfo.ImageFetchInfo
 import com.texture_image.proto.ImageUtils.BoxFit.*
+import com.texture_image.utils.ConfigUtil
 import com.texture_image.utils.LogUtil
 import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
@@ -14,7 +15,7 @@ import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 
 class CanvasRender(
-    private val imageInfo: ImageInfo.ImageFetchInfo
+    private val imageInfo: ImageFetchInfo
 ) : Renderer {
 
     @DelicateCoroutinesApi
@@ -23,9 +24,13 @@ class CanvasRender(
         srcWidth: Int,
         srcHeight: Int,
         taskContext: TaskOutline,
-        globalConfig: ImageInfo.ImageConfigInfo,
     ) {
-        compressBeforeDrawing(bitmap, srcWidth, srcHeight, taskContext)
+        compressBeforeDrawing(
+            bitmap,
+            srcWidth,
+            srcHeight,
+            taskContext,
+        )
     }
 
     override fun release() {}
@@ -71,7 +76,7 @@ class CanvasRender(
                         compressBitmap ?: bitmap,
                         srcWidth,
                         srcHeight,
-                        outline
+                        outline,
                     )
                 }
             }
@@ -84,7 +89,7 @@ class CanvasRender(
         bitmap: Bitmap,
         srcWidth: Int,
         srcHeight: Int,
-        outline: TaskOutline
+        outline: TaskOutline,
     ) {
         if (outline.texture == null || outline.surface == null) {
             return
@@ -97,6 +102,8 @@ class CanvasRender(
                     Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG
                 )
 
+                // "Clean" old picture
+                drawColor(ConfigUtil.backgroundColorInt)
                 drawBitmap(
                     bitmap,
                     null,
