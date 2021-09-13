@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Log
 import android.util.Size
 import android.view.Surface
 import coil.request.Disposable
@@ -32,16 +31,17 @@ class ImageLoaderTask(
     private val context: Context,
     private val cachePolicy: CachePolicy,
     private val registry: TextureRegistry,
-    private val imageInfo: ImageInfo.ImageFetchInfo,
     private val globalConfig: ImageInfo.ImageConfigInfo,
 ) : Target {
     private var scheduler: LoaderTaskScheduler? = null
     private var mImageRequest: ImageRequest? = null
     private var cancelToken: Disposable? = null
     private var imageRender: Renderer? = null
-    private val imagePixelSize: PixelSize by lazy {
-        imageInfo.pixelSize(context)
-    }
+
+    private lateinit var imageInfo: ImageInfo.ImageFetchInfo
+
+    private val imagePixelSize: PixelSize
+        get() = imageInfo.pixelSize(context)
 
     private var mOutline: TaskOutline
             by Delegates.observable(TaskOutline.undefined) { _, oldValue, newValue ->
@@ -64,8 +64,12 @@ class ImageLoaderTask(
         )
 
     @SuppressLint("Recycle")
-    fun scheduleWith(scheduler: LoaderTaskScheduler): ImageLoaderTask {
+    fun scheduleWith(
+        scheduler: LoaderTaskScheduler,
+        imageInfo: ImageInfo.ImageFetchInfo
+    ): ImageLoaderTask {
         this.scheduler = scheduler
+        this.imageInfo = imageInfo
         this.mImageRequest = coilRequest()
 
         val outlineBuilder = TaskOutlineBuilder()
@@ -86,8 +90,6 @@ class ImageLoaderTask(
         } else {
             outlineBuilder.clone(mOutline)
         }
-
-        Log.d("TAG", "scheduleWith: ${mOutline.id}")
 
         mOutline = outlineBuilder
             .setImageUrl(imageInfo.url)
@@ -121,7 +123,6 @@ class ImageLoaderTask(
             )
 
             if (!prepareReuse) {
-                Log.d("TAG", "dispose: ${outline.id} ")
                 setTexture(null)
                 setEntry(null)
                 setSurface(null)

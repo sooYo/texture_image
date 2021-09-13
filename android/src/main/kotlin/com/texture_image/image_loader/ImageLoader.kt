@@ -1,7 +1,6 @@
 package com.texture_image.image_loader
 
 import android.content.Context
-import android.util.Log
 import android.util.Size
 import androidx.annotation.NonNull
 import coil.request.Disposable
@@ -178,11 +177,10 @@ class ImageLoader(
             context,
             cachePolicy,
             textureRegistry,
-            imageInfo,
             globalConfig,
         )
 
-        return task.scheduleWith(this).outline
+        return task.scheduleWith(this, imageInfo).outline
     }
 
     private fun destroyImage(disposeInfo: ImageInfo.ImageDisposeInfo): TaskOutline? {
@@ -197,8 +195,6 @@ class ImageLoader(
         } catch (e: Exception) {
             null
         }
-
-        Log.d("TAG", "Destroy search: ${task?.outline?.id}")
 
         return task?.run {
             when (disposeInfo.canBeReused) {
@@ -233,8 +229,12 @@ class ImageLoader(
 
     private fun saveToTaskMap(task: ImageLoaderTask): TaskOutline {
         with(task) {
-            Log.d("TAG", "saveToTaskMap: ${task.outline.id}")
             assert(outline.id >= 0)
+
+            if (outline.id < 0) {
+                return outline
+            }
+
             taskMap.put(outline.id, this)
             return outline
         }
@@ -269,7 +269,6 @@ class ImageLoader(
             taskReuseMap[task.imageSizeKey] = cacheList
         }
 
-        Log.d("TAG", "saveToReuseMap: ${task.outline.id}")
         cacheList.add(task)
     }
 
@@ -277,6 +276,8 @@ class ImageLoader(
         if (task == null) {
             return null
         }
+
+        LogUtil.d("Move to reuse map: ${task.outline.id}")
 
         return task.run {
             saveToReuseMap(this)
@@ -294,7 +295,7 @@ class ImageLoader(
                 else -> null
             }
 
-            Log.d("TAG", "pick task: ${result?.outline?.id}")
+            LogUtil.d("Reuse task: ${result?.outline?.id}")
             result
         }
     }
