@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
 import 'package:texture_image/texture_image_plugin.dart';
+import 'package:texture_image_example/util.dart';
 
 void main() {
   runApp(MyApp());
@@ -83,42 +85,42 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     "http://img.ah-suuwaa.com/0ad52b80-7c0a-485c-a974-a175cceef77d.png",
     "http://img.ah-suuwaa.com/9a5d5c8d-92a0-4f3a-aa50-2cf35482a556.jpg",
     "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png"
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
-    // "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
+    "http://img.ah-suuwaa.com/86653994-edfc-412d-837a-73c873982dd5.png",
   ];
 
   final useTextureImage = true;
@@ -155,61 +157,61 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         //     );
         //   },
         // )
-        // body: ScrollConfiguration(
-        //   behavior: TransparentOverScrollBehavior(),
-        //   child: GridView.builder(
-        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        //       crossAxisCount: 2,
-        //     ),
-        //     itemCount: _images.length,
-        //     itemBuilder: (context, index) {
-        //       return LayoutBuilder(
-        //         builder: (context, constraint) {
-        //           return useTextureImage
-        //               ? $ti.TextureImage(
-        //                   _images[index],
-        //                   width: constraint.maxWidth,
-        //                   height: constraint.maxHeight,
-        //                   fit: $ti.BoxFit.cover,
-        //                   placeholderPath: 'lib/assets/ic_placeholder.png',
-        //                   // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
-        //                 )
-        //               : CachedNetworkImage(
-        //                   imageUrl: _images[index],
-        //                   height: constraint.maxHeight,
-        //                   fit: BoxFit.cover,
-        //                   memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
-        //                   memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
-        //                 );
-        //         },
-        //       );
-        //     },
-        //   ),
-        // ),
         body: ScrollConfiguration(
           behavior: TransparentOverScrollBehavior(),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 5,
+              crossAxisCount: 5,
             ),
-            itemCount: fitTest.length,
+            itemCount: _images.length,
             itemBuilder: (context, index) {
               return LayoutBuilder(
                 builder: (context, constraint) {
-                  return $ti.TextureImage(
-                    _images[7],
-                    width: constraint.maxWidth,
-                    height: constraint.maxHeight,
-                    fit: fitTest[index],
-                    placeholderPath: 'lib/assets/ic_placeholder.png',
-                  );
+                  return useTextureImage
+                      ? $ti.TextureImage(
+                          _images[index],
+                          width: constraint.maxWidth,
+                          height: constraint.maxHeight,
+                          fit: $ti.BoxFit.cover,
+                          placeholderPath: 'lib/assets/ic_placeholder.png',
+                          // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: _images[index],
+                          height: constraint.maxHeight,
+                          fit: BoxFit.cover,
+                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+                        );
                 },
               );
             },
           ),
         ),
+        // body: ScrollConfiguration(
+        //   behavior: TransparentOverScrollBehavior(),
+        //   child: GridView.builder(
+        //     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        //       crossAxisCount: 2,
+        //       crossAxisSpacing: 5,
+        //       mainAxisSpacing: 5,
+        //     ),
+        //     itemCount: fitTest.length,
+        //     itemBuilder: (context, index) {
+        //       return LayoutBuilder(
+        //         builder: (context, constraint) {
+        //           return $ti.TextureImage(
+        //             _images[7],
+        //             width: constraint.maxWidth,
+        //             height: constraint.maxHeight,
+        //             fit: fitTest[index],
+        //             placeholderPath: 'lib/assets/ic_placeholder.png',
+        //           );
+        //         },
+        //       );
+        //     },
+        //   ),
+        // ),
       ),
     );
   }
