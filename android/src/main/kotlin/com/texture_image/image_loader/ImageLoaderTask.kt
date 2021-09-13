@@ -209,7 +209,11 @@ class ImageLoaderTask(
         createRenderIfNeeded()
 
         assert(imageRender != null) { "Image render hasn't be initialized!" }
-        assert(imageRender?.isReleased ?: false) { "Render has been released!" }
+        assert(imageRender!!.isReleased) { "Image Render has been released!" }
+
+        if (imageRender == null || imageRender!!.isReleased) {
+            return
+        }
 
         imageRender?.render(
             bitmapToDraw,
