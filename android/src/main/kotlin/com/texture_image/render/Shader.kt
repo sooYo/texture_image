@@ -1,6 +1,7 @@
 package com.texture_image.render
 
 import android.opengl.GLES20
+import com.texture_image.utils.ConfigUtil
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.nio.FloatBuffer
@@ -119,7 +120,10 @@ class Shader(private val textureId: Long) {
 
         matrixLocation = GLES20.glGetUniformLocation(program, "v_matrix")
 
-        GLES20.glClearColor(0f, 0f, 0f, 1f)
+        with(ConfigUtil.glBackgroundColorUnit) {
+            GLES20.glClearColor(red, green, blue, alpha)
+        }
+
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
         GLES20.glUseProgram(program)
         GLES20.glEnableVertexAttribArray(avPosition)

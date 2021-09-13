@@ -31,7 +31,6 @@ class ImageLoaderTask(
     private val context: Context,
     private val cachePolicy: CachePolicy,
     private val registry: TextureRegistry,
-    private val globalConfig: ImageInfo.ImageConfigInfo,
 ) : Target {
     private var scheduler: LoaderTaskScheduler? = null
     private var mImageRequest: ImageRequest? = null
@@ -138,7 +137,7 @@ class ImageLoaderTask(
     override fun onStart(placeholder: Drawable?) {
         val loadingIcon = when (placeholder is BitmapDrawable) {
             true -> placeholder.bitmap
-            else -> PlaceholderUtil.placeholder
+            else -> ConfigUtil.placeholder
         }
 
         if (loadingIcon != null) {
@@ -154,7 +153,7 @@ class ImageLoaderTask(
     override fun onError(error: Drawable?) {
         val errorIcon = when (error is BitmapDrawable) {
             true -> error.bitmap
-            else -> PlaceholderUtil.errorPlaceholder
+            else -> ConfigUtil.errorPlaceholder
         }
 
         if (errorIcon != null) {
@@ -198,7 +197,7 @@ class ImageLoaderTask(
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
 
-        PlaceholderUtil.run {
+        ConfigUtil.run {
             assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
             assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
         }
@@ -221,7 +220,6 @@ class ImageLoaderTask(
             imagePixelSize.width,
             imagePixelSize.height,
             mOutline,
-            globalConfig
         )
     }
 
@@ -237,7 +235,7 @@ class ImageLoaderTask(
             return
         }
 
-        imageRender = when (globalConfig.useOpenGLRendering) {
+        imageRender = when (ConfigUtil.global.useOpenGLRendering) {
             true -> when (imageRender is OpenGLRender) {
                 true -> imageRender
                 else -> {

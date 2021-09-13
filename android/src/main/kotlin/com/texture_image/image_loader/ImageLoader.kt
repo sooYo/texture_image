@@ -10,8 +10,8 @@ import com.texture_image.constants.TaskReuseMap
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
 import com.texture_image.proto.ImageInfo
+import com.texture_image.utils.ConfigUtil
 import com.texture_image.utils.LogUtil
-import com.texture_image.utils.PlaceholderUtil
 import com.texture_image.utils.ResultUtils
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel.Result
@@ -22,27 +22,14 @@ class ImageLoader(
     private val context: Context,
     private val textureRegistry: TextureRegistry
 ) : LoaderTaskScheduler {
-    companion object {
-        private val defaultConfig: ImageInfo.ImageConfigInfo
-            get() {
-                return ImageInfo.ImageConfigInfo.newBuilder()
-                    .setBackgroundColor("0x00000000")
-                    .setUseOpenGLRendering(true)
-                    .setReduceQualityInLowMemory(true)
-                    .setAndroidAvailableMemoryPercentage(0.1)
-                    .build()
-            }
-    }
-
     private val taskMap: TaskMap = TaskMap()
     private val taskReuseMap: TaskReuseMap = TaskReuseMap()
-    private var globalConfig: ImageInfo.ImageConfigInfo = defaultConfig
     private val loaderCore: coil.ImageLoader by lazy(LazyThreadSafetyMode.NONE) {
         val httpClient = OkHttpClient.Builder()
             .cache(CoilUtils.createDefaultCache(context))
             .build()
 
-        val memOp = globalConfig.androidAvailableMemoryPercentage
+        val memOp = ConfigUtil.global.androidAvailableMemoryPercentage
 
         coil.ImageLoader.Builder(context)
             .okHttpClient(httpClient)
@@ -147,9 +134,7 @@ class ImageLoader(
             return
         }
 
-        PlaceholderUtil.loadPlaceholders(context, configInfo)
-
-        globalConfig = configInfo
+        ConfigUtil.parseGlobalConfigs(context, configInfo)
         result.success(ResultUtils.ok)
     }
 
@@ -177,7 +162,6 @@ class ImageLoader(
             context,
             cachePolicy,
             textureRegistry,
-            globalConfig,
         )
 
         return task.scheduleWith(this, imageInfo).outline

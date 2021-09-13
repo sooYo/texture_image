@@ -13,4 +13,3 @@ typealias TaskMap = LongSparseArray<ImageLoaderTask>
 
 @Suppress("unused")
 typealias TaskReuseMap = LinkedHashMap<Size, MutableList<ImageLoaderTask>> // TextureSize -> ImageLoaderTask list
-

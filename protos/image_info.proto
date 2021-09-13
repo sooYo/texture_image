@@ -83,7 +83,7 @@ message ImageConfigInfo {
   // Sets the default background color of all texture image widget, once
   // the [placeholder] or [errorPlaceholder] sets to an empty path, then
   // the widget will display this color when it's loading or it encounters
-  // an error. The format is "0xAARRGGBB", default is "0x000000"
+  // an error. The format is "0xAARRGGBB", default is "0x00000000"
   string backgroundColor = 3;
 
   // Percentage of available memory to devote to the loader cache and

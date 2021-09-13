@@ -8,7 +8,6 @@ import android.os.Handler
 import android.os.HandlerThread
 import com.texture_image.extensions.*
 import com.texture_image.models.TaskOutline
-import com.texture_image.proto.ImageInfo
 import com.texture_image.proto.ImageUtils
 import com.texture_image.proto.ImageUtils.BoxFit.*
 import javax.microedition.khronos.egl.*
@@ -66,7 +65,6 @@ class OpenGLRender(
         srcWidth: Int,
         srcHeight: Int,
         taskContext: TaskOutline,
-        globalConfig: ImageInfo.ImageConfigInfo,
     ) {
         handler?.post {
             if (shaderProgram.matrixLocation != 0) {

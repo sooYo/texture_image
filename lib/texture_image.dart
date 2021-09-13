@@ -51,7 +51,6 @@ class _ImageState extends State<TextureImage> {
         ? Texture(textureId: _textureId!)
         : (widget.placeholder ??
             Container(
-              color: Colors.grey,
               height: widget.height,
               width: widget.width,
             ));

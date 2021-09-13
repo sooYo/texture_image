@@ -10,8 +10,7 @@ import 'utils/double_extension.dart';
 class TextureImagePlugin {
   static const MethodChannel _channel = const MethodChannel('texture_image');
 
-  static Future<int> createImageTexture(
-    String url, {
+  static Future<int> createImageTexture(String url, {
     required double width,
     required double height,
     String? placeholderPath,
@@ -70,7 +69,8 @@ class TextureImagePlugin {
       ..placeholder = 'lib/assets/ic_placeholder.png'
       ..errorPlaceholder = 'lib/assets/ic_error.png'
       ..androidAvailableMemoryPercentage = 0.3
-      ..useOpenGLRendering = true;
+      ..useOpenGLRendering = true
+      ..backgroundColor = '0xFF880000';
 
     return _channel.invokeMethod(
       Methods.textureImageConfig,
