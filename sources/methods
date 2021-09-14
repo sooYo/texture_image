@@ -9,5 +9,5 @@
 createImageTexture#Create a new texture image base on a [ImageFetchInfo]
 disposeImageTexture#Release or cache resource of a texture image once the widget is disposed, param is of [ImageFetchCancelInfo] type
 textureImageConfig#Sets the global config of the plugin, the config detail please refer to [ImageConfigInfo]
-releaseImageTextureCaches#Release all texures waiting in the to-be-reused queue, has no effect on those occupied by Flutter widgets
+releaseImageTextureCaches#Release all textures waiting in the to-be-reused queue, has no effect on those occupied by Flutter widgets
 enableLog#Enable/disable console log, param is a boolean
