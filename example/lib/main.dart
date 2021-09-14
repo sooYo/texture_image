@@ -144,8 +144,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           imageUrl: _images[index],
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
-                          // memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
-                          // memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
                         );
                 },
               );

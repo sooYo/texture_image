@@ -25,10 +25,20 @@ fun ImageInfo.ImageFetchInfo.pixelSize(context: Context): PixelSize {
             1.0
         }
 
-        PixelSize(
-            (geometry.width * density * reduceFactor).roundToInt(),
-            (geometry.height * density * reduceFactor).roundToInt()
-        )
+        val width = (geometry.width * density * reduceFactor).roundToInt()
+        val height = (geometry.height * density * reduceFactor).roundToInt()
+
+        val oddWidth = when (width % 2 == 0) {
+            true -> width
+            else -> width + 1
+        }
+
+        val oddHeight = when (height % 2 == 0) {
+            true -> height
+            else -> height + 1
+        }
+
+        PixelSize(oddWidth, oddHeight)
     }
 }
 

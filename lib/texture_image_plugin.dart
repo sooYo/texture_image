@@ -57,7 +57,7 @@ class TextureImagePlugin {
     final cancelInfo = ImageDisposeInfo()
       ..textureId = Int64(textureId ?? -1)
       ..url = url
-      ..canBeReused = false;
+      ..canBeReused = true;
 
     return _channel.invokeMethod(
       Methods.disposeImageTexture,
@@ -70,7 +70,7 @@ class TextureImagePlugin {
       ..placeholder = 'lib/assets/ic_placeholder.png'
       ..errorPlaceholder = 'lib/assets/ic_error.png'
       ..androidAvailableMemoryPercentage = 0.1
-      ..useOpenGLRendering = true
+      ..useOpenGLRendering = false
       ..backgroundColor = '0xFF880000';
 
     return _channel.invokeMethod(
