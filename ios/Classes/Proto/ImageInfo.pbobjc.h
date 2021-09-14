@@ -54,8 +54,11 @@ typedef GPB_ENUM(ImageFetchInfo_FieldNumber) {
   ImageFetchInfo_FieldNumber_URL = 1,
   ImageFetchInfo_FieldNumber_ErrorPlaceholder = 2,
   ImageFetchInfo_FieldNumber_Placeholder = 3,
-  ImageFetchInfo_FieldNumber_Geometry = 4,
-  ImageFetchInfo_FieldNumber_Quality = 5,
+  ImageFetchInfo_FieldNumber_GrayScale = 4,
+  ImageFetchInfo_FieldNumber_Blur = 5,
+  ImageFetchInfo_FieldNumber_BlurSampling = 6,
+  ImageFetchInfo_FieldNumber_Geometry = 7,
+  ImageFetchInfo_FieldNumber_Quality = 8,
 };
 
 /**
@@ -70,6 +73,19 @@ GPB_FINAL @interface ImageFetchInfo : GPBMessage
 
 /** Can be URL or local file path */
 @property(nonatomic, readwrite, copy, null_resettable) NSString *placeholder;
+
+/** Show gray scale style */
+@property(nonatomic, readwrite) BOOL grayScale;
+
+/** Blur radius, zero means no blur */
+@property(nonatomic, readwrite) int32_t blur;
+
+/**
+ * Smapling factor when using blur effect
+ * Value between 0 to 1 will upscale the image,
+ * values bigger than 1 will downscale the image
+ **/
+@property(nonatomic, readwrite) float blurSampling;
 
 /** Geometry info */
 @property(nonatomic, readwrite, strong, null_resettable) Geometry *geometry;
@@ -164,9 +180,9 @@ typedef GPB_ENUM(ImageDisposeInfo_FieldNumber) {
 GPB_FINAL @interface ImageDisposeInfo : GPBMessage
 
 /**
- * You have to provide this property then image loaders from
- * native sides can guarantee that at least they can find origin
- * task by url in a slower way. At some situation widgets gets
+ * You have to provide this property so that image loaders from
+ * native side can guarantee that at least they can find origin
+ * task by url in a slower way. At some situation widgets get
  * disposed before start loading channel API replies a result,
  * and thus widget cannot provide a correct texture id to cancel
  * ongoing download task, then this property would help

@@ -19,8 +19,11 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
     ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'errorPlaceholder', protoName: 'errorPlaceholder')
     ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'placeholder')
-    ..aOM<$0.Geometry>(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geometry', subBuilder: $0.Geometry.create)
-    ..aOM<$0.Quality>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quality', subBuilder: $0.Quality.create)
+    ..aOB(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'grayScale', protoName: 'grayScale')
+    ..a<$core.int>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'blur', $pb.PbFieldType.O3)
+    ..a<$core.double>(6, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'blurSampling', $pb.PbFieldType.OF, protoName: 'blurSampling')
+    ..aOM<$0.Geometry>(7, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'geometry', subBuilder: $0.Geometry.create)
+    ..aOM<$0.Quality>(8, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'quality', subBuilder: $0.Quality.create)
     ..hasRequiredFields = false
   ;
 
@@ -29,6 +32,9 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     $core.String? url,
     $core.String? errorPlaceholder,
     $core.String? placeholder,
+    $core.bool? grayScale,
+    $core.int? blur,
+    $core.double? blurSampling,
     $0.Geometry? geometry,
     $0.Quality? quality,
   }) {
@@ -41,6 +47,15 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
     }
     if (placeholder != null) {
       _result.placeholder = placeholder;
+    }
+    if (grayScale != null) {
+      _result.grayScale = grayScale;
+    }
+    if (blur != null) {
+      _result.blur = blur;
+    }
+    if (blurSampling != null) {
+      _result.blurSampling = blurSampling;
     }
     if (geometry != null) {
       _result.geometry = geometry;
@@ -99,26 +114,53 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
   void clearPlaceholder() => clearField(3);
 
   @$pb.TagNumber(4)
-  $0.Geometry get geometry => $_getN(3);
+  $core.bool get grayScale => $_getBF(3);
   @$pb.TagNumber(4)
-  set geometry($0.Geometry v) { setField(4, v); }
+  set grayScale($core.bool v) { $_setBool(3, v); }
   @$pb.TagNumber(4)
-  $core.bool hasGeometry() => $_has(3);
+  $core.bool hasGrayScale() => $_has(3);
   @$pb.TagNumber(4)
-  void clearGeometry() => clearField(4);
-  @$pb.TagNumber(4)
-  $0.Geometry ensureGeometry() => $_ensure(3);
+  void clearGrayScale() => clearField(4);
 
   @$pb.TagNumber(5)
-  $0.Quality get quality => $_getN(4);
+  $core.int get blur => $_getIZ(4);
   @$pb.TagNumber(5)
-  set quality($0.Quality v) { setField(5, v); }
+  set blur($core.int v) { $_setSignedInt32(4, v); }
   @$pb.TagNumber(5)
-  $core.bool hasQuality() => $_has(4);
+  $core.bool hasBlur() => $_has(4);
   @$pb.TagNumber(5)
-  void clearQuality() => clearField(5);
-  @$pb.TagNumber(5)
-  $0.Quality ensureQuality() => $_ensure(4);
+  void clearBlur() => clearField(5);
+
+  @$pb.TagNumber(6)
+  $core.double get blurSampling => $_getN(5);
+  @$pb.TagNumber(6)
+  set blurSampling($core.double v) { $_setFloat(5, v); }
+  @$pb.TagNumber(6)
+  $core.bool hasBlurSampling() => $_has(5);
+  @$pb.TagNumber(6)
+  void clearBlurSampling() => clearField(6);
+
+  @$pb.TagNumber(7)
+  $0.Geometry get geometry => $_getN(6);
+  @$pb.TagNumber(7)
+  set geometry($0.Geometry v) { setField(7, v); }
+  @$pb.TagNumber(7)
+  $core.bool hasGeometry() => $_has(6);
+  @$pb.TagNumber(7)
+  void clearGeometry() => clearField(7);
+  @$pb.TagNumber(7)
+  $0.Geometry ensureGeometry() => $_ensure(6);
+
+  @$pb.TagNumber(8)
+  $0.Quality get quality => $_getN(7);
+  @$pb.TagNumber(8)
+  set quality($0.Quality v) { setField(8, v); }
+  @$pb.TagNumber(8)
+  $core.bool hasQuality() => $_has(7);
+  @$pb.TagNumber(8)
+  void clearQuality() => clearField(8);
+  @$pb.TagNumber(8)
+  $0.Quality ensureQuality() => $_ensure(7);
 }
 
 class ResultInfo extends $pb.GeneratedMessage {

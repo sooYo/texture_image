@@ -13,11 +13,22 @@ message ImageFetchInfo {
   // Can be URL or local file path
   string placeholder = 3;
 
+  // Show gray scale style
+  bool grayScale = 4;
+
+  // Blur radius, zero means no blur
+  int32 blur = 5;
+
+  // Smapling factor when using blur effect
+  // Value between 0 to 1 will upscale the image,
+  // values bigger than 1 will downscale the image
+  float blurSampling = 6;
+
   // Geometry info
-  Geometry geometry = 4;
+  Geometry geometry = 7;
 
   // Image aqulity control
-  Quality quality = 5;
+  Quality quality = 8;
 }
 
 message ResultInfo {
@@ -51,9 +62,9 @@ message ImageFetchResultInfo {
 
 // Request to cancel an ongoing loading task
 message ImageDisposeInfo {
-  // You have to provide this property then image loaders from
-  // native sides can guarantee that at least they can find origin
-  // task by url in a slower way. At some situation widgets gets
+  // You have to provide this property so that image loaders from
+  // native side can guarantee that at least they can find origin
+  // task by url in a slower way. At some situation widgets get
   // disposed before start loading channel API replies a result,
   // and thus widget cannot provide a correct texture id to cancel
   // ongoing download task, then this property would help

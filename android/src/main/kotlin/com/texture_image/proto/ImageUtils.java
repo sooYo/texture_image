@@ -1072,12 +1072,11 @@ public final class ImageUtils {
      * <pre>
      * Indicate whether this image has alpha channel
      * On Android platform, if this is not supported,
-     * then the bitmap loader will use RGB_565 format
-     * to decode the image, result in reducing half
-     * size. Otherwise, ARGB_888 format will used,
-     * on this format, each pixel is stored on 4 bytes.
-     * It is suggested to disable this feature as if
-     * it's possible anyway.
+     * then bitmap loader will try using RGB_565 format
+     * to decode the image, result in size reducing,
+     * Otherwise, ARGB_888 format will used. On this format,
+     * each pixel is stored using 4 bytes.
+     * It is suggested to disable this feature when it's possible anyway.
      * </pre>
      *
      * <code>bool supportAlpha = 3;</code>
@@ -1251,12 +1250,11 @@ public final class ImageUtils {
      * <pre>
      * Indicate whether this image has alpha channel
      * On Android platform, if this is not supported,
-     * then the bitmap loader will use RGB_565 format
-     * to decode the image, result in reducing half
-     * size. Otherwise, ARGB_888 format will used,
-     * on this format, each pixel is stored on 4 bytes.
-     * It is suggested to disable this feature as if
-     * it's possible anyway.
+     * then bitmap loader will try using RGB_565 format
+     * to decode the image, result in size reducing,
+     * Otherwise, ARGB_888 format will used. On this format,
+     * each pixel is stored using 4 bytes.
+     * It is suggested to disable this feature when it's possible anyway.
      * </pre>
      *
      * <code>bool supportAlpha = 3;</code>
@@ -1762,12 +1760,11 @@ public final class ImageUtils {
        * <pre>
        * Indicate whether this image has alpha channel
        * On Android platform, if this is not supported,
-       * then the bitmap loader will use RGB_565 format
-       * to decode the image, result in reducing half
-       * size. Otherwise, ARGB_888 format will used,
-       * on this format, each pixel is stored on 4 bytes.
-       * It is suggested to disable this feature as if
-       * it's possible anyway.
+       * then bitmap loader will try using RGB_565 format
+       * to decode the image, result in size reducing,
+       * Otherwise, ARGB_888 format will used. On this format,
+       * each pixel is stored using 4 bytes.
+       * It is suggested to disable this feature when it's possible anyway.
        * </pre>
        *
        * <code>bool supportAlpha = 3;</code>
@@ -1781,12 +1778,11 @@ public final class ImageUtils {
        * <pre>
        * Indicate whether this image has alpha channel
        * On Android platform, if this is not supported,
-       * then the bitmap loader will use RGB_565 format
-       * to decode the image, result in reducing half
-       * size. Otherwise, ARGB_888 format will used,
-       * on this format, each pixel is stored on 4 bytes.
-       * It is suggested to disable this feature as if
-       * it's possible anyway.
+       * then bitmap loader will try using RGB_565 format
+       * to decode the image, result in size reducing,
+       * Otherwise, ARGB_888 format will used. On this format,
+       * each pixel is stored using 4 bytes.
+       * It is suggested to disable this feature when it's possible anyway.
        * </pre>
        *
        * <code>bool supportAlpha = 3;</code>
@@ -1803,12 +1799,11 @@ public final class ImageUtils {
        * <pre>
        * Indicate whether this image has alpha channel
        * On Android platform, if this is not supported,
-       * then the bitmap loader will use RGB_565 format
-       * to decode the image, result in reducing half
-       * size. Otherwise, ARGB_888 format will used,
-       * on this format, each pixel is stored on 4 bytes.
-       * It is suggested to disable this feature as if
-       * it's possible anyway.
+       * then bitmap loader will try using RGB_565 format
+       * to decode the image, result in size reducing,
+       * Otherwise, ARGB_888 format will used. On this format,
+       * each pixel is stored using 4 bytes.
+       * It is suggested to disable this feature when it's possible anyway.
        * </pre>
        *
        * <code>bool supportAlpha = 3;</code>

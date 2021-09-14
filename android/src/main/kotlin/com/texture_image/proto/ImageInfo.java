@@ -72,10 +72,42 @@ public final class ImageInfo {
 
     /**
      * <pre>
+     * Show gray scale style
+     * </pre>
+     *
+     * <code>bool grayScale = 4;</code>
+     * @return The grayScale.
+     */
+    boolean getGrayScale();
+
+    /**
+     * <pre>
+     * Blur radius, zero means no blur
+     * </pre>
+     *
+     * <code>int32 blur = 5;</code>
+     * @return The blur.
+     */
+    int getBlur();
+
+    /**
+     * <pre>
+     * Smapling factor when using blur effect
+     * Value between 0 to 1 will upscale the image,
+     * values bigger than 1 will downscale the image
+     * </pre>
+     *
+     * <code>float blurSampling = 6;</code>
+     * @return The blurSampling.
+     */
+    float getBlurSampling();
+
+    /**
+     * <pre>
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      * @return Whether the geometry field is set.
      */
     boolean hasGeometry();
@@ -84,7 +116,7 @@ public final class ImageInfo {
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      * @return The geometry.
      */
     com.texture_image.proto.ImageUtils.Geometry getGeometry();
@@ -93,7 +125,7 @@ public final class ImageInfo {
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      */
     com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder();
 
@@ -102,7 +134,7 @@ public final class ImageInfo {
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      * @return Whether the quality field is set.
      */
     boolean hasQuality();
@@ -111,7 +143,7 @@ public final class ImageInfo {
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      * @return The quality.
      */
     com.texture_image.proto.ImageUtils.Quality getQuality();
@@ -120,7 +152,7 @@ public final class ImageInfo {
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      */
     com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder();
   }
@@ -194,7 +226,22 @@ public final class ImageInfo {
               placeholder_ = s;
               break;
             }
-            case 34: {
+            case 32: {
+
+              grayScale_ = input.readBool();
+              break;
+            }
+            case 40: {
+
+              blur_ = input.readInt32();
+              break;
+            }
+            case 53: {
+
+              blurSampling_ = input.readFloat();
+              break;
+            }
+            case 58: {
               com.texture_image.proto.ImageUtils.Geometry.Builder subBuilder = null;
               if (geometry_ != null) {
                 subBuilder = geometry_.toBuilder();
@@ -207,7 +254,7 @@ public final class ImageInfo {
 
               break;
             }
-            case 42: {
+            case 66: {
               com.texture_image.proto.ImageUtils.Quality.Builder subBuilder = null;
               if (quality_ != null) {
                 subBuilder = quality_.toBuilder();
@@ -382,14 +429,61 @@ public final class ImageInfo {
       }
     }
 
-    public static final int GEOMETRY_FIELD_NUMBER = 4;
+    public static final int GRAYSCALE_FIELD_NUMBER = 4;
+    private boolean grayScale_;
+    /**
+     * <pre>
+     * Show gray scale style
+     * </pre>
+     *
+     * <code>bool grayScale = 4;</code>
+     * @return The grayScale.
+     */
+    @java.lang.Override
+    public boolean getGrayScale() {
+      return grayScale_;
+    }
+
+    public static final int BLUR_FIELD_NUMBER = 5;
+    private int blur_;
+    /**
+     * <pre>
+     * Blur radius, zero means no blur
+     * </pre>
+     *
+     * <code>int32 blur = 5;</code>
+     * @return The blur.
+     */
+    @java.lang.Override
+    public int getBlur() {
+      return blur_;
+    }
+
+    public static final int BLURSAMPLING_FIELD_NUMBER = 6;
+    private float blurSampling_;
+    /**
+     * <pre>
+     * Smapling factor when using blur effect
+     * Value between 0 to 1 will upscale the image,
+     * values bigger than 1 will downscale the image
+     * </pre>
+     *
+     * <code>float blurSampling = 6;</code>
+     * @return The blurSampling.
+     */
+    @java.lang.Override
+    public float getBlurSampling() {
+      return blurSampling_;
+    }
+
+    public static final int GEOMETRY_FIELD_NUMBER = 7;
     private com.texture_image.proto.ImageUtils.Geometry geometry_;
     /**
      * <pre>
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      * @return Whether the geometry field is set.
      */
     @java.lang.Override
@@ -401,7 +495,7 @@ public final class ImageInfo {
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      * @return The geometry.
      */
     @java.lang.Override
@@ -413,21 +507,21 @@ public final class ImageInfo {
      * Geometry info
      * </pre>
      *
-     * <code>.Geometry geometry = 4;</code>
+     * <code>.Geometry geometry = 7;</code>
      */
     @java.lang.Override
     public com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder() {
       return getGeometry();
     }
 
-    public static final int QUALITY_FIELD_NUMBER = 5;
+    public static final int QUALITY_FIELD_NUMBER = 8;
     private com.texture_image.proto.ImageUtils.Quality quality_;
     /**
      * <pre>
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      * @return Whether the quality field is set.
      */
     @java.lang.Override
@@ -439,7 +533,7 @@ public final class ImageInfo {
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      * @return The quality.
      */
     @java.lang.Override
@@ -451,7 +545,7 @@ public final class ImageInfo {
      * Image aqulity control
      * </pre>
      *
-     * <code>.Quality quality = 5;</code>
+     * <code>.Quality quality = 8;</code>
      */
     @java.lang.Override
     public com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder() {
@@ -481,11 +575,20 @@ public final class ImageInfo {
       if (!getPlaceholderBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 3, placeholder_);
       }
+      if (grayScale_ != false) {
+        output.writeBool(4, grayScale_);
+      }
+      if (blur_ != 0) {
+        output.writeInt32(5, blur_);
+      }
+      if (blurSampling_ != 0F) {
+        output.writeFloat(6, blurSampling_);
+      }
       if (geometry_ != null) {
-        output.writeMessage(4, getGeometry());
+        output.writeMessage(7, getGeometry());
       }
       if (quality_ != null) {
-        output.writeMessage(5, getQuality());
+        output.writeMessage(8, getQuality());
       }
       unknownFields.writeTo(output);
     }
@@ -505,13 +608,25 @@ public final class ImageInfo {
       if (!getPlaceholderBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, placeholder_);
       }
+      if (grayScale_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(4, grayScale_);
+      }
+      if (blur_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(5, blur_);
+      }
+      if (blurSampling_ != 0F) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeFloatSize(6, blurSampling_);
+      }
       if (geometry_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(4, getGeometry());
+          .computeMessageSize(7, getGeometry());
       }
       if (quality_ != null) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(5, getQuality());
+          .computeMessageSize(8, getQuality());
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -534,6 +649,13 @@ public final class ImageInfo {
           .equals(other.getErrorPlaceholder())) return false;
       if (!getPlaceholder()
           .equals(other.getPlaceholder())) return false;
+      if (getGrayScale()
+          != other.getGrayScale()) return false;
+      if (getBlur()
+          != other.getBlur()) return false;
+      if (java.lang.Float.floatToIntBits(getBlurSampling())
+          != java.lang.Float.floatToIntBits(
+              other.getBlurSampling())) return false;
       if (hasGeometry() != other.hasGeometry()) return false;
       if (hasGeometry()) {
         if (!getGeometry()
@@ -561,6 +683,14 @@ public final class ImageInfo {
       hash = (53 * hash) + getErrorPlaceholder().hashCode();
       hash = (37 * hash) + PLACEHOLDER_FIELD_NUMBER;
       hash = (53 * hash) + getPlaceholder().hashCode();
+      hash = (37 * hash) + GRAYSCALE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getGrayScale());
+      hash = (37 * hash) + BLUR_FIELD_NUMBER;
+      hash = (53 * hash) + getBlur();
+      hash = (37 * hash) + BLURSAMPLING_FIELD_NUMBER;
+      hash = (53 * hash) + java.lang.Float.floatToIntBits(
+          getBlurSampling());
       if (hasGeometry()) {
         hash = (37 * hash) + GEOMETRY_FIELD_NUMBER;
         hash = (53 * hash) + getGeometry().hashCode();
@@ -712,6 +842,12 @@ public final class ImageInfo {
 
         placeholder_ = "";
 
+        grayScale_ = false;
+
+        blur_ = 0;
+
+        blurSampling_ = 0F;
+
         if (geometryBuilder_ == null) {
           geometry_ = null;
         } else {
@@ -753,6 +889,9 @@ public final class ImageInfo {
         result.url_ = url_;
         result.errorPlaceholder_ = errorPlaceholder_;
         result.placeholder_ = placeholder_;
+        result.grayScale_ = grayScale_;
+        result.blur_ = blur_;
+        result.blurSampling_ = blurSampling_;
         if (geometryBuilder_ == null) {
           result.geometry_ = geometry_;
         } else {
@@ -822,6 +961,15 @@ public final class ImageInfo {
         if (!other.getPlaceholder().isEmpty()) {
           placeholder_ = other.placeholder_;
           onChanged();
+        }
+        if (other.getGrayScale() != false) {
+          setGrayScale(other.getGrayScale());
+        }
+        if (other.getBlur() != 0) {
+          setBlur(other.getBlur());
+        }
+        if (other.getBlurSampling() != 0F) {
+          setBlurSampling(other.getBlurSampling());
         }
         if (other.hasGeometry()) {
           mergeGeometry(other.getGeometry());
@@ -1126,6 +1274,141 @@ public final class ImageInfo {
         return this;
       }
 
+      private boolean grayScale_ ;
+      /**
+       * <pre>
+       * Show gray scale style
+       * </pre>
+       *
+       * <code>bool grayScale = 4;</code>
+       * @return The grayScale.
+       */
+      @java.lang.Override
+      public boolean getGrayScale() {
+        return grayScale_;
+      }
+      /**
+       * <pre>
+       * Show gray scale style
+       * </pre>
+       *
+       * <code>bool grayScale = 4;</code>
+       * @param value The grayScale to set.
+       * @return This builder for chaining.
+       */
+      public Builder setGrayScale(boolean value) {
+        
+        grayScale_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Show gray scale style
+       * </pre>
+       *
+       * <code>bool grayScale = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearGrayScale() {
+        
+        grayScale_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int blur_ ;
+      /**
+       * <pre>
+       * Blur radius, zero means no blur
+       * </pre>
+       *
+       * <code>int32 blur = 5;</code>
+       * @return The blur.
+       */
+      @java.lang.Override
+      public int getBlur() {
+        return blur_;
+      }
+      /**
+       * <pre>
+       * Blur radius, zero means no blur
+       * </pre>
+       *
+       * <code>int32 blur = 5;</code>
+       * @param value The blur to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBlur(int value) {
+        
+        blur_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Blur radius, zero means no blur
+       * </pre>
+       *
+       * <code>int32 blur = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBlur() {
+        
+        blur_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private float blurSampling_ ;
+      /**
+       * <pre>
+       * Smapling factor when using blur effect
+       * Value between 0 to 1 will upscale the image,
+       * values bigger than 1 will downscale the image
+       * </pre>
+       *
+       * <code>float blurSampling = 6;</code>
+       * @return The blurSampling.
+       */
+      @java.lang.Override
+      public float getBlurSampling() {
+        return blurSampling_;
+      }
+      /**
+       * <pre>
+       * Smapling factor when using blur effect
+       * Value between 0 to 1 will upscale the image,
+       * values bigger than 1 will downscale the image
+       * </pre>
+       *
+       * <code>float blurSampling = 6;</code>
+       * @param value The blurSampling to set.
+       * @return This builder for chaining.
+       */
+      public Builder setBlurSampling(float value) {
+        
+        blurSampling_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Smapling factor when using blur effect
+       * Value between 0 to 1 will upscale the image,
+       * values bigger than 1 will downscale the image
+       * </pre>
+       *
+       * <code>float blurSampling = 6;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearBlurSampling() {
+        
+        blurSampling_ = 0F;
+        onChanged();
+        return this;
+      }
+
       private com.texture_image.proto.ImageUtils.Geometry geometry_;
       private com.google.protobuf.SingleFieldBuilderV3<
           com.texture_image.proto.ImageUtils.Geometry, com.texture_image.proto.ImageUtils.Geometry.Builder, com.texture_image.proto.ImageUtils.GeometryOrBuilder> geometryBuilder_;
@@ -1134,7 +1417,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        * @return Whether the geometry field is set.
        */
       public boolean hasGeometry() {
@@ -1145,7 +1428,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        * @return The geometry.
        */
       public com.texture_image.proto.ImageUtils.Geometry getGeometry() {
@@ -1160,7 +1443,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public Builder setGeometry(com.texture_image.proto.ImageUtils.Geometry value) {
         if (geometryBuilder_ == null) {
@@ -1180,7 +1463,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public Builder setGeometry(
           com.texture_image.proto.ImageUtils.Geometry.Builder builderForValue) {
@@ -1198,7 +1481,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public Builder mergeGeometry(com.texture_image.proto.ImageUtils.Geometry value) {
         if (geometryBuilder_ == null) {
@@ -1220,7 +1503,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public Builder clearGeometry() {
         if (geometryBuilder_ == null) {
@@ -1238,7 +1521,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public com.texture_image.proto.ImageUtils.Geometry.Builder getGeometryBuilder() {
         
@@ -1250,7 +1533,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       public com.texture_image.proto.ImageUtils.GeometryOrBuilder getGeometryOrBuilder() {
         if (geometryBuilder_ != null) {
@@ -1265,7 +1548,7 @@ public final class ImageInfo {
        * Geometry info
        * </pre>
        *
-       * <code>.Geometry geometry = 4;</code>
+       * <code>.Geometry geometry = 7;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.texture_image.proto.ImageUtils.Geometry, com.texture_image.proto.ImageUtils.Geometry.Builder, com.texture_image.proto.ImageUtils.GeometryOrBuilder> 
@@ -1289,7 +1572,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        * @return Whether the quality field is set.
        */
       public boolean hasQuality() {
@@ -1300,7 +1583,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        * @return The quality.
        */
       public com.texture_image.proto.ImageUtils.Quality getQuality() {
@@ -1315,7 +1598,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public Builder setQuality(com.texture_image.proto.ImageUtils.Quality value) {
         if (qualityBuilder_ == null) {
@@ -1335,7 +1618,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public Builder setQuality(
           com.texture_image.proto.ImageUtils.Quality.Builder builderForValue) {
@@ -1353,7 +1636,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public Builder mergeQuality(com.texture_image.proto.ImageUtils.Quality value) {
         if (qualityBuilder_ == null) {
@@ -1375,7 +1658,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public Builder clearQuality() {
         if (qualityBuilder_ == null) {
@@ -1393,7 +1676,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public com.texture_image.proto.ImageUtils.Quality.Builder getQualityBuilder() {
         
@@ -1405,7 +1688,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       public com.texture_image.proto.ImageUtils.QualityOrBuilder getQualityOrBuilder() {
         if (qualityBuilder_ != null) {
@@ -1420,7 +1703,7 @@ public final class ImageInfo {
        * Image aqulity control
        * </pre>
        *
-       * <code>.Quality quality = 5;</code>
+       * <code>.Quality quality = 8;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<
           com.texture_image.proto.ImageUtils.Quality, com.texture_image.proto.ImageUtils.Quality.Builder, com.texture_image.proto.ImageUtils.QualityOrBuilder> 
@@ -3272,9 +3555,9 @@ public final class ImageInfo {
 
     /**
      * <pre>
-     * You have to provide this property then image loaders from
-     * native sides can guarantee that at least they can find origin
-     * task by url in a slower way. At some situation widgets gets
+     * You have to provide this property so that image loaders from
+     * native side can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets get
      * disposed before start loading channel API replies a result,
      * and thus widget cannot provide a correct texture id to cancel
      * ongoing download task, then this property would help
@@ -3286,9 +3569,9 @@ public final class ImageInfo {
     java.lang.String getUrl();
     /**
      * <pre>
-     * You have to provide this property then image loaders from
-     * native sides can guarantee that at least they can find origin
-     * task by url in a slower way. At some situation widgets gets
+     * You have to provide this property so that image loaders from
+     * native side can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets get
      * disposed before start loading channel API replies a result,
      * and thus widget cannot provide a correct texture id to cancel
      * ongoing download task, then this property would help
@@ -3424,9 +3707,9 @@ public final class ImageInfo {
     private volatile java.lang.Object url_;
     /**
      * <pre>
-     * You have to provide this property then image loaders from
-     * native sides can guarantee that at least they can find origin
-     * task by url in a slower way. At some situation widgets gets
+     * You have to provide this property so that image loaders from
+     * native side can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets get
      * disposed before start loading channel API replies a result,
      * and thus widget cannot provide a correct texture id to cancel
      * ongoing download task, then this property would help
@@ -3450,9 +3733,9 @@ public final class ImageInfo {
     }
     /**
      * <pre>
-     * You have to provide this property then image loaders from
-     * native sides can guarantee that at least they can find origin
-     * task by url in a slower way. At some situation widgets gets
+     * You have to provide this property so that image loaders from
+     * native side can guarantee that at least they can find origin
+     * task by url in a slower way. At some situation widgets get
      * disposed before start loading channel API replies a result,
      * and thus widget cannot provide a correct texture id to cancel
      * ongoing download task, then this property would help
@@ -3853,9 +4136,9 @@ public final class ImageInfo {
       private java.lang.Object url_ = "";
       /**
        * <pre>
-       * You have to provide this property then image loaders from
-       * native sides can guarantee that at least they can find origin
-       * task by url in a slower way. At some situation widgets gets
+       * You have to provide this property so that image loaders from
+       * native side can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets get
        * disposed before start loading channel API replies a result,
        * and thus widget cannot provide a correct texture id to cancel
        * ongoing download task, then this property would help
@@ -3878,9 +4161,9 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * You have to provide this property then image loaders from
-       * native sides can guarantee that at least they can find origin
-       * task by url in a slower way. At some situation widgets gets
+       * You have to provide this property so that image loaders from
+       * native side can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets get
        * disposed before start loading channel API replies a result,
        * and thus widget cannot provide a correct texture id to cancel
        * ongoing download task, then this property would help
@@ -3904,9 +4187,9 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * You have to provide this property then image loaders from
-       * native sides can guarantee that at least they can find origin
-       * task by url in a slower way. At some situation widgets gets
+       * You have to provide this property so that image loaders from
+       * native side can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets get
        * disposed before start loading channel API replies a result,
        * and thus widget cannot provide a correct texture id to cancel
        * ongoing download task, then this property would help
@@ -3928,9 +4211,9 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * You have to provide this property then image loaders from
-       * native sides can guarantee that at least they can find origin
-       * task by url in a slower way. At some situation widgets gets
+       * You have to provide this property so that image loaders from
+       * native side can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets get
        * disposed before start loading channel API replies a result,
        * and thus widget cannot provide a correct texture id to cancel
        * ongoing download task, then this property would help
@@ -3947,9 +4230,9 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * You have to provide this property then image loaders from
-       * native sides can guarantee that at least they can find origin
-       * task by url in a slower way. At some situation widgets gets
+       * You have to provide this property so that image loaders from
+       * native side can guarantee that at least they can find origin
+       * task by url in a slower way. At some situation widgets get
        * disposed before start loading channel API replies a result,
        * and thus widget cannot provide a correct texture id to cancel
        * ongoing download task, then this property would help
@@ -5515,22 +5798,24 @@ public final class ImageInfo {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\020image_info.proto\032\021image_utils.proto\"\204\001" +
+      "\n\020image_info.proto\032\021image_utils.proto\"\273\001" +
       "\n\016ImageFetchInfo\022\013\n\003url\030\001 \001(\t\022\030\n\020errorPl" +
-      "aceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\033\n\010" +
-      "geometry\030\004 \001(\0132\t.Geometry\022\031\n\007quality\030\005 \001" +
-      "(\0132\010.Quality\"+\n\nResultInfo\022\014\n\004code\030\001 \001(\005" +
-      "\022\017\n\007message\030\002 \001(\t\"p\n\024ImageFetchResultInf" +
-      "o\022\014\n\004code\030\001 \001(\005\022\021\n\ttextureId\030\002 \001(\003\022\017\n\007me" +
-      "ssage\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022\031\n\005state\030\005 \001(\0162" +
-      "\n.TaskState\"G\n\020ImageDisposeInfo\022\013\n\003url\030\001" +
-      " \001(\t\022\021\n\ttextureId\030\002 \001(\003\022\023\n\013canBeReused\030\003" +
-      " \001(\010\"\301\001\n\017ImageConfigInfo\022\023\n\013placeholder\030" +
-      "\001 \001(\t\022\030\n\020errorPlaceholder\030\002 \001(\t\022\027\n\017backg" +
-      "roundColor\030\003 \001(\t\022(\n androidAvailableMemo" +
-      "ryPercentage\030\004 \001(\001\022 \n\030reduceQualityInLow" +
-      "Memory\030\005 \001(\010\022\032\n\022useOpenGLRendering\030\006 \001(\010" +
-      "B\031\n\027com.texture_image.protob\006proto3"
+      "aceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\021\n\t" +
+      "grayScale\030\004 \001(\010\022\014\n\004blur\030\005 \001(\005\022\024\n\014blurSam" +
+      "pling\030\006 \001(\002\022\033\n\010geometry\030\007 \001(\0132\t.Geometry" +
+      "\022\031\n\007quality\030\010 \001(\0132\010.Quality\"+\n\nResultInf" +
+      "o\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\"p\n\024Imag" +
+      "eFetchResultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextur" +
+      "eId\030\002 \001(\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022" +
+      "\031\n\005state\030\005 \001(\0162\n.TaskState\"G\n\020ImageDispo" +
+      "seInfo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\022\023" +
+      "\n\013canBeReused\030\003 \001(\010\"\301\001\n\017ImageConfigInfo\022" +
+      "\023\n\013placeholder\030\001 \001(\t\022\030\n\020errorPlaceholder" +
+      "\030\002 \001(\t\022\027\n\017backgroundColor\030\003 \001(\t\022(\n andro" +
+      "idAvailableMemoryPercentage\030\004 \001(\001\022 \n\030red" +
+      "uceQualityInLowMemory\030\005 \001(\010\022\032\n\022useOpenGL" +
+      "Rendering\030\006 \001(\010B\031\n\027com.texture_image.pro" +
+      "tob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5542,7 +5827,7 @@ public final class ImageInfo {
     internal_static_ImageFetchInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageFetchInfo_descriptor,
-        new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "Geometry", "Quality", });
+        new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "GrayScale", "Blur", "BlurSampling", "Geometry", "Quality", });
     internal_static_ResultInfo_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_ResultInfo_fieldAccessorTable = new

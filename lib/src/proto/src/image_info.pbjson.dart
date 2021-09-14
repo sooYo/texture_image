@@ -15,13 +15,16 @@ const ImageFetchInfo$json = const {
     const {'1': 'url', '3': 1, '4': 1, '5': 9, '10': 'url'},
     const {'1': 'errorPlaceholder', '3': 2, '4': 1, '5': 9, '10': 'errorPlaceholder'},
     const {'1': 'placeholder', '3': 3, '4': 1, '5': 9, '10': 'placeholder'},
-    const {'1': 'geometry', '3': 4, '4': 1, '5': 11, '6': '.Geometry', '10': 'geometry'},
-    const {'1': 'quality', '3': 5, '4': 1, '5': 11, '6': '.Quality', '10': 'quality'},
+    const {'1': 'grayScale', '3': 4, '4': 1, '5': 8, '10': 'grayScale'},
+    const {'1': 'blur', '3': 5, '4': 1, '5': 5, '10': 'blur'},
+    const {'1': 'blurSampling', '3': 6, '4': 1, '5': 2, '10': 'blurSampling'},
+    const {'1': 'geometry', '3': 7, '4': 1, '5': 11, '6': '.Geometry', '10': 'geometry'},
+    const {'1': 'quality', '3': 8, '4': 1, '5': 11, '6': '.Quality', '10': 'quality'},
   ],
 };
 
 /// Descriptor for `ImageFetchInfo`. Decode as a `google.protobuf.DescriptorProto`.
-final $typed_data.Uint8List imageFetchInfoDescriptor = $convert.base64Decode('Cg5JbWFnZUZldGNoSW5mbxIQCgN1cmwYASABKAlSA3VybBIqChBlcnJvclBsYWNlaG9sZGVyGAIgASgJUhBlcnJvclBsYWNlaG9sZGVyEiAKC3BsYWNlaG9sZGVyGAMgASgJUgtwbGFjZWhvbGRlchIlCghnZW9tZXRyeRgEIAEoCzIJLkdlb21ldHJ5UghnZW9tZXRyeRIiCgdxdWFsaXR5GAUgASgLMgguUXVhbGl0eVIHcXVhbGl0eQ==');
+final $typed_data.Uint8List imageFetchInfoDescriptor = $convert.base64Decode('Cg5JbWFnZUZldGNoSW5mbxIQCgN1cmwYASABKAlSA3VybBIqChBlcnJvclBsYWNlaG9sZGVyGAIgASgJUhBlcnJvclBsYWNlaG9sZGVyEiAKC3BsYWNlaG9sZGVyGAMgASgJUgtwbGFjZWhvbGRlchIcCglncmF5U2NhbGUYBCABKAhSCWdyYXlTY2FsZRISCgRibHVyGAUgASgFUgRibHVyEiIKDGJsdXJTYW1wbGluZxgGIAEoAlIMYmx1clNhbXBsaW5nEiUKCGdlb21ldHJ5GAcgASgLMgkuR2VvbWV0cnlSCGdlb21ldHJ5EiIKB3F1YWxpdHkYCCABKAsyCC5RdWFsaXR5UgdxdWFsaXR5');
 @$core.Deprecated('Use resultInfoDescriptor instead')
 const ResultInfo$json = const {
   '1': 'ResultInfo',

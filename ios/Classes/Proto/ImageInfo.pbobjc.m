@@ -58,11 +58,16 @@ static GPBFileDescriptor *ImageInfoRoot_FileDescriptor(void) {
 @dynamic URL;
 @dynamic errorPlaceholder;
 @dynamic placeholder;
+@dynamic grayScale;
+@dynamic blur;
+@dynamic blurSampling;
 @dynamic hasGeometry, geometry;
 @dynamic hasQuality, quality;
 
 typedef struct ImageFetchInfo__storage_ {
   uint32_t _has_storage_[1];
+  int32_t blur;
+  float blurSampling;
   NSString *URL;
   NSString *errorPlaceholder;
   NSString *placeholder;
@@ -104,10 +109,37 @@ typedef struct ImageFetchInfo__storage_ {
         .dataType = GPBDataTypeString,
       },
       {
+        .name = "grayScale",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageFetchInfo_FieldNumber_GrayScale,
+        .hasIndex = 3,
+        .offset = 4,  // Stored in _has_storage_ to save space.
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeBool,
+      },
+      {
+        .name = "blur",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageFetchInfo_FieldNumber_Blur,
+        .hasIndex = 5,
+        .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, blur),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeInt32,
+      },
+      {
+        .name = "blurSampling",
+        .dataTypeSpecific.clazz = Nil,
+        .number = ImageFetchInfo_FieldNumber_BlurSampling,
+        .hasIndex = 6,
+        .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, blurSampling),
+        .flags = (GPBFieldFlags)(GPBFieldOptional | GPBFieldTextFormatNameCustom | GPBFieldClearHasIvarOnZero),
+        .dataType = GPBDataTypeFloat,
+      },
+      {
         .name = "geometry",
         .dataTypeSpecific.clazz = GPBObjCClass(Geometry),
         .number = ImageFetchInfo_FieldNumber_Geometry,
-        .hasIndex = 3,
+        .hasIndex = 7,
         .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, geometry),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -116,7 +148,7 @@ typedef struct ImageFetchInfo__storage_ {
         .name = "quality",
         .dataTypeSpecific.clazz = GPBObjCClass(Quality),
         .number = ImageFetchInfo_FieldNumber_Quality,
-        .hasIndex = 4,
+        .hasIndex = 8,
         .offset = (uint32_t)offsetof(ImageFetchInfo__storage_, quality),
         .flags = GPBFieldOptional,
         .dataType = GPBDataTypeMessage,
@@ -132,7 +164,7 @@ typedef struct ImageFetchInfo__storage_ {
                                          flags:(GPBDescriptorInitializationFlags)(GPBDescriptorInitializationFlag_UsesClassRefs | GPBDescriptorInitializationFlag_Proto3OptionalKnown)];
 #if !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     static const char *extraTextFormatInfo =
-        "\002\001!!!\000\002\020\000";
+        "\004\001!!!\000\002\020\000\004\t\000\006\014\000";
     [localDescriptor setupExtraTextInfo:extraTextFormatInfo];
 #endif  // !GPBOBJC_SKIP_MESSAGE_TEXTFORMAT_EXTRAS
     #if defined(DEBUG) && DEBUG
