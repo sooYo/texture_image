@@ -10,7 +10,8 @@ import 'utils/double_extension.dart';
 class TextureImagePlugin {
   static const MethodChannel _channel = const MethodChannel('texture_image');
 
-  static Future<int> createImageTexture(String url, {
+  static Future<int> createImageTexture(
+    String url, {
     required double width,
     required double height,
     String? placeholderPath,
@@ -56,7 +57,7 @@ class TextureImagePlugin {
     final cancelInfo = ImageDisposeInfo()
       ..textureId = Int64(textureId ?? -1)
       ..url = url
-      ..canBeReused = true;
+      ..canBeReused = false;
 
     return _channel.invokeMethod(
       Methods.disposeImageTexture,
@@ -68,7 +69,7 @@ class TextureImagePlugin {
     final config = ImageConfigInfo()
       ..placeholder = 'lib/assets/ic_placeholder.png'
       ..errorPlaceholder = 'lib/assets/ic_error.png'
-      ..androidAvailableMemoryPercentage = 0.3
+      ..androidAvailableMemoryPercentage = 0.1
       ..useOpenGLRendering = true
       ..backgroundColor = '0xFF880000';
 
@@ -76,5 +77,9 @@ class TextureImagePlugin {
       Methods.textureImageConfig,
       config.writeToBuffer(),
     );
+  }
+
+  static Future<void> cleanCache() async {
+    _channel.invokeListMethod(Methods.releaseImageTextureCaches);
   }
 }

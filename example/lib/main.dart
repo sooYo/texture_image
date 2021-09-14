@@ -102,6 +102,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
+          actions: [
+            IconButton(
+              onPressed: clean,
+              icon: Icon(Icons.cleaning_services_sharp),
+            )
+          ],
         ),
         // body: LayoutBuilder(
         //   builder: (context, constraint) {
@@ -138,8 +144,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           imageUrl: _images[index],
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
-                          memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
-                          memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
+                          // memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
+                          // memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
                         );
                 },
               );
@@ -172,6 +178,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         // ),
       ),
     );
+  }
+
+  void clean() {
+    TextureImagePlugin.cleanCache();
   }
 }
 
