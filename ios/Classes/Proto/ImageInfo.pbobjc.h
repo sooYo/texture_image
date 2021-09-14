@@ -221,7 +221,7 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
  * Sets the default background color of all texture image widget, once
  * the [placeholder] or [errorPlaceholder] sets to an empty path, then
  * the widget will display this color when it's loading or it encounters
- * an error. The format is "0xAARRGGBB", default is "0x000000"
+ * an error. The format is "0xAARRGGBB", default is "0xFF000000"
  **/
 @property(nonatomic, readwrite, copy, null_resettable) NSString *backgroundColor;
 
@@ -229,7 +229,7 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
  * Percentage of available memory to devote to the loader cache and
  * bitmap pool, this config item only makes sense on Android platform.
  * Range from 0.0, which means `disable`, to 1.0, which means `use
- * when it's possible`. Default value is 0.2
+ * when it's possible`. Default value is 0.1
  **/
 @property(nonatomic, readwrite) double androidAvailableMemoryPercentage;
 
@@ -244,9 +244,8 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
 @property(nonatomic, readwrite) BOOL reduceQualityInLowMemory;
 
 /**
- * Whether to use OpenGL for drawing images or not, it's suggested to
- * enable this feature because it can lead to a better render speed,
- * but currently OpenGL rendering is still a experimental feature in this plugin
+ * Whether to use OpenGL for drawing images or not, currently
+ * OpenGL rendering is still a experimental feature in this plugin
  **/
 @property(nonatomic, readwrite) BOOL useOpenGlrendering;
 

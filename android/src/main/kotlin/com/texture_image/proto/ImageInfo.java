@@ -4172,7 +4172,7 @@ public final class ImageInfo {
      * Sets the default background color of all texture image widget, once
      * the [placeholder] or [errorPlaceholder] sets to an empty path, then
      * the widget will display this color when it's loading or it encounters
-     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * an error. The format is "0xAARRGGBB", default is "0xFF000000"
      * </pre>
      *
      * <code>string backgroundColor = 3;</code>
@@ -4184,7 +4184,7 @@ public final class ImageInfo {
      * Sets the default background color of all texture image widget, once
      * the [placeholder] or [errorPlaceholder] sets to an empty path, then
      * the widget will display this color when it's loading or it encounters
-     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * an error. The format is "0xAARRGGBB", default is "0xFF000000"
      * </pre>
      *
      * <code>string backgroundColor = 3;</code>
@@ -4198,7 +4198,7 @@ public final class ImageInfo {
      * Percentage of available memory to devote to the loader cache and
      * bitmap pool, this config item only makes sense on Android platform.
      * Range from 0.0, which means `disable`, to 1.0, which means `use
-     * when it's possible`. Default value is 0.2
+     * when it's possible`. Default value is 0.1
      * </pre>
      *
      * <code>double androidAvailableMemoryPercentage = 4;</code>
@@ -4223,9 +4223,8 @@ public final class ImageInfo {
 
     /**
      * <pre>
-     * Whether to use OpenGL for drawing images or not, it's suggested to
-     * enable this feature because it can lead to a better render speed,
-     * but currently OpenGL rendering is still a experimental feature in this plugin
+     * Whether to use OpenGL for drawing images or not, currently
+     * OpenGL rendering is still a experimental feature in this plugin
      * </pre>
      *
      * <code>bool useOpenGLRendering = 6;</code>
@@ -4457,7 +4456,7 @@ public final class ImageInfo {
      * Sets the default background color of all texture image widget, once
      * the [placeholder] or [errorPlaceholder] sets to an empty path, then
      * the widget will display this color when it's loading or it encounters
-     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * an error. The format is "0xAARRGGBB", default is "0xFF000000"
      * </pre>
      *
      * <code>string backgroundColor = 3;</code>
@@ -4481,7 +4480,7 @@ public final class ImageInfo {
      * Sets the default background color of all texture image widget, once
      * the [placeholder] or [errorPlaceholder] sets to an empty path, then
      * the widget will display this color when it's loading or it encounters
-     * an error. The format is "0xAARRGGBB", default is "0x000000"
+     * an error. The format is "0xAARRGGBB", default is "0xFF000000"
      * </pre>
      *
      * <code>string backgroundColor = 3;</code>
@@ -4509,7 +4508,7 @@ public final class ImageInfo {
      * Percentage of available memory to devote to the loader cache and
      * bitmap pool, this config item only makes sense on Android platform.
      * Range from 0.0, which means `disable`, to 1.0, which means `use
-     * when it's possible`. Default value is 0.2
+     * when it's possible`. Default value is 0.1
      * </pre>
      *
      * <code>double androidAvailableMemoryPercentage = 4;</code>
@@ -4544,9 +4543,8 @@ public final class ImageInfo {
     private boolean useOpenGLRendering_;
     /**
      * <pre>
-     * Whether to use OpenGL for drawing images or not, it's suggested to
-     * enable this feature because it can lead to a better render speed,
-     * but currently OpenGL rendering is still a experimental feature in this plugin
+     * Whether to use OpenGL for drawing images or not, currently
+     * OpenGL rendering is still a experimental feature in this plugin
      * </pre>
      *
      * <code>bool useOpenGLRendering = 6;</code>
@@ -5170,7 +5168,7 @@ public final class ImageInfo {
        * Sets the default background color of all texture image widget, once
        * the [placeholder] or [errorPlaceholder] sets to an empty path, then
        * the widget will display this color when it's loading or it encounters
-       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * an error. The format is "0xAARRGGBB", default is "0xFF000000"
        * </pre>
        *
        * <code>string backgroundColor = 3;</code>
@@ -5193,7 +5191,7 @@ public final class ImageInfo {
        * Sets the default background color of all texture image widget, once
        * the [placeholder] or [errorPlaceholder] sets to an empty path, then
        * the widget will display this color when it's loading or it encounters
-       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * an error. The format is "0xAARRGGBB", default is "0xFF000000"
        * </pre>
        *
        * <code>string backgroundColor = 3;</code>
@@ -5217,7 +5215,7 @@ public final class ImageInfo {
        * Sets the default background color of all texture image widget, once
        * the [placeholder] or [errorPlaceholder] sets to an empty path, then
        * the widget will display this color when it's loading or it encounters
-       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * an error. The format is "0xAARRGGBB", default is "0xFF000000"
        * </pre>
        *
        * <code>string backgroundColor = 3;</code>
@@ -5239,7 +5237,7 @@ public final class ImageInfo {
        * Sets the default background color of all texture image widget, once
        * the [placeholder] or [errorPlaceholder] sets to an empty path, then
        * the widget will display this color when it's loading or it encounters
-       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * an error. The format is "0xAARRGGBB", default is "0xFF000000"
        * </pre>
        *
        * <code>string backgroundColor = 3;</code>
@@ -5256,7 +5254,7 @@ public final class ImageInfo {
        * Sets the default background color of all texture image widget, once
        * the [placeholder] or [errorPlaceholder] sets to an empty path, then
        * the widget will display this color when it's loading or it encounters
-       * an error. The format is "0xAARRGGBB", default is "0x000000"
+       * an error. The format is "0xAARRGGBB", default is "0xFF000000"
        * </pre>
        *
        * <code>string backgroundColor = 3;</code>
@@ -5281,7 +5279,7 @@ public final class ImageInfo {
        * Percentage of available memory to devote to the loader cache and
        * bitmap pool, this config item only makes sense on Android platform.
        * Range from 0.0, which means `disable`, to 1.0, which means `use
-       * when it's possible`. Default value is 0.2
+       * when it's possible`. Default value is 0.1
        * </pre>
        *
        * <code>double androidAvailableMemoryPercentage = 4;</code>
@@ -5296,7 +5294,7 @@ public final class ImageInfo {
        * Percentage of available memory to devote to the loader cache and
        * bitmap pool, this config item only makes sense on Android platform.
        * Range from 0.0, which means `disable`, to 1.0, which means `use
-       * when it's possible`. Default value is 0.2
+       * when it's possible`. Default value is 0.1
        * </pre>
        *
        * <code>double androidAvailableMemoryPercentage = 4;</code>
@@ -5314,7 +5312,7 @@ public final class ImageInfo {
        * Percentage of available memory to devote to the loader cache and
        * bitmap pool, this config item only makes sense on Android platform.
        * Range from 0.0, which means `disable`, to 1.0, which means `use
-       * when it's possible`. Default value is 0.2
+       * when it's possible`. Default value is 0.1
        * </pre>
        *
        * <code>double androidAvailableMemoryPercentage = 4;</code>
@@ -5388,9 +5386,8 @@ public final class ImageInfo {
       private boolean useOpenGLRendering_ ;
       /**
        * <pre>
-       * Whether to use OpenGL for drawing images or not, it's suggested to
-       * enable this feature because it can lead to a better render speed,
-       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * Whether to use OpenGL for drawing images or not, currently
+       * OpenGL rendering is still a experimental feature in this plugin
        * </pre>
        *
        * <code>bool useOpenGLRendering = 6;</code>
@@ -5402,9 +5399,8 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * Whether to use OpenGL for drawing images or not, it's suggested to
-       * enable this feature because it can lead to a better render speed,
-       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * Whether to use OpenGL for drawing images or not, currently
+       * OpenGL rendering is still a experimental feature in this plugin
        * </pre>
        *
        * <code>bool useOpenGLRendering = 6;</code>
@@ -5419,9 +5415,8 @@ public final class ImageInfo {
       }
       /**
        * <pre>
-       * Whether to use OpenGL for drawing images or not, it's suggested to
-       * enable this feature because it can lead to a better render speed,
-       * but currently OpenGL rendering is still a experimental feature in this plugin
+       * Whether to use OpenGL for drawing images or not, currently
+       * OpenGL rendering is still a experimental feature in this plugin
        * </pre>
        *
        * <code>bool useOpenGLRendering = 6;</code>

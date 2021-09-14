@@ -83,7 +83,7 @@ message ImageConfigInfo {
   // Sets the default background color of all texture image widget, once
   // the [placeholder] or [errorPlaceholder] sets to an empty path, then
   // the widget will display this color when it's loading or it encounters
-  // an error. The format is "0xAARRGGBB", default is "0x00000000"
+  // an error. The format is "0xAARRGGBB", default is "0xFF000000"
   string backgroundColor = 3;
 
   // Percentage of available memory to devote to the loader cache and
@@ -100,9 +100,8 @@ message ImageConfigInfo {
   // keep this feature disallowed if it's not a must
   bool reduceQualityInLowMemory = 5;
 
-  // Whether to use OpenGL for drawing images or not, it's suggested to
-  // enable this feature because it can lead to a better render speed,
-  // but currently OpenGL rendering is still a experimental feature in this plugin
+  // Whether to use OpenGL for drawing images or not, currently
+  // OpenGL rendering is still a experimental feature in this plugin
   bool useOpenGLRendering = 6;
 }
 

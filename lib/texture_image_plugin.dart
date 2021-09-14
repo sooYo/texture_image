@@ -71,7 +71,7 @@ class TextureImagePlugin {
       ..errorPlaceholder = 'lib/assets/ic_error.png'
       ..androidAvailableMemoryPercentage = 0.1
       ..useOpenGLRendering = false
-      ..backgroundColor = '0xFF880000';
+      ..backgroundColor = '0xFF000000';
 
     return _channel.invokeMethod(
       Methods.textureImageConfig,
