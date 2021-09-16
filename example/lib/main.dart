@@ -137,6 +137,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
                           placeholderPath: 'lib/assets/ic_placeholder.png',
+                          // maskColor: Colors.transparent,
                           // autoDownscale: false,
                           // quality: 10,
                           // borderRadius: BorderRadius.all(Radius.circular(50)),

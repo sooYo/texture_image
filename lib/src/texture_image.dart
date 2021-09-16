@@ -136,6 +136,12 @@ class TextureImage extends StatefulWidget {
 class _ImageState extends State<TextureImage> {
   int? _textureId;
 
+  /// With a solid mask, the image content is invisible at all
+  bool get _isSolidMask => widget.maskColor.alpha == 255;
+
+  /// An invisible mask can be removed from the view hierarchy
+  bool get _isVisibleMask => widget.maskColor.alpha != 0;
+
   @override
   void initState() {
     super.initState();
@@ -150,22 +156,36 @@ class _ImageState extends State<TextureImage> {
 
   @override
   Widget build(BuildContext context) {
+    final mask = Container(
+      width: widget.width,
+      height: widget.height,
+      color: widget.maskColor,
+    );
+
+    if (_isSolidMask) {
+      return mask;
+    }
+
     final content = _textureId != null && _textureId! >= 0
         ? Texture(textureId: _textureId!)
-        : (widget.placeholder ??
-            Container(
-              height: widget.height,
-              width: widget.width,
-            ));
+        : Container();
 
-    return Container(
+    final image = Container(
       width: widget.width,
       height: widget.height,
       child: content,
     );
+
+    return _isVisibleMask ? Stack(children: [image, mask]) : image;
   }
 
   void _loadImage() async {
+    if (_isSolidMask) {
+      // Mask color cover the image and is fully opaque
+      // thus is unnecessary to draw the image itself
+      return;
+    }
+
     final textureId = await $ti.TextureImagePlugin.createImageTexture(
       widget.url,
       width: widget.width,
@@ -193,6 +213,10 @@ class _ImageState extends State<TextureImage> {
   }
 
   void _disposeImage() async {
+    if (_isSolidMask) {
+      return;
+    }
+
     $ti.TextureImagePlugin.destroyImageTexture(
       _textureId,
       widget.url,
