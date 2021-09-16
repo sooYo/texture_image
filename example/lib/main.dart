@@ -92,13 +92,15 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    $ti.TextureImagePlugin.updateConfig();
+    $ti.TextureImagePlugin.addParameterTransformers([]);
+    $ti.TextureImagePlugin.updateConfig(backgroundColor: '0x00000000');
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.blueGrey,
         appBar: AppBar(
           title: const Text('Plugin example app'),
           actions: [
@@ -130,6 +132,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             itemBuilder: (context, index) {
               return LayoutBuilder(
                 builder: (context, constraint) {
+                  print(MediaQuery.of(context).devicePixelRatio);
+
                   return useTextureImage
                       ? $ti.TextureImage(
                           _images[index],
@@ -137,10 +141,10 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
                           placeholderPath: 'lib/assets/ic_placeholder.png',
-                          // maskColor: Colors.transparent,
+                          // maskColor: Colors.black87,
                           // autoDownscale: false,
                           // quality: 10,
-                          // borderRadius: BorderRadius.all(Radius.circular(50)),
+                          borderRadius: BorderRadius.all(Radius.circular(50)),
                           // blur: 20,
                           // blurSampling: 1.2,
                           // grayScale: true,

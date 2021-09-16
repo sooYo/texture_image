@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import '../../proto/pb_header.dart';
+import '../../utils/double_extension.dart';
 import '../param_transformer.dart';
 
 /// Qiniu parameter converter
@@ -40,7 +41,7 @@ extension _QiniuUrlHandler on ImageFetchInfo {
       return this;
     }
 
-    final append = url.contains(r'(?:imageMogr2|roundPic|');
+    final append = url.contains(RegExp(r'\b(imageMogr2|roundPic)\b'));
     return this..url += '${append ? '|' : '?'}$api';
   }
 
@@ -51,15 +52,19 @@ extension _QiniuUrlHandler on ImageFetchInfo {
       ._convertBlurParams();
 
   ImageFetchInfo _convertSizeParams(double devicePixelRatio) {
-    final pixelWidth = geometry.width * devicePixelRatio;
-    final pixelHeight = geometry.height * devicePixelRatio;
+    final pixelWidth = (geometry.width * devicePixelRatio).evenSize;
+    final pixelHeight = (geometry.height * devicePixelRatio).evenSize;
     final sizeQuery = '/thumbnail/${pixelWidth}x$pixelHeight';
 
     return this..url += sizeQuery;
   }
 
   ImageFetchInfo _convertBlurParams() {
-    final blur = max(1, min(this.blur, 50));
+    final blur = max(0, min(this.blur, 50));
+    if (blur == 0) {
+      return this;
+    }
+
     this.blur = 0; // Skip native proceeding
     return this..url += '/blur/${blur}x$blur';
   }
@@ -69,7 +74,7 @@ extension _QiniuUrlHandler on ImageFetchInfo {
   // region RoundPic Command
   ImageFetchInfo applyRoundPicProceedCommand(double devicePixelRatio) {
     // Qiniu cannot hanlde unequal radius
-    if (geometry.borderRadius.isRegular) {
+    if (!geometry.borderRadius.isRegular) {
       return this;
     }
 
@@ -79,11 +84,9 @@ extension _QiniuUrlHandler on ImageFetchInfo {
   }
 
   ImageFetchInfo _convertBorderRadiusParams(double devicePixelRatio) {
-    // Skip native proceed
-    geometry.borderRadius = BorderRadius();
-
     final radius = geometry.borderRadius.topLeft * devicePixelRatio;
-    return this..url += '/roundPic/radius/$radius';
+    geometry.borderRadius = BorderRadius(); // Skip native proceed
+    return this..url += '/radius/$radius';
   }
 
 // endRegion RoundPic Command

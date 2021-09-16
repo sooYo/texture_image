@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:texture_image/src/texture_image_plugin.dart' as $ti;
+import 'package:texture_image/texture_image.dart' as $ti;
 
 /// Image widget using [Texture] to display images
 ///
@@ -159,7 +159,10 @@ class _ImageState extends State<TextureImage> {
     final mask = Container(
       width: widget.width,
       height: widget.height,
-      color: widget.maskColor,
+      decoration: BoxDecoration(
+        borderRadius: widget.borderRadius,
+        color: widget.maskColor,
+      ),
     );
 
     if (_isSolidMask) {

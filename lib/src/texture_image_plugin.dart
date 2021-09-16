@@ -11,7 +11,7 @@ import 'utils/double_extension.dart';
 
 class TextureImagePlugin {
   static const _channel = const MethodChannel('texture_image');
-  static final _paramTransformers = <ParamTransformerImpl>[];
+  static final _transforms = <ParamTransformerImpl>[];
   static final _defConfig = $pb.ImageConfigInfo()
     ..useOpenGLRendering = false
     ..reduceQualityInLowMemory = true
@@ -21,12 +21,20 @@ class TextureImagePlugin {
     ..errorPlaceholder = 'lib/assets/ic_error.png';
 
   // region Param Transforms
-  void addParameterTransformers(List<ParamTransformerImpl> transformers) {
-    _paramTransformers.clear();
-    _paramTransformers.addAll(transformers);
+  static void addParameterTransformers(
+    List<ParamTransformerImpl> transformers,
+  ) {
+    _transforms.clear();
+    _transforms.addAll(transformers);
 
     // Preset transformers
-    _paramTransformers.add(ParamTransformerChainGuard());
+    _transforms.add(QiniuParamTransformer(3.0));
+    _transforms.add(ParamTransformerChainGuard());
+
+    assert(
+      _transforms.last is ParamTransformerChainGuard,
+      'Use ParamTransformerChainGuard to ensure stopable looping',
+    );
   }
 
   // endregion Param Transforms
@@ -162,7 +170,7 @@ class TextureImagePlugin {
     final transformChain = ParamTransformerChain(
       index: 0,
       fetchInfo: rawInfo,
-      transformers: _paramTransformers,
+      transformers: _transforms,
     );
 
     return transformChain.proceed(rawInfo);

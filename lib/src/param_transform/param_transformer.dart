@@ -1,6 +1,7 @@
 import 'package:texture_image/src/proto/pb_header.dart';
 
 export 'transfromers/guard_transformer.dart';
+export 'transfromers/qiniu_transformer.dart';
 
 class ParamTransformerChain {
   ParamTransformerChain({
