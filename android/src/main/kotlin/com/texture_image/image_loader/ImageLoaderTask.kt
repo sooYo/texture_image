@@ -180,18 +180,13 @@ class ImageLoaderTask(
 
     private fun coilRequest(): ImageRequest {
         // Collect transformations as much as possible
-        val transform = ArrayList<Transformation>()
-        val shapeTransform = imageInfo.geometry.parseCoilShapeTransform()
-        if (shapeTransform != null) {
-            transform.add(shapeTransform)
-        }
-
+        val transforms = imageInfo.parseCoilTransformations(context)
         val builder = ImageRequest
             .Builder(context)
             .target(this)
             .data(imageInfo.url)
             .size(imagePixelSize)
-            .transformations(transform)
+            .transformations(transforms)
             .allowRgb565(!imageInfo.geometry.supportAlpha)
             .diskCachePolicy(cachePolicy.coilDiskCache)
             .memoryCachePolicy(cachePolicy.coilMemCache)

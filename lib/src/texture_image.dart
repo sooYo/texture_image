@@ -174,6 +174,7 @@ class _ImageState extends State<TextureImage> {
       blur: widget.blur,
       quality: widget.quality,
       grayScale: widget.grayScale,
+      borderRadius: widget.borderRadius,
       blurSampling: widget.blurSampling,
       autoDownscale: widget.autoDownscale,
       placeholderPath: widget.placeholderPath,

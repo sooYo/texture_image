@@ -2,6 +2,9 @@ package com.texture_image.extensions
 
 import android.content.Context
 import coil.size.PixelSize
+import coil.transform.BlurTransformation
+import coil.transform.GrayscaleTransformation
+import coil.transform.Transformation
 import com.texture_image.constants.Quality
 import com.texture_image.proto.ImageInfo
 import kotlin.math.roundToInt
@@ -40,6 +43,26 @@ fun ImageInfo.ImageFetchInfo.pixelSize(context: Context): PixelSize {
 
         PixelSize(oddWidth, oddHeight)
     }
+}
+
+fun ImageInfo.ImageFetchInfo.parseCoilTransformations(context: Context): List<Transformation> {
+    val transforms = mutableListOf<Transformation>()
+    val shapeTransform = geometry.parseCoilShapeTransform()
+    if (shapeTransform != null) {
+        transforms.add(shapeTransform)
+    }
+
+    if (blur > 0) {
+        val coilBlur = blur * 0.5f
+        val blurTransform = BlurTransformation(context, coilBlur, blurSampling)
+        transforms.add(blurTransform)
+    }
+
+    if (grayScale) {
+        transforms.add(GrayscaleTransformation())
+    }
+
+    return transforms
 }
 
 val ImageInfo.ImageFetchInfo.compressionQuality: Int

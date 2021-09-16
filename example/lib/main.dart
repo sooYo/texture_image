@@ -137,6 +137,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
                           placeholderPath: 'lib/assets/ic_placeholder.png',
+                          // autoDownscale: false,
+                          // quality: 10,
+                          // borderRadius: BorderRadius.all(Radius.circular(50)),
+                          // blur: 20,
+                          // blurSampling: 1.2,
+                          // grayScale: true,
                           // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
                         )
                       : CachedNetworkImage(
