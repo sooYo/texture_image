@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
-import 'package:texture_image/texture_image_plugin.dart';
 import 'package:texture_image_example/util.dart';
 
 void main() {
@@ -93,7 +92,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    TextureImagePlugin.updateConfig();
+    $ti.TextureImagePlugin.updateConfig();
   }
 
   @override
@@ -136,7 +135,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                           _images[index],
                           width: constraint.maxWidth,
                           height: constraint.maxHeight,
-                          fit: $ti.BoxFit.cover,
+                          fit: BoxFit.cover,
                           placeholderPath: 'lib/assets/ic_placeholder.png',
                           // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
                         )
@@ -181,7 +180,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   }
 
   void clean() {
-    TextureImagePlugin.cleanCache();
+    $ti.TextureImagePlugin.cleanCache();
   }
 }
 

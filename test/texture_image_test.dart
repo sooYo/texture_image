@@ -1,6 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:texture_image/texture_image_plugin.dart';
+import 'package:texture_image/src/texture_image_plugin.dart';
 
 void main() {
   const MethodChannel channel = MethodChannel('texture_image');
