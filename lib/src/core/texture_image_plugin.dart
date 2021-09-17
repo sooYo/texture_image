@@ -4,10 +4,10 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import 'constants/methods.dart';
-import 'param_transform/param_transformer.dart';
-import 'proto/pb_header.dart' as $pb;
-import 'utils/double_extension.dart';
+import '../constants/methods.dart';
+import '../param_transform/param_transformer.dart';
+import '../proto/pb_header.dart' as $pb;
+import '../utils/double_extension.dart';
 
 class TextureImagePlugin {
   static const _channel = MethodChannel('texture_image');
