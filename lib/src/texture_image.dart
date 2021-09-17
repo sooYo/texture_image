@@ -21,11 +21,11 @@ import 'package:texture_image/texture_image.dart' as $ti;
 ///
 /// Reusing logic is decided by [reuseAfterDispose], this will allow the backend
 /// data buffer to be reused for saving buffer creation cost
-class TextureImage extends StatefulWidget {
+class TextureImage extends StatelessWidget {
   TextureImage(
     this.url, {
-    required this.width,
-    required this.height,
+    this.width,
+    this.height,
     this.placeholder,
     this.placeholderPath,
     this.errorPlaceholder,
@@ -44,8 +44,8 @@ class TextureImage extends StatefulWidget {
   });
 
   final String url;
-  final double width;
-  final double height;
+  final double? width;
+  final double? height;
 
   final BoxFit fit;
   final BorderRadius borderRadius;
@@ -130,10 +130,107 @@ class TextureImage extends StatefulWidget {
   final bool reuseAfterDispose;
 
   @override
+  Widget build(BuildContext context) {
+    if (width != null && height != null) {
+      return _TextureImage(
+        url,
+        fit: fit,
+        blur: blur,
+        width: width!,
+        height: height!,
+        quality: quality,
+        maskColor: maskColor,
+        borderRadius: borderRadius,
+        grayScale: grayScale,
+        blurSampling: blurSampling,
+        autoDownscale: autoDownscale,
+        reuseAfterDispose: reuseAfterDispose,
+        downscaleTriggerSize: downscaleTriggerSize,
+        ignorableAlphaChannel: ignorableAlphaChannel,
+        placeholder: placeholder,
+        placeholderPath: placeholderPath,
+        errorPlaceholder: errorPlaceholder,
+        errorPlaceholderPath: errorPlaceholderPath,
+      );
+    }
+
+    return LayoutBuilder(
+      builder: (context, constraints) => _TextureImage(
+        url,
+        fit: fit,
+        blur: blur,
+        width: constraints.maxWidth,
+        height: constraints.maxHeight,
+        quality: quality,
+        maskColor: maskColor,
+        borderRadius: borderRadius,
+        grayScale: grayScale,
+        blurSampling: blurSampling,
+        autoDownscale: autoDownscale,
+        reuseAfterDispose: reuseAfterDispose,
+        downscaleTriggerSize: downscaleTriggerSize,
+        ignorableAlphaChannel: ignorableAlphaChannel,
+        placeholder: placeholder,
+        placeholderPath: placeholderPath,
+        errorPlaceholder: errorPlaceholder,
+        errorPlaceholderPath: errorPlaceholderPath,
+      ),
+    );
+  }
+}
+
+class _TextureImage extends StatefulWidget {
+  _TextureImage(
+    this.url, {
+    required this.fit,
+    required this.blur,
+    required this.width,
+    required this.height,
+    required this.quality,
+    required this.maskColor,
+    required this.borderRadius,
+    required this.grayScale,
+    required this.blurSampling,
+    required this.autoDownscale,
+    required this.reuseAfterDispose,
+    required this.downscaleTriggerSize,
+    required this.ignorableAlphaChannel,
+    this.placeholder,
+    this.placeholderPath,
+    this.errorPlaceholder,
+    this.errorPlaceholderPath,
+  });
+
+  final String url;
+
+  final double width;
+  final double height;
+  final double blurSampling;
+
+  final BoxFit fit;
+  final Color maskColor;
+  final BorderRadius borderRadius;
+
+  final Widget? placeholder;
+  final String? placeholderPath;
+
+  final Widget? errorPlaceholder;
+  final String? errorPlaceholderPath;
+
+  final bool grayScale;
+  final bool autoDownscale;
+  final bool reuseAfterDispose;
+  final bool ignorableAlphaChannel;
+
+  final int blur;
+  final int quality;
+  final int downscaleTriggerSize;
+
+  @override
   State<StatefulWidget> createState() => _ImageState();
 }
 
-class _ImageState extends State<TextureImage> {
+class _ImageState extends State<_TextureImage> {
   int? _textureId;
 
   /// With a solid mask, the image content is invisible at all

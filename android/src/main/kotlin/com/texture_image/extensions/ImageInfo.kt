@@ -15,17 +15,17 @@ fun ImageInfo.ImageFetchInfo.pixelSize(context: Context): PixelSize {
     val width = (geometry.width * reduceFactor).roundToInt()
     val height = (geometry.height * reduceFactor).roundToInt()
 
-    val oddWidth = when (width % 2 == 0) {
+    val evenWidth = when (width % 2 == 0) {
         true -> width
         else -> width + 1
     }
 
-    val oddHeight = when (height % 2 == 0) {
+    val evenHeight = when (height % 2 == 0) {
         true -> height
         else -> height + 1
     }
 
-    return PixelSize(oddWidth, oddHeight)
+    return PixelSize(evenWidth, evenHeight)
 }
 
 fun ImageInfo.ImageFetchInfo.parseCoilTransformations(context: Context): List<Transformation> {

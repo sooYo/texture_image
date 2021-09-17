@@ -130,35 +130,34 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
             ),
             itemCount: _images.length,
             itemBuilder: (context, index) {
-              return LayoutBuilder(
-                builder: (context, constraint) {
-                  print(MediaQuery.of(context).devicePixelRatio);
-
-                  return useTextureImage
-                      ? $ti.TextureImage(
-                          _images[index],
-                          width: constraint.maxWidth,
-                          height: constraint.maxHeight,
-                          fit: BoxFit.cover,
-                          placeholderPath: 'lib/assets/ic_placeholder.png',
-                          // maskColor: Colors.black87,
-                          // autoDownscale: false,
-                          // quality: 10,
-                          borderRadius: BorderRadius.all(Radius.circular(50)),
-                          // blur: 20,
-                          // blurSampling: 1.2,
-                          // grayScale: true,
-                          // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
-                        )
-                      : CachedNetworkImage(
+              return useTextureImage
+                  ? $ti.TextureImage(
+                      _images[index],
+                      // width: constraint.maxWidth,
+                      // height: constraint.maxHeight,
+                      fit: BoxFit.cover,
+                      placeholderPath: 'lib/assets/ic_placeholder.png',
+                      // maskColor: Colors.black87,
+                      // autoDownscale: false,
+                      // quality: 10,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      // blur: 20,
+                      // blurSampling: 1.2,
+                      // grayScale: true,
+                      // errorPlaceholderPath: 'lib/assets/ic_error_1.png',
+                    )
+                  : LayoutBuilder(
+                      builder: (context, constraint) {
+                        print(MediaQuery.of(context).devicePixelRatio);
+                        return CachedNetworkImage(
                           imageUrl: _images[index],
                           height: constraint.maxHeight,
                           fit: BoxFit.cover,
                           memCacheWidth: pt(constraint.maxWidth).toInt() + 50,
                           memCacheHeight: pt(constraint.maxHeight).toInt() + 50,
                         );
-                },
-              );
+                      },
+                    );
             },
           ),
         ),
