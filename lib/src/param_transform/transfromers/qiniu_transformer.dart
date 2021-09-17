@@ -6,10 +6,10 @@ import '../param_transformer.dart';
 
 /// Qiniu parameter converter
 ///
-/// Using qiniu imageMogr2 API to achieve image transformation
-/// If the image url starts with a legal host, then some of the
-/// fetching parameters will be converted into URL queries, and
-/// reset the ImageFetchInfo to reduce native side work
+/// Using qiniu imageMogr2 API or others to achieve image transformation
+/// If the image url starts with a legal host, then some of the fetching
+/// parameters will be converted into URL queries, and reset the
+/// ImageFetchInfo to reduce native side work
 class QiniuParamTransformer with ParamTransformerImpl {
   QiniuParamTransformer(this.devicePixelRatio);
 

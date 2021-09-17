@@ -1,0 +1,11 @@
+include: package:pedantic/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - lib/src/proto/**
+
+linter:
+  rules:
+    prefer_single_quotes: false
+    sort_child_properties_last: false
+    unnecessary_this: false

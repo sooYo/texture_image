@@ -10,7 +10,7 @@ import 'proto/pb_header.dart' as $pb;
 import 'utils/double_extension.dart';
 
 class TextureImagePlugin {
-  static const _channel = const MethodChannel('texture_image');
+  static const _channel = MethodChannel('texture_image');
   static final _transforms = <ParamTransformerImpl>[];
   static final _defConfig = $pb.ImageConfigInfo()
     ..useOpenGLRendering = false
@@ -122,8 +122,8 @@ class TextureImagePlugin {
     );
   }
 
-  static Future<void> cleanCache() async {
-    _channel.invokeListMethod(Methods.releaseImageTextureCaches);
+  static Future<void> cleanCache() {
+    return _channel.invokeListMethod(Methods.releaseImageTextureCaches);
   }
 
   // endregion Channel Methods

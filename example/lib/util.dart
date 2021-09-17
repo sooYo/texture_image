@@ -11,13 +11,13 @@ class ResolutionUtils {
   }
 
   static ResolutionUtils get instance => _instance;
-  static ResolutionUtils _instance = ResolutionUtils._();
+  static final ResolutionUtils _instance = ResolutionUtils._();
 
   void _setupPt() {
     if (!_hadReSetPtPerPx) {
-      MediaQueryData mediaQuery = MediaQueryData.fromWindow(window);
-      Size screenSize = mediaQuery.size;
-      double ptPerPx = screenSize.width / 375;
+      final mediaQuery = MediaQueryData.fromWindow(window);
+      final screenSize = mediaQuery.size;
+      final ptPerPx = screenSize.width / 375;
 
       if (ptPerPx > 0) {
         _ptPerPx = ptPerPx;

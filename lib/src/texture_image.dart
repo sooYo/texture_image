@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:texture_image/texture_image.dart' as $ti;
 
 /// Image widget using [Texture] to display images
@@ -134,17 +135,17 @@ class TextureImage extends StatelessWidget {
     if (width != null && height != null) {
       return _TextureImage(
         url,
-        fit: fit,
-        blur: blur,
         width: width!,
         height: height!,
+        fit: fit,
+        borderRadius: borderRadius,
         quality: quality,
         maskColor: maskColor,
-        borderRadius: borderRadius,
         grayScale: grayScale,
+        blur: blur,
         blurSampling: blurSampling,
-        autoDownscale: autoDownscale,
         reuseAfterDispose: reuseAfterDispose,
+        autoDownscale: autoDownscale,
         downscaleTriggerSize: downscaleTriggerSize,
         ignorableAlphaChannel: ignorableAlphaChannel,
         placeholder: placeholder,
@@ -317,10 +318,12 @@ class _ImageState extends State<_TextureImage> {
       return;
     }
 
-    $ti.TextureImagePlugin.destroyImageTexture(
-      _textureId,
-      widget.url,
-      canBeResused: widget.reuseAfterDispose,
+    unawaited(
+      $ti.TextureImagePlugin.destroyImageTexture(
+        _textureId,
+        widget.url,
+        canBeResused: widget.reuseAfterDispose,
+      ),
     );
   }
 }

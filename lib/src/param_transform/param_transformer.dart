@@ -5,18 +5,16 @@ export 'transfromers/qiniu_transformer.dart';
 
 class ParamTransformerChain {
   ParamTransformerChain({
-    required int index,
-    required ImageFetchInfo fetchInfo,
+    required this.index,
+    required this.fetchInfo,
     required List<ParamTransformerImpl> transformers,
-  })  : _index = index,
-        _impls = transformers,
-        _fetchInfo = fetchInfo;
+  }) {
+    _impls.addAll(transformers);
+  }
 
-  int _index = 0;
-  ImageFetchInfo _fetchInfo;
-  List<ParamTransformerImpl> _impls;
-
-  ImageFetchInfo get fetchInfo => _fetchInfo;
+  final int index;
+  final ImageFetchInfo fetchInfo;
+  final List<ParamTransformerImpl> _impls = <ParamTransformerImpl>[];
 
   ImageFetchInfo proceed(ImageFetchInfo fetchInfo) {
     if (_impls.isEmpty) {
@@ -24,17 +22,17 @@ class ParamTransformerChain {
     }
 
     final chain = ParamTransformerChain(
-      index: _index + 1,
+      index: index + 1,
       fetchInfo: fetchInfo,
       transformers: _impls,
     );
 
-    if (_index >= _impls.length) {
+    if (index >= _impls.length) {
       assert(false, 'Loop over entire list without returning a legal result');
       return fetchInfo;
     }
 
-    return _impls[_index].transform(chain);
+    return _impls[index].transform(chain);
   }
 }
 

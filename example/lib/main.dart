@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     $ti.TextureImagePlugin.addParameterTransformers([]);
-    $ti.TextureImagePlugin.updateConfig(backgroundColor: '0x00000000');
+    $ti.TextureImagePlugin.updateConfig(backgroundColor: '0xFFFFFFFF');
   }
 
   @override
