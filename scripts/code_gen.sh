@@ -145,7 +145,6 @@ function parseMethodsDefine() {
   while IFS= read -r line || [ -n "$line" ]; do
     # Trim lines and ignore comment lines
     trimmed="$(printf "%s" "$line")"
-    echo "$trimmed"
     if [[ "$trimmed" == //* || -z "$trimmed" ]]; then
       continue
     fi

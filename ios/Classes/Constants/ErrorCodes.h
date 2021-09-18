@@ -17,4 +17,7 @@ typedef NS_ENUM(NSInteger, ErrorCode) {
     // The task has been reused and previous loading mission should be cancelled
     taskHasBeenReused = 100003,
     
+    // Image widget has been disposed before it's attached fetching task completed
+    disposedBeforeHttpResponses = 100004,
+    
 };

@@ -17,4 +17,7 @@ enum class ErrorCode(val code: Int) {
     // The task has been reused and previous loading mission should be cancelled
     TASK_HAS_BEEN_REUSED(100003),
     
+    // Image widget has been disposed before it's attached fetching task completed
+    DISPOSED_BEFORE_HTTP_RESPONSES(100004),
+    
 }

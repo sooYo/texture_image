@@ -15,4 +15,7 @@ class ErrorCode {
   // The task has been reused and previous loading mission should be cancelled
   static const taskHasBeenReused = 100003;
   
+  // Image widget has been disposed before it's attached fetching task completed
+  static const disposedBeforeHttpResponses = 100004;
+  
 }
