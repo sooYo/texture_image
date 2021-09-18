@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 
-import 'texture_image_plugin.dart' as $ti;
+import '../constants/load_state.dart';
+import '../extension/image_fetch_result.dart';
+import 'texture_image_plugin.dart';
 
 class TextureImageWidget extends StatefulWidget {
   TextureImageWidget(
@@ -57,11 +59,21 @@ class TextureImageWidget extends StatefulWidget {
 class _ImageState extends State<TextureImageWidget> {
   int? _textureId;
 
+  ImageLoadState _loadingState = ImageLoadState.init;
+
   /// With a solid mask, the image content is invisible at all
   bool get _isSolidMask => widget.maskColor.alpha == 255;
 
   /// An invisible mask can be removed from the view hierarchy
   bool get _isVisibleMask => widget.maskColor.alpha != 0;
+
+  /// State to control animation
+  CrossFadeState get _crossFadeState => _loadingState == ImageLoadState.init
+      ? CrossFadeState.showFirst
+      : CrossFadeState.showSecond;
+
+  /// Whether the image loading completed successfuly
+  bool get _imageLoaded => _loadingState == ImageLoadState.success;
 
   @override
   void initState() {
@@ -77,7 +89,8 @@ class _ImageState extends State<TextureImageWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final mask = Container(
+    // The color mask lay above the image content
+    final colorMask = Container(
       width: widget.width,
       height: widget.height,
       decoration: BoxDecoration(
@@ -87,20 +100,46 @@ class _ImageState extends State<TextureImageWidget> {
     );
 
     if (_isSolidMask) {
-      return mask;
+      // A solid mask will not have any animated effect
+      return colorMask;
     }
 
-    final content = _textureId != null && _textureId! >= 0
-        ? Texture(textureId: _textureId!)
-        : Container();
+    // Placeholder comes into view at first
+    final placeholder = widget.placeholder ??
+        Image.asset(
+          widget.placeholderPath ?? '',
+          width: widget.width,
+          height: widget.height,
+          fit: BoxFit.cover,
+        );
 
-    final image = Container(
+    // Widget to show when image loading failed
+    final errorWidget = widget.errorPlaceholder ??
+        Image.asset(
+          widget.errorPlaceholderPath ?? '',
+          width: widget.width,
+          height: widget.height,
+          fit: BoxFit.cover,
+        );
+
+    final imageContent = Container(
       width: widget.width,
       height: widget.height,
-      child: content,
+      child: _textureId != null && _textureId! >= 0
+          ? Texture(textureId: _textureId!)
+          : Container(),
     );
 
-    return _isVisibleMask ? Stack(children: [image, mask]) : image;
+    final image = _isVisibleMask
+        ? Stack(children: [imageContent, colorMask])
+        : imageContent;
+
+    return AnimatedCrossFade(
+      firstChild: placeholder,
+      secondChild: _imageLoaded ? image : errorWidget,
+      crossFadeState: _crossFadeState,
+      duration: Duration(milliseconds: 500),
+    );
   }
 
   void _loadImage() async {
@@ -110,7 +149,7 @@ class _ImageState extends State<TextureImageWidget> {
       return;
     }
 
-    final textureId = await $ti.TextureImagePlugin.createImageTexture(
+    final fetchResult = await TextureImagePlugin.createImageTexture(
       widget.url,
       width: widget.width,
       height: widget.height,
@@ -132,7 +171,8 @@ class _ImageState extends State<TextureImageWidget> {
     }
 
     setState(() {
-      _textureId = textureId;
+      _loadingState = fetchResult.loadState;
+      _textureId = fetchResult.textureId.toInt();
     });
   }
 
@@ -142,7 +182,7 @@ class _ImageState extends State<TextureImageWidget> {
     }
 
     unawaited(
-      $ti.TextureImagePlugin.destroyImageTexture(
+      TextureImagePlugin.destroyImageTexture(
         _textureId,
         widget.url,
         canBeResused: widget.reuseAfterDispose,

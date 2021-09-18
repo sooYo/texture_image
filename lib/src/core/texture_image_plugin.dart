@@ -4,21 +4,20 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../constants/error_codes.dart';
 import '../constants/methods.dart';
+import '../extension/image_config.dart';
+import '../extension/material.dart';
 import '../param_transform/param_transformer.dart';
 import '../proto/pb_header.dart' as $pb;
+import '../proxy/log_proxy.dart';
 import '../utils/double_extension.dart';
 
 class TextureImagePlugin {
+  static const TAG = 'TextureImage';
+
   static const _channel = MethodChannel('texture_image');
   static final _transforms = <ParamTransformerImpl>[];
-  static final _defConfig = $pb.ImageConfigInfo()
-    ..useOpenGLRendering = false
-    ..reduceQualityInLowMemory = true
-    ..backgroundColor = '0xFF000000'
-    ..androidAvailableMemoryPercentage = 0.1
-    ..placeholder = 'lib/assets/ic_placeholder.png'
-    ..errorPlaceholder = 'lib/assets/ic_error.png';
 
   // region Param Transforms
   static void addParameterTransformers(
@@ -40,7 +39,7 @@ class TextureImagePlugin {
   // endregion Param Transforms
 
   // region Channel Methods
-  static Future<int> createImageTexture(
+  static Future<$pb.ImageFetchResultInfo> createImageTexture(
     String url, {
     required double width,
     required double height,
@@ -78,8 +77,18 @@ class TextureImagePlugin {
       imageInfo.writeToBuffer(),
     );
 
-    final result = $pb.ImageFetchResultInfo.fromBuffer(base64Data);
-    return result.textureId.toInt();
+    try {
+      return $pb.ImageFetchResultInfo.fromBuffer(base64Data);
+    } catch (e) {
+      log.e(TAG, e.toString());
+
+      return $pb.ImageFetchResultInfo()
+        ..url = url
+        ..textureId = Int64(-1)
+        ..state = $pb.TaskState.failed
+        ..code = ErrorCode.pbParseFailed
+        ..message = 'PB parsed failed on Flutter side';
+    }
   }
 
   static Future<void> destroyImageTexture(
@@ -106,15 +115,14 @@ class TextureImagePlugin {
     String? backgroundColor,
     double? cachedMemoryPercetage,
   }) async {
-    final config = $pb.ImageConfigInfo()
-      ..placeholder = placeholder ?? _defConfig.placeholder
-      ..errorPlaceholder = errorPlaceholer ?? _defConfig.errorPlaceholder
-      ..backgroundColor = backgroundColor ?? _defConfig.backgroundColor
-      ..useOpenGLRendering = useOpenGLRendering ?? _defConfig.useOpenGLRendering
-      ..reduceQualityInLowMemory =
-          compressInLowMemory ?? _defConfig.reduceQualityInLowMemory
-      ..androidAvailableMemoryPercentage =
-          cachedMemoryPercetage ?? _defConfig.androidAvailableMemoryPercentage;
+    final config = $pb.ImageConfigInfo().load(
+      placeholder: placeholder,
+      errorPlaceholer: errorPlaceholer,
+      backgroundColor: backgroundColor,
+      useOpenGLRendering: useOpenGLRendering,
+      compressInLowMemory: compressInLowMemory,
+      memoryCacheSizeSpace: cachedMemoryPercetage,
+    );
 
     return _channel.invokeMethod(
       Methods.textureImageConfig,
@@ -146,16 +154,16 @@ class TextureImagePlugin {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     final imageGeometry = $pb.Geometry()
-      ..fit = _convertBoxFit(fit)
+      ..fit = fit.pbRepresent
       ..width = width.evenSize
       ..height = height.evenSize
       ..supportAlpha = !ignorAlpha
-      ..borderRadius = _convertBorderRadius(borderRadius);
+      ..borderRadius = borderRadius.pbRepresent;
 
     final imageQulality = $pb.Quality()
+      ..quality = quality
       ..autoDownscale = autoDownscale
-      ..minimumAutoDownscaleTriggerSize = downscaleSize
-      ..quality = quality;
+      ..minimumAutoDownscaleTriggerSize = downscaleSize;
 
     final rawInfo = $pb.ImageFetchInfo()
       ..url = url
@@ -174,28 +182,6 @@ class TextureImagePlugin {
     );
 
     return transformChain.proceed(rawInfo);
-  }
-
-  static $pb.BorderRadius _convertBorderRadius(BorderRadius radius) =>
-      $pb.BorderRadius()
-        ..topLeft = radius.topLeft.x
-        ..topRight = radius.topRight.x
-        ..bottomLeft = radius.bottomLeft.x
-        ..bottomRight = radius.bottomRight.x;
-
-  static $pb.BoxFit _convertBoxFit(BoxFit fit) {
-    switch (fit) {
-      case BoxFit.contain:
-        return $pb.BoxFit.contain;
-      case BoxFit.cover:
-        return $pb.BoxFit.cover;
-      case BoxFit.fitWidth:
-        return $pb.BoxFit.fitWidth;
-      case BoxFit.fitHeight:
-        return $pb.BoxFit.fitHeight;
-      default:
-        return $pb.BoxFit.fill;
-    }
   }
 // endregion Message Building
 }
