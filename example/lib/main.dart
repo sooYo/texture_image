@@ -126,7 +126,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           behavior: TransparentOverScrollBehavior(),
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
+              crossAxisCount: 2,
             ),
             itemCount: _images.length,
             itemBuilder: (context, index) {

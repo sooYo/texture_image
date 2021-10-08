@@ -44,7 +44,7 @@ object ConfigUtil {
     ) {
         mGlobalConfig = imageConfigInfo
 
-        parsePlaceholders(context, imageConfigInfo)
+//        parsePlaceholders(context, imageConfigInfo)
         parseBackgroundFillColor(imageConfigInfo)
     }
 

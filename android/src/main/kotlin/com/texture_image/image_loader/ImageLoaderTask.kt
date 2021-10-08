@@ -211,10 +211,10 @@ class ImageLoaderTask(
             .memoryCachePolicy(cachePolicy.coilMemCache)
             .networkCachePolicy(cachePolicy.coilNetworkCache)
 
-        ConfigUtil.run {
-            assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
-            assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
-        }
+//        ConfigUtil.run {
+//            assignLoadingPlaceholder(context, imageInfo.placeholder, builder)
+//            assignErrorPlaceholder(context, imageInfo.errorPlaceholder, builder)
+//        }
 
         return builder.build()
     }

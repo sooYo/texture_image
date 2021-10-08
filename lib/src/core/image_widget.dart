@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 
+import '../constants/default_global_config.dart';
 import '../constants/load_state.dart';
 import '../extension/image_fetch_result.dart';
 import 'texture_image_plugin.dart';
@@ -106,20 +107,26 @@ class _ImageState extends State<TextureImageWidget> {
 
     // Placeholder comes into view at first
     final placeholder = widget.placeholder ??
-        Image.asset(
-          widget.placeholderPath ?? '',
-          width: widget.width,
-          height: widget.height,
-          fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: widget.borderRadius,
+          child: Image.asset(
+            widget.placeholderPath ?? DefaultConfig.placeholder,
+            width: widget.width,
+            height: widget.height,
+            fit: BoxFit.cover,
+          ),
         );
 
     // Widget to show when image loading failed
     final errorWidget = widget.errorPlaceholder ??
-        Image.asset(
-          widget.errorPlaceholderPath ?? '',
-          width: widget.width,
-          height: widget.height,
-          fit: BoxFit.cover,
+        ClipRRect(
+          borderRadius: widget.borderRadius,
+          child: Image.asset(
+            widget.errorPlaceholderPath ?? DefaultConfig.errorPlaceholder,
+            width: widget.width,
+            height: widget.height,
+            fit: BoxFit.cover,
+          ),
         );
 
     final imageContent = Container(
