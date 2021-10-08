@@ -10,7 +10,7 @@ class TaskOutline(
     val surface: Surface? = null,
     val entry: SurfaceTextureEntry? = null,
     val texture: SurfaceTexture? = null,
-    val state: TaskState = TaskState.initialized
+    val state: TaskState = TaskState.initialized,
 ) {
     companion object {
         val undefined = TaskOutline(
@@ -35,7 +35,7 @@ class TaskOutline(
 
     @Suppress("unused")
     val isCompleted: Boolean
-        get() = state == TaskState.completed
+        get() = state == TaskState.completed || state == TaskState.failed
 
     val isInitialized: Boolean get() = state == TaskState.initialized
 

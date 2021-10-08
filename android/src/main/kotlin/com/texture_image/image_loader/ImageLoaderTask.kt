@@ -11,7 +11,6 @@ import coil.request.Disposable
 import coil.request.ImageRequest
 import coil.size.PixelSize
 import coil.target.Target
-import coil.transform.Transformation
 import com.texture_image.extensions.*
 import com.texture_image.models.CachePolicy
 import com.texture_image.models.TaskOutline
@@ -23,6 +22,7 @@ import com.texture_image.render.CanvasRender
 import com.texture_image.render.OpenGLRender
 import com.texture_image.render.Renderer
 import com.texture_image.utils.*
+import io.flutter.plugin.common.MethodChannel
 import io.flutter.view.TextureRegistry
 import kotlinx.coroutines.*
 import kotlin.properties.Delegates
@@ -36,6 +36,7 @@ class ImageLoaderTask(
     private var mImageRequest: ImageRequest? = null
     private var cancelToken: Disposable? = null
     private var imageRender: Renderer? = null
+    private var callback: MethodChannel.Result? = null
 
     private lateinit var imageInfo: ImageInfo.ImageFetchInfo
 
@@ -100,6 +101,8 @@ class ImageLoaderTask(
     }
 
     fun dispose(prepareReuse: Boolean = false): TaskOutline {
+        assert(callback == null) { "Channel result should be consumed before disposed" }
+
         cancelToken?.dispose()
         mOutline.release(prepareReuse)
 
@@ -132,6 +135,22 @@ class ImageLoaderTask(
 
         return mOutline
     }
+
+    // region Channel Result
+    fun catchChannelCallback(callback: MethodChannel.Result?) {
+        if (this.callback != null) {
+            throw IllegalStateException("Consume callback before Catching another one!")
+        }
+
+        this.callback = callback
+    }
+
+    fun consumeChannelCallback(result: ByteArray) {
+        this.callback?.success(result)
+        this.callback = null
+    }
+
+    // endregion Channel Result
 
     // region Coil Target
     override fun onStart(placeholder: Drawable?) {

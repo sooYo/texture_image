@@ -45,8 +45,14 @@ class ImageLoader(
     }
 
     override fun onTaskStateUpdated(task: ImageLoaderTask) {
-        if (task.outline.isInitialized) {
-            saveToTaskMap(task)
+        with(task) {
+            if (outline.isInitialized) {
+                saveToTaskMap(this)
+            }
+
+            if (outline.isCompleted) {
+                consumeChannelCallback(ResultUtils.success(outline))
+            }
         }
     }
     // endregion Task Scheduler
@@ -75,9 +81,7 @@ class ImageLoader(
             return
         }
 
-        loadImage(imageInfo).also {
-            result.success(ResultUtils.success(it))
-        }
+        loadImage(imageInfo, result)
     }
 
     fun disposeTextureImage(
@@ -103,8 +107,8 @@ class ImageLoader(
             return
         }
 
-        destroyImage(disposeInfo).also {
-            result.success(ResultUtils.success(it))
+        destroyImage(disposeInfo)?.run {
+            result.success(ResultUtils.success(outline))
         }
     }
 
@@ -155,8 +159,9 @@ class ImageLoader(
     // region Core Methods
     private fun loadImage(
         imageInfo: ImageInfo.ImageFetchInfo,
+        result: Result,
         cachePolicy: CachePolicy = CachePolicy()
-    ): TaskOutline {
+    ): ImageLoaderTask {
 
         val task = pickTaskFromReuseMap(imageInfo) ?: ImageLoaderTask(
             context,
@@ -164,10 +169,22 @@ class ImageLoader(
             textureRegistry,
         )
 
-        return task.scheduleWith(this, imageInfo).outline
+        try {
+            task.catchChannelCallback(result)
+        } catch (e: Exception) {
+            // Task holding another callback which means this task is being reused,
+            // we need to consume that callback at first to make Flutter side function
+            // returning in an expected way, then we do hold another callback again
+            task.consumeChannelCallback(ResultUtils.archived)
+
+            // This time should be ok
+            task.catchChannelCallback(result)
+        }
+
+        return task.scheduleWith(this, imageInfo)
     }
 
-    private fun destroyImage(disposeInfo: ImageInfo.ImageDisposeInfo): TaskOutline? {
+    private fun destroyImage(disposeInfo: ImageInfo.ImageDisposeInfo): ImageLoaderTask? {
         val task: ImageLoaderTask? = try {
             with(disposeInfo) {
                 when {
@@ -180,7 +197,15 @@ class ImageLoader(
             null
         }
 
-        return task?.run {
+        // Consume channel result callback to prevent method call waiting
+        task?.consumeChannelCallback(
+            when (disposeInfo.canBeReused) {
+                true -> ResultUtils.archived
+                else -> ResultUtils.httpTooLate
+            }
+        )
+
+        return task?.apply {
             when (disposeInfo.canBeReused) {
                 true -> moveToReuseMap(this)
                 else -> removeFromTaskMap(this)

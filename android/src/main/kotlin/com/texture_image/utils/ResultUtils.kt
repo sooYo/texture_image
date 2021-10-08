@@ -7,13 +7,21 @@ import com.texture_image.proto.ImageUtils
 
 object ResultUtils {
     val ok: ByteArray
-        get() {
-            return ImageInfo.ResultInfo.newBuilder()
-                .setCode(200)
-                .setMessage("success")
-                .build()
-                .toByteArray()
-        }
+        get() = makeResult(ErrorCode.OK, "Success")
+
+    val archived: ByteArray
+        get() = makeResult(
+            ErrorCode.TASK_HAS_BEEN_REUSED,
+            "Task has been reused, current loading mission should be cancelled",
+            state = ImageUtils.TaskState.prepreReuse
+        )
+
+    val httpTooLate: ByteArray
+        get() = makeResult(
+            ErrorCode.DISPOSED_BEFORE_HTTP_RESPONSES,
+            "Task replied too late and widget is being disposed at this time",
+            state = ImageUtils.TaskState.failed
+        )
 
     private fun makeResult(
         code: ErrorCode,
@@ -22,7 +30,7 @@ object ResultUtils {
         textureId: Long? = null,
         state: ImageUtils.TaskState? = null
     ): ByteArray {
-        return ImageInfo.ImageFetchResultInfo.newBuilder()
+        return ImageInfo.ResultInfo.newBuilder()
             .setCode(code.code)
             .setMessage(message)
             .setUrl(url ?: "")
