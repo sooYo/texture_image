@@ -31,35 +31,6 @@ message ImageFetchInfo {
   Quality quality = 8;
 }
 
-message ResultInfo {
-  int32 code = 1;
-  string  message = 2;
-}
-
-// An object to describe image request API invoking result
-// Flutter side may use the [textureId] to rebuild its UI
-// when receiving the result, but the target image may not
-// be visible right now because it maybe downloading by now
-// you can check [state] for relative task's newest status
-message ImageFetchResultInfo {
-  // The result code of process, if this code's value is not 200
-  // then the [textureId] shall be invalid and error placeholder
-  // is supposed to be shown on this situation
-  int32 code = 1;
-
-  // Texture widget id for this image
-  int64 textureId = 2;
-
-  // Description for the result
-  string message = 3;
-
-  // Requesting image's url
-  string url = 4;
-
-  // Relative image fetching task's current status
-  TaskState state = 5;
-}
-
 // Request to cancel an ongoing loading task
 message ImageDisposeInfo {
   // You have to provide this property so that image loaders from
@@ -116,3 +87,27 @@ message ImageConfigInfo {
   bool useOpenGLRendering = 6;
 }
 
+// An object that describes the API invoke result.
+message ResultInfo {
+  // The result code of process, if this code's value is not 200
+  // then the [textureId] shall be invalid and error placeholder
+  // is supposed to be shown on this situation
+  int32 code = 1;
+
+  // Texture widget id for this image, this value is meaningless
+  // when invoked API is non-relative to particular image such as
+  // 'textureImageConfig' and 'enableLog'
+  int64 textureId = 2;
+
+  // Detail description
+  string message = 3;
+
+  // Requesting image's url, this value is meaningless
+  // when invoked API is non-relative to particular image.
+  string url = 4;
+
+  // Relative image fetching task's current status
+  // this value is meaningless when invoked API is
+  // non-relative to particular image.
+  TaskState state = 5;
+}

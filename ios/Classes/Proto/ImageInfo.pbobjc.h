@@ -99,73 +99,6 @@ GPB_FINAL @interface ImageFetchInfo : GPBMessage
 
 @end
 
-#pragma mark - ResultInfo
-
-typedef GPB_ENUM(ResultInfo_FieldNumber) {
-  ResultInfo_FieldNumber_Code = 1,
-  ResultInfo_FieldNumber_Message = 2,
-};
-
-GPB_FINAL @interface ResultInfo : GPBMessage
-
-@property(nonatomic, readwrite) int32_t code;
-
-@property(nonatomic, readwrite, copy, null_resettable) NSString *message;
-
-@end
-
-#pragma mark - ImageFetchResultInfo
-
-typedef GPB_ENUM(ImageFetchResultInfo_FieldNumber) {
-  ImageFetchResultInfo_FieldNumber_Code = 1,
-  ImageFetchResultInfo_FieldNumber_TextureId = 2,
-  ImageFetchResultInfo_FieldNumber_Message = 3,
-  ImageFetchResultInfo_FieldNumber_URL = 4,
-  ImageFetchResultInfo_FieldNumber_State = 5,
-};
-
-/**
- * An object to describe image request API invoking result
- * Flutter side may use the [textureId] to rebuild its UI
- * when receiving the result, but the target image may not
- * be visible right now because it maybe downloading by now
- * you can check [state] for relative task's newest status
- **/
-GPB_FINAL @interface ImageFetchResultInfo : GPBMessage
-
-/**
- * The result code of process, if this code's value is not 200
- * then the [textureId] shall be invalid and error placeholder
- * is supposed to be shown on this situation
- **/
-@property(nonatomic, readwrite) int32_t code;
-
-/** Texture widget id for this image */
-@property(nonatomic, readwrite) int64_t textureId;
-
-/** Description for the result */
-@property(nonatomic, readwrite, copy, null_resettable) NSString *message;
-
-/** Requesting image's url */
-@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
-
-/** Relative image fetching task's current status */
-@property(nonatomic, readwrite) enum TaskState state;
-
-@end
-
-/**
- * Fetches the raw value of a @c ImageFetchResultInfo's @c state property, even
- * if the value was not defined by the enum at the time the code was generated.
- **/
-int32_t ImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message);
-/**
- * Sets the raw value of an @c ImageFetchResultInfo's @c state property, allowing
- * it to be set to a value that was not defined by the enum at the time the code
- * was generated.
- **/
-void SetImageFetchResultInfo_State_RawValue(ImageFetchResultInfo *message, int32_t value);
-
 #pragma mark - ImageDisposeInfo
 
 typedef GPB_ENUM(ImageDisposeInfo_FieldNumber) {
@@ -266,6 +199,65 @@ GPB_FINAL @interface ImageConfigInfo : GPBMessage
 @property(nonatomic, readwrite) BOOL useOpenGlrendering;
 
 @end
+
+#pragma mark - ResultInfo
+
+typedef GPB_ENUM(ResultInfo_FieldNumber) {
+  ResultInfo_FieldNumber_Code = 1,
+  ResultInfo_FieldNumber_TextureId = 2,
+  ResultInfo_FieldNumber_Message = 3,
+  ResultInfo_FieldNumber_URL = 4,
+  ResultInfo_FieldNumber_State = 5,
+};
+
+/**
+ * An object that describes the API invoke result.
+ **/
+GPB_FINAL @interface ResultInfo : GPBMessage
+
+/**
+ * The result code of process, if this code's value is not 200
+ * then the [textureId] shall be invalid and error placeholder
+ * is supposed to be shown on this situation
+ **/
+@property(nonatomic, readwrite) int32_t code;
+
+/**
+ * Texture widget id for this image, this value is meaningless
+ * when invoked API is non-relative to particular image such as
+ * 'textureImageConfig' and 'enableLog'
+ **/
+@property(nonatomic, readwrite) int64_t textureId;
+
+/** Detail description */
+@property(nonatomic, readwrite, copy, null_resettable) NSString *message;
+
+/**
+ * Requesting image's url, this value is meaningless
+ * when invoked API is non-relative to particular image.
+ **/
+@property(nonatomic, readwrite, copy, null_resettable) NSString *URL;
+
+/**
+ * Relative image fetching task's current status
+ * this value is meaningless when invoked API is
+ * non-relative to particular image.
+ **/
+@property(nonatomic, readwrite) enum TaskState state;
+
+@end
+
+/**
+ * Fetches the raw value of a @c ResultInfo's @c state property, even
+ * if the value was not defined by the enum at the time the code was generated.
+ **/
+int32_t ResultInfo_State_RawValue(ResultInfo *message);
+/**
+ * Sets the raw value of an @c ResultInfo's @c state property, allowing
+ * it to be set to a value that was not defined by the enum at the time the code
+ * was generated.
+ **/
+void SetResultInfo_State_RawValue(ResultInfo *message, int32_t value);
 
 NS_ASSUME_NONNULL_END
 

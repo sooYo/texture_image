@@ -1771,1784 +1771,6 @@ public final class ImageInfo {
 
   }
 
-  public interface ResultInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ResultInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    int getCode();
-
-    /**
-     * <code>string message = 2;</code>
-     * @return The message.
-     */
-    java.lang.String getMessage();
-    /**
-     * <code>string message = 2;</code>
-     * @return The bytes for message.
-     */
-    com.google.protobuf.ByteString
-        getMessageBytes();
-  }
-  /**
-   * Protobuf type {@code ResultInfo}
-   */
-  public static final class ResultInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ResultInfo)
-      ResultInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ResultInfo.newBuilder() to construct.
-    private ResultInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ResultInfo() {
-      message_ = "";
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ResultInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ResultInfo(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              code_ = input.readInt32();
-              break;
-            }
-            case 18: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              message_ = s;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    @java.lang.Override
-    public int getCode() {
-      return code_;
-    }
-
-    public static final int MESSAGE_FIELD_NUMBER = 2;
-    private volatile java.lang.Object message_;
-    /**
-     * <code>string message = 2;</code>
-     * @return The message.
-     */
-    @java.lang.Override
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      }
-    }
-    /**
-     * <code>string message = 2;</code>
-     * @return The bytes for message.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != 0) {
-        output.writeInt32(1, code_);
-      }
-      if (!getMessageBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, message_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, code_);
-      }
-      if (!getMessageBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, message_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ResultInfo)) {
-        return super.equals(obj);
-      }
-      com.texture_image.proto.ImageInfo.ResultInfo other = (com.texture_image.proto.ImageInfo.ResultInfo) obj;
-
-      if (getCode()
-          != other.getCode()) return false;
-      if (!getMessage()
-          .equals(other.getMessage())) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getMessage().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ResultInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * Protobuf type {@code ResultInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ResultInfo)
-        com.texture_image.proto.ImageInfo.ResultInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
-      }
-
-      // Construct using com.texture_image.proto.ImageInfo.ResultInfo.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        message_ = "";
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ResultInfo build() {
-        com.texture_image.proto.ImageInfo.ResultInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ResultInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.ResultInfo result = new com.texture_image.proto.ImageInfo.ResultInfo(this);
-        result.code_ = code_;
-        result.message_ = message_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ResultInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ResultInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ResultInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance()) return this;
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        if (!other.getMessage().isEmpty()) {
-          message_ = other.message_;
-          onChanged();
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ResultInfo parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ResultInfo) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ ;
-      /**
-       * <code>int32 code = 1;</code>
-       * @return The code.
-       */
-      @java.lang.Override
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <code>int32 code = 1;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-        
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 code = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object message_ = "";
-      /**
-       * <code>string message = 2;</code>
-       * @return The message.
-       */
-      public java.lang.String getMessage() {
-        java.lang.Object ref = message_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          message_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <code>string message = 2;</code>
-       * @return The bytes for message.
-       */
-      public com.google.protobuf.ByteString
-          getMessageBytes() {
-        java.lang.Object ref = message_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          message_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <code>string message = 2;</code>
-       * @param value The message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        message_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string message = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMessage() {
-        
-        message_ = getDefaultInstance().getMessage();
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>string message = 2;</code>
-       * @param value The bytes for message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessageBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        message_ = value;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:ResultInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:ResultInfo)
-    private static final com.texture_image.proto.ImageInfo.ResultInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ResultInfo();
-    }
-
-    public static com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ResultInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ResultInfo>() {
-      @java.lang.Override
-      public ResultInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ResultInfo(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ResultInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ResultInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface ImageFetchResultInfoOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:ImageFetchResultInfo)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <pre>
-     * The result code of process, if this code's value is not 200
-     * then the [textureId] shall be invalid and error placeholder
-     * is supposed to be shown on this situation
-     * </pre>
-     *
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    int getCode();
-
-    /**
-     * <pre>
-     * Texture widget id for this image
-     * </pre>
-     *
-     * <code>int64 textureId = 2;</code>
-     * @return The textureId.
-     */
-    long getTextureId();
-
-    /**
-     * <pre>
-     * Description for the result
-     * </pre>
-     *
-     * <code>string message = 3;</code>
-     * @return The message.
-     */
-    java.lang.String getMessage();
-    /**
-     * <pre>
-     * Description for the result
-     * </pre>
-     *
-     * <code>string message = 3;</code>
-     * @return The bytes for message.
-     */
-    com.google.protobuf.ByteString
-        getMessageBytes();
-
-    /**
-     * <pre>
-     * Requesting image's url
-     * </pre>
-     *
-     * <code>string url = 4;</code>
-     * @return The url.
-     */
-    java.lang.String getUrl();
-    /**
-     * <pre>
-     * Requesting image's url
-     * </pre>
-     *
-     * <code>string url = 4;</code>
-     * @return The bytes for url.
-     */
-    com.google.protobuf.ByteString
-        getUrlBytes();
-
-    /**
-     * <pre>
-     * Relative image fetching task's current status
-     * </pre>
-     *
-     * <code>.TaskState state = 5;</code>
-     * @return The enum numeric value on the wire for state.
-     */
-    int getStateValue();
-    /**
-     * <pre>
-     * Relative image fetching task's current status
-     * </pre>
-     *
-     * <code>.TaskState state = 5;</code>
-     * @return The state.
-     */
-    com.texture_image.proto.ImageUtils.TaskState getState();
-  }
-  /**
-   * <pre>
-   * An object to describe image request API invoking result
-   * Flutter side may use the [textureId] to rebuild its UI
-   * when receiving the result, but the target image may not
-   * be visible right now because it maybe downloading by now
-   * you can check [state] for relative task's newest status
-   * </pre>
-   *
-   * Protobuf type {@code ImageFetchResultInfo}
-   */
-  public static final class ImageFetchResultInfo extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:ImageFetchResultInfo)
-      ImageFetchResultInfoOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use ImageFetchResultInfo.newBuilder() to construct.
-    private ImageFetchResultInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private ImageFetchResultInfo() {
-      message_ = "";
-      url_ = "";
-      state_ = 0;
-    }
-
-    @java.lang.Override
-    @SuppressWarnings({"unused"})
-    protected java.lang.Object newInstance(
-        UnusedPrivateParameter unused) {
-      return new ImageFetchResultInfo();
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private ImageFetchResultInfo(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            case 8: {
-
-              code_ = input.readInt32();
-              break;
-            }
-            case 16: {
-
-              textureId_ = input.readInt64();
-              break;
-            }
-            case 26: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              message_ = s;
-              break;
-            }
-            case 34: {
-              java.lang.String s = input.readStringRequireUtf8();
-
-              url_ = s;
-              break;
-            }
-            case 40: {
-              int rawValue = input.readEnum();
-
-              state_ = rawValue;
-              break;
-            }
-            default: {
-              if (!parseUnknownField(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
-    }
-
-    @java.lang.Override
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.texture_image.proto.ImageInfo.ImageFetchResultInfo.class, com.texture_image.proto.ImageInfo.ImageFetchResultInfo.Builder.class);
-    }
-
-    public static final int CODE_FIELD_NUMBER = 1;
-    private int code_;
-    /**
-     * <pre>
-     * The result code of process, if this code's value is not 200
-     * then the [textureId] shall be invalid and error placeholder
-     * is supposed to be shown on this situation
-     * </pre>
-     *
-     * <code>int32 code = 1;</code>
-     * @return The code.
-     */
-    @java.lang.Override
-    public int getCode() {
-      return code_;
-    }
-
-    public static final int TEXTUREID_FIELD_NUMBER = 2;
-    private long textureId_;
-    /**
-     * <pre>
-     * Texture widget id for this image
-     * </pre>
-     *
-     * <code>int64 textureId = 2;</code>
-     * @return The textureId.
-     */
-    @java.lang.Override
-    public long getTextureId() {
-      return textureId_;
-    }
-
-    public static final int MESSAGE_FIELD_NUMBER = 3;
-    private volatile java.lang.Object message_;
-    /**
-     * <pre>
-     * Description for the result
-     * </pre>
-     *
-     * <code>string message = 3;</code>
-     * @return The message.
-     */
-    @java.lang.Override
-    public java.lang.String getMessage() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        message_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Description for the result
-     * </pre>
-     *
-     * <code>string message = 3;</code>
-     * @return The bytes for message.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getMessageBytes() {
-      java.lang.Object ref = message_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        message_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int URL_FIELD_NUMBER = 4;
-    private volatile java.lang.Object url_;
-    /**
-     * <pre>
-     * Requesting image's url
-     * </pre>
-     *
-     * <code>string url = 4;</code>
-     * @return The url.
-     */
-    @java.lang.Override
-    public java.lang.String getUrl() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        return (java.lang.String) ref;
-      } else {
-        com.google.protobuf.ByteString bs = 
-            (com.google.protobuf.ByteString) ref;
-        java.lang.String s = bs.toStringUtf8();
-        url_ = s;
-        return s;
-      }
-    }
-    /**
-     * <pre>
-     * Requesting image's url
-     * </pre>
-     *
-     * <code>string url = 4;</code>
-     * @return The bytes for url.
-     */
-    @java.lang.Override
-    public com.google.protobuf.ByteString
-        getUrlBytes() {
-      java.lang.Object ref = url_;
-      if (ref instanceof java.lang.String) {
-        com.google.protobuf.ByteString b = 
-            com.google.protobuf.ByteString.copyFromUtf8(
-                (java.lang.String) ref);
-        url_ = b;
-        return b;
-      } else {
-        return (com.google.protobuf.ByteString) ref;
-      }
-    }
-
-    public static final int STATE_FIELD_NUMBER = 5;
-    private int state_;
-    /**
-     * <pre>
-     * Relative image fetching task's current status
-     * </pre>
-     *
-     * <code>.TaskState state = 5;</code>
-     * @return The enum numeric value on the wire for state.
-     */
-    @java.lang.Override public int getStateValue() {
-      return state_;
-    }
-    /**
-     * <pre>
-     * Relative image fetching task's current status
-     * </pre>
-     *
-     * <code>.TaskState state = 5;</code>
-     * @return The state.
-     */
-    @java.lang.Override public com.texture_image.proto.ImageUtils.TaskState getState() {
-      @SuppressWarnings("deprecation")
-      com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
-      return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    @java.lang.Override
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    @java.lang.Override
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (code_ != 0) {
-        output.writeInt32(1, code_);
-      }
-      if (textureId_ != 0L) {
-        output.writeInt64(2, textureId_);
-      }
-      if (!getMessageBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
-      }
-      if (!getUrlBytes().isEmpty()) {
-        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, url_);
-      }
-      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
-        output.writeEnum(5, state_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    @java.lang.Override
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (code_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, code_);
-      }
-      if (textureId_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(2, textureId_);
-      }
-      if (!getMessageBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
-      }
-      if (!getUrlBytes().isEmpty()) {
-        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, url_);
-      }
-      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeEnumSize(5, state_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.texture_image.proto.ImageInfo.ImageFetchResultInfo)) {
-        return super.equals(obj);
-      }
-      com.texture_image.proto.ImageInfo.ImageFetchResultInfo other = (com.texture_image.proto.ImageInfo.ImageFetchResultInfo) obj;
-
-      if (getCode()
-          != other.getCode()) return false;
-      if (getTextureId()
-          != other.getTextureId()) return false;
-      if (!getMessage()
-          .equals(other.getMessage())) return false;
-      if (!getUrl()
-          .equals(other.getUrl())) return false;
-      if (state_ != other.state_) return false;
-      if (!unknownFields.equals(other.unknownFields)) return false;
-      return true;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + CODE_FIELD_NUMBER;
-      hash = (53 * hash) + getCode();
-      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getTextureId());
-      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
-      hash = (53 * hash) + getMessage().hashCode();
-      hash = (37 * hash) + URL_FIELD_NUMBER;
-      hash = (53 * hash) + getUrl().hashCode();
-      hash = (37 * hash) + STATE_FIELD_NUMBER;
-      hash = (53 * hash) + state_;
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    @java.lang.Override
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ImageFetchResultInfo prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    @java.lang.Override
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     * An object to describe image request API invoking result
-     * Flutter side may use the [textureId] to rebuild its UI
-     * when receiving the result, but the target image may not
-     * be visible right now because it maybe downloading by now
-     * you can check [state] for relative task's newest status
-     * </pre>
-     *
-     * Protobuf type {@code ImageFetchResultInfo}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:ImageFetchResultInfo)
-        com.texture_image.proto.ImageInfo.ImageFetchResultInfoOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
-      }
-
-      @java.lang.Override
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.texture_image.proto.ImageInfo.ImageFetchResultInfo.class, com.texture_image.proto.ImageInfo.ImageFetchResultInfo.Builder.class);
-      }
-
-      // Construct using com.texture_image.proto.ImageInfo.ImageFetchResultInfo.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      @java.lang.Override
-      public Builder clear() {
-        super.clear();
-        code_ = 0;
-
-        textureId_ = 0L;
-
-        message_ = "";
-
-        url_ = "";
-
-        state_ = 0;
-
-        return this;
-      }
-
-      @java.lang.Override
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.texture_image.proto.ImageInfo.internal_static_ImageFetchResultInfo_descriptor;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstanceForType() {
-        return com.texture_image.proto.ImageInfo.ImageFetchResultInfo.getDefaultInstance();
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo build() {
-        com.texture_image.proto.ImageInfo.ImageFetchResultInfo result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      @java.lang.Override
-      public com.texture_image.proto.ImageInfo.ImageFetchResultInfo buildPartial() {
-        com.texture_image.proto.ImageInfo.ImageFetchResultInfo result = new com.texture_image.proto.ImageInfo.ImageFetchResultInfo(this);
-        result.code_ = code_;
-        result.textureId_ = textureId_;
-        result.message_ = message_;
-        result.url_ = url_;
-        result.state_ = state_;
-        onBuilt();
-        return result;
-      }
-
-      @java.lang.Override
-      public Builder clone() {
-        return super.clone();
-      }
-      @java.lang.Override
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.setField(field, value);
-      }
-      @java.lang.Override
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return super.clearField(field);
-      }
-      @java.lang.Override
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return super.clearOneof(oneof);
-      }
-      @java.lang.Override
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return super.setRepeatedField(field, index, value);
-      }
-      @java.lang.Override
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return super.addRepeatedField(field, value);
-      }
-      @java.lang.Override
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.texture_image.proto.ImageInfo.ImageFetchResultInfo) {
-          return mergeFrom((com.texture_image.proto.ImageInfo.ImageFetchResultInfo)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ImageFetchResultInfo other) {
-        if (other == com.texture_image.proto.ImageInfo.ImageFetchResultInfo.getDefaultInstance()) return this;
-        if (other.getCode() != 0) {
-          setCode(other.getCode());
-        }
-        if (other.getTextureId() != 0L) {
-          setTextureId(other.getTextureId());
-        }
-        if (!other.getMessage().isEmpty()) {
-          message_ = other.message_;
-          onChanged();
-        }
-        if (!other.getUrl().isEmpty()) {
-          url_ = other.url_;
-          onChanged();
-        }
-        if (other.state_ != 0) {
-          setStateValue(other.getStateValue());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      @java.lang.Override
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      @java.lang.Override
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.texture_image.proto.ImageInfo.ImageFetchResultInfo parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.texture_image.proto.ImageInfo.ImageFetchResultInfo) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int code_ ;
-      /**
-       * <pre>
-       * The result code of process, if this code's value is not 200
-       * then the [textureId] shall be invalid and error placeholder
-       * is supposed to be shown on this situation
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @return The code.
-       */
-      @java.lang.Override
-      public int getCode() {
-        return code_;
-      }
-      /**
-       * <pre>
-       * The result code of process, if this code's value is not 200
-       * then the [textureId] shall be invalid and error placeholder
-       * is supposed to be shown on this situation
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @param value The code to set.
-       * @return This builder for chaining.
-       */
-      public Builder setCode(int value) {
-        
-        code_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * The result code of process, if this code's value is not 200
-       * then the [textureId] shall be invalid and error placeholder
-       * is supposed to be shown on this situation
-       * </pre>
-       *
-       * <code>int32 code = 1;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearCode() {
-        
-        code_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long textureId_ ;
-      /**
-       * <pre>
-       * Texture widget id for this image
-       * </pre>
-       *
-       * <code>int64 textureId = 2;</code>
-       * @return The textureId.
-       */
-      @java.lang.Override
-      public long getTextureId() {
-        return textureId_;
-      }
-      /**
-       * <pre>
-       * Texture widget id for this image
-       * </pre>
-       *
-       * <code>int64 textureId = 2;</code>
-       * @param value The textureId to set.
-       * @return This builder for chaining.
-       */
-      public Builder setTextureId(long value) {
-        
-        textureId_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Texture widget id for this image
-       * </pre>
-       *
-       * <code>int64 textureId = 2;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearTextureId() {
-        
-        textureId_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object message_ = "";
-      /**
-       * <pre>
-       * Description for the result
-       * </pre>
-       *
-       * <code>string message = 3;</code>
-       * @return The message.
-       */
-      public java.lang.String getMessage() {
-        java.lang.Object ref = message_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          message_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Description for the result
-       * </pre>
-       *
-       * <code>string message = 3;</code>
-       * @return The bytes for message.
-       */
-      public com.google.protobuf.ByteString
-          getMessageBytes() {
-        java.lang.Object ref = message_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          message_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Description for the result
-       * </pre>
-       *
-       * <code>string message = 3;</code>
-       * @param value The message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessage(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        message_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Description for the result
-       * </pre>
-       *
-       * <code>string message = 3;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearMessage() {
-        
-        message_ = getDefaultInstance().getMessage();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Description for the result
-       * </pre>
-       *
-       * <code>string message = 3;</code>
-       * @param value The bytes for message to set.
-       * @return This builder for chaining.
-       */
-      public Builder setMessageBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        message_ = value;
-        onChanged();
-        return this;
-      }
-
-      private java.lang.Object url_ = "";
-      /**
-       * <pre>
-       * Requesting image's url
-       * </pre>
-       *
-       * <code>string url = 4;</code>
-       * @return The url.
-       */
-      public java.lang.String getUrl() {
-        java.lang.Object ref = url_;
-        if (!(ref instanceof java.lang.String)) {
-          com.google.protobuf.ByteString bs =
-              (com.google.protobuf.ByteString) ref;
-          java.lang.String s = bs.toStringUtf8();
-          url_ = s;
-          return s;
-        } else {
-          return (java.lang.String) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Requesting image's url
-       * </pre>
-       *
-       * <code>string url = 4;</code>
-       * @return The bytes for url.
-       */
-      public com.google.protobuf.ByteString
-          getUrlBytes() {
-        java.lang.Object ref = url_;
-        if (ref instanceof String) {
-          com.google.protobuf.ByteString b = 
-              com.google.protobuf.ByteString.copyFromUtf8(
-                  (java.lang.String) ref);
-          url_ = b;
-          return b;
-        } else {
-          return (com.google.protobuf.ByteString) ref;
-        }
-      }
-      /**
-       * <pre>
-       * Requesting image's url
-       * </pre>
-       *
-       * <code>string url = 4;</code>
-       * @param value The url to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUrl(
-          java.lang.String value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        url_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Requesting image's url
-       * </pre>
-       *
-       * <code>string url = 4;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearUrl() {
-        
-        url_ = getDefaultInstance().getUrl();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Requesting image's url
-       * </pre>
-       *
-       * <code>string url = 4;</code>
-       * @param value The bytes for url to set.
-       * @return This builder for chaining.
-       */
-      public Builder setUrlBytes(
-          com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  checkByteStringIsUtf8(value);
-        
-        url_ = value;
-        onChanged();
-        return this;
-      }
-
-      private int state_ = 0;
-      /**
-       * <pre>
-       * Relative image fetching task's current status
-       * </pre>
-       *
-       * <code>.TaskState state = 5;</code>
-       * @return The enum numeric value on the wire for state.
-       */
-      @java.lang.Override public int getStateValue() {
-        return state_;
-      }
-      /**
-       * <pre>
-       * Relative image fetching task's current status
-       * </pre>
-       *
-       * <code>.TaskState state = 5;</code>
-       * @param value The enum numeric value on the wire for state to set.
-       * @return This builder for chaining.
-       */
-      public Builder setStateValue(int value) {
-        
-        state_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Relative image fetching task's current status
-       * </pre>
-       *
-       * <code>.TaskState state = 5;</code>
-       * @return The state.
-       */
-      @java.lang.Override
-      public com.texture_image.proto.ImageUtils.TaskState getState() {
-        @SuppressWarnings("deprecation")
-        com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
-        return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
-      }
-      /**
-       * <pre>
-       * Relative image fetching task's current status
-       * </pre>
-       *
-       * <code>.TaskState state = 5;</code>
-       * @param value The state to set.
-       * @return This builder for chaining.
-       */
-      public Builder setState(com.texture_image.proto.ImageUtils.TaskState value) {
-        if (value == null) {
-          throw new NullPointerException();
-        }
-        
-        state_ = value.getNumber();
-        onChanged();
-        return this;
-      }
-      /**
-       * <pre>
-       * Relative image fetching task's current status
-       * </pre>
-       *
-       * <code>.TaskState state = 5;</code>
-       * @return This builder for chaining.
-       */
-      public Builder clearState() {
-        
-        state_ = 0;
-        onChanged();
-        return this;
-      }
-      @java.lang.Override
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFields(unknownFields);
-      }
-
-      @java.lang.Override
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:ImageFetchResultInfo)
-    }
-
-    // @@protoc_insertion_point(class_scope:ImageFetchResultInfo)
-    private static final com.texture_image.proto.ImageInfo.ImageFetchResultInfo DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ImageFetchResultInfo();
-    }
-
-    public static com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<ImageFetchResultInfo>
-        PARSER = new com.google.protobuf.AbstractParser<ImageFetchResultInfo>() {
-      @java.lang.Override
-      public ImageFetchResultInfo parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new ImageFetchResultInfo(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<ImageFetchResultInfo> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<ImageFetchResultInfo> getParserForType() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.texture_image.proto.ImageInfo.ImageFetchResultInfo getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
   public interface ImageDisposeInfoOrBuilder extends
       // @@protoc_insertion_point(interface_extends:ImageDisposeInfo)
       com.google.protobuf.MessageOrBuilder {
@@ -5764,21 +3986,1180 @@ public final class ImageInfo {
 
   }
 
+  public interface ResultInfoOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:ResultInfo)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    int getCode();
+
+    /**
+     * <pre>
+     * Texture widget id for this image, this value is meaningless
+     * when invoked API is non-relative to particular image such as
+     * 'textureImageConfig' and 'enableLog'
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    long getTextureId();
+
+    /**
+     * <pre>
+     * Detail description
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The message.
+     */
+    java.lang.String getMessage();
+    /**
+     * <pre>
+     * Detail description
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The bytes for message.
+     */
+    com.google.protobuf.ByteString
+        getMessageBytes();
+
+    /**
+     * <pre>
+     * Requesting image's url, this value is meaningless
+     * when invoked API is non-relative to particular image.
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The url.
+     */
+    java.lang.String getUrl();
+    /**
+     * <pre>
+     * Requesting image's url, this value is meaningless
+     * when invoked API is non-relative to particular image.
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The bytes for url.
+     */
+    com.google.protobuf.ByteString
+        getUrlBytes();
+
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * this value is meaningless when invoked API is
+     * non-relative to particular image.
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    int getStateValue();
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * this value is meaningless when invoked API is
+     * non-relative to particular image.
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The state.
+     */
+    com.texture_image.proto.ImageUtils.TaskState getState();
+  }
+  /**
+   * <pre>
+   * An object that describes the API invoke result.
+   * </pre>
+   *
+   * Protobuf type {@code ResultInfo}
+   */
+  public static final class ResultInfo extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:ResultInfo)
+      ResultInfoOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use ResultInfo.newBuilder() to construct.
+    private ResultInfo(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private ResultInfo() {
+      message_ = "";
+      url_ = "";
+      state_ = 0;
+    }
+
+    @java.lang.Override
+    @SuppressWarnings({"unused"})
+    protected java.lang.Object newInstance(
+        UnusedPrivateParameter unused) {
+      return new ResultInfo();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private ResultInfo(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            case 8: {
+
+              code_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              textureId_ = input.readInt64();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              message_ = s;
+              break;
+            }
+            case 34: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              url_ = s;
+              break;
+            }
+            case 40: {
+              int rawValue = input.readEnum();
+
+              state_ = rawValue;
+              break;
+            }
+            default: {
+              if (!parseUnknownField(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+    }
+
+    @java.lang.Override
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
+    }
+
+    public static final int CODE_FIELD_NUMBER = 1;
+    private int code_;
+    /**
+     * <pre>
+     * The result code of process, if this code's value is not 200
+     * then the [textureId] shall be invalid and error placeholder
+     * is supposed to be shown on this situation
+     * </pre>
+     *
+     * <code>int32 code = 1;</code>
+     * @return The code.
+     */
+    @java.lang.Override
+    public int getCode() {
+      return code_;
+    }
+
+    public static final int TEXTUREID_FIELD_NUMBER = 2;
+    private long textureId_;
+    /**
+     * <pre>
+     * Texture widget id for this image, this value is meaningless
+     * when invoked API is non-relative to particular image such as
+     * 'textureImageConfig' and 'enableLog'
+     * </pre>
+     *
+     * <code>int64 textureId = 2;</code>
+     * @return The textureId.
+     */
+    @java.lang.Override
+    public long getTextureId() {
+      return textureId_;
+    }
+
+    public static final int MESSAGE_FIELD_NUMBER = 3;
+    private volatile java.lang.Object message_;
+    /**
+     * <pre>
+     * Detail description
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The message.
+     */
+    @java.lang.Override
+    public java.lang.String getMessage() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        message_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Detail description
+     * </pre>
+     *
+     * <code>string message = 3;</code>
+     * @return The bytes for message.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getMessageBytes() {
+      java.lang.Object ref = message_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        message_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int URL_FIELD_NUMBER = 4;
+    private volatile java.lang.Object url_;
+    /**
+     * <pre>
+     * Requesting image's url, this value is meaningless
+     * when invoked API is non-relative to particular image.
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The url.
+     */
+    @java.lang.Override
+    public java.lang.String getUrl() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        url_ = s;
+        return s;
+      }
+    }
+    /**
+     * <pre>
+     * Requesting image's url, this value is meaningless
+     * when invoked API is non-relative to particular image.
+     * </pre>
+     *
+     * <code>string url = 4;</code>
+     * @return The bytes for url.
+     */
+    @java.lang.Override
+    public com.google.protobuf.ByteString
+        getUrlBytes() {
+      java.lang.Object ref = url_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        url_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int STATE_FIELD_NUMBER = 5;
+    private int state_;
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * this value is meaningless when invoked API is
+     * non-relative to particular image.
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The enum numeric value on the wire for state.
+     */
+    @java.lang.Override public int getStateValue() {
+      return state_;
+    }
+    /**
+     * <pre>
+     * Relative image fetching task's current status
+     * this value is meaningless when invoked API is
+     * non-relative to particular image.
+     * </pre>
+     *
+     * <code>.TaskState state = 5;</code>
+     * @return The state.
+     */
+    @java.lang.Override public com.texture_image.proto.ImageUtils.TaskState getState() {
+      @SuppressWarnings("deprecation")
+      com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
+      return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    @java.lang.Override
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    @java.lang.Override
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (code_ != 0) {
+        output.writeInt32(1, code_);
+      }
+      if (textureId_ != 0L) {
+        output.writeInt64(2, textureId_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, message_);
+      }
+      if (!getUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 4, url_);
+      }
+      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
+        output.writeEnum(5, state_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    @java.lang.Override
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (code_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, code_);
+      }
+      if (textureId_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(2, textureId_);
+      }
+      if (!getMessageBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, message_);
+      }
+      if (!getUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(4, url_);
+      }
+      if (state_ != com.texture_image.proto.ImageUtils.TaskState.initialized.getNumber()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeEnumSize(5, state_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.texture_image.proto.ImageInfo.ResultInfo)) {
+        return super.equals(obj);
+      }
+      com.texture_image.proto.ImageInfo.ResultInfo other = (com.texture_image.proto.ImageInfo.ResultInfo) obj;
+
+      if (getCode()
+          != other.getCode()) return false;
+      if (getTextureId()
+          != other.getTextureId()) return false;
+      if (!getMessage()
+          .equals(other.getMessage())) return false;
+      if (!getUrl()
+          .equals(other.getUrl())) return false;
+      if (state_ != other.state_) return false;
+      if (!unknownFields.equals(other.unknownFields)) return false;
+      return true;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + CODE_FIELD_NUMBER;
+      hash = (53 * hash) + getCode();
+      hash = (37 * hash) + TEXTUREID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTextureId());
+      hash = (37 * hash) + MESSAGE_FIELD_NUMBER;
+      hash = (53 * hash) + getMessage().hashCode();
+      hash = (37 * hash) + URL_FIELD_NUMBER;
+      hash = (53 * hash) + getUrl().hashCode();
+      hash = (37 * hash) + STATE_FIELD_NUMBER;
+      hash = (53 * hash) + state_;
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.texture_image.proto.ImageInfo.ResultInfo parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    @java.lang.Override
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.texture_image.proto.ImageInfo.ResultInfo prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    @java.lang.Override
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     * An object that describes the API invoke result.
+     * </pre>
+     *
+     * Protobuf type {@code ResultInfo}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:ResultInfo)
+        com.texture_image.proto.ImageInfo.ResultInfoOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.texture_image.proto.ImageInfo.ResultInfo.class, com.texture_image.proto.ImageInfo.ResultInfo.Builder.class);
+      }
+
+      // Construct using com.texture_image.proto.ImageInfo.ResultInfo.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      @java.lang.Override
+      public Builder clear() {
+        super.clear();
+        code_ = 0;
+
+        textureId_ = 0L;
+
+        message_ = "";
+
+        url_ = "";
+
+        state_ = 0;
+
+        return this;
+      }
+
+      @java.lang.Override
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.texture_image.proto.ImageInfo.internal_static_ResultInfo_descriptor;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
+        return com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance();
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo build() {
+        com.texture_image.proto.ImageInfo.ResultInfo result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      @java.lang.Override
+      public com.texture_image.proto.ImageInfo.ResultInfo buildPartial() {
+        com.texture_image.proto.ImageInfo.ResultInfo result = new com.texture_image.proto.ImageInfo.ResultInfo(this);
+        result.code_ = code_;
+        result.textureId_ = textureId_;
+        result.message_ = message_;
+        result.url_ = url_;
+        result.state_ = state_;
+        onBuilt();
+        return result;
+      }
+
+      @java.lang.Override
+      public Builder clone() {
+        return super.clone();
+      }
+      @java.lang.Override
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.setField(field, value);
+      }
+      @java.lang.Override
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return super.clearField(field);
+      }
+      @java.lang.Override
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return super.clearOneof(oneof);
+      }
+      @java.lang.Override
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return super.setRepeatedField(field, index, value);
+      }
+      @java.lang.Override
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return super.addRepeatedField(field, value);
+      }
+      @java.lang.Override
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.texture_image.proto.ImageInfo.ResultInfo) {
+          return mergeFrom((com.texture_image.proto.ImageInfo.ResultInfo)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.texture_image.proto.ImageInfo.ResultInfo other) {
+        if (other == com.texture_image.proto.ImageInfo.ResultInfo.getDefaultInstance()) return this;
+        if (other.getCode() != 0) {
+          setCode(other.getCode());
+        }
+        if (other.getTextureId() != 0L) {
+          setTextureId(other.getTextureId());
+        }
+        if (!other.getMessage().isEmpty()) {
+          message_ = other.message_;
+          onChanged();
+        }
+        if (!other.getUrl().isEmpty()) {
+          url_ = other.url_;
+          onChanged();
+        }
+        if (other.state_ != 0) {
+          setStateValue(other.getStateValue());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      @java.lang.Override
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      @java.lang.Override
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.texture_image.proto.ImageInfo.ResultInfo parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.texture_image.proto.ImageInfo.ResultInfo) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int code_ ;
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @return The code.
+       */
+      @java.lang.Override
+      public int getCode() {
+        return code_;
+      }
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @param value The code to set.
+       * @return This builder for chaining.
+       */
+      public Builder setCode(int value) {
+        
+        code_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * The result code of process, if this code's value is not 200
+       * then the [textureId] shall be invalid and error placeholder
+       * is supposed to be shown on this situation
+       * </pre>
+       *
+       * <code>int32 code = 1;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearCode() {
+        
+        code_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long textureId_ ;
+      /**
+       * <pre>
+       * Texture widget id for this image, this value is meaningless
+       * when invoked API is non-relative to particular image such as
+       * 'textureImageConfig' and 'enableLog'
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return The textureId.
+       */
+      @java.lang.Override
+      public long getTextureId() {
+        return textureId_;
+      }
+      /**
+       * <pre>
+       * Texture widget id for this image, this value is meaningless
+       * when invoked API is non-relative to particular image such as
+       * 'textureImageConfig' and 'enableLog'
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @param value The textureId to set.
+       * @return This builder for chaining.
+       */
+      public Builder setTextureId(long value) {
+        
+        textureId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Texture widget id for this image, this value is meaningless
+       * when invoked API is non-relative to particular image such as
+       * 'textureImageConfig' and 'enableLog'
+       * </pre>
+       *
+       * <code>int64 textureId = 2;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearTextureId() {
+        
+        textureId_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object message_ = "";
+      /**
+       * <pre>
+       * Detail description
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return The message.
+       */
+      public java.lang.String getMessage() {
+        java.lang.Object ref = message_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          message_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Detail description
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return The bytes for message.
+       */
+      public com.google.protobuf.ByteString
+          getMessageBytes() {
+        java.lang.Object ref = message_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          message_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Detail description
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @param value The message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessage(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        message_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Detail description
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearMessage() {
+        
+        message_ = getDefaultInstance().getMessage();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Detail description
+       * </pre>
+       *
+       * <code>string message = 3;</code>
+       * @param value The bytes for message to set.
+       * @return This builder for chaining.
+       */
+      public Builder setMessageBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        message_ = value;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object url_ = "";
+      /**
+       * <pre>
+       * Requesting image's url, this value is meaningless
+       * when invoked API is non-relative to particular image.
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return The url.
+       */
+      public java.lang.String getUrl() {
+        java.lang.Object ref = url_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          url_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Requesting image's url, this value is meaningless
+       * when invoked API is non-relative to particular image.
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return The bytes for url.
+       */
+      public com.google.protobuf.ByteString
+          getUrlBytes() {
+        java.lang.Object ref = url_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          url_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <pre>
+       * Requesting image's url, this value is meaningless
+       * when invoked API is non-relative to particular image.
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @param value The url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        url_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Requesting image's url, this value is meaningless
+       * when invoked API is non-relative to particular image.
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearUrl() {
+        
+        url_ = getDefaultInstance().getUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Requesting image's url, this value is meaningless
+       * when invoked API is non-relative to particular image.
+       * </pre>
+       *
+       * <code>string url = 4;</code>
+       * @param value The bytes for url to set.
+       * @return This builder for chaining.
+       */
+      public Builder setUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        url_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int state_ = 0;
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * this value is meaningless when invoked API is
+       * non-relative to particular image.
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return The enum numeric value on the wire for state.
+       */
+      @java.lang.Override public int getStateValue() {
+        return state_;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * this value is meaningless when invoked API is
+       * non-relative to particular image.
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @param value The enum numeric value on the wire for state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setStateValue(int value) {
+        
+        state_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * this value is meaningless when invoked API is
+       * non-relative to particular image.
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return The state.
+       */
+      @java.lang.Override
+      public com.texture_image.proto.ImageUtils.TaskState getState() {
+        @SuppressWarnings("deprecation")
+        com.texture_image.proto.ImageUtils.TaskState result = com.texture_image.proto.ImageUtils.TaskState.valueOf(state_);
+        return result == null ? com.texture_image.proto.ImageUtils.TaskState.UNRECOGNIZED : result;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * this value is meaningless when invoked API is
+       * non-relative to particular image.
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @param value The state to set.
+       * @return This builder for chaining.
+       */
+      public Builder setState(com.texture_image.proto.ImageUtils.TaskState value) {
+        if (value == null) {
+          throw new NullPointerException();
+        }
+        
+        state_ = value.getNumber();
+        onChanged();
+        return this;
+      }
+      /**
+       * <pre>
+       * Relative image fetching task's current status
+       * this value is meaningless when invoked API is
+       * non-relative to particular image.
+       * </pre>
+       *
+       * <code>.TaskState state = 5;</code>
+       * @return This builder for chaining.
+       */
+      public Builder clearState() {
+        
+        state_ = 0;
+        onChanged();
+        return this;
+      }
+      @java.lang.Override
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFields(unknownFields);
+      }
+
+      @java.lang.Override
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:ResultInfo)
+    }
+
+    // @@protoc_insertion_point(class_scope:ResultInfo)
+    private static final com.texture_image.proto.ImageInfo.ResultInfo DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.texture_image.proto.ImageInfo.ResultInfo();
+    }
+
+    public static com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<ResultInfo>
+        PARSER = new com.google.protobuf.AbstractParser<ResultInfo>() {
+      @java.lang.Override
+      public ResultInfo parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new ResultInfo(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<ResultInfo> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<ResultInfo> getParserForType() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.texture_image.proto.ImageInfo.ResultInfo getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ImageFetchInfo_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ImageFetchInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ResultInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ResultInfo_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_ImageFetchResultInfo_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_ImageFetchResultInfo_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_ImageDisposeInfo_descriptor;
   private static final 
@@ -5789,6 +5170,11 @@ public final class ImageInfo {
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_ImageConfigInfo_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_ResultInfo_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_ResultInfo_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -5803,19 +5189,17 @@ public final class ImageInfo {
       "aceholder\030\002 \001(\t\022\023\n\013placeholder\030\003 \001(\t\022\021\n\t" +
       "grayScale\030\004 \001(\010\022\014\n\004blur\030\005 \001(\005\022\024\n\014blurSam" +
       "pling\030\006 \001(\002\022\033\n\010geometry\030\007 \001(\0132\t.Geometry" +
-      "\022\031\n\007quality\030\010 \001(\0132\010.Quality\"+\n\nResultInf" +
-      "o\022\014\n\004code\030\001 \001(\005\022\017\n\007message\030\002 \001(\t\"p\n\024Imag" +
-      "eFetchResultInfo\022\014\n\004code\030\001 \001(\005\022\021\n\ttextur" +
-      "eId\030\002 \001(\003\022\017\n\007message\030\003 \001(\t\022\013\n\003url\030\004 \001(\t\022" +
-      "\031\n\005state\030\005 \001(\0162\n.TaskState\"G\n\020ImageDispo" +
-      "seInfo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\022\023" +
-      "\n\013canBeReused\030\003 \001(\010\"\301\001\n\017ImageConfigInfo\022" +
-      "\023\n\013placeholder\030\001 \001(\t\022\030\n\020errorPlaceholder" +
-      "\030\002 \001(\t\022\027\n\017backgroundColor\030\003 \001(\t\022(\n andro" +
-      "idAvailableMemoryPercentage\030\004 \001(\001\022 \n\030red" +
-      "uceQualityInLowMemory\030\005 \001(\010\022\032\n\022useOpenGL" +
-      "Rendering\030\006 \001(\010B\031\n\027com.texture_image.pro" +
-      "tob\006proto3"
+      "\022\031\n\007quality\030\010 \001(\0132\010.Quality\"G\n\020ImageDisp" +
+      "oseInfo\022\013\n\003url\030\001 \001(\t\022\021\n\ttextureId\030\002 \001(\003\022" +
+      "\023\n\013canBeReused\030\003 \001(\010\"\301\001\n\017ImageConfigInfo" +
+      "\022\023\n\013placeholder\030\001 \001(\t\022\030\n\020errorPlaceholde" +
+      "r\030\002 \001(\t\022\027\n\017backgroundColor\030\003 \001(\t\022(\n andr" +
+      "oidAvailableMemoryPercentage\030\004 \001(\001\022 \n\030re" +
+      "duceQualityInLowMemory\030\005 \001(\010\022\032\n\022useOpenG" +
+      "LRendering\030\006 \001(\010\"f\n\nResultInfo\022\014\n\004code\030\001" +
+      " \001(\005\022\021\n\ttextureId\030\002 \001(\003\022\017\n\007message\030\003 \001(\t" +
+      "\022\013\n\003url\030\004 \001(\t\022\031\n\005state\030\005 \001(\0162\n.TaskState" +
+      "B\031\n\027com.texture_image.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,
@@ -5828,30 +5212,24 @@ public final class ImageInfo {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageFetchInfo_descriptor,
         new java.lang.String[] { "Url", "ErrorPlaceholder", "Placeholder", "GrayScale", "Blur", "BlurSampling", "Geometry", "Quality", });
-    internal_static_ResultInfo_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_ResultInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ResultInfo_descriptor,
-        new java.lang.String[] { "Code", "Message", });
-    internal_static_ImageFetchResultInfo_descriptor =
-      getDescriptor().getMessageTypes().get(2);
-    internal_static_ImageFetchResultInfo_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_ImageFetchResultInfo_descriptor,
-        new java.lang.String[] { "Code", "TextureId", "Message", "Url", "State", });
     internal_static_ImageDisposeInfo_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(1);
     internal_static_ImageDisposeInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageDisposeInfo_descriptor,
         new java.lang.String[] { "Url", "TextureId", "CanBeReused", });
     internal_static_ImageConfigInfo_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(2);
     internal_static_ImageConfigInfo_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ImageConfigInfo_descriptor,
         new java.lang.String[] { "Placeholder", "ErrorPlaceholder", "BackgroundColor", "AndroidAvailableMemoryPercentage", "ReduceQualityInLowMemory", "UseOpenGLRendering", });
+    internal_static_ResultInfo_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_ResultInfo_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_ResultInfo_descriptor,
+        new java.lang.String[] { "Code", "TextureId", "Message", "Url", "State", });
     com.texture_image.proto.ImageUtils.getDescriptor();
   }
 

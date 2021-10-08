@@ -10,4 +10,4 @@ OK=200#Success
 pb_parse_failed=100001#Cannot parse PB data
 argument_type_error=100002#Arguments from channel method params map with a wrong data type
 task_has_been_reused=100003#The task has been reused and previous loading mission should be cancelled
-disposed_before_http_responses=100004#Image widget has been disposed before it's attached fetching task completed
+disposed_before_http_responses=100004#Image widget has been disposed before its attached fetching task completed

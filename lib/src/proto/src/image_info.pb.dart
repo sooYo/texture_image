@@ -163,170 +163,6 @@ class ImageFetchInfo extends $pb.GeneratedMessage {
   $0.Quality ensureQuality() => $_ensure(7);
 }
 
-class ResultInfo extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResultInfo', createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
-    ..aOS(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..hasRequiredFields = false
-  ;
-
-  ResultInfo._() : super();
-  factory ResultInfo({
-    $core.int? code,
-    $core.String? message,
-  }) {
-    final _result = create();
-    if (code != null) {
-      _result.code = code;
-    }
-    if (message != null) {
-      _result.message = message;
-    }
-    return _result;
-  }
-  factory ResultInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ResultInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ResultInfo clone() => ResultInfo()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ResultInfo copyWith(void Function(ResultInfo) updates) => super.copyWith((message) => updates(message as ResultInfo)) as ResultInfo; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ResultInfo create() => ResultInfo._();
-  ResultInfo createEmptyInstance() => create();
-  static $pb.PbList<ResultInfo> createRepeated() => $pb.PbList<ResultInfo>();
-  @$core.pragma('dart2js:noInline')
-  static ResultInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResultInfo>(create);
-  static ResultInfo? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get code => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set code($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $core.String get message => $_getSZ(1);
-  @$pb.TagNumber(2)
-  set message($core.String v) { $_setString(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasMessage() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearMessage() => clearField(2);
-}
-
-class ImageFetchResultInfo extends $pb.GeneratedMessage {
-  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageFetchResultInfo', createEmptyInstance: create)
-    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
-    ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', protoName: 'textureId')
-    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
-    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
-    ..e<$0.TaskState>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $0.TaskState.initialized, valueOf: $0.TaskState.valueOf, enumValues: $0.TaskState.values)
-    ..hasRequiredFields = false
-  ;
-
-  ImageFetchResultInfo._() : super();
-  factory ImageFetchResultInfo({
-    $core.int? code,
-    $fixnum.Int64? textureId,
-    $core.String? message,
-    $core.String? url,
-    $0.TaskState? state,
-  }) {
-    final _result = create();
-    if (code != null) {
-      _result.code = code;
-    }
-    if (textureId != null) {
-      _result.textureId = textureId;
-    }
-    if (message != null) {
-      _result.message = message;
-    }
-    if (url != null) {
-      _result.url = url;
-    }
-    if (state != null) {
-      _result.state = state;
-    }
-    return _result;
-  }
-  factory ImageFetchResultInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
-  factory ImageFetchResultInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
-  'Will be removed in next major version')
-  ImageFetchResultInfo clone() => ImageFetchResultInfo()..mergeFromMessage(this);
-  @$core.Deprecated(
-  'Using this can add significant overhead to your binary. '
-  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
-  'Will be removed in next major version')
-  ImageFetchResultInfo copyWith(void Function(ImageFetchResultInfo) updates) => super.copyWith((message) => updates(message as ImageFetchResultInfo)) as ImageFetchResultInfo; // ignore: deprecated_member_use
-  $pb.BuilderInfo get info_ => _i;
-  @$core.pragma('dart2js:noInline')
-  static ImageFetchResultInfo create() => ImageFetchResultInfo._();
-  ImageFetchResultInfo createEmptyInstance() => create();
-  static $pb.PbList<ImageFetchResultInfo> createRepeated() => $pb.PbList<ImageFetchResultInfo>();
-  @$core.pragma('dart2js:noInline')
-  static ImageFetchResultInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ImageFetchResultInfo>(create);
-  static ImageFetchResultInfo? _defaultInstance;
-
-  @$pb.TagNumber(1)
-  $core.int get code => $_getIZ(0);
-  @$pb.TagNumber(1)
-  set code($core.int v) { $_setSignedInt32(0, v); }
-  @$pb.TagNumber(1)
-  $core.bool hasCode() => $_has(0);
-  @$pb.TagNumber(1)
-  void clearCode() => clearField(1);
-
-  @$pb.TagNumber(2)
-  $fixnum.Int64 get textureId => $_getI64(1);
-  @$pb.TagNumber(2)
-  set textureId($fixnum.Int64 v) { $_setInt64(1, v); }
-  @$pb.TagNumber(2)
-  $core.bool hasTextureId() => $_has(1);
-  @$pb.TagNumber(2)
-  void clearTextureId() => clearField(2);
-
-  @$pb.TagNumber(3)
-  $core.String get message => $_getSZ(2);
-  @$pb.TagNumber(3)
-  set message($core.String v) { $_setString(2, v); }
-  @$pb.TagNumber(3)
-  $core.bool hasMessage() => $_has(2);
-  @$pb.TagNumber(3)
-  void clearMessage() => clearField(3);
-
-  @$pb.TagNumber(4)
-  $core.String get url => $_getSZ(3);
-  @$pb.TagNumber(4)
-  set url($core.String v) { $_setString(3, v); }
-  @$pb.TagNumber(4)
-  $core.bool hasUrl() => $_has(3);
-  @$pb.TagNumber(4)
-  void clearUrl() => clearField(4);
-
-  @$pb.TagNumber(5)
-  $0.TaskState get state => $_getN(4);
-  @$pb.TagNumber(5)
-  set state($0.TaskState v) { setField(5, v); }
-  @$pb.TagNumber(5)
-  $core.bool hasState() => $_has(4);
-  @$pb.TagNumber(5)
-  void clearState() => clearField(5);
-}
-
 class ImageDisposeInfo extends $pb.GeneratedMessage {
   static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ImageDisposeInfo', createEmptyInstance: create)
     ..aOS(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
@@ -517,5 +353,108 @@ class ImageConfigInfo extends $pb.GeneratedMessage {
   $core.bool hasUseOpenGLRendering() => $_has(5);
   @$pb.TagNumber(6)
   void clearUseOpenGLRendering() => clearField(6);
+}
+
+class ResultInfo extends $pb.GeneratedMessage {
+  static final $pb.BuilderInfo _i = $pb.BuilderInfo(const $core.bool.fromEnvironment('protobuf.omit_message_names') ? '' : 'ResultInfo', createEmptyInstance: create)
+    ..a<$core.int>(1, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'code', $pb.PbFieldType.O3)
+    ..aInt64(2, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'textureId', protoName: 'textureId')
+    ..aOS(3, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'message')
+    ..aOS(4, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'url')
+    ..e<$0.TaskState>(5, const $core.bool.fromEnvironment('protobuf.omit_field_names') ? '' : 'state', $pb.PbFieldType.OE, defaultOrMaker: $0.TaskState.initialized, valueOf: $0.TaskState.valueOf, enumValues: $0.TaskState.values)
+    ..hasRequiredFields = false
+  ;
+
+  ResultInfo._() : super();
+  factory ResultInfo({
+    $core.int? code,
+    $fixnum.Int64? textureId,
+    $core.String? message,
+    $core.String? url,
+    $0.TaskState? state,
+  }) {
+    final _result = create();
+    if (code != null) {
+      _result.code = code;
+    }
+    if (textureId != null) {
+      _result.textureId = textureId;
+    }
+    if (message != null) {
+      _result.message = message;
+    }
+    if (url != null) {
+      _result.url = url;
+    }
+    if (state != null) {
+      _result.state = state;
+    }
+    return _result;
+  }
+  factory ResultInfo.fromBuffer($core.List<$core.int> i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromBuffer(i, r);
+  factory ResultInfo.fromJson($core.String i, [$pb.ExtensionRegistry r = $pb.ExtensionRegistry.EMPTY]) => create()..mergeFromJson(i, r);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.deepCopy] instead. '
+  'Will be removed in next major version')
+  ResultInfo clone() => ResultInfo()..mergeFromMessage(this);
+  @$core.Deprecated(
+  'Using this can add significant overhead to your binary. '
+  'Use [GeneratedMessageGenericExtensions.rebuild] instead. '
+  'Will be removed in next major version')
+  ResultInfo copyWith(void Function(ResultInfo) updates) => super.copyWith((message) => updates(message as ResultInfo)) as ResultInfo; // ignore: deprecated_member_use
+  $pb.BuilderInfo get info_ => _i;
+  @$core.pragma('dart2js:noInline')
+  static ResultInfo create() => ResultInfo._();
+  ResultInfo createEmptyInstance() => create();
+  static $pb.PbList<ResultInfo> createRepeated() => $pb.PbList<ResultInfo>();
+  @$core.pragma('dart2js:noInline')
+  static ResultInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ResultInfo>(create);
+  static ResultInfo? _defaultInstance;
+
+  @$pb.TagNumber(1)
+  $core.int get code => $_getIZ(0);
+  @$pb.TagNumber(1)
+  set code($core.int v) { $_setSignedInt32(0, v); }
+  @$pb.TagNumber(1)
+  $core.bool hasCode() => $_has(0);
+  @$pb.TagNumber(1)
+  void clearCode() => clearField(1);
+
+  @$pb.TagNumber(2)
+  $fixnum.Int64 get textureId => $_getI64(1);
+  @$pb.TagNumber(2)
+  set textureId($fixnum.Int64 v) { $_setInt64(1, v); }
+  @$pb.TagNumber(2)
+  $core.bool hasTextureId() => $_has(1);
+  @$pb.TagNumber(2)
+  void clearTextureId() => clearField(2);
+
+  @$pb.TagNumber(3)
+  $core.String get message => $_getSZ(2);
+  @$pb.TagNumber(3)
+  set message($core.String v) { $_setString(2, v); }
+  @$pb.TagNumber(3)
+  $core.bool hasMessage() => $_has(2);
+  @$pb.TagNumber(3)
+  void clearMessage() => clearField(3);
+
+  @$pb.TagNumber(4)
+  $core.String get url => $_getSZ(3);
+  @$pb.TagNumber(4)
+  set url($core.String v) { $_setString(3, v); }
+  @$pb.TagNumber(4)
+  $core.bool hasUrl() => $_has(3);
+  @$pb.TagNumber(4)
+  void clearUrl() => clearField(4);
+
+  @$pb.TagNumber(5)
+  $0.TaskState get state => $_getN(4);
+  @$pb.TagNumber(5)
+  set state($0.TaskState v) { setField(5, v); }
+  @$pb.TagNumber(5)
+  $core.bool hasState() => $_has(4);
+  @$pb.TagNumber(5)
+  void clearState() => clearField(5);
 }
 
