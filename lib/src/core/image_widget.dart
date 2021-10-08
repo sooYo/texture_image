@@ -138,7 +138,9 @@ class _ImageState extends State<TextureImageWidget> {
       firstChild: placeholder,
       secondChild: _imageLoaded ? image : errorWidget,
       crossFadeState: _crossFadeState,
-      duration: Duration(milliseconds: 500),
+      firstCurve: Curves.easeInToLinear,
+      secondCurve: Curves.linearToEaseOut,
+      duration: Duration(milliseconds: 1000),
     );
   }
 
