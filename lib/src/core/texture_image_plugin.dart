@@ -32,14 +32,14 @@ class TextureImagePlugin {
 
     assert(
       _transforms.last is ParamTransformerChainGuard,
-      'Use ParamTransformerChainGuard to ensure stopable looping',
+      'Use ParamTransformerChainGuard to ensure halting the loop',
     );
   }
 
   // endregion Param Transforms
 
   // region Channel Methods
-  static Future<$pb.ImageFetchResultInfo> createImageTexture(
+  static Future<$pb.ResultInfo> createImageTexture(
     String url, {
     required double width,
     required double height,
@@ -63,10 +63,10 @@ class TextureImagePlugin {
       errorPlaceholder: errorPlaceholderPath,
       fit: fit,
       blur: blur,
+      blurSampling: blurSampling,
       quality: quality,
       grayScale: grayScale,
       ignorAlpha: ignorAlpha,
-      blurSampling: blurSampling,
       borderRadius: borderRadius,
       autoDownscale: autoDownscale,
       downscaleSize: downscaleSize,
@@ -78,36 +78,40 @@ class TextureImagePlugin {
     );
 
     try {
-      return $pb.ImageFetchResultInfo.fromBuffer(base64Data);
+      return $pb.ResultInfo.fromBuffer(base64Data);
     } catch (e) {
-      log.e(TAG, e.toString());
-
-      return $pb.ImageFetchResultInfo()
-        ..url = url
-        ..textureId = Int64(-1)
-        ..state = $pb.TaskState.failed
-        ..code = ErrorCode.pbParseFailed
-        ..message = 'PB parsed failed on Flutter side';
+      log.e(TAG, 'create text image: $e');
+      return _buildPBParseFailedResult(url: url);
     }
   }
 
-  static Future<void> destroyImageTexture(
+  static Future<$pb.ResultInfo> destroyImageTexture(
     int? textureId,
     String url, {
     bool canBeResused = true,
-  }) {
+  }) async {
     final cancelInfo = $pb.ImageDisposeInfo()
       ..url = url
       ..canBeReused = canBeResused
       ..textureId = Int64(textureId ?? -1);
 
-    return _channel.invokeMethod(
+    final base64Data = await _channel.invokeMethod(
       Methods.disposeImageTexture,
       cancelInfo.writeToBuffer(),
     );
+
+    try {
+      return $pb.ResultInfo.fromBuffer(base64Data);
+    } catch (e) {
+      log.e(TAG, 'Dispose image: $e');
+      return _buildPBParseFailedResult(
+        textureId: textureId,
+        url: url,
+      );
+    }
   }
 
-  static Future<void> updateConfig({
+  static Future<$pb.ResultInfo> updateConfig({
     bool? useOpenGLRendering,
     bool? compressInLowMemory,
     String? placeholder,
@@ -124,14 +128,30 @@ class TextureImagePlugin {
       memoryCacheSizeSpace: cachedMemoryPercetage,
     );
 
-    return _channel.invokeMethod(
+    final base64Data = await _channel.invokeMethod(
       Methods.textureImageConfig,
       config.writeToBuffer(),
     );
+
+    try {
+      return $pb.ResultInfo.fromBuffer(base64Data);
+    } catch (e) {
+      log.e(TAG, 'Update config: $e');
+      return _buildPBParseFailedResult();
+    }
   }
 
-  static Future<void> cleanCache() {
-    return _channel.invokeListMethod(Methods.releaseImageTextureCaches);
+  static Future<$pb.ResultInfo> cleanCache() async {
+    final base64Data = await _channel.invokeMethod(
+      Methods.releaseImageTextureCaches,
+    );
+
+    try {
+      return $pb.ResultInfo.fromBuffer(base64Data);
+    } catch (e) {
+      log.e(TAG, 'Clean cache:$e');
+      return _buildPBParseFailedResult();
+    }
   }
 
   // endregion Channel Methods
@@ -182,6 +202,18 @@ class TextureImagePlugin {
     );
 
     return transformChain.proceed(rawInfo);
+  }
+
+  static $pb.ResultInfo _buildPBParseFailedResult({
+    int? textureId,
+    String? url,
+  }) {
+    return $pb.ResultInfo()
+      ..url = url ?? ''
+      ..textureId = Int64(textureId ?? -1)
+      ..state = $pb.TaskState.failed
+      ..code = ErrorCode.pbParseFailed
+      ..message = 'PB parsed failed on Flutter side';
   }
 // endregion Message Building
 }

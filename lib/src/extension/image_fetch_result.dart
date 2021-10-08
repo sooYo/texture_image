@@ -3,7 +3,7 @@ import 'package:texture_image/texture_image.dart';
 import '../constants/load_state.dart';
 import '../proto/pb_header.dart';
 
-extension PluginExtension on ImageFetchResultInfo {
+extension PluginExtension on ResultInfo {
   ImageLoadState get loadState {
     switch (state) {
       case TaskState.initialized:
