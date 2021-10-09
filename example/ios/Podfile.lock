@@ -1,22 +1,47 @@
 PODS:
   - Flutter (1.0.0)
+  - FMDB (2.7.5):
+    - FMDB/standard (= 2.7.5)
+  - FMDB/standard (2.7.5)
+  - path_provider (0.0.1):
+    - Flutter
+  - Protobuf (3.18.0)
+  - sqflite (0.0.2):
+    - Flutter
+    - FMDB (>= 2.7.5)
   - texture_image (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - Protobuf
+  - sqflite (from `.symlinks/plugins/sqflite/ios`)
   - texture_image (from `.symlinks/plugins/texture_image/ios`)
+
+SPEC REPOS:
+  trunk:
+    - FMDB
+    - Protobuf
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+  sqflite:
+    :path: ".symlinks/plugins/sqflite/ios"
   texture_image:
     :path: ".symlinks/plugins/texture_image/ios"
 
 SPEC CHECKSUMS:
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
+  FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  Protobuf: 1a37ebea1338949e9ac35a3f06e80b3f536eec8d
+  sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   texture_image: ffacfc46873ba430aa621e66055f52e8a2d751b8
 
-PODFILE CHECKSUM: 8e679eca47255a8ca8067c4c67aab20e64cb974d
+PODFILE CHECKSUM: b74b6ff97ce3b549d3159aa506b553e8be794671
 
 COCOAPODS: 1.10.1
