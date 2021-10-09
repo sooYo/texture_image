@@ -246,16 +246,16 @@ class _Placeholder extends StatelessWidget {
       fit: fit,
     );
 
-    if (isOpaqueBackground) {
-      result = Container(
-        color: backgroundColor,
+    if (borderRadius != null && borderRadius != BorderRadius.zero) {
+      result = ClipRRect(
+        borderRadius: borderRadius!,
         child: result,
       );
     }
 
-    if (borderRadius != null && borderRadius != BorderRadius.zero) {
-      result = ClipRRect(
-        borderRadius: borderRadius!,
+    if (isOpaqueBackground) {
+      result = Container(
+        color: backgroundColor,
         child: result,
       );
     }
