@@ -1,4 +1,4 @@
-import '../constants/default_global_config.dart';
+import '../constants/constants.dart';
 import '../proto/pb_header.dart';
 
 extension PluginExtension on ImageConfigInfo {

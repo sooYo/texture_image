@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import '../../proto/pb_header.dart';
-import '../../utils/double_extension.dart';
+import '../../utils/utils.dart';
 import '../param_transformer.dart';
 
 /// Qiniu parameter converter

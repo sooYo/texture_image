@@ -1,6 +1,6 @@
 import 'package:texture_image/texture_image.dart';
 
-import '../constants/load_state.dart';
+import '../constants/constants.dart';
 import '../proto/pb_header.dart';
 
 extension PluginExtension on ResultInfo {

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 
-import '../constants/default_global_config.dart';
-import '../constants/load_state.dart';
+import '../constants/constants.dart';
 import '../extension/image_fetch_result.dart';
+import '../proto/pb_header.dart' as $pb;
+import '../utils/utils.dart';
 import 'texture_image_plugin.dart';
 
 class TextureImageWidget extends StatefulWidget {
@@ -76,6 +77,9 @@ class _ImageState extends State<TextureImageWidget> {
   /// Whether the image loading completed successfuly
   bool get _imageLoaded => _loadingState == ImageLoadState.success;
 
+  /// Shortcut for globalConfig
+  $pb.ImageConfigInfo get config => TextureImagePlugin.globalConfig;
+
   @override
   void initState() {
     super.initState();
@@ -106,33 +110,31 @@ class _ImageState extends State<TextureImageWidget> {
     }
 
     // Placeholder comes into view at first
-    final placeholder = widget.placeholder ??
-        ClipRRect(
-          borderRadius: widget.borderRadius,
-          child: Image.asset(
-            widget.placeholderPath ?? DefaultConfig.placeholder,
-            width: widget.width,
-            height: widget.height,
-            fit: BoxFit.cover,
-          ),
-        );
+    final placeholder = _Placeholder(
+      widget.placeholderPath ?? config.placeholder,
+      widget: widget.placeholder,
+      fit: widget.fit,
+      width: widget.width,
+      height: widget.height,
+      borderRadius: widget.borderRadius,
+      backgroundColor: config.backgroundColor,
+    );
 
     // Widget to show when image loading failed
-    final errorWidget = widget.errorPlaceholder ??
-        ClipRRect(
-          borderRadius: widget.borderRadius,
-          child: Image.asset(
-            widget.errorPlaceholderPath ?? DefaultConfig.errorPlaceholder,
-            width: widget.width,
-            height: widget.height,
-            fit: BoxFit.cover,
-          ),
-        );
+    final errorWidget = _Placeholder(
+      widget.errorPlaceholderPath ?? config.errorPlaceholder,
+      widget: widget.errorPlaceholder,
+      fit: widget.fit,
+      width: widget.width,
+      height: widget.height,
+      borderRadius: widget.borderRadius,
+      backgroundColor: config.backgroundColor,
+    );
 
     final imageContent = Container(
       width: widget.width,
       height: widget.height,
-      child: _textureId != null && _textureId! >= 0
+      child: _imageLoaded && _textureId != null && _textureId! >= 0
           ? Texture(textureId: _textureId!)
           : Container(),
     );
@@ -141,6 +143,7 @@ class _ImageState extends State<TextureImageWidget> {
         ? Stack(children: [imageContent, colorMask])
         : imageContent;
 
+    // Add a fade-in-out effect
     return AnimatedCrossFade(
       firstChild: placeholder,
       secondChild: _imageLoaded ? image : errorWidget,
@@ -197,5 +200,66 @@ class _ImageState extends State<TextureImageWidget> {
         canBeResused: widget.reuseAfterDispose,
       ),
     );
+  }
+}
+
+class _Placeholder extends StatelessWidget {
+  _Placeholder(
+    this.placeholder, {
+    String? backgroundColor,
+    required this.width,
+    required this.height,
+    this.widget,
+    this.borderRadius,
+    this.fit = BoxFit.cover,
+  })  : isOpaqueBackground = backgroundColor?.isOpaqueColor ?? false,
+        backgroundColor = backgroundColor?.color ?? Colors.transparent,
+        assert(
+          widget != null || placeholder != null,
+          'At least provide a way to construct this widget',
+        );
+
+  final double width;
+  final double height;
+
+  /// Custom style of this placeholder
+  final Widget? widget;
+
+  final BoxFit fit;
+  final String? placeholder;
+  final BorderRadius? borderRadius;
+
+  /// Calculated from the `backgroundColor` string
+  final Color backgroundColor;
+  final bool isOpaqueBackground;
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget != null) {
+      return widget!;
+    }
+
+    Widget result = Image.asset(
+      placeholder ?? DefaultConfig.placeholder,
+      width: width,
+      height: height,
+      fit: fit,
+    );
+
+    if (isOpaqueBackground) {
+      result = Container(
+        color: backgroundColor,
+        child: result,
+      );
+    }
+
+    if (borderRadius != null && borderRadius != BorderRadius.zero) {
+      result = ClipRRect(
+        borderRadius: borderRadius!,
+        child: result,
+      );
+    }
+
+    return result;
   }
 }
