@@ -1,4 +1,4 @@
-import '../proto/pb_header.dart';
+import '../../proto/pb_header.dart';
 
 final DefaultConfig = ImageConfigInfo()
   ..useOpenGLRendering = false
