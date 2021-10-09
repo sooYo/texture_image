@@ -4,20 +4,23 @@ import 'package:fixnum/fixnum.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../constants/error_codes.dart';
-import '../constants/methods.dart';
+import '../constants/constants.dart';
 import '../extension/image_config.dart';
 import '../extension/material.dart';
 import '../param_transform/param_transformer.dart';
 import '../proto/pb_header.dart' as $pb;
 import '../proxy/log_proxy.dart';
-import '../utils/double_extension.dart';
+import '../utils/utils.dart';
 
 class TextureImagePlugin {
   static const TAG = 'TextureImage';
 
   static const _channel = MethodChannel('texture_image');
   static final _transforms = <ParamTransformerImpl>[];
+
+  static $pb.ImageConfigInfo _globalConfig = DefaultConfig;
+
+  static $pb.ImageConfigInfo get globalConfig => _globalConfig;
 
   // region Param Transforms
   static void addParameterTransformers(
@@ -127,6 +130,8 @@ class TextureImagePlugin {
       compressInLowMemory: compressInLowMemory,
       memoryCacheSizeSpace: cachedMemoryPercetage,
     );
+
+    _globalConfig = config;
 
     final base64Data = await _channel.invokeMethod(
       Methods.textureImageConfig,
