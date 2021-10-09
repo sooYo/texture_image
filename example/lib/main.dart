@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   void initState() {
     super.initState();
     $ti.TextureImagePlugin.addParameterTransformers([]);
-    $ti.TextureImagePlugin.updateConfig(backgroundColor: '0xFF00FF00');
+    $ti.TextureImagePlugin.updateConfig(backgroundColor: '0xFFFFFFFF');
   }
 
   @override
@@ -140,7 +140,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                       // maskColor: Colors.black87,
                       // autoDownscale: false,
                       // quality: 10,
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      // borderRadius: BorderRadius.all(Radius.circular(50)),
                       // blur: 20,
                       // blurSampling: 1.2,
                       // grayScale: true,
