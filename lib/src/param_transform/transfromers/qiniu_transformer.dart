@@ -74,7 +74,7 @@ extension _QiniuUrlHandler on ImageFetchInfo {
   // region RoundPic Command
   ImageFetchInfo applyRoundPicProceedCommand(double devicePixelRatio) {
     // Qiniu cannot hanlde unequal radius
-    if (!geometry.borderRadius.isRegular) {
+    if (!geometry.borderRadius.isRounded || !geometry.borderRadius.isRegular) {
       return this;
     }
 
@@ -93,9 +93,17 @@ extension _QiniuUrlHandler on ImageFetchInfo {
 }
 
 extension _Introspection on BorderRadius {
-  // Whether all radius of four conrners are equals
+  /// Whether all radius of four conrners are equals
   bool get isRegular {
     final sum = topLeft + topRight + bottomLeft + bottomRight;
-    return (sum / 4.0) - topLeft <= 0.0001;
+    return (sum / 4.0).isEqualTo(topLeft);
+  }
+
+  /// If there's at least one border radius
+  bool get isRounded {
+    return !topLeft.isEqualTo(0.0) ||
+        !topRight.isEqualTo(0.0) ||
+        !bottomLeft.isEqualTo(0.0) ||
+        !bottomRight.isEqualTo(0.0);
   }
 }
