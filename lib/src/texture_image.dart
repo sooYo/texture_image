@@ -126,8 +126,8 @@ class TextureImage extends StatelessWidget {
   /// Reuse image's data buffer
   ///
   /// Indicates whether the backend SurfaceTexture can be reused for saving
-  /// creation time. The reused SurfaceTexture will be released later is it's
-  /// free and [TextureImagePlugin.cleanCache] is invoked
+  /// creation time. The reused SurfaceTexture will be released later when
+  /// it's free and [TextureImagePlugin.cleanCache] is invoked
   final bool reuseAfterDispose;
 
   @override
