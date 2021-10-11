@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
@@ -36,6 +37,9 @@
 		07608BC727119604000CDA21 /* TypeAlias.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TypeAlias.h; sourceTree = "<group>"; };
 		07608BC8271198B6000CDA21 /* ImageLoadState.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageLoadState.h; sourceTree = "<group>"; };
 		07608BCA2711A179000CDA21 /* ImageLoader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageLoader.h; sourceTree = "<group>"; };
+		0760D4F8271411C600916F01 /* Codes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Codes.h; sourceTree = "<group>"; };
+		0760D4F9271413AC00916F01 /* ImageGrayScaleProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageGrayScaleProcessor.h; sourceTree = "<group>"; };
+		0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageGrayScaleProcessor.m; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		32F023649FB3066FF1E4BF98 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +83,7 @@
 		07608BC127119575000CDA21 /* ImageProcessor */ = {
 			isa = PBXGroup;
 			children = (
+				0760D4FC27141E0200916F01 /* Concrete Processors */,
 				07608BC227119575000CDA21 /* ImageProcessor.h */,
 			);
 			path = ImageProcessor;
@@ -98,6 +103,7 @@
 			children = (
 				07608BC727119604000CDA21 /* TypeAlias.h */,
 				07608BC8271198B6000CDA21 /* ImageLoadState.h */,
+				0760D4F8271411C600916F01 /* Codes.h */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -108,6 +114,15 @@
 				07608BC027119575000CDA21 /* ImageRequest.h */,
 			);
 			path = ImageRequest;
+			sourceTree = "<group>";
+		};
+		0760D4FC27141E0200916F01 /* Concrete Processors */ = {
+			isa = PBXGroup;
+			children = (
+				0760D4F9271413AC00916F01 /* ImageGrayScaleProcessor.h */,
+				0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */,
+			);
+			path = "Concrete Processors";
 			sourceTree = "<group>";
 		};
 		45DEBB5C13076C743A15F6CE /* Pods */ = {
@@ -315,6 +330,7 @@
 			files = (
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
+				0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

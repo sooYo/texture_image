@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Codes.h"
 
 @protocol ImageProcessor;
 @protocol ImageRequest;
@@ -18,7 +19,7 @@
  @param image The altered image, maybe nil if something went wrong
  @param error The detail error info if there's any
  */
-typedef void (^ImageProcessCompletion) (UIImage * _Nullable image, NSError * _Nullable error);
+typedef void (^ImageProcessCompletion) (UIImage * _Nullable image, TIError * _Nullable error);
 
 
 /**
@@ -29,7 +30,7 @@ typedef void (^ImageProcessCompletion) (UIImage * _Nullable image, NSError * _Nu
  @param error The detail error info if there's any
  @param isFromCache A boolean indicates whether this image is from local cache or not
  */
-typedef void (^ImageLoadingCompletion) (id<ImageRequest> _Nonnull request,  UIImage * _Nullable image, NSError * _Nullable error, BOOL isFromCache);
+typedef void (^ImageLoadingCompletion) (id<ImageRequest> _Nonnull request,  UIImage * _Nullable image, TIError * _Nullable error, BOOL isFromCache);
 
 #pragma mark -
 #pragma mark Types Alias
