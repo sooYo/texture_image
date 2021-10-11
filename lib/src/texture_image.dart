@@ -10,7 +10,7 @@ import 'core/image_widget.dart';
 /// the enhancement works are done by native side.
 ///
 /// On Android, it is [Coil](https://github.com/coil-kt/coil)
-/// On iOS, it is [SDWebImage](https://github.com/SDWebImage/SDWebImage)
+/// On iOS, it is [LKImageKit](https://github.com/Tencent/LKImageKit)
 ///
 /// Image compression can be controled across the [quality], [autoDownscale],
 /// [ignorableAlphaChannel] and [downscaleTriggerSize] properties.
