@@ -61,7 +61,7 @@ class TextureImageWidget extends StatefulWidget {
 class _ImageState extends State<TextureImageWidget> {
   int? _textureId;
 
-  ImageLoadState _loadingState = ImageLoadState.init;
+  ImageLoadState _loadState = ImageLoadState.init;
 
   /// With a solid mask, the image content is invisible at all
   bool get _isSolidMask => widget.maskColor.alpha == 255;
@@ -69,13 +69,13 @@ class _ImageState extends State<TextureImageWidget> {
   /// An invisible mask can be removed from the view hierarchy
   bool get _isVisibleMask => widget.maskColor.alpha != 0;
 
+  /// Whether the image loading completed successfuly
+  bool get _imageLoaded => _loadState == ImageLoadState.success;
+
   /// State to control animation
-  CrossFadeState get _crossFadeState => _loadingState == ImageLoadState.init
+  CrossFadeState get _crossFadeState => _loadState == ImageLoadState.init
       ? CrossFadeState.showFirst
       : CrossFadeState.showSecond;
-
-  /// Whether the image loading completed successfuly
-  bool get _imageLoaded => _loadingState == ImageLoadState.success;
 
   /// Shortcut for globalConfig
   $pb.ImageConfigInfo get config => TextureImagePlugin.globalConfig;
@@ -183,7 +183,7 @@ class _ImageState extends State<TextureImageWidget> {
     }
 
     setState(() {
-      _loadingState = fetchResult.loadState;
+      _loadState = fetchResult.loadState;
       _textureId = fetchResult.textureId.toInt();
     });
   }

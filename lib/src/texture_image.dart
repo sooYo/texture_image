@@ -53,7 +53,7 @@ class TextureImage extends StatelessWidget {
 
   /// Placeholder when image is loading
   ///
-  /// User can provide both a widget, say [placeholder], and also a
+  /// User can provide both widget [placeholder], and also a local
   /// assets file path [placeholderPath] to enable this feature. If
   /// the two values are provided at the same time, [placeholder]
   /// shall be used at high priority
