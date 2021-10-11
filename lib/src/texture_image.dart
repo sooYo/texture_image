@@ -114,7 +114,7 @@ class TextureImage extends StatelessWidget {
   /// Force compression
   ///
   /// If this value is lower than 100, then a force compression shall be
-  /// performed,[autoDownscale] and [downscaleTriggerSize] will be both
+  /// performed, [autoDownscale] and [downscaleTriggerSize] will be both
   /// ignored. The legal value ranging from 0 to 100, with 100 stands
   /// for 'no compress'.
   ///

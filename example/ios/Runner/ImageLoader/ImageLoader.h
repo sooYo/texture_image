@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "ImageRequest.h"
 #import "TypeAlias.h"
 
 NS_ASSUME_NONNULL_BEGIN
@@ -20,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)defaultLoader;
 
-- (void)sendRequest:(id<ImageRequest>)request withCompletion:(ImageLoadingCompletion)completion;
-- (void)cancelRequest:(id<ImageRequest>)request;
+- (void)sendRequest:(id<ImageRequestProtol>)request withCompletion:(ImageLoadingCompletion)completion;
+- (void)cancelRequest:(id<ImageRequestProtol>)request;
 
 @end
 

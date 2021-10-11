@@ -9,7 +9,7 @@
 #import "Codes.h"
 
 @protocol ImageProcessor;
-@protocol ImageRequest;
+@protocol ImageRequestProtocol;
 
 #pragma mark -
 #pragma mark Functions Alias
@@ -30,7 +30,7 @@ typedef void (^ImageProcessCompletion) (UIImage * _Nullable image, TIError * _Nu
  @param error The detail error info if there's any
  @param isFromCache A boolean indicates whether this image is from local cache or not
  */
-typedef void (^ImageLoadingCompletion) (id<ImageRequest> _Nonnull request,  UIImage * _Nullable image, TIError * _Nullable error, BOOL isFromCache);
+typedef void (^ImageLoadingCompletion) (id<ImageRequestProtocol> _Nonnull request,  UIImage * _Nullable image, TIError * _Nullable error, BOOL isFromCache);
 
 #pragma mark -
 #pragma mark Types Alias

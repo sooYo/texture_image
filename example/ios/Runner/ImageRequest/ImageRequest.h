@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ImageRequestProtol <NSObject>
+@protocol ImageRequestProtocol <NSObject>
 
 @property (nonatomic, copy, readonly) NSString *url;
 

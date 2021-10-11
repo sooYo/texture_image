@@ -16,6 +16,6 @@ typedef NS_ENUM (NSInteger, ImageLoadState) {
     canceled,
     success,
     failed,
-}
+};
 
 #endif /* ImageLoadState_h */
