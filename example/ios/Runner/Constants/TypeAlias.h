@@ -11,6 +11,8 @@
 @protocol ImageProcessor;
 @protocol ImageRequestProtocol;
 
+@class TIError;
+
 #pragma mark -
 #pragma mark Functions Alias
 /**

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */; };
+		07F649EF271443A60072DCDF /* LKImageRequestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649EE271443A60072DCDF /* LKImageRequestBridge.m */; };
+		07F649F2271446340072DCDF /* TIError.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649F1271446340072DCDF /* TIError.m */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
@@ -41,6 +43,10 @@
 		0760D4F9271413AC00916F01 /* ImageGrayScaleProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageGrayScaleProcessor.h; sourceTree = "<group>"; };
 		0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageGrayScaleProcessor.m; sourceTree = "<group>"; };
 		07F649EB271439F60072DCDF /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		07F649ED271443A60072DCDF /* LKImageRequestBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKImageRequestBridge.h; sourceTree = "<group>"; };
+		07F649EE271443A60072DCDF /* LKImageRequestBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKImageRequestBridge.m; sourceTree = "<group>"; };
+		07F649F0271446340072DCDF /* TIError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIError.h; sourceTree = "<group>"; };
+		07F649F1271446340072DCDF /* TIError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TIError.m; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		32F023649FB3066FF1E4BF98 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -112,6 +118,7 @@
 		07608BC92711A139000CDA21 /* ImageRequest */ = {
 			isa = PBXGroup;
 			children = (
+				07F649EC271442EB0072DCDF /* LKImplementation */,
 				07608BC027119575000CDA21 /* ImageRequest.h */,
 			);
 			path = ImageRequest;
@@ -130,8 +137,19 @@
 			isa = PBXGroup;
 			children = (
 				07F649EB271439F60072DCDF /* Macros.h */,
+				07F649F0271446340072DCDF /* TIError.h */,
+				07F649F1271446340072DCDF /* TIError.m */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		07F649EC271442EB0072DCDF /* LKImplementation */ = {
+			isa = PBXGroup;
+			children = (
+				07F649ED271443A60072DCDF /* LKImageRequestBridge.h */,
+				07F649EE271443A60072DCDF /* LKImageRequestBridge.m */,
+			);
+			path = LKImplementation;
 			sourceTree = "<group>";
 		};
 		45DEBB5C13076C743A15F6CE /* Pods */ = {
@@ -338,6 +356,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07F649EF271443A60072DCDF /* LKImageRequestBridge.m in Sources */,
+				07F649F2271446340072DCDF /* TIError.m in Sources */,
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
 				0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */,

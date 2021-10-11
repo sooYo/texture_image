@@ -8,6 +8,7 @@
 #import "ImageGrayScaleProcessor.h"
 #import "ImageRequest.h"
 
+#import "TIError.h"
 #import "Macros.h"
 
 @implementation ImageGrayScaleProcessor
