@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSString *identifier;
 
-- (void)processImage:(UIImage *)image request:(id<ImageRequestProtocol>)request  withCompletion:(ImageProcessCompletion)completion;
+- (void)processImage:(UIImage *)image request:(id<ImageRequest>)request  withCompletion:(ImageProcessCompletion)completion;
 
 @end
 

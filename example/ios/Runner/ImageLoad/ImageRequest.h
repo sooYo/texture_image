@@ -13,19 +13,17 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol ImageRequestProtocol <NSObject>
+@protocol ImageRequest <NSObject>
 
 @property (nonatomic, copy, readonly) NSString *url;
+@property (nonatomic, assign, readonly) CGFloat progress;
+@property (nonatomic, assign, readonly) ImageLoadState state;
 
 // Processors to handle the image after fetching
 @property (nonatomic, strong) ImageProcessorList *processors;
 
-@property (nonatomic, assign) ImageLoadState state;
-@property (nonatomic, assign) CGSize preferedSize;
 @property (nonatomic, assign) BOOL cacheEnable;
-
-// Retry control
-@property (nonatomic, assign) NSInteger retryCount;
+@property (nonatomic, assign) CGSize preferedSize;
 
 @end
 

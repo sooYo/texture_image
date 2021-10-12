@@ -51,6 +51,8 @@
             result = @"Task or other routine had been cancled";
         case ResultCodeProcessFailed:
             result = @"Processor cannot handle this image";
+        case ResultCodeUnderlayerDriverMismatch:
+            result = @"Objects may get wrong types for the driver framework, check if you are using SD types in a LK context or vice versa";
         default:
             result = [NSString stringWithFormat:@"It's a valid reuslt code: %zd", code];
     }

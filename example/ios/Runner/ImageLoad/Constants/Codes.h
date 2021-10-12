@@ -16,6 +16,7 @@ typedef NS_ENUM (NSInteger, ResultCode) {
     ResultCodeCanceled = -100,
     
     ResultCodeProcessFailed = 100001, // Processor cann't handle the image
+    ResultCodeUnderlayerDriverMismatch = 100002, // The driver behind the scene is wrong, eg. use SDWebImage in a LK context
 };
 
 #endif

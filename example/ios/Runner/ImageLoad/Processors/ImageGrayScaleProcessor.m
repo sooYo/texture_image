@@ -19,7 +19,8 @@
     return NSStringFromClass(self.class);
 }
 
-- (void)processImage:(UIImage *)image request:(id<ImageRequestProtocol>)request withCompletion:(ImageProcessCompletion)completion {
+- (void)processImage:(UIImage *)image request:(id<ImageRequest>)request withCompletion:(ImageProcessCompletion)completion {
+    if (dispatch_queue_get_label(dispatch_get_main_queue()))
     @autoreleasepool {
         size_t width = image.size.width * image.scale;
         size_t height = image.size.height * image.scale;
@@ -48,7 +49,5 @@
         TIExecBlock(completion, result, nil);
     }
 }
-     
-
 
 @end

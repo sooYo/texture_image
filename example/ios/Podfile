@@ -31,7 +31,7 @@ target 'Runner' do
   flutter_install_all_ios_pods File.dirname(File.realpath(__FILE__))
   
   pod 'Protobuf'
-  pod 'LKImageKit', :git => 'https://github.com/Tencent/LKImageKit.git'
+  pod 'LKImageKit', :git => 'https://github.com/sooYo/LKImageKit.git'
 end
 
 post_install do |installer|

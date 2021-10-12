@@ -10,6 +10,8 @@
 		0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */; };
 		07F649EF271443A60072DCDF /* LKImageRequestBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649EE271443A60072DCDF /* LKImageRequestBridge.m */; };
 		07F649F2271446340072DCDF /* TIError.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649F1271446340072DCDF /* TIError.m */; };
+		07F649F627144E560072DCDF /* LKImageLoaderBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649F527144E560072DCDF /* LKImageLoaderBridge.m */; };
+		07F649FB271574720072DCDF /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 07F649FA271574720072DCDF /* Utils.m */; };
 		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
 		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
 		978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AFFD8EE1D35381100E5BB4D /* AppDelegate.m */; };
@@ -47,6 +49,10 @@
 		07F649EE271443A60072DCDF /* LKImageRequestBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKImageRequestBridge.m; sourceTree = "<group>"; };
 		07F649F0271446340072DCDF /* TIError.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TIError.h; sourceTree = "<group>"; };
 		07F649F1271446340072DCDF /* TIError.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TIError.m; sourceTree = "<group>"; };
+		07F649F427144E560072DCDF /* LKImageLoaderBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LKImageLoaderBridge.h; sourceTree = "<group>"; };
+		07F649F527144E560072DCDF /* LKImageLoaderBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LKImageLoaderBridge.m; sourceTree = "<group>"; };
+		07F649F9271574720072DCDF /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		07F649FA271574720072DCDF /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
 		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
 		32F023649FB3066FF1E4BF98 /* libPods-Runner.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Runner.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,23 +85,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		07608BBF27119575000CDA21 /* ImageLoader */ = {
-			isa = PBXGroup;
-			children = (
-				07608BCA2711A179000CDA21 /* ImageLoader.h */,
-			);
-			path = ImageLoader;
-			sourceTree = "<group>";
-		};
-		07608BC127119575000CDA21 /* ImageProcessor */ = {
-			isa = PBXGroup;
-			children = (
-				0760D4FC27141E0200916F01 /* Concrete Processors */,
-				07608BC227119575000CDA21 /* ImageProcessor.h */,
-			);
-			path = ImageProcessor;
-			sourceTree = "<group>";
-		};
 		07608BC5271195CB000CDA21 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,41 +104,50 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
-		07608BC92711A139000CDA21 /* ImageRequest */ = {
-			isa = PBXGroup;
-			children = (
-				07F649EC271442EB0072DCDF /* LKImplementation */,
-				07608BC027119575000CDA21 /* ImageRequest.h */,
-			);
-			path = ImageRequest;
-			sourceTree = "<group>";
-		};
-		0760D4FC27141E0200916F01 /* Concrete Processors */ = {
-			isa = PBXGroup;
-			children = (
-				0760D4F9271413AC00916F01 /* ImageGrayScaleProcessor.h */,
-				0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */,
-			);
-			path = "Concrete Processors";
-			sourceTree = "<group>";
-		};
 		07F649EA271439C10072DCDF /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				07F649EB271439F60072DCDF /* Macros.h */,
 				07F649F0271446340072DCDF /* TIError.h */,
 				07F649F1271446340072DCDF /* TIError.m */,
+				07F649F9271574720072DCDF /* Utils.h */,
+				07F649FA271574720072DCDF /* Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		07F649EC271442EB0072DCDF /* LKImplementation */ = {
+		07F649F327144E340072DCDF /* LKImplementation */ = {
 			isa = PBXGroup;
 			children = (
+				07F649F427144E560072DCDF /* LKImageLoaderBridge.h */,
+				07F649F527144E560072DCDF /* LKImageLoaderBridge.m */,
 				07F649ED271443A60072DCDF /* LKImageRequestBridge.h */,
 				07F649EE271443A60072DCDF /* LKImageRequestBridge.m */,
 			);
 			path = LKImplementation;
+			sourceTree = "<group>";
+		};
+		07F649F727151E040072DCDF /* ImageLoad */ = {
+			isa = PBXGroup;
+			children = (
+				07F649EA271439C10072DCDF /* Utils */,
+				07608BC6271195F4000CDA21 /* Constants */,
+				07F649F827151E5D0072DCDF /* Processors */,
+				07F649F327144E340072DCDF /* LKImplementation */,
+				07608BC027119575000CDA21 /* ImageRequest.h */,
+				07608BC227119575000CDA21 /* ImageProcessor.h */,
+				07608BCA2711A179000CDA21 /* ImageLoader.h */,
+			);
+			path = ImageLoad;
+			sourceTree = "<group>";
+		};
+		07F649F827151E5D0072DCDF /* Processors */ = {
+			isa = PBXGroup;
+			children = (
+				0760D4F9271413AC00916F01 /* ImageGrayScaleProcessor.h */,
+				0760D4FA271413AC00916F01 /* ImageGrayScaleProcessor.m */,
+			);
+			path = Processors;
 			sourceTree = "<group>";
 		};
 		45DEBB5C13076C743A15F6CE /* Pods */ = {
@@ -205,12 +203,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
-				07F649EA271439C10072DCDF /* Utils */,
+				07F649F727151E040072DCDF /* ImageLoad */,
 				07608BC5271195CB000CDA21 /* AppDelegate */,
-				07608BC6271195F4000CDA21 /* Constants */,
-				07608BBF27119575000CDA21 /* ImageLoader */,
-				07608BC127119575000CDA21 /* ImageProcessor */,
-				07608BC92711A139000CDA21 /* ImageRequest */,
 				97C146F11CF9000F007C117D /* Supporting Files */,
 			);
 			path = Runner;
@@ -359,9 +353,11 @@
 				07F649EF271443A60072DCDF /* LKImageRequestBridge.m in Sources */,
 				07F649F2271446340072DCDF /* TIError.m in Sources */,
 				978B8F6F1D3862AE00F588F7 /* AppDelegate.m in Sources */,
+				07F649FB271574720072DCDF /* Utils.m in Sources */,
 				97C146F31CF9000F007C117D /* main.m in Sources */,
 				0760D4FB271413AC00916F01 /* ImageGrayScaleProcessor.m in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
+				07F649F627144E560072DCDF /* LKImageLoaderBridge.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

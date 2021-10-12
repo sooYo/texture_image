@@ -11,11 +11,11 @@
 #import <Foundation/Foundation.h>
 
 typedef NS_ENUM (NSInteger, ImageLoadState) {
-    initailized,
-    loading,
-    canceled,
-    success,
-    failed,
+    ImageLoadStateInitailized,
+    ImageLoadStateLoading,
+    ImageLoadStateCanceled,
+    ImageLoadStateSuccess,
+    ImageLoadStateFailed,
 };
 
 #endif /* ImageLoadState_h */
