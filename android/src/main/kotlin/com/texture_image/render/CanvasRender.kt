@@ -103,7 +103,7 @@ class CanvasRender(
                 )
 
                 // "Clean" old picture
-                drawColor(ConfigUtil.backgroundColorInt)
+                drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
                 drawBitmap(
                     bitmap,
                     null,
